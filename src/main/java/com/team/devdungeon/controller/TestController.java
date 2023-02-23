@@ -19,10 +19,10 @@ public class TestController {
     @GetMapping("/test")
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("index");
-    	System.out.println("홍준호님");
+    	System.out.println("이그노어 테스트");
     	System.out.println("push and check");
-    	System.out.println("gitignore");
-    	System.out.println("gitignore");
+    	System.out.println("git ignore");
+    	System.out.println("git ignore");
     	int count = testService.boardCount();
         System.out.println("결과 : " + count);
         TestDTO dto = new TestDTO();
