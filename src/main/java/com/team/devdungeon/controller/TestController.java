@@ -13,7 +13,7 @@ public class TestController {
 
     @GetMapping("/index")
     public String index() {
-    	System.out.println("홍");
+    	System.out.println("홍123412342134234");
     	int count = testService.boardCount();
         System.out.println("결과 : " + count);
         return "index";
