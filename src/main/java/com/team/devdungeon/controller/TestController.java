@@ -19,7 +19,7 @@ public class TestController {
     @GetMapping("/test")
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("index");
-    	System.out.println("이그노어 테스트");
+    	System.out.println("이그노어 테스트 확인");
     	System.out.println("push and check");
     	System.out.println("git ignore");
     	System.out.println("git ignore");
