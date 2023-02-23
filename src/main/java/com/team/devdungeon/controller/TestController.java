@@ -14,6 +14,8 @@ public class TestController {
     @GetMapping("/index")
     public String index() {
     	System.out.println("홍준호님");
+    	System.out.println("push and check");
+    	System.out.println("gitignore");
     	int count = testService.boardCount();
         System.out.println("결과 : " + count);
         return "index";
