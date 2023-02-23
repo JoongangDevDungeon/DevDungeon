@@ -5,6 +5,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Ignore database configuration files
+!**/src/main/resources/application.properties
 ### STS ###
 .apt_generated
 .classpath
@@ -35,8 +37,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-
-
-# Ignore database configuration files
-application.properties
