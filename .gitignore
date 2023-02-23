@@ -5,7 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-# Ignore database configuration files
+# Ignore database configuration file
 application-db.properties
 
 ### STS ###
