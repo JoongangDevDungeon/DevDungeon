@@ -11,29 +11,27 @@
 <title>HJHBoard</title>
 </head>
 <body>
-<h1>홍준호님의 board 입니다.</h1>
-<div class="container container-lg">
-	<table class="table">
-		<tr class="table-header">
-			<th class="col-1">번호</th>
-			<th class="col-5">제목</th>
-			<th class="col-2">글쓴이</th>
-			<th class="col-3">날짜</th>
-			<th class="col-1">좋아요</th>
-		</tr>
-		
-		<c:forEach var="board" items="${list }">
+	<div class="container">
+		<h1>홍준호님의 board 입니다.</h1>
+		<table class="table">
+			<tr class="table-header">
+				<th class="col-1">번호</th>
+				<th class="col-5">제목</th>
+				<th class="col-2">글쓴이</th>
+				<th class="col-3">날짜</th>
+				<th class="col-1">좋아요</th>
+			</tr>
+
+			<c:forEach var="board" items="${list }">
 				<tr class="table-header">
-					<td>${board.b_no }</td>
+					<td>${board.bno }</td>
 					<td class="title">${board.b_title }</td>
 					<td>${board.member_no }</td>
 					<td>${board.b_date }</td>
 					<td>${board.b_like }</td>
 				</tr>
-		</c:forEach>
-		
-	</table>
-</div>	
-
+			</c:forEach>
+		</table>
+	</div>
 </body>
 </html>

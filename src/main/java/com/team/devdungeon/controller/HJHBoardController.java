@@ -15,12 +15,13 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class HJHBoardController {
 	
-	private final HJHBoardService hjhBoardService;
+	private final HJHBoardService HJHBoardservice;
 	
 	@GetMapping("/HJHBoard")
 	public ModelAndView HJHBoard() {
 		ModelAndView mv = new ModelAndView("HJHBoard");
-		List<Map<String, Object>> list = hjhBoardService.boardList();
+		List<Map<String, Object>> list = HJHBoardservice.boardList();
+		System.out.println(list);
 		mv.addObject("list",list);
 		
 		return mv;

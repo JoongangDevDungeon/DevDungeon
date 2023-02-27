@@ -13,10 +13,10 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class HJHBoardService {
 	
-	private final HJHBoardDAO hjhBoardDAO;
+	private final HJHBoardDAO HJHboardDAO;
 	
 	public List<Map<String, Object>> boardList() {
-		return hjhBoardDAO.boardList();
+		return HJHboardDAO.boardList();
 	}
 
 	
