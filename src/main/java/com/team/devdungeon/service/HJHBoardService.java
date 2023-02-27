@@ -1,5 +1,24 @@
 package com.team.devdungeon.service;
 
-public interface HJHBoardService {
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.team.devdungeon.dao.HJHBoardDAO;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Service
+public class HJHBoardService {
+	
+	private final HJHBoardDAO hjhBoardDAO;
+	
+	public List<Map<String, Object>> boardList() {
+		return hjhBoardDAO.boardList();
+	}
+
+	
 
 }
