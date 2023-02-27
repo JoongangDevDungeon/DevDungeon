@@ -19,7 +19,7 @@ public class TestController {
     	System.out.println("이그노어 홍준호 확인!");
     	System.out.println("push and check");
     	System.out.println("git ignore");
-    	System.out.println("git ignore");
+    	System.out.println("git ignore");	
     	int count = testService.boardCount();
         System.out.println("결과 : " + count);
         TestDTO dto = new TestDTO();
