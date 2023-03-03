@@ -14,7 +14,7 @@ public class TestController {
     private TestService testService;
 
     @GetMapping("/test")
-    public ModelAndView index() {
+    public ModelAndView test() {
         ModelAndView mv = new ModelAndView("index");
     	System.out.println("이그노어 홍준호 확인!");
     	System.out.println("push and check");
@@ -26,6 +26,12 @@ public class TestController {
         dto.setCount(1234567);
         mv.addObject("dto", dto);
         return mv;
+    }
+    
+    @GetMapping("/index")
+    public String index() {
+    	
+    	return "index";
     }
 
 }

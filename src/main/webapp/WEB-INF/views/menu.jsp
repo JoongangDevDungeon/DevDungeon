@@ -6,80 +6,12 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
+<link rel="stylesheet" href="/css/menu.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
-<style>
-body {
-	margin: 0px;
-	padding: 0px;
-}
-
-.menu {
-	width: 1920px;
-	height: 50px;
-	background-color: orange;
-}
-
-.login-btn{
-	float: right;
-	margin-right: 10%;
-	line-height: 38px;
-	border: none;
-}
-
-.menu-list{
-	float: right;
-	line-height: 50px;
-	border: none;
-}
-
-
-
-.btn-none{
-	border: none;
-}
-
-.my-bar{
-	width:202px;
-	background-color: yellowgreen;
-}
-
-
-
-.board{
-
-	line-height: 95px;
-	width: 300px;
-	text-align: center;
-	color: white;
-	float: left;
-}
-
-.logo{
-	width:234.5px;
-	height: 95px;
-	display: inline-block;
-	position: relative;
-	background-color: yellow;
-	float: left;
-	line-height: 95px;
-	text-align: center;
-}
-
-.menu-lists{
-	background-color: red;
-	width: 1920px;
-	height: 95px;
-	float: left;
-}
-
-</style>
 <body>
-	<div class="menu"><!-- 메뉴 -->
+	<!-- 메뉴 -->
+	<div class="menu">
 		<!-- 로그인 버튼 -->
 		<div class="dropdown">
 			<c:choose>
@@ -120,35 +52,26 @@ body {
 				</c:otherwise>
 			</c:choose>
 		</form>
-			
 		</div>
-				<!-- 로그인 버튼 -->
 				
 		<!-- 메뉴 리스트 -->
-	<div class="menu-list">
-	<span class="btn text-white menu-board">쪽지</span>
-	<span class="btn text-white menu-board">레벨</span>
-	<span class="btn text-white menu-board">포인트</span>
-	<span class="btn text-white menu-board">마이페이지</span>
-
-
-	</div>
+		<div class="menu-list">
+			<span class="btn text-white menu-board">쪽지</span> 
+			<span class="btn text-white menu-board">레벨</span> 
+			<span class="btn text-white menu-board">포인트</span> 
+			<span class="btn text-white menu-board">마이페이지</span>
+		</div>
 		<!-- 메뉴 리스트 -->
 
-	</div><!-- 메뉴 -->
-	
-	<div class="menu-lists">
-	
-	<div class="logo">로고</div>
-	
-	<div class="board">공지사항</div>
-	<div class="board">게시판</div>
-	<div class="board">스토어</div>
-	<div class="board">고객센터</div>
-	
-
 	</div>
-
+	<!-- 메뉴 -->
+	<div class="menu-lists">
+		<div class="logo">로고</div>
+		<div class="board">공지사항</div>
+		<div class="board">게시판</div>
+		<div class="board">스토어</div>
+		<div class="board">고객센터</div>
+	</div>
 
 	<script src="/resources/js/scripts.js"></script>
 </body>
