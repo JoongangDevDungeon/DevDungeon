@@ -12,7 +12,7 @@
 .container{
 padding:0;
 width:1200px;
-background-color: yellowgreen;
+background-color: #FFBCD1;
 height:1440px;
 }
 

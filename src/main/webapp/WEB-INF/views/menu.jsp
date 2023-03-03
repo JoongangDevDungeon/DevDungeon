@@ -12,9 +12,9 @@
 <body>
    <!-- 메뉴 -->
    <div class="menu">
-            
+   <div class="top_menu">
       <!-- 메뉴 리스트 -->
-      <div class="menu-list">
+      <div class="menu-list1">
          <span class="btn text-white menu-board">쪽지</span> 
          <span class="btn text-white menu-board">레벨</span> 
          <span class="btn text-white menu-board">포인트</span> 
@@ -25,8 +25,8 @@
 
    </div>
    <!-- 메뉴 -->
-   <div class="menu-lists">
-   <div class="menu_list2">
+   <div class="menu-list2">
+   <div class="menu_list3">
       <div class="logo">로고</div>
       <div class="board">공지사항</div>
       <div class="board">게시판</div>
@@ -34,7 +34,7 @@
       <div class="board">고객센터</div>
    	</div>
    </div>
-
+</div>
    <script src="/resources/js/scripts.js"></script>
 </body>
 </html>
