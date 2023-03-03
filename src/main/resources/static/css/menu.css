@@ -39,7 +39,6 @@
 }
 
 .logo{
-	margin-left:352px;
    width:200px;
    display: inline-block;
    background-color: yellow;
@@ -55,6 +54,6 @@
 }
 .menu_list2{
 	display: flex;
+	margin:0 auto;
 	width:1200px;
-	text-align:center;
 }
