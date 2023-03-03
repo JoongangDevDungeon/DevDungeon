@@ -6,10 +6,6 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <style>
@@ -53,7 +49,7 @@ body {
 .board{
 
 	line-height: 95px;
-	width: 300px;
+	width: 150px;
 	text-align: center;
 	color: white;
 	float: left;
@@ -71,10 +67,19 @@ body {
 }
 
 .menu-lists{
+	margin-left: 350px;
 	background-color: red;
-	width: 1920px;
+	width: 1000px;
 	height: 95px;
 	float: left;
+}
+
+.meme{
+
+width: 100%;
+
+background-color: red;
+
 }
 
 </style>
@@ -137,6 +142,8 @@ body {
 
 	</div><!-- 메뉴 -->
 	
+	<div class="meme">
+	
 	<div class="menu-lists">
 	
 	<div class="logo">로고</div>
@@ -148,8 +155,11 @@ body {
 	
 
 	</div>
+	
 
-
+	</div>
+	
+	
 	<script src="/resources/js/scripts.js"></script>
 </body>
 </html>

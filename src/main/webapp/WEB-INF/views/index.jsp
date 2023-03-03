@@ -12,13 +12,16 @@
 
 .ground{
 width:1200px;
-margin: 0 auto;
 background-color: yellowgreen;
+display: flex;
 }
 
+ 
 .left{
 width: 350px;
-background-color: blue;
+height:100%;
+
+float: left;
 }
 
 
@@ -27,8 +30,8 @@ background-color: blue;
 
  	<%@include file="menu.jsp" %> 
 	
-	<div class="left">a</div>
-	
+ 	<div class="left">a</div> 
+
 	
 	
 <div class="ground">	
