@@ -5,14 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.team.devdungeon.service.SDYService;
+import com.team.devdungeon.service.SDYBoardService;
 
 
 @Controller
 public class SDYController {
 
 	@Autowired
-	private SDYService SDYService;
+	private SDYBoardService SDYService;
 	
 	@GetMapping("/sim")
 	public ModelAndView Recipe() {

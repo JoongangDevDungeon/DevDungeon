@@ -1,6 +1,6 @@
 package com.team.devdungeon.service;
 
-public interface SDYService {
+public interface SDYBoardService {
 	
 	public int boardCount();
 	

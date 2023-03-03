@@ -23,7 +23,6 @@ public class HJHBoardController {
 		List<Map<String, Object>> list = HJHBoardservice.boardList();
 		System.out.println(list);
 		mv.addObject("list",list);
-		
 		return mv;
 	}
 }

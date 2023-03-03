@@ -3,16 +3,16 @@ package com.team.devdungeon.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.team.devdungeon.dao.SDYDAO;
+import com.team.devdungeon.dao.SDYBoardDAO;
 
 @Service
-public class SDYServiceImpl implements SDYService {
+public class SDYBoardServiceImpl implements SDYBoardService {
 
     @Autowired
-    private SDYDAO sdyDAO;
+    private SDYBoardDAO sdyBoardDAO;
 
     @Override
     public int boardCount() {
-        return sdyDAO.boardCount();
+        return sdyBoardDAO.boardCount();
     }
 }
