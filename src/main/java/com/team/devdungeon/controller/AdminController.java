@@ -35,6 +35,8 @@ public class AdminController {
 		
 	}
 	
+	
+	//로그인
 	@GetMapping("/adminLogin")
 	public String adminLogin() {
 		return "adminLogin";
@@ -68,16 +70,68 @@ public class AdminController {
 		
 	}
 	
+
 	@GetMapping("/adminMember")
 	public ModelAndView adminMember() {
-		ModelAndView mv = new ModelAndView();
-		
+		ModelAndView mv = new ModelAndView("./admin/adminMember");
 		List<MemberDTO> list = adminService.adminMember();
 		mv.addObject("list", list);
 		
 		return mv;
 	}
 	
+	
+	//게시글 관리
+	@GetMapping("/adminBoard")
+	public ModelAndView adminBoard() {
+		ModelAndView mv = new ModelAndView("./admin/adminBoard");
+		
+		
+		return mv;
+	}
+	
+	//로그 데이터
+	@GetMapping("/adminLog")
+	public ModelAndView adminLog() {
+		ModelAndView mv = new ModelAndView("./admin/adminLog");
+		return mv;
+	}
+	
+	//통계
+	@GetMapping("/adminStatistics")
+	public ModelAndView adminStatistics() {
+		ModelAndView mv = new ModelAndView("./admin/adminStatistics");
+		return mv;
+	}
+	
+	//쿠폰발급
+	@GetMapping("/adminCoupon")
+	public ModelAndView adminCoupon() {
+		ModelAndView mv = new ModelAndView("./admin/adminCoupon");
+		return mv;
+	}
+	
+	//QnA
+	@GetMapping("/adminQnA")
+	public ModelAndView adminQnA() {
+		ModelAndView mv = new ModelAndView("./admin/adminQnA");
+		return mv;
+	}
+	
+	//스토어
+	@GetMapping("/adminStore")
+	public ModelAndView adminStore() {
+		ModelAndView mv = new ModelAndView("./admin/adminStore");
+		return mv;
+	}
+	
+	//이벤트
+	@GetMapping("/adminEvent")
+	public ModelAndView adminEvent() {
+		ModelAndView mv = new ModelAndView("./admin/adminEvent");
+		return mv;
+	}
+
 	
 	
 	

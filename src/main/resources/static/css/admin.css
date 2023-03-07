@@ -17,7 +17,7 @@
 }
 
 .main{
-	width: calc(100% - 50px);
+	width: calc(100% - 210px);
 	height: 100vh;
 	float: right;
 	background-color: #FAFAFA;
