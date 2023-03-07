@@ -14,11 +14,14 @@ import lombok.RequiredArgsConstructor;
 public class HJHBoardService {
 	
 	private final HJHBoardDAO HJHboardDAO;
-	
-	public List<Map<String, Object>> boardList() {
-		return HJHboardDAO.boardList();
+
+	public int boardCount() {
+		return HJHboardDAO.boardCount();
 	}
 
-	
+	public List<Map<String, Object>> boardList(Map<String, Object> pages) {
+		return HJHboardDAO.boardList(pages);
+	}
+
 
 }
