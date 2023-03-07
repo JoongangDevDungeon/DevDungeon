@@ -12,15 +12,16 @@
 <body>
 <div id="container">
 	<div class="header">
-		<%@include file="./admin/adminmenu.jsp"%>
+		<%@include file="./adminMenu.jsp"%>
 	</div>
-<h1>QnA FAQ<h1>
-
-
-
-
-
- 
+	
+	<!-- 메인 시작 -->
+	<div class="main">
+		<h1>관리자 QnA FAQ 페이지</h1>
+		
+		
+		
+	</div>
 </div>
 </body>
 </html>

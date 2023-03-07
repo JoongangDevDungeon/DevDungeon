@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin</title>
+<title>adminBoard</title>
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
@@ -12,15 +12,16 @@
 <body>
 <div id="container">
 	<div class="header">
-		<%@include file="./admin/adminmenu.jsp"%>
+		<%@include file="./adminMenu.jsp"%>
 	</div>
-<h1>관리자 페이지 메인 대쉬보드</h1>
-
-
-
-
-
- 
+	
+	<!-- 메인 시작 -->
+	<div class="main">
+		<h1>관리자 게시글 관리</h1>
+		
+		
+		
+	</div>
 </div>
 </body>
 </html>

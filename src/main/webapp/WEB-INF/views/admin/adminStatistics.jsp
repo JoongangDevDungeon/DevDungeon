@@ -12,15 +12,16 @@
 <body>
 <div id="container">
 	<div class="header">
-		<%@include file="./admin/adminmenu.jsp"%>
+		<%@include file="./adminMenu.jsp"%>
 	</div>
-<h1>통계</h1>
-
-
-
-
-
- 
+	
+	<!-- 메인 시작 -->
+	<div class="main">
+		<h1>관리자 통계 페이지</h1>
+	
+	
+	
+	</div>
 </div>
 </body>
 </html>

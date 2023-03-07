@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.dto.AdminDTO;
 import com.team.devdungeon.service.AdminService;
@@ -32,6 +32,8 @@ public class AdminController {
 		
 	}
 	
+	
+	//로그인
 	@GetMapping("/adminLogin")
 	public String adminLogin() {
 		return "adminLogin";
@@ -65,6 +67,61 @@ public class AdminController {
 		
 	}
 	
+	//사용자관리
+	@GetMapping("/adminMember")
+	public ModelAndView adminMember() {
+		ModelAndView mv = new ModelAndView("./admin/adminMember");
+		return mv;
+	}
+	
+	//게시글 관리
+	@GetMapping("/adminBoard")
+	public ModelAndView adminBoard() {
+		ModelAndView mv = new ModelAndView("./admin/adminBoard");
+		return mv;
+	}
+	
+	//로그 데이터
+	@GetMapping("/adminLog")
+	public ModelAndView adminLog() {
+		ModelAndView mv = new ModelAndView("./admin/adminLog");
+		return mv;
+	}
+	
+	//통계
+	@GetMapping("/adminStatistics")
+	public ModelAndView adminStatistics() {
+		ModelAndView mv = new ModelAndView("./admin/adminStatistics");
+		return mv;
+	}
+	
+	//쿠폰발급
+	@GetMapping("/adminCoupon")
+	public ModelAndView adminCoupon() {
+		ModelAndView mv = new ModelAndView("./admin/adminCoupon");
+		return mv;
+	}
+	
+	//QnA
+	@GetMapping("/adminQnA")
+	public ModelAndView adminQnA() {
+		ModelAndView mv = new ModelAndView("./admin/adminQnA");
+		return mv;
+	}
+	
+	//스토어
+	@GetMapping("/adminStore")
+	public ModelAndView adminStore() {
+		ModelAndView mv = new ModelAndView("./admin/adminStore");
+		return mv;
+	}
+	
+	//이벤트
+	@GetMapping("/adminEvent")
+	public ModelAndView adminEvent() {
+		ModelAndView mv = new ModelAndView("./admin/adminEvent");
+		return mv;
+	}
 	
 	
 	
