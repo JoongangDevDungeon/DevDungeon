@@ -9,7 +9,7 @@ import com.team.devdungeon.service.SDYBoardService;
 
 
 @Controller
-public class SDYController {
+public class SDYBoardController {
 
 	@Autowired
 	private SDYBoardService SDYService;
