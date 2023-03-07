@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 </head>
 <body>
-	
 <div id="container">
 	<div class="header">
 		<%@include file="./admin/adminmenu.jsp"%>
@@ -22,6 +21,5 @@
 
  
 </div>
->>>>>>> branch 'master' of https://github.com/JoongangDevDungeon/DevDungeon.git
 </body>
 </html>
