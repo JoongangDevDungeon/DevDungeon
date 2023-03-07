@@ -46,7 +46,7 @@ public class AdminController {
 		adminDTO.setAdmin_pw(request.getParameter("adminPW"));
 		
 		AdminDTO result = adminService.adminLogin(adminDTO);
-//		System.out.println(result.getAdmin_id());
+		System.out.println(result.getAdmin_id());
 //		System.out.println(result.getAdmin_pw());
 //		System.out.println(result.getCount());
 		
