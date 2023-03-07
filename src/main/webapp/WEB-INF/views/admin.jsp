@@ -10,6 +10,7 @@
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
 </head>
 <body>
+	
 <div id="container">
 	<div class="header">
 		<%@include file="./admin/adminMenu.jsp"%>
@@ -22,5 +23,6 @@
 
  
 </div>
+>>>>>>> branch 'master' of https://github.com/JoongangDevDungeon/DevDungeon.git
 </body>
 </html>
