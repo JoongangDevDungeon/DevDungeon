@@ -159,6 +159,12 @@ public class AdminController {
 	}
 
 	
+	//포인트
+	@GetMapping("/adminPoint")
+	public ModelAndView adminPoint() {
+		ModelAndView mv = new ModelAndView("./admin/adminPoint");
+		return mv;
+	}
 	
 	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="/resources/assets/favicon.ico" />
 	<div class="menu">
 	<div>
 	<!-- 로고 -->
@@ -27,4 +28,5 @@
 		<div class="menu-item" onclick="url('adminQnA')"><img src="./img/admin/adminQnA1.png">QnA FAQ</div>
 		<div class="menu-item" onclick="url('adminStore')"><img src="./img/admin/adminstore1.png">스토어</div>
 		<div class="menu-item" onclick="url('adminEvent')"><img src="./img/admin/adminevent1.png">이벤트</div>
+		<div class="menu-item" onclick="url('adminPoint')"><img src="./img/admin/adminpoint1.png">포인트 정산</div>
 	</div>
