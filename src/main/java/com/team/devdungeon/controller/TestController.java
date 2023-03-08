@@ -30,7 +30,7 @@ public class TestController {
 
     @GetMapping("/yjmtest")
     public String yjmtest() {
-        return "yjmtest";
+        return "index";
     }
 
     @GetMapping("/index")
