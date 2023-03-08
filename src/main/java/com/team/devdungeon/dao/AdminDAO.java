@@ -9,6 +9,7 @@ import com.team.devdungeon.dto.AdminDTO;
 import com.team.devdungeon.dto.BoardDTO;
 import com.team.devdungeon.dto.CouponDTO;
 import com.team.devdungeon.dto.MemberDTO;
+import com.team.devdungeon.dto.QuestionBoardDTO;
 
 @Repository
 @Mapper
@@ -23,5 +24,12 @@ public interface AdminDAO {
 	List<CouponDTO> Coupon();
 
 	void adminCouponCreate(CouponDTO couponDTO);
+
+
+	List<QuestionBoardDTO> QnA();
+
+	
+	
+
 
 }

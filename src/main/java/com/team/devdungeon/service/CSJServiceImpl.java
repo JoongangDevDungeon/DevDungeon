@@ -42,5 +42,25 @@ public class CSJServiceImpl implements CSJService {
 		return csjDAO.pageList(dto);
 	}
 
+	@Override
+	public int write(Map<String, Object> writemap) {
+		// TODO Auto-generated method stub
+		return csjDAO.write(writemap);
+	}
+
+	@Override
+	public Map<String, Object> detail(int bno) {
+		// TODO Auto-generated method stub
+		return csjDAO.detail(bno);
+	}
+
+	@Override
+	public Map<String, Object> memberProfile(int member_no) {
+		// TODO Auto-generated method stub
+		System.out.println("서비스"+member_no);
+		System.out.println("서비스"+csjDAO.memberProfile(member_no));
+		return csjDAO.memberProfile(member_no);
+	}
+
 
 }

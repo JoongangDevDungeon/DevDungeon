@@ -39,4 +39,16 @@ public class TestController {
     	return "index";
     }
 
+
+    @GetMapping("/agree")
+    public String agree() {
+
+        return "agree";
+    }
+
+    @GetMapping("/signup")
+    public String signup() {
+
+        return "signup";
+    }
 }

@@ -15,6 +15,7 @@ import com.team.devdungeon.dto.AdminDTO;
 import com.team.devdungeon.dto.BoardDTO;
 import com.team.devdungeon.dto.CouponDTO;
 import com.team.devdungeon.dto.MemberDTO;
+import com.team.devdungeon.dto.QuestionBoardDTO;
 import com.team.devdungeon.service.AdminService;
 
 
@@ -88,9 +89,11 @@ public class AdminController {
 	@GetMapping("/adminBoard")
 	public ModelAndView adminBoard() {
 		ModelAndView mv = new ModelAndView("./admin/adminBoard");
+
 		List<BoardDTO> list = adminService.adminBoard();
 		mv.addObject("list", list);
 		System.out.println(mv);
+
 		return mv;
 	}
 	
@@ -126,17 +129,12 @@ public class AdminController {
 	
 	@PostMapping("/adminCouponCreate")
 	public String adminCouponCreate(HttpServletRequest request) {
-//		System.out.println(request.getParameter("couponName"));
-//		System.out.println(request.getParameter("couponContent"));
-//		System.out.println(request.getParameter("coupon"));
 		CouponDTO couponDTO = new CouponDTO();
 		couponDTO.setCoupon_name(request.getParameter("couponName"));
 		couponDTO.setCoupon_content(request.getParameter("couponContent"));
 		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("coupon")));
 		
 		adminService.adminCouponCreate(couponDTO);
-		
-		
 		return "redirect:/adminCoupon";
 	}
 	
@@ -144,6 +142,9 @@ public class AdminController {
 	@GetMapping("/adminQnA")
 	public ModelAndView adminQnA() {
 		ModelAndView mv = new ModelAndView("./admin/adminQnA");
+		List<QuestionBoardDTO> qna = adminService.QnA();
+		mv.addObject("qna", qna);
+		
 		return mv;
 	}
 	

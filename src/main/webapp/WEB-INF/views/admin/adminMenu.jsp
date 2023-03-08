@@ -25,7 +25,7 @@
 		<div class="menu-item" onclick="url('adminLog')"><img src="./img/admin/admincookie1.png">로그 데이터</div>
 		<div class="menu-item" onclick="url('adminStatistics')"><img src="./img/admin/adminstatistics1.png">통계</div>
 		<div class="menu-item" onclick="url('adminCoupon')"><img src="./img/admin/admincoupon1.png">쿠폰발급</div>
-		<div class="menu-item" onclick="url('adminQnA')"><img src="./img/admin/adminQnA1.png">QnA FAQ</div>
+		<div class="menu-item" onclick="url('adminQnA')"><img src="./img/admin/adminQnA1.png">QnA</div>
 		<div class="menu-item" onclick="url('adminStore')"><img src="./img/admin/adminstore1.png">스토어</div>
 		<div class="menu-item" onclick="url('adminEvent')"><img src="./img/admin/adminevent1.png">이벤트</div>
 		<div class="menu-item" onclick="url('adminPoint')"><img src="./img/admin/adminpoint1.png">포인트 정산</div>

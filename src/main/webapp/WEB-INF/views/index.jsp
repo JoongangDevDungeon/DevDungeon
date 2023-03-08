@@ -43,7 +43,7 @@
       padding-left: 30px;
       padding-bottom: 10px;
       box-sizing: border-box;
-      width: 300px;
+      width: 350px;
    }
 
    /* 네비게이션 */
@@ -159,6 +159,7 @@
                <form class="dropdown-menu">
                   <div class="mb-3">
                      <label for="member_id" class="form-label">아이디</label>
+                     <a href="/signup">계정찾기</a>
                      <input type="email" class="form-control" id="member_id" name="member_id" placeholder="아이디를 입력하세요.">
                   </div>
                   <div class="mb-3">
@@ -174,8 +175,8 @@
                      </div>
                   </div>
                   <button type="submit" class="btn btn-primary">로그인</button>
-                  <button type="button" class="btn btn-secondary">회원가입</button>
-                  <a href="/signup">계정찾기</a>
+                  <button type="button" class="btn btn-secondary" onclick="location.href='/agree'">회원가입</button>
+
                </form>
             </div>
          </li>

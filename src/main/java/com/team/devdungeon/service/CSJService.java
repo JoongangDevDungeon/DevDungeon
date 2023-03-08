@@ -15,4 +15,10 @@ public interface CSJService {
 	public PageInfo<Map<String, Object>> pageList(Integer pageNo, int i);
 
 	public PageInfo<Map<String, Object>> pageList(CSJshowDTO dto);
+
+	public int write(Map<String, Object> writemap);
+
+	public Map<String, Object> detail(int bno);
+
+	public Map<String, Object> memberProfile(int member_no);
 }

@@ -36,16 +36,15 @@
 						<th>조회수</th>
 						<th>좋아요</th>
 					</tr>
-
 					<c:forEach items="${list }" var="b">
 						<tr>
-							<td>1</td>
-							<td>${b.b_no }</td>
-							<td>${b.b_title }</td>
-							<td>${b.member_no }</td>
-							<td>${b.b_date }</td>
-							<td></td>
-							<td></td>
+							<td>${b.tag_no }</td>
+							<td>${b.board_no }</td>
+							<td><a href="csjDetail?bno=${b.board_no }">${b.board_title }</a></td>
+							<td>${b.member_name }</td>
+							<td>${b.board_date }</td>
+							<td>${b.board_read }</td>
+							<td>${b.board_like }</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -53,11 +52,11 @@
 			</div>
 			<%@ include file="CSJpaging.jsp" %>
 			<div class="searchForm">
-				<form action="csjboard" method="get">
+				<form action="csjboard" method="get" id="searchForm"> 
 					<select name="searchType">
 						<option value="title">제목</option>
-						<option value="writer">글쓴이</option>
-					</select> <input type="text" name="searchValue">
+						<option value="writer"<c:if test='${searchType eq "writer"}'>selected</c:if>>글쓴이</option>
+					</select> <input type="text" name="searchValue" value="${searchValue }">
 					<button class="btn btn-primary">검색</button>
 				</form>
 			</div>

@@ -10,6 +10,7 @@ import com.team.devdungeon.dto.AdminDTO;
 import com.team.devdungeon.dto.BoardDTO;
 import com.team.devdungeon.dto.CouponDTO;
 import com.team.devdungeon.dto.MemberDTO;
+import com.team.devdungeon.dto.QuestionBoardDTO;
 
 @Service
 public class AdminService {
@@ -38,6 +39,10 @@ public class AdminService {
 
 	public void adminCouponCreate(CouponDTO couponDTO) {
 		adminDAO.adminCouponCreate(couponDTO);
+	}
+
+	public List<QuestionBoardDTO> QnA() {
+		return adminDAO.QnA();
 	}
 
 	

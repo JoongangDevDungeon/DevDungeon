@@ -2,16 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.devdungeon.dao.CSJDAO">
     <select id="boardList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
-        SELECT b_no,b_title,member_no,b_date,b_like, ROW_NUMBER() OVER() AS bno
+        SELECT *
         FROM boardview
         <if test="searchType != null">
 			WHERE
 			<choose>
-				<when test="searchType == 'title'">b_title</when>
+				<when test="searchType == 'title'">board_title</when>
 				<when test="searchType == 'writer'">member_no</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
         </if>
-        ORDER BY b_no DESC
+        ORDER BY board_no DESC
+    </select>
+ 
+    <select id="detail" parameterType="Integer" resultType="HashMap">
+    	SELECT *
+    	FROM boardview
+    	WHERE board_no=#{bno}
+    </select>
+    <select id="memberProfile" parameterType="Integer" resultType="HashMap">
+    	SELECT *
+    	FROM member
+    	WHERE member_no=#{member_no}
     </select>
 </mapper>
