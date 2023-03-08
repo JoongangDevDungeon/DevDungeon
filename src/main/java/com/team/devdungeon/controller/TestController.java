@@ -45,4 +45,10 @@ public class TestController {
 
         return "agree";
     }
+
+    @GetMapping("/signup")
+    public String signup() {
+
+        return "signup";
+    }
 }

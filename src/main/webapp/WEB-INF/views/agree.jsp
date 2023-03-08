@@ -37,6 +37,11 @@ border: 2px solid gray;
 box-sizing: border-box;
 overflow:auto;
 }
+
+button{
+    style="width: 700px; height:50px;"
+
+}
 </style>
 <body>
 
@@ -114,7 +119,7 @@ overflow:auto;
    
    
    
-   <button class="btn btn-primary" style="width: 700px; height:50px;">다음</button>
+   <button class="btn btn-primary" onclick=location.href="signup">다음</button>
    </div><!-- 약관 전체 범위 끝 -->
 	
 	
