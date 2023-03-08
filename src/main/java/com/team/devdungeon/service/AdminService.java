@@ -24,4 +24,8 @@ public class AdminService {
 		return adminDAO.adminMember();
 	}
 
+	public List<MemberDTO> adminBoard() {
+		return adminDAO.adminBoard();
+	}
+
 }

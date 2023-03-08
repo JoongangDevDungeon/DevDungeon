@@ -16,6 +16,8 @@ public interface AdminDAO {
 	AdminDTO adminLogin(AdminDTO adminDTO);
 
 	List<MemberDTO> adminMember();
+
+	List<MemberDTO> adminBoard();
 	
 
 }
