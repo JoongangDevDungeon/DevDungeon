@@ -10,6 +10,7 @@
     	select * from member
     </select>
     
+
     <select id="adminBoard" parameterType="BoardDTO" resultType="BoardDTO">
 		SELECT b.*, m.member_id
 		FROM board AS b
@@ -18,4 +19,18 @@
 		LIMIT 0, 10
     </select>
     
+
+     <select id="Coupon" resultType="CouponDTO">
+    	select * from coupon
+    </select>
+    
+    <insert id="adminCouponCreate" parameterType="CouponDTO">
+    	INSERT INTO coupon
+ 		SET
+ 			event_no = #{event_no},
+ 			coupon_name = #{coupon_name},
+ 			coupon_content = #{coupon_content}
+    </insert>
+    
+
 </mapper>
