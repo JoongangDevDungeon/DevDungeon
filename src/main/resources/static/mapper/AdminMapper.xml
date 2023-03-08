@@ -22,4 +22,8 @@
  			coupon_content = #{coupon_content}
     </insert>
     
+    <select id="QnA" resultType="QuestionBoardDTO">
+    	select * from question_board
+    </select>
+    
 </mapper>

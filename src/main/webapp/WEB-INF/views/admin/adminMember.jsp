@@ -18,25 +18,30 @@
 	<div class="main">
 		<h1>관리자 사용자 관리 페이지</h1>
 		<table class="table">
-							<tr>
-								<td>멤버번호</td>
-								<td>이름</td>
-								<td>멤버 아이디</td>
-								<td>멤버 번호</td>
-								<td>멤버 이메일</td>
-								<td>생일</td>
-							</tr><c:forEach items="${list }" var="row">
-							<tr>
-								<td>${row.member_no }</td>
-								<td>${row.member_name }</td>
-								<td>${row.member_id }</td>
-								<td>${row.member_tel }</td>
-								<td>${row.member_email }</td>
-								<td>${row.member_birth }</td>
-							</tr></c:forEach>
-						</table>
-		
-		
+				<tr>
+					<td>멤버번호</td>
+					<td>이름</td>
+					<td>멤버 아이디</td>
+					<td>멤버 번호</td>
+					<td>멤버 이메일</td>
+					<td>생일</td>
+					<td>멤버상태변경</td>								
+				</tr><c:forEach items="${list }" var="row">
+				<tr>
+					<td>${row.member_no }</td>
+					<td>${row.member_name }</td>
+					<td>${row.member_id }</td>
+					<td>${row.member_tel }</td>
+					<td>${row.member_email }</td>
+					<td>${row.member_birth }</td>
+					<td>
+					<c:choose>
+						<c:when test="${row.member_grade eq 0}"><button>활성화</button></c:when>
+					<c:otherwise><button type="button">비활성화</button></c:otherwise>
+					</c:choose>
+					</td>
+				</tr></c:forEach>
+		</table>	
 	</div>
 </div>
 </body>

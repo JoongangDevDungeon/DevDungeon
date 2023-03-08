@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team.devdungeon.dto.AdminDTO;
 import com.team.devdungeon.dto.CouponDTO;
 import com.team.devdungeon.dto.MemberDTO;
+import com.team.devdungeon.dto.QuestionBoardDTO;
 import com.team.devdungeon.service.AdminService;
 
 
@@ -135,6 +136,9 @@ public class AdminController {
 	@GetMapping("/adminQnA")
 	public ModelAndView adminQnA() {
 		ModelAndView mv = new ModelAndView("./admin/adminQnA");
+		List<QuestionBoardDTO> qna = adminService.QnA();
+		mv.addObject("qna", qna);
+		
 		return mv;
 	}
 	
