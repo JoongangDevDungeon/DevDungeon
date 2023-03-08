@@ -24,26 +24,28 @@ public class HJHBoardController {
 	private final HJHBoardService HJHboardService;
 	
 	@Autowired
-	private PageNation pagingNation;
+	private PageNation pageNation;
 	
 	@GetMapping("/HJHBoard")
-	public ModelAndView HJHBoard(@RequestParam(value="pageNo", defaultValue = "1") int pageNo) {
+	public ModelAndView HJHBoard(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("HJHBoard");
-		int startPage = (pageNo*10)-9;
-		int totalCount = HJHboardService.boardCount();
-		List<Integer> paging = pagingNation.paging(totalCount);
 		Map<String, Object> pages = new HashMap<String, Object>();
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		pages.put("searchType", searchType);
+		pages.put("searchValue", searchValue);
+		int startPage = (pageNo*10)-10;
+		int totalCount = HJHboardService.boardCount(pages);
+		int lastPage = (int)Math.floor((totalCount-1)/10);
+		List<Integer> paging = pageNation.paging(totalCount);
 		pages.put("startPage", startPage);
+		pages.put("lastPage", lastPage);
 		List<Map<String, Object>> list = HJHboardService.boardList(pages);
 		mv.addObject("paging",paging);
+		mv.addObject("pages",pages);
 		mv.addObject("list",list);
+		mv.addObject("pageNo", pageNo);
 		return mv;
 	}
 	
-	@GetMapping("/search")
-	public ModelAndView search(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("HJHBoard");
-
-		return mv;
-	}
 }

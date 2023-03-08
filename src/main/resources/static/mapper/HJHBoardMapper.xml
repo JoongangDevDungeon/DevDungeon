@@ -2,13 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.devdungeon.dao.HJHBoardDAO">
     <select id="boardList"  parameterType="Integer"  resultType="HashMap">
-        SELECT b_no,b_title,member_no,b_date,b_like,b_read, ROW_NUMBER() OVER() AS bno
+        SELECT board_no,board_title,member_no,board_date,board_like,board_read, bno
         FROM boardview
-<!--         ORDER BY b_no DESC  -->
+        <if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">board_title</when>
+				<when test="searchType == 'writer'">member_no</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+        </if>
+        ORDER BY board_no DESC
         LIMIT #{startPage}, 10
     </select>
-    <select id="boardCount" resultType="Integer">
+    <select id="boardCount" parameterType="HashMap" resultType="Integer">
         SELECT COUNT(*)
         FROM boardview
+         <if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">board_title</when>
+				<when test="searchType == 'writer'">member_no</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+        </if>
     </select>
 </mapper>
