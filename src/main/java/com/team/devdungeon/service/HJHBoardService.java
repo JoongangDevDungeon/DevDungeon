@@ -15,8 +15,8 @@ public class HJHBoardService {
 	
 	private final HJHBoardDAO HJHboardDAO;
 
-	public int boardCount() {
-		return HJHboardDAO.boardCount();
+	public int boardCount(Map<String, Object> pages) {
+		return HJHboardDAO.boardCount(pages);
 	}
 
 	public List<Map<String, Object>> boardList(Map<String, Object> pages) {

@@ -13,23 +13,34 @@
 	padding:0;
 	list-style: none;
 	display: flex;
-	justify-content: space-around;
-	
+	justify-content: start;
+	justify-content: center;
 }
 .pagingBox{
-	width:600px;
+	width:700px;
 	margin:0 auto;
 }
-.pageNo{
-	cursor: pointer;
+.page{	
+	cursor: pointer; 
+	text-decoration:none;
+	color: black;
+	width:30px;
+	height:30px;
+	text-align: center;
+	line-height: 30px;
 }
+.page:hover{
+	background-color: #d3d3d3;
+	border-radius: 5px;
+}
+
 .write_btn{
 	display: flex;
 	justify-content: end;
 }
 .searchForm{
 	display: flex;
-	justify-content: center;	
+	justify-content: center;
 }
 .menubar{
 	width:100%; 
