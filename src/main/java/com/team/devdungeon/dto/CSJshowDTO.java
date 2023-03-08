@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CSJshowDTO {
-	private int pageNo,pageSize;
+	private int pageNo,pageSize,category;
 	private String searchType,searchValue;
 }

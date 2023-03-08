@@ -35,4 +35,18 @@ public class CSJDAO {
 		return PageInfo.of(sqlSession.selectList("com.team.devdungeon.dao.CSJDAO.boardList",dto));
 	}
 
+	public int write(Map<String, Object> writemap) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("com.team.devdungeon.dao.CSJDAO.boardWrite",writemap);
+	}
+
+	public Map<String, Object> detail(int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("com.team.devdungeon.dao.CSJDAO.detail",bno);
+	}
+
+	public Map<String, Object> memberProfile(int member_no) {
+		return sqlSession.selectOne("com.team.devdungeon.dao.CSJDAO.memberProfile",member_no);
+	}
+
 }
