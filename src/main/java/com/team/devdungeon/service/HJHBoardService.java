@@ -23,5 +23,9 @@ public class HJHBoardService {
 		return HJHboardDAO.boardList(pages);
 	}
 
+	public List<Map<String, Object>> boardDetail(String board_no) {
+		return HJHboardDAO.boardDetail(board_no);
+	}
+
 
 }

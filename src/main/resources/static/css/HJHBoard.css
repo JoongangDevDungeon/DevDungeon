@@ -1,7 +1,9 @@
 .table{	text-align: center; }
 .table-header{ background-color: #d3d3d3; }
-.title{	text-align: left; }
 .container{	width:1000px; }
+.pagingBox{	width:700px; margin:0 auto; }
+.title{	text-align: left; }
+a {	text-decoration: none; color:black; }
 .pagingList{
 	margin:0;
 	padding:0;
@@ -9,11 +11,10 @@
 	display: flex;
 	justify-content: start;
 	justify-content: center;
+	font-size: 13px;
 }
-.pagingBox{	width:700px; margin:0 auto; }
 .pageNo{	
-	cursor: pointer; 
-	text-decoration:none;
+	cursor: pointer;
 	width:30px;
 	height:30px;
 	text-align: center;
@@ -26,6 +27,7 @@
 	margin:0 2px;
 	color:white;
 	font-weight: bold;
+	font-size: 15px;
 }
 .page_btn:hover{ background-color: #8887cc; }
 .write{	display: flex; justify-content: end; }

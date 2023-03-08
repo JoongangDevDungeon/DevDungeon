@@ -14,5 +14,6 @@ public interface HJHBoardDAO {
 
 	public List<Map<String, Object>> boardList(Map<String, Object> pages);
 
-	
+	public List<Map<String, Object>> boardDetail(String board_no);
+
 }
