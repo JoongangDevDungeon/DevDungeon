@@ -1,5 +1,7 @@
 package com.team.devdungeon.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.dto.AdminDTO;
+import com.team.devdungeon.dto.MemberDTO;
 import com.team.devdungeon.service.AdminService;
 
 
@@ -67,18 +70,28 @@ public class AdminController {
 		
 	}
 	
+<<<<<<< HEAD
+
+=======
 	
 	//사용자관리
+>>>>>>> 9c70f5d6394e076cf5a46b1d4823166c249956c8
 	@GetMapping("/adminMember")
 	public ModelAndView adminMember() {
 		ModelAndView mv = new ModelAndView("./admin/adminMember");
+		List<MemberDTO> list = adminService.adminMember();
+		mv.addObject("list", list);
+		
 		return mv;
 	}
+	
 	
 	//게시글 관리
 	@GetMapping("/adminBoard")
 	public ModelAndView adminBoard() {
 		ModelAndView mv = new ModelAndView("./admin/adminBoard");
+		
+		
 		return mv;
 	}
 	
@@ -123,6 +136,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("./admin/adminEvent");
 		return mv;
 	}
+
 	
 	//포인트
 	@GetMapping("/adminPoint")

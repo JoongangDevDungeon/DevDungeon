@@ -9,8 +9,7 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
 </head>
-<body>
-	
+<body>	
 <div id="container">
 	<div class="header">
 		<%@include file="./admin/adminMenu.jsp"%>
@@ -23,6 +22,9 @@
 
  
 </div>
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/JoongangDevDungeon/DevDungeon.git
 </body>
 </html>
