@@ -14,13 +14,27 @@
 	<div class="header">
 		<%@include file="./adminMenu.jsp"%>
 	</div>
-	
 	<!-- 메인 시작 -->
 	<div class="main">
 		<h1>관리자 사용자 관리 페이지</h1>
-		<c:forEach items="${list }" var="row">
-			사용자 이름: ${row.member_name}
-		</c:forEach>
+		<table class="table">
+							<tr>
+								<td>멤버번호</td>
+								<td>이름</td>
+								<td>멤버 아이디</td>
+								<td>멤버 번호</td>
+								<td>멤버 이메일</td>
+								<td>생일</td>
+							</tr><c:forEach items="${list }" var="row">
+							<tr>
+								<td>${row.member_no }</td>
+								<td>${row.member_name }</td>
+								<td>${row.member_id }</td>
+								<td>${row.member_tel }</td>
+								<td>${row.member_email }</td>
+								<td>${row.member_birth }</td>
+							</tr></c:forEach>
+						</table>
 		
 		
 	</div>

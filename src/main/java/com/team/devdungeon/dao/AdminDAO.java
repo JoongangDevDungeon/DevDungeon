@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.team.devdungeon.dto.AdminDTO;
+import com.team.devdungeon.dto.CouponDTO;
 import com.team.devdungeon.dto.MemberDTO;
 
 @Repository
@@ -16,6 +17,12 @@ public interface AdminDAO {
 	AdminDTO adminLogin(AdminDTO adminDTO);
 
 	List<MemberDTO> adminMember();
+
+	List<CouponDTO> Coupon();
+
+	void adminCouponCreate(CouponDTO couponDTO);
+
+	
 	
 
 }

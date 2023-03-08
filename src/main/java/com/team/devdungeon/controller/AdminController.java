@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.dto.AdminDTO;
+import com.team.devdungeon.dto.CouponDTO;
 import com.team.devdungeon.dto.MemberDTO;
 import com.team.devdungeon.service.AdminService;
 
@@ -70,12 +71,9 @@ public class AdminController {
 		
 	}
 	
-<<<<<<< HEAD
 
-=======
-	
 	//사용자관리
->>>>>>> 9c70f5d6394e076cf5a46b1d4823166c249956c8
+
 	@GetMapping("/adminMember")
 	public ModelAndView adminMember() {
 		ModelAndView mv = new ModelAndView("./admin/adminMember");
@@ -113,7 +111,30 @@ public class AdminController {
 	@GetMapping("/adminCoupon")
 	public ModelAndView adminCoupon() {
 		ModelAndView mv = new ModelAndView("./admin/adminCoupon");
+		List<CouponDTO> list = adminService.Coupon();
+		mv.addObject("list", list);
+		
 		return mv;
+	}
+	@GetMapping("/adminCouponCreate")
+	public String adminCouponCreate() {
+		return "./admin/adminCouponCreate";
+	}
+	
+	@PostMapping("/adminCouponCreate")
+	public String adminCouponCreate(HttpServletRequest request) {
+//		System.out.println(request.getParameter("couponName"));
+//		System.out.println(request.getParameter("couponContent"));
+//		System.out.println(request.getParameter("coupon"));
+		CouponDTO couponDTO = new CouponDTO();
+		couponDTO.setCoupon_name(request.getParameter("couponName"));
+		couponDTO.setCoupon_content(request.getParameter("couponContent"));
+		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("coupon")));
+		
+		adminService.adminCouponCreate(couponDTO);
+		
+		
+		return "redirect:/adminCoupon";
 	}
 	
 	//QnA

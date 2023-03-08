@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.team.devdungeon.dao.AdminDAO;
 import com.team.devdungeon.dto.AdminDTO;
+import com.team.devdungeon.dto.CouponDTO;
 import com.team.devdungeon.dto.MemberDTO;
 
 @Service
@@ -23,5 +24,15 @@ public class AdminService {
 	public List<MemberDTO> adminMember() {
 		return adminDAO.adminMember();
 	}
+
+	public List<CouponDTO> Coupon() {
+		return adminDAO.Coupon();
+	}
+
+	public void adminCouponCreate(CouponDTO couponDTO) {
+		adminDAO.adminCouponCreate(couponDTO);
+	}
+
+	
 
 }
