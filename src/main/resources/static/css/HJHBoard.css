@@ -6,5 +6,37 @@
 }
 .container{
 	width:1000px;
-	background-color: yellow;
+/* 	background-color: yellow; */
+}
+.pagingList{
+	margin:0;
+	padding:0;
+	list-style: none;
+	display: flex;
+	justify-content: space-around;
+	
+}
+.pagingBox{
+	width:600px;
+	margin:0 auto;
+}
+.pageNo{
+	cursor: pointer;
+}
+.write_btn{
+	display: flex;
+	justify-content: end;
+}
+.searchForm{
+	display: flex;
+	justify-content: center;	
+}
+.menubar{
+	width:100%; 
+	height:100px; 
+	background-color: purple; 
+	color:white;
+	text-align: center;
+	font-size: 30px;
+	line-height: 100px;
 }
