@@ -18,6 +18,26 @@
 	<!-- 메인 시작 -->
 	<div class="main">
 		<h1>관리자 게시글 관리</h1>
+		<table>
+			<tr>
+				<th>글번호</th>
+				<th>제목</th>
+				<th>글쓴이</th>
+				<th>날짜</th>
+				<th>추천수</th>
+				<th>관리</th>
+			</tr>
+			<c:forEach items="${list }" var="row">
+			<tr>
+				<td>${row.board_no }</td>
+				<td>${row.board_title }</td>
+				<td>${row.member_id }</td>
+				<td>${row.board_date }</td>
+				<td>${row.board_like }</td>
+				<td>관리</td>
+			</tr>
+			</c:forEach>
+		</table>
 		
 		
 		

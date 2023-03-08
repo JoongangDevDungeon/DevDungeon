@@ -10,6 +10,16 @@
     	select * from member
     </select>
     
+
+    <select id="adminBoard" parameterType="BoardDTO" resultType="BoardDTO">
+		SELECT b.*, m.member_id
+		FROM board AS b
+		JOIN member AS m ON b.member_no = m.member_no
+		ORDER BY b.board_no DESC
+		LIMIT 0, 10
+    </select>
+    
+
      <select id="Coupon" resultType="CouponDTO">
     	select * from coupon
     </select>
@@ -22,4 +32,12 @@
  			coupon_content = #{coupon_content}
     </insert>
     
+
+
+
+    <select id="QnA" resultType="QuestionBoardDTO">
+    	select * from question_board
+    </select>
+
+
 </mapper>

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.dto.AdminDTO;
+import com.team.devdungeon.dto.BoardDTO;
 import com.team.devdungeon.dto.CouponDTO;
 import com.team.devdungeon.dto.MemberDTO;
+import com.team.devdungeon.dto.QuestionBoardDTO;
 import com.team.devdungeon.service.AdminService;
 
 
@@ -88,9 +89,14 @@ public class AdminController {
 	@GetMapping("/adminBoard")
 	public ModelAndView adminBoard() {
 		ModelAndView mv = new ModelAndView("./admin/adminBoard");
-		
+
+		List<BoardDTO> list = adminService.adminBoard();
+		mv.addObject("list", list);
+		System.out.println(mv);
+
 		return mv;
 	}
+	
 	
 	//로그 데이터
 	@GetMapping("/adminLog")
@@ -105,6 +111,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("./admin/adminStatistics");
 		return mv;
 	}
+	
 	
 	//쿠폰발급
 	@GetMapping("/adminCoupon")
@@ -135,6 +142,9 @@ public class AdminController {
 	@GetMapping("/adminQnA")
 	public ModelAndView adminQnA() {
 		ModelAndView mv = new ModelAndView("./admin/adminQnA");
+		List<QuestionBoardDTO> qna = adminService.QnA();
+		mv.addObject("qna", qna);
+		
 		return mv;
 	}
 	
