@@ -43,7 +43,7 @@ overflow:auto;
 
    <div class="all_fild" style="background-color: red;"><!-- 전체 범위 -->
    
-   <div class="banner"><img src="/css/banner.png"></div><!-- 배너 -->
+   <div class="banner"><img src="/img/banner.png"></div><!-- 배너 -->
   
    <div class="agree_fild"><!-- 약관동의 범위 -->
    
