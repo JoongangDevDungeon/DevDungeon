@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.dto.AdminDTO;
+import com.team.devdungeon.dto.BoardDTO;
 import com.team.devdungeon.dto.MemberDTO;
 import com.team.devdungeon.service.AdminService;
 
@@ -86,11 +87,12 @@ public class AdminController {
 	@GetMapping("/adminBoard")
 	public ModelAndView adminBoard() {
 		ModelAndView mv = new ModelAndView("./admin/adminBoard");
-		List<MemberDTO> list = adminService.adminBoard();
+		List<BoardDTO> list = adminService.adminBoard();
 		mv.addObject("list", list);
-		
+		System.out.println(mv);
 		return mv;
 	}
+	
 	
 	//로그 데이터
 	@GetMapping("/adminLog")
