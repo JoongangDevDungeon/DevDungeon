@@ -27,7 +27,12 @@ public class TestController {
         mv.addObject("dto", dto);
         return mv;
     }
-    
+
+    @GetMapping("/yjmtest")
+    public String yjmtest() {
+        return "yjmtest";
+    }
+
     @GetMapping("/index")
     public String index() {
     	
