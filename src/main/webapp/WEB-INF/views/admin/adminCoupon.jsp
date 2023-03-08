@@ -18,8 +18,9 @@
 	<!-- 메인 시작 -->
 	<div class="main">
 		<h1>관리자 쿠폰발급 페이지</h1>
+		${list }
 		
-		
+		<button type="button" onclick="location.href='/adminCouponCreate';">쿠폰생성</button>
 		
 		
 	</div>
