@@ -70,7 +70,12 @@ public class AdminController {
 		
 	}
 	
+<<<<<<< HEAD
 
+=======
+	
+	//사용자관리
+>>>>>>> 9c70f5d6394e076cf5a46b1d4823166c249956c8
 	@GetMapping("/adminMember")
 	public ModelAndView adminMember() {
 		ModelAndView mv = new ModelAndView("./admin/adminMember");

@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 	<div class="menu">
-	
-	
+	<div>
+	<!-- 로고 -->
+	<div>로고임당</div>
+	<!-- 사용자 이모티콘 -->
+	<div>이모티콘임당</div>
+	<!-- 관리자 이름 -->
+	${sessionScope.id }님 환영합니다!
+	</div>
+	<!-- 선 -->
+	<div>
+	--------------------------------
+	</div>
+	<!-- 사이트관리 -->
+	사이트 관리
 	
 	
 	

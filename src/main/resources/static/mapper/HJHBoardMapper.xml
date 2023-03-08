@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.devdungeon.dao.HJHBoardDAO">
-    <select id="boardList" resultType="HashMap">
-        SELECT b_no,b_title,member_no,b_date,b_like, ROW_NUMBER() OVER() AS bno
+    <select id="boardList"  parameterType="Integer"  resultType="HashMap">
+        SELECT b_no,b_title,member_no,b_date,b_like,b_read, ROW_NUMBER() OVER() AS bno
         FROM boardview
-        ORDER BY b_no DESC
+<!--         ORDER BY b_no DESC  -->
+        LIMIT #{startPage}, 10
+    </select>
+    <select id="boardCount" resultType="Integer">
+        SELECT COUNT(*)
+        FROM boardview
     </select>
 </mapper>

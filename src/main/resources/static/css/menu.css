@@ -35,9 +35,6 @@ background-image: url("/assets/img/topMenu.png");
    width: 250px;
    text-align: center;
    color: white;
-}
-.board:hover{
-   background-color:#CE7BB0;
    cursor: pointer;
 }
 .logo{

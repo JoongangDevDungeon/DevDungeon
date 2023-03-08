@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HJHBoardDAO {
 
-	public List<Map<String, Object>> boardList();
+	public int boardCount();
+
+	public List<Map<String, Object>> boardList(Map<String, Object> pages);
+
 	
 }
