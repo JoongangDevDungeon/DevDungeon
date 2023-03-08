@@ -41,6 +41,7 @@ overflow:auto;
 <body>
 
 
+
    <div class="all_fild" style="background-color: red;"><!-- 전체 범위 -->
    
    <div class="banner"><img src="/img/banner.png"></div><!-- 배너 -->
