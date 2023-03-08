@@ -89,7 +89,6 @@ public class AdminController {
 	public ModelAndView adminBoard() {
 		ModelAndView mv = new ModelAndView("./admin/adminBoard");
 		
-		
 		return mv;
 	}
 	
@@ -123,17 +122,12 @@ public class AdminController {
 	
 	@PostMapping("/adminCouponCreate")
 	public String adminCouponCreate(HttpServletRequest request) {
-//		System.out.println(request.getParameter("couponName"));
-//		System.out.println(request.getParameter("couponContent"));
-//		System.out.println(request.getParameter("coupon"));
 		CouponDTO couponDTO = new CouponDTO();
 		couponDTO.setCoupon_name(request.getParameter("couponName"));
 		couponDTO.setCoupon_content(request.getParameter("couponContent"));
 		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("coupon")));
 		
 		adminService.adminCouponCreate(couponDTO);
-		
-		
 		return "redirect:/adminCoupon";
 	}
 	
