@@ -10,6 +10,5 @@
     <select id="boardCount" resultType="Integer">
         SELECT COUNT(*)
         FROM boardview
-
     </select>
 </mapper>

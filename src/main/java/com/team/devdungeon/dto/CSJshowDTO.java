@@ -1,0 +1,11 @@
+package com.team.devdungeon.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class CSJshowDTO {
+	private int pageNo,pageSize;
+	private String searchType,searchValue;
+}

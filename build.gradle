@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     implementation 'javax.servlet:jstl'
-    implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
     compileOnly 'org.projectlombok:lombok'
@@ -32,9 +32,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    //implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    
+    // https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter
+	implementation group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.4.6'
 }
+	
+	tasks.named('test') { useJUnitPlatform() }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
+

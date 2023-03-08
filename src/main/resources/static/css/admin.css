@@ -10,20 +10,20 @@
 .header{
 	width: 210px;
 	height: 100vh;
-	background-color: black;
+	background-color: rgb(224,224,224);
 	overflow: hidden;
 	position: absolute;
 	float: left;
 }
 
 .main{
-	width: calc(100% - 50px);
+	width: calc(100% - 210px);
 	height: 100vh;
 	float: right;
 	background-color: #FAFAFA;
 }
 .menu{
-	padding-top: 50px;
+/* 	padding-top: 50px; */
 }
 .menu-item{
 	width: 200px;
@@ -32,8 +32,11 @@
 	color: white;
 	margin: 5px;
 	box-sizing: border-box;
-	/* background-color: gray; */
+	background-color: rgb(94,94,94);
+	border-radius: 15px;
 	line-height: 50px;
+	border: 1px solid white;
+	margin-top: 15px;
 }
 
 .menu-item img{
@@ -43,11 +46,11 @@
 	vertical-align: middle;
 }
 .menu-item:hover {
-	background-color: #c0c0c0;
+	background-color: red;
 	border-radius: 15px;
 	/* font-size: large; */
 	font-weight: bold;
-	color: red;
+	color: white;
 }
 
 
