@@ -15,18 +15,16 @@ function moveBefore(pageNum){
 	let searchType = document.getElementById("searchType");
 	let searchValue = document.getElementById("searchValue");
 	let url =  document.location.href.split("?",1);
-	let url2 = document.location.href.split("pageNo=");
-	let pageNo = url2[1]-1;
 	
 	if(pageNum < 1) { return false; }
 	else if (pageNum != 1){
-		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+		if(searchType.value != null && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+(pageNum-1);
 		}else{
 			location.href="/HJHBoard?pageNo="+(pageNum-1);
 		}
 	}else{
-		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+		if(searchType.value != null && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+1;
 		}else{
 			location.href="/HJHBoard?pageNo="+1;
@@ -41,13 +39,13 @@ function moveNext(pageNum){
 	let url =  document.location.href.split("?",1);
 	if(pageNum > ${pages.lastPage } ) { return false; }
 	else if (pageNum != ${pages.lastPage } ){
-		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+		if(searchType.value != null && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+(pageNum+1);
 		}else{
 			location.href="/HJHBoard?pageNo="+(pageNum+1);
 		}
 	}else if(pageNum == ${pages.lastPage }){
-		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+		if(searchType.value != null && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+(pageNum+1);
 		}else{
 			location.href="/HJHBoard?pageNo="+(pageNum+1);
@@ -59,7 +57,7 @@ function move(pageNum){
 	let searchType = document.getElementById("searchType");
 	let searchValue = document.getElementById("searchValue");
 	let url =  document.location.href.split("?");
-	if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+	if(searchType.value != null && searchValue.value != null){
 		location.href=url[0]+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+pageNum;
 	}else{
 		location.href="/HJHBoard?pageNo="+pageNum;
@@ -95,7 +93,7 @@ function check(){
 			</tr>
 
 			<c:forEach var="board" items="${list }">
-				<tr class="table-header">
+				<tr>
 					<td>${board.bno }</td>
 					<td class="title">${board.board_title }</td>
 					<td>${board.member_no }</td>
@@ -106,35 +104,33 @@ function check(){
 			</c:forEach>
 		</table>
 		<!-- 페이징 -->
-<%-- 		<c:set var="startPage" value="${pages.startPage }"/><c:set var="lastPage" value="${pages.lastPage }"/> --%>
 		<div class="pagingBox">
 			<ul class="pagingList">
-				<li class="page" onclick="moveBefore(1)"> << </li>
-				<li class="page" onclick="moveBefore(${pageNo})"> < </li>
+				<li class="pageNo page_btn" onclick="moveBefore(1)"> << </li>
+				<li class="pageNo page_btn" onclick="moveBefore(${pageNo})"> < </li>
 				<c:forEach var="paging" items="${paging }" begin="${Math.floor((pageNo-1)/10)*10 }" 
 				end="${Math.floor((pageNo-1)/10)*10 +9 gt pages.lastPage  ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +9}" >
-					<li class="page" onclick="move(${paging })">${paging }</li>
+					<li class="pageNo" onclick="move(${paging })">${paging }</li>
 				</c:forEach>
-				<li class="page" onclick="moveNext(${pageNo})"> > </li>
-				<li class="page" onclick="moveNext(${pages.lastPage })"> >> </li>
+				<li class="pageNo page_btn" onclick="moveNext(${pageNo})"> > </li>
+				<li class="pageNo page_btn" onclick="moveNext(${pages.lastPage })"> >> </li>
 			</ul>
-		</div>
+		</div><br>
 		<!-- 검색 -->
 		<div class="searchForm">
 			<form action="/HJHBoard" method="get" onsubmit="return check()">
 				<select name="searchType" id="searchType">
-					<option value="none">선택</option>
 					<option value="title" <c:if test='${ pages.searchType eq "title"}'>selected</c:if>>제목</option>
 					<option value="writer" <c:if test='${ pages.searchType eq "writer"}'>selected</c:if>>글쓴이</option>
 				</select>
 				<input type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
-				<button>검색</button>
+				<button class="search_btn">검색</button>
 			</form>
 		</div>
 		<!-- 글쓰기 -->
-		<div class="write_btn">
-			<button onclick="location.href='/HJHBoardWrite'">글쓰기</button>
+		<div class="write">
+			<button class="write_btn"onclick="location.href='/HJHBoardWrite'">글쓰기</button>
 		</div>
-	</div>
+	</div><br>
 </body>
 </html>
