@@ -5,4 +5,9 @@
        select count(*) as count, admin_id, admin_pw, admin_grade from admin
        where admin_id = #{admin_id} AND admin_pw = #{admin_pw}
     </select>
+    
+    <select id="adminMember" resultType="MemberDTO">
+    	select * from member
+    </select>
+    
 </mapper>

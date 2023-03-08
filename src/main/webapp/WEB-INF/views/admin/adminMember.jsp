@@ -18,7 +18,9 @@
 	<!-- 메인 시작 -->
 	<div class="main">
 		<h1>관리자 사용자 관리 페이지</h1>
-		
+		<c:forEach items="${list }" var="row">
+			사용자 이름: ${row.member_name}
+		</c:forEach>
 		
 		
 	</div>
