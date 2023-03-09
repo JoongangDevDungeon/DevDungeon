@@ -157,8 +157,8 @@ function check(){
 
 </script>
 <body>
-	<%@ include file="top.jsp"%>
-	<%@ include file="menu.jsp"%>
+	<%@ include file="../top.jsp"%>
+	<%@ include file="../menu.jsp"%>
 	<div class="container">
 		<h1>Detail</h1>
 		<div class="detailBox">
@@ -203,7 +203,7 @@ function check(){
 				</div>
 		</c:forEach>
 	</div><br>
-	<%@ include file="footer.jsp"%>
+	<%@ include file="../footer.jsp"%>
 
 </body>
 </html>

@@ -6,17 +6,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.service.HJHBoardService;
-import com.team.devdungeon.util.PageNation;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,7 +24,7 @@ public class HJHBoardController {
 	
 	@GetMapping("/HJHBoard")
 	public ModelAndView board(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("HJHBoard");
+		ModelAndView mv = new ModelAndView("board/HJHBoard");
 		Map<String, Object> pages = new HashMap<String, Object>();
 		String searchType = request.getParameter("searchType");
 		String searchValue = request.getParameter("searchValue");
@@ -47,7 +43,7 @@ public class HJHBoardController {
 	}
 	@GetMapping("/HJHBoardDetail")
 	public ModelAndView boardDetail(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("HJHBoardDetail");
+		ModelAndView mv = new ModelAndView("board/HJHBoardDetail");
 		String board_no = request.getParameter("board_no");
 		System.out.println(board_no);
 		Map<String, Object> boardDetail = HJHboardService.boardDetail(board_no);

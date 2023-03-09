@@ -79,8 +79,8 @@ function check(){	//검색 체크
 }
 </script>
 <body>
-	<%@ include file="top.jsp" %>
-	<%@ include file="menu.jsp" %>
+	<%@ include file="../top.jsp" %>
+	<%@ include file="../menu.jsp" %>
 	<div class="container">
 		<h1>B O A R D</h1>
 		<table class="table">
@@ -133,6 +133,6 @@ function check(){	//검색 체크
 			<button class="write_btn"onclick="location.href='/HJHBoardWrite'">글쓰기</button>
 		</div>
 	</div>
-	<%@ include file="footer.jsp" %>
+	<%@ include file="../footer.jsp" %>
 </body>
 </html>
