@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+/* 헤더 */
+.top {
+    width: 1920px;
+    height: 40px;
+    background-color: #6867AC;
+}
+
+.top_ul {
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: 40px;
+    line-height: 40px;
+    list-style: none;
+    float: right;
+    color: white;
+    margin-right: 390px;
+}
+
+.top_ul > li {
+    float: left;
+    margin-right: 10px;
+}
+
+.dropdown-toggle {
+    color: white;
+}
+
+.dropdown-menu {
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    width: 350px;
+}
+
+/* 네비게이션 */
+
+.menu {
+    width: 1920px;
+    height: 100px;
+    text-align: center;
+}
+
+.menu_ul {
+    padding: 0;
+    height: 100px;
+    list-style: none;
+    display: inline-block;
+}
+
+.menu_ul > li {
+    float: left;
+    width: 200px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    display: inline-block;
+}
+
+.menu_ul > li:nth-child(1) > img {
+    width: 170px;
+    height: 100px;
+}
+
+/* 섹션 */
+
+.main {
+    width: 1920px;
+    height: auto;
+    text-align: center;
+    display: inline-block;
+}
+
+.add_first {
+    width: 190px;
+    min-height: 800px;
+    background-color: #ccc;
+    display: inline-block;
+}
+
+.add_second {
+    width: 190px;
+    min-height: 800px;
+    background-color: #ccc;
+    display: inline-block;
+}
+
+.content {
+    text-align: justify;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 1000px;
+    min-height: 1080px;
+    display: inline-block;
+}
+
+/* 푸터 */
+
+footer {
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+}
+
+footer > ol {
+    list-style: none;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+}
+
+footer > ol > li {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    float: left;
+    position: relative;
+    color: #7e7e7e;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+footer > ol > li:after {
+    content: "|";
+    position: absolute;
+    right: 0;
+}
+
+footer > ol > li:nth-child(6):after {
+    content: "";
+}
