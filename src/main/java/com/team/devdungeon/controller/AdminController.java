@@ -86,6 +86,7 @@ public class AdminController {
 	}
 	
 	
+	
 	//게시글 관리
 	@GetMapping("/adminBoard")
 	public ModelAndView adminBoard() {
@@ -93,7 +94,12 @@ public class AdminController {
 
 		List<BoardDTO> list = adminService.adminBoard();
 		mv.addObject("list", list);
+
 		System.out.println("list : "+list);
+
+
+		System.out.println(mv);
+
 
 		return mv;
 	}

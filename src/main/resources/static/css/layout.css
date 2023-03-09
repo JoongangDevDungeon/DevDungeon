@@ -4,6 +4,7 @@
 .top {
     width: 1920px;
     height: 40px;
+    margin: 0 auto;
     background-color: #6867AC;
 }
 
@@ -41,6 +42,7 @@
 .menu {
     width: 1920px;
     height: 100px;
+    margin: 0 auto;
     text-align: center;
 }
 
@@ -70,31 +72,34 @@
 .main {
     width: 1920px;
     height: auto;
+    margin: 0 auto;
     text-align: center;
-    display: inline-block;
+    position: relative;
 }
 
-.add_first {
-    width: 190px;
-    min-height: 800px;
-    background-color: #ccc;
-    display: inline-block;
-}
-
-.add_second {
-    width: 190px;
-    min-height: 800px;
-    background-color: #ccc;
-    display: inline-block;
-}
-
-.content {
-    text-align: justify;
-    border: 1px solid #ccc;
+.add1 {
+    padding: 5px;
     box-sizing: border-box;
-    width: 1000px;
-    min-height: 1080px;
-    display: inline-block;
+    width: 300px;
+    min-height: 800px;
+    float: left;
+    background-color: #ccc;
+}
+
+.add2 {
+    padding: 5px;
+    box-sizing: border-box;
+    width: 300px;
+    min-height: 800px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ccc;
+}
+.content {
+    width: 1200px;
+    min-height: 800px;
+    margin: 0 auto;
 }
 
 /* 푸터 */
@@ -103,13 +108,15 @@ footer {
     margin-top: 30px;
     padding-top: 18px;
     border-top: 1px solid #ccc;
-    width: 100%;
+    width: 1200px;
     height: 40px;
+    margin: 0 auto;
     text-align: center;
 }
 
 footer > ol {
     list-style: none;
+    width: 1400px;
     height: 40px;
     line-height: 40px;
     display: inline-block;
