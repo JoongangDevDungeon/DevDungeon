@@ -80,9 +80,8 @@ function check(){	//검색 체크
 </script>
 <body>
 	<%@ include file="top.jsp" %>
-	
-	<div class="container">
 	<%@ include file="menu.jsp" %>
+	<div class="container">
 		<h1>B O A R D</h1>
 		<table class="table">
 			<tr class="table-header">
@@ -108,9 +107,10 @@ function check(){	//검색 체크
 		<div class="pagingBox">
 			<ul class="pagingList">
 				<li class="pageNo page_btn" onclick="moveBefore(1)"> << </li>
-				<li class="pageNo page_btn" onclick="moveBefore(${pageNo})"> < </li>
-				<c:forEach var="i" begin="${Math.floor((pageNo-1)/10)*10+1 }" 	end="${Math.floor((pageNo-1)/10)*10 +10 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}" >
-					<li class="pageNo" onclick="move(this)" value="${i }">${i }</li>
+				<li class="pageNo page_btn" onclick="moveBefore(${pageNo})" > < </li>
+				<c:forEach var="i" begin="${Math.floor((pageNo-1)/10)*10+1 }" 
+					end="${Math.floor((pageNo-1)/10)*10 +10 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}" >
+					<li class="pageNo" onclick="move(${i })" <c:if test="${pageNo eq i }" >style="color:red; font-weight: bold;"</c:if>>${i }</li>
 				</c:forEach>
 				<li class="pageNo page_btn" onclick="moveNext(${pageNo})"> > </li>
 				<li class="pageNo page_btn" onclick="moveNext(${pages.lastPage })"> >> </li>
