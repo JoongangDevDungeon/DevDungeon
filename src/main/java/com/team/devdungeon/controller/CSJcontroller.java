@@ -27,7 +27,7 @@ public class CSJcontroller {
 	@GetMapping("/csjboard")
 	public ModelAndView csjboard(@RequestParam(defaultValue = "1") Integer pageNo,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("CSJBoard");
+		mv.setViewName("board/CSJBoard");
 		
 		int pageSize = 10;
 		int category = 1; //카테고리에 맞는 글만 불러오도록 쿼리 수정
@@ -56,7 +56,7 @@ public class CSJcontroller {
 	@GetMapping("/csjWrite")
 	public ModelAndView csjWrite() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("CSJWrite");
+		mv.setViewName("board/CSJWrite");
 		return mv;
 	}
 	
@@ -88,7 +88,7 @@ public class CSJcontroller {
 	@GetMapping("/csjDetail")
 	public ModelAndView detail(@RequestParam(value="bno") int bno) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/CSJDetail");
+		mv.setViewName("board/CSJDetail");
 		
 		Map<String,Object> det = csjService.detail(bno);
 		int member_no = (int) det.get("member_no");
