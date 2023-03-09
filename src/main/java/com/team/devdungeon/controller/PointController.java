@@ -13,7 +13,7 @@ public class PointController {
 
     @GetMapping("/level")
     public String level() {
-        return "level";
+        return "content/level";
     }
 
 }

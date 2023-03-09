@@ -111,8 +111,8 @@
 </style>
 </head>
 <body>
-	<%@include file="top.jsp"%>
-	<%@include file="menu.jsp"%>
+	<%@include file="../top.jsp"%>
+	<%@include file="../menu.jsp"%>
 	<section>
 		<div class="main">
 			<div class="add1">광고1</div>
@@ -177,7 +177,7 @@
 			<div class="add2">광고2</div>
 		</div>
 	</section>
-	<%@include file="footer.jsp"%>
+	<%@include file="../footer.jsp"%>
 </body>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

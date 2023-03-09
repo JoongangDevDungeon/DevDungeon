@@ -22,13 +22,13 @@ function moveBefore(pageNo){	//페이징 시작
 		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+(pageNo-1);
 		}else{
-			location.href="/HJHBoard?pageNo="+(pageNo-1);
+			location.href="/board/HJHBoard?pageNo="+(pageNo-1);
 		}
 	}else{
 		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+1;
 		}else{
-			location.href="/HJHBoard?pageNo="+1;
+			location.href="/board/HJHBoard?pageNo="+1;
 		}
 	}
 }
@@ -41,13 +41,13 @@ function moveNext(pageNo){
 		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+(pageNo+1);
 		}else{
-			location.href="/HJHBoard?pageNo="+(pageNo+1);
+			location.href="/board/HJHBoard?pageNo="+(pageNo+1);
 		}
 	}else if(pageNo == ${pages.lastPage }){
 		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+pageNo;
 		}else{
-			location.href="/HJHBoard?pageNo="+pageNo;
+			location.href="/board/HJHBoard?pageNo="+pageNo;
 		}
 	}
 	
@@ -59,7 +59,7 @@ function move(pageNo){
 	if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
 		location.href=url[0]+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+pageNo;
 	}else{
-		location.href="/HJHBoard?pageNo="+pageNo;
+		location.href="/board/HJHBoard?pageNo="+pageNo;
 	}
 	
 }//페이징 끝
@@ -79,8 +79,8 @@ function check(){	//검색 체크
 }
 </script>
 <body>
-	<%@ include file="top.jsp" %>
-	<%@ include file="menu.jsp" %>
+	<%@ include file="../top.jsp" %>
+	<%@ include file="../menu.jsp" %>
 	<div class="container">
 		<h1>B O A R D</h1>
 		<table class="table">
@@ -95,7 +95,7 @@ function check(){	//검색 체크
 			<c:forEach var="board" items="${list }">
 				<tr>
 					<td>${board.bno }</td>
-					<td class="title"><a href="/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }</a></td>
+					<td class="title"><a href="/board/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }</a></td>
 					<td>${board.member_name}</td>
 					<td>${board.board_date }</td>
 					<td>${board.board_read }</td>
@@ -118,7 +118,7 @@ function check(){	//검색 체크
 		</div><br>
 		<!-- 검색 -->
 		<div class="searchForm">
-			<form action="/HJHBoard" method="get" onsubmit="return check()">
+			<form action="/board/HJHBoard" method="get" onsubmit="return check()">
 				<select name="searchType" id="searchType">
 					<option value="none">선택</option>
 					<option value="title" <c:if test='${ pages.searchType eq "title"}'>selected</c:if>>제목</option>
@@ -130,9 +130,9 @@ function check(){	//검색 체크
 		</div>
 		<!-- 글쓰기 -->
 		<div class="write">
-			<button class="write_btn"onclick="location.href='/HJHBoardWrite'">글쓰기</button>
+			<button class="write_btn"onclick="location.href='/board/HJHBoardWrite'">글쓰기</button>
 		</div>
 	</div>
-	<%@ include file="footer.jsp" %>
+	<%@ include file="../footer.jsp" %>
 </body>
 </html>

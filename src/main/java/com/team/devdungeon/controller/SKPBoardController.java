@@ -16,7 +16,7 @@ public class SKPBoardController {
 	@GetMapping("/SKPBoard")
 	public String SKPBoard() {
 		
-		return "SKPBoard";
+		return "board/SKPBoard";
 	}
 	
 	

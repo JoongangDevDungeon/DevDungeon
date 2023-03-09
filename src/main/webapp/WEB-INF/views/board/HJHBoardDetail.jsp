@@ -155,8 +155,8 @@ function check(){
 
 </script>
 <body>
-	<%@ include file="top.jsp"%>
-	<%@ include file="menu.jsp"%>
+	<%@ include file="../top.jsp"%>
+	<%@ include file="../menu.jsp"%>
 	<div class="container">
 		<h1>Detail</h1>
 		<div class="detailBox">
@@ -178,11 +178,11 @@ function check(){
 				<div class="btnBox_2">
 					<button class="detailBtn" style="background-color: #ffc414;">수정</button> 
 					<button class="detailBtn" style="background-color: #ff3d3d;">삭제</button> 
-					<button class="detailBtn boardList" onclick="location.href='/HJHBoard'">목록</button>
+					<button class="detailBtn boardList" onclick="location.href='/board/HJHBoard'">목록</button>
 				</div>
 			</div>
 			<div class="commentBox">
-				<form action="/HJHComment" method="post" onsubmit="return check()">
+				<form action="/board/HJHComment" method="post" onsubmit="return check()">
 					<input type="hidden" value="${boardDetail.board_no }" name="board_no">
 					<input type="text" class="commentText" name="commentText" id="commentText" placeholder="댓글을 입력하세요">
 					<button class="commentBtn">댓글쓰기</button>
@@ -202,7 +202,7 @@ function check(){
 				</div>
 		</c:forEach>
 	</div><br>
-	<%@ include file="footer.jsp"%>
+	<%@ include file="../footer.jsp"%>
 
 </body>
 </html>

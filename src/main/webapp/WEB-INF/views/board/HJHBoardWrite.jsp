@@ -137,8 +137,8 @@ body{
 
 </script>
 <body>
-	<%@ include file="top.jsp"%>
-	<%@ include file="menu.jsp"%>
+	<%@ include file="../top.jsp"%>
+	<%@ include file="../menu.jsp"%>
 	<div class="container">
 		<h1>Write</h1>
 		<div class="writeBox">
@@ -147,12 +147,12 @@ body{
 			<div class="btnBox">
 				<div class="btnBox_2">
 					<button class="detailBtn" style="background-color: #ff3d3d;">저장</button> 
-					<button class="detailBtn boardList" onclick="location.href='/HJHBoard'">목록</button>
+					<button class="detailBtn boardList" onclick="location.href='/board/HJHBoard'">목록</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<%@ include file="footer.jsp"%>
+	<%@ include file="../footer.jsp"%>
 
 </body>
 </html>

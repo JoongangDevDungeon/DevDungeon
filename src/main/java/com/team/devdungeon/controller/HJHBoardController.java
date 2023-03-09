@@ -6,17 +6,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.service.HJHBoardService;
-import com.team.devdungeon.util.PageNation;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,9 +22,9 @@ public class HJHBoardController {
 	
 	private final HJHBoardService HJHboardService;
 	
-	@GetMapping("/HJHBoard")
-	public ModelAndView boardList(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("HJHBoard");
+	@GetMapping("/board/HJHBoard")
+	public ModelAndView board(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("board/HJHBoard");
 		Map<String, Object> pages = new HashMap<String, Object>();
 		String searchType = request.getParameter("searchType");
 		String searchValue = request.getParameter("searchValue");
@@ -45,9 +41,9 @@ public class HJHBoardController {
 		mv.addObject("pageNo", pageNo);
 		return mv;
 	}
-	@GetMapping("/HJHBoardDetail")
+	@GetMapping("/board/HJHBoardDetail")
 	public ModelAndView boardDetail(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("HJHBoardDetail");
+		ModelAndView mv = new ModelAndView("board/HJHBoardDetail");
 		String board_no = request.getParameter("board_no");
 		System.out.println(board_no);
 		Map<String, Object> boardDetail = HJHboardService.boardDetail(board_no);
@@ -57,7 +53,7 @@ public class HJHBoardController {
 		return mv;
 	}
 	
-	@PostMapping("/HJHComment")
+	@PostMapping("/board/HJHComment")
 	public String comment(HttpServletRequest request) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		String comment_content = request.getParameter("commentText");
@@ -66,20 +62,14 @@ public class HJHBoardController {
 		map.put("board_no", board_no);
 		System.out.println(map);
 		HJHboardService.commentAdd(map);
-		
-		return "redirect:/HJHBoardDetail?board_no="+board_no;
+		return "redirect:/board/HJHBoardDetail?board_no="+board_no;
 	}
-	@GetMapping("/HJHBoardWrite")
+	
+	@GetMapping("/board/HJHBoardWrite")
 	public String boardWrite() {
 
-		return "HJHBoardWrite";
+		return "board/HJHBoardWrite";
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 }
