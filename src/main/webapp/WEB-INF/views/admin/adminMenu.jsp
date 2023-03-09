@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="/resources/assets/favicon.ico" />
+
 	<div class="menu">
 	<div>
 	<!-- 로고 -->
