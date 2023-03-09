@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
-public class CSJcontroller {
+public class CSJController {
 	
 	private final CSJService csjService;
 	
