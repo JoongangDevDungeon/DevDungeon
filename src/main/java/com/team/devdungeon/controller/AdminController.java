@@ -85,6 +85,7 @@ public class AdminController {
 	}
 	
 	
+	
 	//게시글 관리
 	@GetMapping("/adminBoard")
 	public ModelAndView adminBoard() {
