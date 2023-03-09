@@ -45,7 +45,7 @@ public class CSJcontroller {
 		
 		PageInfo<Map<String,Object>> pageList = csjService.pageList(dto);
 		
-		
+		mv.addObject("pageNo",pageNo);
 		mv.addObject("pageInfo",pageList);
 		mv.addObject("searchType",searchType);
 		mv.addObject("searchValue",searchValue);
@@ -92,12 +92,26 @@ public class CSJcontroller {
 		
 		Map<String,Object> det = csjService.detail(bno);
 		int member_no = (int) det.get("member_no");
-		System.out.println(member_no);
 		Map<String,Object> mem = csjService.memberProfile(member_no);
+		
+		List<Map<String,Object>> comment = csjService.commentList(bno);
+		
 		mv.addObject("det",det);
-		System.out.println(mem);
 		mv.addObject("mem",mem);
+		mv.addObject("comment",comment);
 		
 		return mv;
+	}
+	
+	@GetMapping("/likethis")
+	public String likethis(@RequestParam(value="bno")int bno) {
+		int result = csjService.likethis(bno);
+		return "redirect:/csjDetail?bno="+bno;
+	}
+
+	@GetMapping("/csjRead")
+	public String readthis(@RequestParam(value="bno")int bno) {
+		int result = csjService.readthis(bno);
+		return "redirect:/csjDetail?bno="+bno;
 	}
 }

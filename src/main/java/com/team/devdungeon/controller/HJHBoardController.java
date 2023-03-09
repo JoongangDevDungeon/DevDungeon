@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.service.HJHBoardService;
@@ -24,7 +27,7 @@ public class HJHBoardController {
 	private final HJHBoardService HJHboardService;
 	
 	@GetMapping("/HJHBoard")
-	public ModelAndView HJHBoard(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,HttpServletRequest request) {
+	public ModelAndView board(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("HJHBoard");
 		Map<String, Object> pages = new HashMap<String, Object>();
 		String searchType = request.getParameter("searchType");
@@ -46,9 +49,20 @@ public class HJHBoardController {
 	public ModelAndView boardDetail(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("HJHBoardDetail");
 		String board_no = request.getParameter("board_no");
-		List<Map<String, Object>> boardDetail = HJHboardService.boardDetail(board_no);
+		System.out.println(board_no);
+		Map<String, Object> boardDetail = HJHboardService.boardDetail(board_no);
+		List<Map<String,Object>> detailComments = HJHboardService.detailComment(board_no);
 		mv.addObject("boardDetail",boardDetail);
+		mv.addObject("detailComments",detailComments);
 		return mv;
 	}
 	
+	@PostMapping("/HJHComment")
+	public String comment(HttpServletRequest request) {
+		String comment = request.getParameter("commentText");
+		String board_no = request.getParameter("board_no");
+//		System.out.println(comment);
+		
+		return "redirect:/HJHBoardDetail?board_no="+board_no;
+	}
 }

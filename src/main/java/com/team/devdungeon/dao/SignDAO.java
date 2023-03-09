@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TestDAO {
+public class SignDAO {
 
     @Autowired
     private SqlSession sqlSession;
@@ -13,4 +13,5 @@ public class TestDAO {
     public int boardCount() {
         return sqlSession.selectOne("board.boardCount");
     }
+
 }

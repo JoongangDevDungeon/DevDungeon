@@ -55,7 +55,7 @@
 
 .menu_ul > li {
     float: left;
-    width: 200px;
+    width: 250px;
     height: 100px;
     line-height: 100px;
     text-align: center;
@@ -107,8 +107,7 @@
 footer {
     margin-top: 30px;
     padding-top: 18px;
-    border-top: 1px solid #ccc;
-    width: 1200px;
+    width: 1920px;
     height: 40px;
     margin: 0 auto;
     text-align: center;

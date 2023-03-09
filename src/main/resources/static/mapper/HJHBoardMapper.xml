@@ -28,10 +28,16 @@
         </if>
     </select>
     <select id="boardDetail" parameterType="String" resultType="HashMap">
-  		SELECT * FROM boardview
+  		SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read,board_content
+  		FROM boardview
   		WHERE board_no = #{board_no}
     
     </select>
-    
+    <select id="detailComment" parameterType="String" resultType="HashMap">
+    	SELECT comment_no,board_no,comment_writer,comment_depth,comment_root,comment_time,member_name,comment_content
+    	FROM commentview
+    	WHERE board_no=${ board_no }
+    	ORDER BY comment_root DESC;
+    </select>
     
 </mapper>

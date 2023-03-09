@@ -23,8 +23,12 @@ public class HJHBoardService {
 		return HJHboardDAO.boardList(pages);
 	}
 
-	public List<Map<String, Object>> boardDetail(String board_no) {
+	public Map<String, Object> boardDetail(String board_no) {
 		return HJHboardDAO.boardDetail(board_no);
+	}
+
+	public List<Map<String, Object>> detailComment(String board_no) {
+		return HJHboardDAO.detailComment(board_no);
 	}
 
 
