@@ -6,6 +6,5 @@
       <li>게시판</li>
       <li>스토어</li>
       <li><a href="/level">레벨 등급표</a></li>
-      <li><a href="/checkPassword">마이 페이지</a></li>
    </ul>
 </nav>

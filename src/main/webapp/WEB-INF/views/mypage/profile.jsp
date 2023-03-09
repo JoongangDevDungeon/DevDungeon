@@ -68,7 +68,7 @@
                         </div>
 
                         <div style="padding: 10px; padding-top: 5px; box-sizing: border-box;">
-                            <textarea class="form-control" rows="6"></textarea>
+                            <textarea class="form-control" rows="6" placeholder="간단한 자기소개를 입력해주세요."></textarea>
                         </div>
                     </div>
                 </div>

@@ -69,7 +69,7 @@
                         </div>
                         <div class="mt-3">
                             <label style="float: left; width: 100px;">휴대전화</label>
-                            <input class="form-control" style="width: 400px;" type="text" name="member_tel" value="wjdahr125@naver.com" placeholder="전화번호를 입력하세요.">
+                            <input class="form-control" style="width: 400px;" type="text" name="member_tel" value="010-4825-9959" placeholder="전화번호를 입력하세요.">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3 mb-4" style="width: 600px;">수정</button>
