@@ -80,9 +80,8 @@ function check(){	//검색 체크
 </script>
 <body>
 	<%@ include file="top.jsp" %>
-	
-	<div class="container">
 	<%@ include file="menu.jsp" %>
+	<div class="container">
 		<h1>B O A R D</h1>
 		<table class="table">
 			<tr class="table-header">
@@ -97,10 +96,10 @@ function check(){	//검색 체크
 				<tr>
 					<td>${board.bno }</td>
 					<td class="title"><a href="/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }</a></td>
-					<td>${board.member_name }</a></td>
-					<td>${board.board_date }</a></td>
-					<td>${board.board_read }</a></td>
-					<td>${board.board_like }</a></td>
+					<td>${board.member_name }</td>
+					<td>${board.board_date }</td>
+					<td>${board.board_read }</td>
+					<td>${board.board_like }</td>
 				</tr>
 			</c:forEach>
 		</table>
