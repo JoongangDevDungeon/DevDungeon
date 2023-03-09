@@ -72,30 +72,34 @@
 .main {
     width: 1920px;
     height: auto;
+    margin: 0 auto;
     text-align: center;
-    display: inline-block;
+    position: relative;
 }
 
-.add_first {
-    width: 190px;
-    min-height: 800px;
-    background-color: #ccc;
-    display: flex;
-}
-
-.add_second {
-    width: 190px;
-    min-height: 800px;
-    background-color: #ccc;
-    display: flex;
-}
-
-.content {
-    border: 1px solid #ccc;
+.add1 {
+    padding: 5px;
     box-sizing: border-box;
-    width: 1000px;
+    width: 300px;
     min-height: 800px;
-    display: flex;
+    float: left;
+    background-color: #ccc;
+}
+
+.add2 {
+    padding: 5px;
+    box-sizing: border-box;
+    width: 300px;
+    min-height: 800px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ccc;
+}
+.content {
+    width: 1200px;
+    min-height: 800px;
+    margin: 0 auto;
 }
 
 /* 푸터 */
@@ -104,7 +108,7 @@ footer {
     margin-top: 30px;
     padding-top: 18px;
     border-top: 1px solid #ccc;
-    width: 1920px;
+    width: 1200px;
     height: 40px;
     margin: 0 auto;
     text-align: center;
