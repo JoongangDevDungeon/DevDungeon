@@ -4,6 +4,7 @@
 .top {
     width: 1920px;
     height: 40px;
+    margin: 0 auto;
     background-color: #6867AC;
 }
 
@@ -41,6 +42,7 @@
 .menu {
     width: 1920px;
     height: 100px;
+    margin: 0 auto;
     text-align: center;
 }
 
@@ -78,23 +80,22 @@
     width: 190px;
     min-height: 800px;
     background-color: #ccc;
-    display: inline-block;
+    display: flex;
 }
 
 .add_second {
     width: 190px;
     min-height: 800px;
     background-color: #ccc;
-    display: inline-block;
+    display: flex;
 }
 
 .content {
-    text-align: justify;
     border: 1px solid #ccc;
     box-sizing: border-box;
     width: 1000px;
-    min-height: 1080px;
-    display: inline-block;
+    min-height: 800px;
+    display: flex;
 }
 
 /* 푸터 */
@@ -103,13 +104,15 @@ footer {
     margin-top: 30px;
     padding-top: 18px;
     border-top: 1px solid #ccc;
-    width: 100%;
+    width: 1920px;
     height: 40px;
+    margin: 0 auto;
     text-align: center;
 }
 
 footer > ol {
     list-style: none;
+    width: 1400px;
     height: 40px;
     line-height: 40px;
     display: inline-block;
