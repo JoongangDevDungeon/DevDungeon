@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.dto.AdminDTO;
@@ -84,6 +85,17 @@ public class AdminController {
 		return mv;
 	}
 	
+	@PostMapping("/adminMember")
+	public String adminMember(HttpServletRequest request) {
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setMember_grade(Integer.parseInt(request.getParameter("member_grade")));
+		memberDTO.setMember_no(Integer.parseInt(request.getParameter("member_no")));
+		
+		adminService.memberUpdate(memberDTO);
+		
+		return "redirect:/adminMember";
+	}
+	
 	
 	
 	//게시글 관리
@@ -93,10 +105,34 @@ public class AdminController {
 
 		List<BoardDTO> list = adminService.adminBoard();
 		mv.addObject("list", list);
+
+		System.out.println("list : "+list);
+
+
 		System.out.println(mv);
+
 
 		return mv;
 	}
+	//게시글 삭제
+	@PostMapping("/adminBoard")
+	public String adminBoardDel(HttpServletRequest request) {
+		
+		request.getParameter("board_no");
+		request.getParameter("status_no");
+		//System.out.println(request.getParameter("board_no"));
+		//System.out.println(request.getParameter("status_no"));
+		BoardDTO boardDTO = new BoardDTO();
+		
+		boardDTO.setBoard_no(Integer.parseInt(request.getParameter("board_no")));
+		boardDTO.setStatus_no(Integer.parseInt(request.getParameter("status_no")));
+		
+		adminService.adminBoardDel(boardDTO);
+		
+
+		return "redirect:/adminBoard";
+	}
+	
 	
 	
 	//로그 데이터
@@ -134,10 +170,10 @@ public class AdminController {
 		couponDTO.setCoupon_name(request.getParameter("couponName"));
 		couponDTO.setCoupon_content(request.getParameter("couponContent"));
 		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("coupon")));
-		
 		adminService.adminCouponCreate(couponDTO);
 		return "redirect:/adminCoupon";
 	}
+	
 	
 	//QnA
 	@GetMapping("/adminQnA")

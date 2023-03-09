@@ -25,4 +25,31 @@
     	FROM member
     	WHERE member_no=#{member_no}
     </select>
+    <select id="commentList" parameterType="Integer" resultType="HashMap">
+    	SELECT *
+    	FROM commentview
+    	WHERE board_no=#{bno}
+    	ORDER BY comment_root,comment_no
+    </select>
+    
+    <update id="likethis" parameterType="Integer">
+    	UPDATE board
+    	SET
+    	board_like = board_like+1
+    	WHERE board_no = #{bno}
+    </update>
+    
+    <update id="readthis" parameterType="Integer">
+    	UPDATE board
+    	SET
+    	board_read = board_read+1
+    	WHERE board_no = #{bno}
+    </update>
+    
+    <update id="deleteByUser" parameterType="Integer">
+    	UPDATE board
+    	SET
+    	status_no = 2
+    	WHERE board_no = #{bno}
+    </update>
 </mapper>

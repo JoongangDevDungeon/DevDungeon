@@ -19,6 +19,11 @@
 		LIMIT 0, 10
     </select>
     
+	<update id="adminBoardDel" parameterType="BoardDTO">
+		UPDATE board SET status_no = if(#{status_no}=1,2,1)
+		WHERE board_no = #{board_no}
+	</update>
+    
 
      <select id="Coupon" resultType="CouponDTO">
     	select * from coupon
@@ -32,12 +37,14 @@
  			coupon_content = #{coupon_content}
     </insert>
     
-
-
-
     <select id="QnA" resultType="QuestionBoardDTO">
     	select * from question_board
     </select>
 
+	<update id="memberUpdate" parameterType="MemberDTO">
+		UPDATE member
+		SET member_grade = #{member_grade}
+		where member_no = #{member_no}
+	</update>
 
 </mapper>

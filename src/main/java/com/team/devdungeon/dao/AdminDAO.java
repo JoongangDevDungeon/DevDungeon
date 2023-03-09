@@ -25,11 +25,10 @@ public interface AdminDAO {
 
 	void adminCouponCreate(CouponDTO couponDTO);
 
-
 	List<QuestionBoardDTO> QnA();
 
-	
-	
+	void memberUpdate(MemberDTO memberDTO);
 
+	void adminBoardDel(BoardDTO boardDTO);
 
 }
