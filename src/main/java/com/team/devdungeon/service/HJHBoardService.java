@@ -27,5 +27,9 @@ public class HJHBoardService {
 		return HJHboardDAO.boardDetail(board_no);
 	}
 
+	public List<Map<String, Object>> detailComment(String board_no) {
+		return HJHboardDAO.detailComment(board_no);
+	}
+
 
 }

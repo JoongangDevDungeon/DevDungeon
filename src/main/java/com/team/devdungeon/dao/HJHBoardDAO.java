@@ -16,4 +16,6 @@ public interface HJHBoardDAO {
 
 	public Map<String, Object> boardDetail(String board_no);
 
+	public List<Map<String, Object>> detailComment(String board_no);
+
 }
