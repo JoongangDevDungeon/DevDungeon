@@ -47,4 +47,10 @@
 		where member_no = #{member_no}
 	</update>
 
+	<select id="Answer" parameterType="Integer" resultType="QuestionBoardDTO">
+		SELECT question_board_title, question_board_content
+		FROM question_board
+		WHERE question_board_no = #{answer}
+	</select>
+
 </mapper>

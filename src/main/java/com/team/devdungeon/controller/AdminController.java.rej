@@ -1,9 +1,0 @@
-diff a/src/main/java/com/team/devdungeon/controller/AdminController.java b/src/main/java/com/team/devdungeon/controller/AdminController.java	(rejected hunks)
-@@ -87,7 +87,6 @@
- 	@GetMapping("/adminBoard")
- 	public ModelAndView adminBoard() {
- 		ModelAndView mv = new ModelAndView("./admin/adminBoard");
--		List<MemberDTO> list = adminService.adminBoard();
- 		List<BoardDTO> list = adminService.adminBoard();
- 		mv.addObject("list", list);
- 		System.out.println(mv);

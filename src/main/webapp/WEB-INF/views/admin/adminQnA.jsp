@@ -37,8 +37,13 @@
 					<td>${row.question_board_date }</td>
 					<td>
 					<c:choose>
-						<c:when test="${row.question_board_status eq 1}"><button>답변달기</button></c:when>
-					<c:otherwise></c:otherwise>
+							<c:when test="${row.question_board_status eq 1}">
+								<form action="/adminAnswer" method="get">
+								<input type="hidden" name="answer" value="${row.question_board_no}">
+								<button type="submit">답변달기</button>
+								</form>
+							</c:when>
+					<c:otherwise>답변완료</c:otherwise>
 					</c:choose>
 					</td>
 				</tr></c:forEach>

@@ -19,8 +19,6 @@ import com.team.devdungeon.dto.MemberDTO;
 import com.team.devdungeon.dto.QuestionBoardDTO;
 import com.team.devdungeon.service.AdminService;
 
-
-
 @Controller
 public class AdminController {
 
@@ -47,16 +45,11 @@ public class AdminController {
 	
 	@PostMapping("/adminLogin")
 	public String adminLogin(HttpServletRequest request) {
-		//System.out.println(request.getParameter("adminID"));
-		//System.out.println(request.getParameter("adminPW"));
 		AdminDTO adminDTO = new AdminDTO();
 		adminDTO.setAdmin_id(request.getParameter("adminID"));
 		adminDTO.setAdmin_pw(request.getParameter("adminPW"));
 		
 		AdminDTO result = adminService.adminLogin(adminDTO);
-		//System.out.println(result.getAdmin_id());
-//		System.out.println(result.getAdmin_pw());
-//		System.out.println(result.getCount());
 		
 		if(result.getCount() == 1) {
 			//세션 만들기
@@ -96,8 +89,6 @@ public class AdminController {
 		return "redirect:/adminMember";
 	}
 	
-	
-	
 	//게시글 관리
 	@GetMapping("/adminBoard")
 	public ModelAndView adminBoard() {
@@ -106,30 +97,19 @@ public class AdminController {
 		List<BoardDTO> list = adminService.adminBoard();
 		mv.addObject("list", list);
 
-		System.out.println("list : "+list);
-
-
-		System.out.println(mv);
-
-
 		return mv;
 	}
 	//게시글 삭제
 	@PostMapping("/adminBoard")
 	public String adminBoardDel(HttpServletRequest request) {
-		
 		request.getParameter("board_no");
 		request.getParameter("status_no");
-		//System.out.println(request.getParameter("board_no"));
-		//System.out.println(request.getParameter("status_no"));
 		BoardDTO boardDTO = new BoardDTO();
 		
 		boardDTO.setBoard_no(Integer.parseInt(request.getParameter("board_no")));
 		boardDTO.setStatus_no(Integer.parseInt(request.getParameter("status_no")));
 		
 		adminService.adminBoardDel(boardDTO);
-		
-
 		return "redirect:/adminBoard";
 	}
 	
@@ -174,7 +154,6 @@ public class AdminController {
 		return "redirect:/adminCoupon";
 	}
 	
-	
 	//QnA
 	@GetMapping("/adminQnA")
 	public ModelAndView adminQnA() {
@@ -182,6 +161,15 @@ public class AdminController {
 		List<QuestionBoardDTO> qna = adminService.QnA();
 		mv.addObject("qna", qna);
 		
+		return mv;
+	} 
+	@GetMapping("/adminAnswer")
+	public ModelAndView adminAnswer(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("./admin/adminAnswer");
+		int no = Integer.parseInt(request.getParameter("answer"));
+		
+		List<QuestionBoardDTO> qna = adminService.Answer(no);
+		mv.addObject("qna", qna);
 		return mv;
 	}
 	
