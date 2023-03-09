@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
-public class LoginServiceImpl {
+public class LoginServiceImpl implements  LoginService{
 
     private final LoginDAO loginDAO;
 
