@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class BoardDTO {
-	private int board_no, board_like, status_no;
+	private int board_no, board_like, status_no, board_read;
 	private String board_title, member_id, board_date;
 
 }

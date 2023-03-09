@@ -23,19 +23,26 @@
 		
 		</div>
 		--------------------------------
-		<div class="">
+		<div class="graph">
 			<div class="graph1">
-				<canvas id="myBarChart" width="100" height="100"></canvas>
-				막대그래프
+				<canvas id="myBarChart1" width="330" height="250"></canvas>
+				막대그래프1
+				<div></div>
 			</div>
 			<div class="graph2">
-				표2
+				<canvas id="myBarChart2" width="330" height="250"></canvas>
+				막대그래프2
+				<div></div>
 			</div>
 			<div class="graph3">
-				표3
+				<canvas id="myBarChart3" width="330" height="250"></canvas>
+				막대그래프3
+				<div></div>
 			</div>
 			<div class="graph4">
-				표4
+				<canvas id="myBarChart4" width="330" height="250"></canvas>
+				막대그래프4
+				<div></div>
 			</div>
 		</div>
 		
