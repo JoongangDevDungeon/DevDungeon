@@ -12,7 +12,7 @@
 <body>
     <div>
         <div class="banner"><img src="/img/banner.png"></div>
-        <form action="/accountInquiry" method="post">
+        <form action="/changePassword" method="post">
             <div class="form-control find-form">
                 <label class="find-label mt-4" for="member_pw1">새 비밀번호</label>
                 <div class="find-info mb-3">

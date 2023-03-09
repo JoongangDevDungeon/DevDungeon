@@ -107,4 +107,12 @@ public class SignController {
     public String changePassword() {
         return "sign/changePassword";
     }
+
+    @PostMapping("/changePassword")
+    public String changePassword(HttpServletRequest request) {
+        String member_pw1 = request.getParameter("member_pw1");
+        String member_pw2 = request.getParameter("member_pw2");
+        System.out.println("1 : " + member_pw1 + " , "  + "2 : " + member_pw2);
+        return "redirect:/index";
+    }
 }
