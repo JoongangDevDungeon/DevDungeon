@@ -39,5 +39,10 @@
     	WHERE board_no=${ board_no }
     	ORDER BY comment_root DESC;
     </select>
+   <insert id="commentAdd" parameterType="HashMap">
+		INSERT INTO board_comment(board_no, comment_writer, comment_content, comment_depth)
+		VALUES( ${ board_no }, 3, '${ comment_content }' , 0)
+   </insert>
+    
     
 </mapper>

@@ -31,5 +31,10 @@ public class HJHBoardService {
 		return HJHboardDAO.detailComment(board_no);
 	}
 
+	public void commentAdd(Map<String, Object> map) {
+		HJHboardDAO.commentAdd(map);
+		
+	}
+
 
 }

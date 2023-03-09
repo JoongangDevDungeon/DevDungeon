@@ -33,6 +33,8 @@ body{
 	line-height:50px;
 	margin-left:5px;
 	font-size: 20px;
+	text-align: center;
+	
 }
 .detailTop_item:nth-child(1){ flex-grow:2; }
 .detailMid{
@@ -111,6 +113,7 @@ body{
 	border:none;
 	color:white;
 	border-radius: 5px;
+	line-height: 40px;
 }
 .comments{
 	margin-top:10px;
@@ -118,10 +121,11 @@ body{
 	font-size:20px;
 }
 .commentWrited{
+	height: 50px;
 	border-bottom: 1px solid black;
 }
-.i{
-
+.commentWrited_But{
+	height: 50px;
 }
 .commentDropdown{
 	float:right;
@@ -148,12 +152,6 @@ function check(){
 		return false;
 	}
 }
-// function dropdown(value){
-// 	let down =  document.getElementsByClassname("subComment");
-// 	if(value==1){
-// 		$(selector).hide(speed,callback);
-// 	}
-// }
 
 </script>
 <body>
@@ -173,13 +171,13 @@ function check(){
 			</div>
 			<div class="btnBox">
 				<div class="btnBox_1">
-					<button class="detailBtn" style="background-color: #3dcc00;"><i class="xi-thumbs-up "></i></button> 
-					<button class="detailBtn" style="background-color: #ff8080;"><img src="/img/siren.png"></button>
+					<button class="detailBtn" style="background-color: #3dcc00;"><img src="/img/thumbs-up.png" style="margin-bottom: 7px;"></button> 
+					<button class="detailBtn" style="background-color: #ff8080;"><img src="/img/siren.png" style="margin-bottom: 7px;"></button>
 <!-- 					style="background-color: #ff8080;" -->
 				</div>
 				<div class="btnBox_2">
-					<button class="detailBtn" style="background-color: #ffc414;"><i class="xi-save "></i></button> 
-					<button class="detailBtn" style="background-color: #ff3d3d;"><i class="xi-trash-o "></i></button> 
+					<button class="detailBtn" style="background-color: #ffc414;">수정</button> 
+					<button class="detailBtn" style="background-color: #ff3d3d;">삭제</button> 
 					<button class="detailBtn boardList" onclick="location.href='/HJHBoard'">목록</button>
 				</div>
 			</div>
@@ -194,12 +192,13 @@ function check(){
 		<c:forEach var="comment" items="${ detailComments }">			
 				<div class="comments <c:if test="${ comment.comment_depth eq 1 }"> subComment </c:if>">
 					<div class="commentWrited ">${ comment.member_name } ${ comment.comment_time } 
-						<button class="commentBtn_1" style="background-color: #ff8080;"><img src="/img/siren.png"></button>
+						<button class="commentBtn_1" style="background-color: #CB0E00; position: relative;"><i class="xi-trash-o "></i></button>
+						<button class="commentBtn_1" style="background-color: #ff8080;"><img src="/img/siren.png" style="margin-bottom: 10px;"></button>
 						<c:if test="${comment.comment_depth eq 0 }">
 							<button class="commentDropdown"><i class="xi-caret-down "></i></button>
 						</c:if>
 					</div>
-					<div>${ comment.comment_content }</div>
+					<div class="commentWrited_But">${ comment.comment_content }</div>
 				</div>
 		</c:forEach>
 	</div><br>
