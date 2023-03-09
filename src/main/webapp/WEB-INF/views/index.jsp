@@ -3,6 +3,7 @@
 <head>
    <meta charset="UTF-8">
 <title>메인화면</title>
+<link rel="icon" type="image/x-icon" href="/img/favicon.png" />
 <link rel="stylesheet" href="/css/layout.css">
 <link rel="stylesheet" href="/cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -17,6 +18,7 @@
             <div class="content">
                <!-- 이 곳을 수정하여 사용해주세요. -->
                본문
+               <img src="/img/favicon.png"/>
             </div>
             <span class="add_second">광고</span>
          </div>
