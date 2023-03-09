@@ -8,7 +8,7 @@
 			WHERE
 			<choose>
 				<when test="searchType == 'title'">board_title</when>
-				<when test="searchType == 'writer'">member_no</when>
+				<when test="searchType == 'writer'">member_name</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
         </if>
@@ -22,7 +22,7 @@
 			WHERE
 			<choose>
 				<when test="searchType == 'title'">board_title</when>
-				<when test="searchType == 'writer'">member_no</when>
+				<when test="searchType == 'writer'">member_name</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
         </if>
