@@ -27,12 +27,8 @@ public interface AdminDAO {
 
 	List<QuestionBoardDTO> QnA();
 
+	void memberUpdate(MemberDTO memberDTO);
+
 	void adminBoardDel(BoardDTO boardDTO);
-
-	
-
-	
-	
-
 
 }

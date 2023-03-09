@@ -29,6 +29,8 @@
 					<td>생일</td>
 					<td>멤버상태변경</td>								
 				</tr><c:forEach items="${list }" var="row">
+				<form action="/adminMember" method="post">
+				<input type="hidden" name="member_no" value="${row.member_no }">
 				<tr>
 					<td>${row.member_no }</td>
 					<td>${row.member_name }</td>
@@ -38,11 +40,13 @@
 					<td>${row.member_birth }</td>
 					<td>
 					<c:choose>
-						<c:when test="${row.member_grade eq 0}"><button>활성화</button></c:when>
-					<c:otherwise><button type="button">비활성화</button></c:otherwise>
+						<c:when test="${row.member_grade eq 0}"><button type="submit" value="1" name="member_grade">활성화</button></c:when>
+					<c:otherwise><button type="submit" value="0" name="member_grade">비활성화</button></c:otherwise>
 					</c:choose>
 					</td>
-				</tr></c:forEach>
+				</tr>
+				</form>
+				</c:forEach>
 		</table>	
 	</div>
 </div>
