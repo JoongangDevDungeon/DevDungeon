@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- Favicon-->
+<link rel="icon" href="/img/admin/adminGazi.png" />
 <title>admin coupon</title>
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">

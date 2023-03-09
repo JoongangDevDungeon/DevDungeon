@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- Favicon-->
+<link rel="icon" href="/img/admin/adminGazi.png" />
 <title>admin statistics</title>
 <link rel="stylesheet" href="/css/admin.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>

@@ -45,6 +45,10 @@ public class AdminService {
 		return adminDAO.QnA();
 	}
 
+	public void adminBoardDel(BoardDTO boardDTO) {
+		adminDAO.adminBoardDel(boardDTO);
+	}
+
 	
 
 

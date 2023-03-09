@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- Favicon-->
+<link rel="icon" href="/img/admin/adminGazi.png" />
 <title>adminBoard</title>
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
@@ -34,7 +36,13 @@
 				<td>${row.member_id }</td>
 				<td>${row.board_date }</td>
 				<td>${row.board_like }</td>
-				<td>관리</td>
+				<td>
+					<form action="/adminBoard" method="post">
+						<input type="hidden" name="board_no" value="${row.board_no }">
+						<input type="hidden" name="status_no" value="${row.status_no }">
+						<button type="submit">${row.status_no eq '1' ? '비활성화' : '활성화'}</button>
+					</form>
+				</td>
 			</tr>
 			</c:forEach>
 		</table>
