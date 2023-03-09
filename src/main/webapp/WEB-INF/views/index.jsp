@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-   <meta charset="UTF-8">
+<meta charset="UTF-8">
 <title>메인화면</title>
-<link rel="icon" type="image/x-icon" href="/img/favicon.png" />
 <link rel="stylesheet" href="/css/layout.css">
-<link rel="stylesheet" href="/cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="icon" href="/img/Gazi_shortCut.png" />
 </head>
 <body>
    <%@include file="top.jsp"%>
@@ -18,7 +17,7 @@
             <div class="content">
                <!-- 이 곳을 수정하여 사용해주세요. -->
                본문
-               <img src="/img/favicon.png"/>
+               <img src="/img/Gazi_shortCut.png"/>
             </div>
             <span class="add_second">광고</span>
          </div>
