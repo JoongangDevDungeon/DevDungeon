@@ -16,14 +16,8 @@
          <div class="main">
             <div class="add1">광고1</div>
             <div class="content">
-               <table class="table" style="margin-bottom: 0; background-color: white;">
-                     <th class="col-1">번호</th>
-                     <th class="col-5">제목</th>
-                     <th class="col-2">글쓴이</th>
-                     <th class="col-2">날짜</th>
-                     <th class="col-1">조회수</th>
-                     <th class="col-1">좋아요</th>
-               </table>
+               <!-- 이 곳을 수정하여 사용해주세요. -->
+
             </div>
             <div class="add2">광고2</div>
          </div>
