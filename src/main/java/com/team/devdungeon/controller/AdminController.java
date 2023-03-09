@@ -84,6 +84,17 @@ public class AdminController {
 		return mv;
 	}
 	
+	@PostMapping("/adminMember")
+	public String adminMember(HttpServletRequest request) {
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setMember_grade(Integer.parseInt(request.getParameter("member_grade")));
+		memberDTO.setMember_no(Integer.parseInt(request.getParameter("member_no")));
+		
+		adminService.memberUpdate(memberDTO);
+		
+		return "redirect:/adminMember";
+	}
+	
 	
 	
 	//게시글 관리
@@ -134,10 +145,10 @@ public class AdminController {
 		couponDTO.setCoupon_name(request.getParameter("couponName"));
 		couponDTO.setCoupon_content(request.getParameter("couponContent"));
 		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("coupon")));
-		
 		adminService.adminCouponCreate(couponDTO);
 		return "redirect:/adminCoupon";
 	}
+	
 	
 	//QnA
 	@GetMapping("/adminQnA")

@@ -28,6 +28,8 @@ public interface AdminDAO {
 
 	List<QuestionBoardDTO> QnA();
 
+	void memberUpdate(MemberDTO memberDTO);
+
 	
 	
 

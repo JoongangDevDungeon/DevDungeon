@@ -32,12 +32,14 @@
  			coupon_content = #{coupon_content}
     </insert>
     
-
-
-
     <select id="QnA" resultType="QuestionBoardDTO">
     	select * from question_board
     </select>
 
+	<update id="memberUpdate" parameterType="MemberDTO">
+		UPDATE member
+		SET member_grade = #{member_grade}
+		where member_no = #{member_no}
+	</update>
 
 </mapper>
