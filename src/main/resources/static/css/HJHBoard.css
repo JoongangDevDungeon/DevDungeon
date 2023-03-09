@@ -1,6 +1,6 @@
-.table{	text-align: center; }
+.table{	text-align: center; width:1200px; margin:0 auto;}
 .table-header{ background-color: #d3d3d3; }
-.container{	width:1920px; }
+.container{	max-width:1200px; margin:0 auto;}
 .pagingBox{	width:700px; margin:0 auto; }
 .title{	text-align: left; }
 a {	text-decoration: none; color:black; }

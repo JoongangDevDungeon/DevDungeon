@@ -28,7 +28,8 @@
         </if>
     </select>
     <select id="boardDetail" parameterType="String" resultType="HashMap">
-  		SELECT * FROM boardview
+  		SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read, bno
+  		FROM boardview
   		WHERE board_no = #{board_no}
     
     </select>

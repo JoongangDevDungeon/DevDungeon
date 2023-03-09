@@ -46,8 +46,9 @@ public class HJHBoardController {
 	public ModelAndView boardDetail(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("HJHBoardDetail");
 		String board_no = request.getParameter("board_no");
-		List<Map<String, Object>> boardDetail = HJHboardService.boardDetail(board_no);
+		Map<String, Object> boardDetail = HJHboardService.boardDetail(board_no);
 		mv.addObject("boardDetail",boardDetail);
+		System.out.println(boardDetail);
 		return mv;
 	}
 	
