@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.banner {
+    text-align: center;
+}
+
+.find-form {
+    width: 700px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.find-label {
+    padding-left: 36px;
+    box-sizing: border-box;
+    font-size: 36px;
+}
+
+.find-info {
+    text-align: center;
+}
+
+.find-input {
+    margin: 0 auto;
+    width: 600px;
+    height: 50px;
+}
+
+.find-btn {
+    width: 300px;
+}

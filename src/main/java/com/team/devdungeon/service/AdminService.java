@@ -45,17 +45,12 @@ public class AdminService {
 		return adminDAO.QnA();
 	}
 
-<<<<<<< HEAD
 	public void memberUpdate(MemberDTO memberDTO) {
 		adminDAO.memberUpdate(memberDTO);
-		
-=======
-	public void adminBoardDel(BoardDTO boardDTO) {
-		adminDAO.adminBoardDel(boardDTO);
->>>>>>> df75487ed505a85cfe453e0d455528e25ab6f467
 	}
 
-	
-
+	public void adminBoardDel(BoardDTO boardDTO) {
+		adminDAO.adminBoardDel(boardDTO);
+	}
 
 }
