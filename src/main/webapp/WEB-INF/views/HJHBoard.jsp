@@ -9,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <link type="text/css" rel="stylesheet" href="/css/HJHBoard.css">
+<link type="text/css" rel="stylesheet" href="/css/layout.css">
 <title>HJHBoard</title>
 </head>
 <script type="text/javascript">
@@ -78,9 +79,10 @@ function check(){	//검색 체크
 }
 </script>
 <body>
-	<div class="menubar">메뉴바</div>
+	<%@ include file="top.jsp" %>
 	
 	<div class="container">
+	<%@ include file="menu.jsp" %>
 		<h1>B O A R D</h1>
 		<table class="table">
 			<tr class="table-header">
@@ -91,7 +93,6 @@ function check(){	//검색 체크
 				<th class="col-1">조회수</th>
 				<th class="col-1">좋아요</th>
 			</tr>
-
 			<c:forEach var="board" items="${list }">
 				<tr>
 					<td>${board.bno }</td>
@@ -109,7 +110,7 @@ function check(){	//검색 체크
 				<li class="pageNo page_btn" onclick="moveBefore(1)"> << </li>
 				<li class="pageNo page_btn" onclick="moveBefore(${pageNo})"> < </li>
 				<c:forEach var="i" begin="${Math.floor((pageNo-1)/10)*10+1 }" 	end="${Math.floor((pageNo-1)/10)*10 +10 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}" >
-					<li class="pageNo" onclick="move(${i })">${i }</li>
+					<li class="pageNo" onclick="move(this)" value="${i }">${i }</li>
 				</c:forEach>
 				<li class="pageNo page_btn" onclick="moveNext(${pageNo})"> > </li>
 				<li class="pageNo page_btn" onclick="moveNext(${pages.lastPage })"> >> </li>
@@ -131,6 +132,7 @@ function check(){	//검색 체크
 		<div class="write">
 			<button class="write_btn"onclick="location.href='/HJHBoardWrite'">글쓰기</button>
 		</div>
-	</div><br>
+	</div>
+	<%@ include file="footer.jsp" %>
 </body>
 </html>
