@@ -18,7 +18,7 @@ function moving(page){
 <link rel="stylesheet" href="/css/paging.css">
 <div class="pagingBar">
 	<!-- 지금은 어디서 페이지를 눌러도 csjboard로 넘어감 -->
-	<ul>
+	<ul class="pagingUl">
 		
 			<li><a onclick="moving(1)">[처음]</a></li>
 			<li><a onclick="moving(${pageInfo.pageNum-1})">[이전]</a></li>
@@ -43,11 +43,5 @@ function moving(page){
 			<li><a onclick="moving(${pageInfo.pages })">[끝]</a></li>
 	
 	</ul>
-		<c:forEach 
-			begin="${Math.floor((pageNo-1)/10)*10 +1 }" 
-			end="${Math.floor((pageNo-1)/10)*10 +10 gt pageInfo.pages ? pageInfo.pages : Math.floor((pageNo-1)/10)*10 +10}" 
-			var="p">
-			${p }
-		</c:forEach>
 	
 </div>

@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
-ul{
+.pagingUl{
 	list-style: none;
 	height:100%;
 	width:500px;
 	margin:0 auto;
 }
-li{
+.pagingUl li{
 	float:left;
 }
 

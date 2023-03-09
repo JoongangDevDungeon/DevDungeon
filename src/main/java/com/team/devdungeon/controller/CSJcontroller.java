@@ -108,4 +108,10 @@ public class CSJcontroller {
 		int result = csjService.likethis(bno);
 		return "redirect:/csjDetail?bno="+bno;
 	}
+
+	@GetMapping("/csjRead")
+	public String readthis(@RequestParam(value="bno")int bno) {
+		int result = csjService.readthis(bno);
+		return "redirect:/csjDetail?bno="+bno;
+	}
 }

@@ -25,4 +25,6 @@ public interface CSJService {
 	public List<Map<String, Object>> commentList(int bno);
 
 	public int likethis(int bno);
+
+	public int readthis(int bno);
 }

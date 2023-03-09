@@ -64,5 +64,11 @@ public class CSJServiceImpl implements CSJService {
 		return csjDAO.likethis(bno);
 	}
 
+	@Override
+	public int readthis(int bno) {
+		// TODO Auto-generated method stub
+		return csjDAO.readthis(bno);
+	}
+
 
 }
