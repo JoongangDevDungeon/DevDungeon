@@ -28,7 +28,7 @@ function moving(page){
 			begin="${pageInfo.pageNum lt pageInfo.pages-9 ? pageInfo.pageNum:pageInfo.pages-9}"
 			end="${pageInfo.pageNum+9 gt pageInfo.pages ? pageInfo.pages:pageInfo.pageNum+9}"
 			var="p">
-			<li><a onclick="moving(${p })">[${p }]</a></li>
+			<li><a onclick="moving(${p })"<c:if test="${pageInfo.pageNum eq p }">style="color:pink"</c:if>>[${p }]</a></li>
 			</c:forEach>
 		</c:if>
 		<c:if test="${pageInfo.pages le 9 }">
@@ -36,11 +36,18 @@ function moving(page){
 			begin="${1 }"
 			end="${pageInfo.pages }"
 			var="p">
-			<li><a onclick="moving(${p })">[${p }]</a></li>
+			<li><a onclick="moving(${p })"<c:if test="${pageInfo.pageNum eq p }">style="color:pink"</c:if>>[${p }]</a></li>			
 			</c:forEach>
 		</c:if>
 			<li><a onclick="moving(${pageInfo.pageNum eq pageInfo.pages ? pageInfo.pageNum:pageInfo.pageNum+1 })">[다음]</a></li>
 			<li><a onclick="moving(${pageInfo.pages })">[끝]</a></li>
 	
 	</ul>
+		<c:forEach 
+			begin="${Math.floor((pageNo-1)/10)*10 +1 }" 
+			end="${Math.floor((pageNo-1)/10)*10 +10 gt pageInfo.pages ? pageInfo.pages : Math.floor((pageNo-1)/10)*10 +10}" 
+			var="p">
+			${p }
+		</c:forEach>
+	
 </div>

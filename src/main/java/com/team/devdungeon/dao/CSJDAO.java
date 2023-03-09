@@ -19,34 +19,39 @@ public class CSJDAO {
 	private SqlSession sqlSession;
 	
 	public List<Map<String, Object>> boardList() {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("com.team.devdungeon.dao.CSJDAO.boardList");
 	}
 
 	public PageInfo<Map<String, Object>> pageList(Integer pageNo, int i) {
-		// TODO Auto-generated method stub
 		PageHelper.startPage(pageNo,i);
 		return PageInfo.of(sqlSession.selectList("com.team.devdungeon.dao.CSJDAO.boardList"));
 	}
 
 	public PageInfo<Map<String, Object>> pageList(CSJshowDTO dto) {
-		// TODO Auto-generated method stub
 		PageHelper.startPage(dto.getPageNo(),dto.getPageSize());
 		return PageInfo.of(sqlSession.selectList("com.team.devdungeon.dao.CSJDAO.boardList",dto));
 	}
 
 	public int write(Map<String, Object> writemap) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("com.team.devdungeon.dao.CSJDAO.boardWrite",writemap);
 	}
 
 	public Map<String, Object> detail(int bno) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("com.team.devdungeon.dao.CSJDAO.detail",bno);
 	}
 
 	public Map<String, Object> memberProfile(int member_no) {
 		return sqlSession.selectOne("com.team.devdungeon.dao.CSJDAO.memberProfile",member_no);
+	}
+
+	public List<Map<String, Object>> commentList(int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("com.team.devdungeon.dao.CSJDAO.commentList",bno);
+	}
+
+	public int likethis(int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("com.team.devdungeon.dao.CSJDAO.likethis",bno);
 	}
 
 }

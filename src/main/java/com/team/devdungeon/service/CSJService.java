@@ -21,4 +21,8 @@ public interface CSJService {
 	public Map<String, Object> detail(int bno);
 
 	public Map<String, Object> memberProfile(int member_no);
+
+	public List<Map<String, Object>> commentList(int bno);
+
+	public int likethis(int bno);
 }
