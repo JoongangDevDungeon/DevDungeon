@@ -9,7 +9,7 @@
             <form class="dropdown-menu">
                <div class="mb-3">
                   <label for="member_id" class="form-label">아이디</label>
-                  <a href="/signup">계정찾기</a>
+                  <a href="/accountInquiry">계정찾기</a>
                   <input type="email" class="form-control" id="member_id" name="member_id" placeholder="아이디를 입력하세요.">
                </div>
                <div class="mb-3">
