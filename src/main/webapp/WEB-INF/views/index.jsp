@@ -16,26 +16,18 @@
             <span class="add_first">광고</span>
             <div class="content">
                <!-- 이 곳을 수정하여 사용해주세요. -->
-               <table>
-                  <tr>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>1</td>
-                  </tr>
-               </table>
+               <div class="container">
+                  <table class="table">
+                     <tr class="table-header">
+                        <th class="col-1">번호</th>
+                        <th class="col-5">제목</th>
+                        <th class="col-2">글쓴이</th>
+                        <th class="col-2">날짜</th>
+                        <th class="col-1">조회수</th>
+                        <th class="col-1">좋아요</th>
+                     </tr>
+                  </table>
+               </div>
             </div>
             <span class="add_second">광고</span>
          </div>
