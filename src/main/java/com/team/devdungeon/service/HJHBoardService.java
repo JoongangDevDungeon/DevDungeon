@@ -36,5 +36,10 @@ public class HJHBoardService {
 		
 	}
 
+	public void writeAdd(Map<String, Object> map) {
+		HJHboardDAO.writeAdd(map);
+		
+	}
+
 
 }

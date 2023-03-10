@@ -171,7 +171,8 @@ function check(){
 			</div>
 			<div class="btnBox">
 				<div class="btnBox_1">
-					<button class="detailBtn" style="background-color: #3dcc00;"><img src="/img/thumbs-up.png" style="margin-bottom: 7px;"></button> 
+					<button class="detailBtn" style="background-color: #3dcc00;"><img src="/img/thumbs-up
+					.png" style="margin-bottom: 5px; width:25px; height:25px;"></button> 
 					<button class="detailBtn" style="background-color: #ff8080;"><img src="/img/siren.png" style="margin-bottom: 7px;"></button>
 <!-- 					style="background-color: #ff8080;" -->
 				</div>

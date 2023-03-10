@@ -23,7 +23,7 @@ public class HJHBoardController {
 	private final HJHBoardService HJHboardService;
 	
 	@GetMapping("/board/HJHBoard")
-	public ModelAndView board(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,HttpServletRequest request) {
+	public ModelAndView boardList(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("board/HJHBoard");
 		Map<String, Object> pages = new HashMap<String, Object>();
 		String searchType = request.getParameter("searchType");
@@ -52,7 +52,6 @@ public class HJHBoardController {
 		mv.addObject("detailComments",detailComments);
 		return mv;
 	}
-	
 	@PostMapping("/board/HJHComment")
 	public String comment(HttpServletRequest request) {
 		Map<String,Object> map = new HashMap<String, Object>();
@@ -67,8 +66,18 @@ public class HJHBoardController {
 	
 	@GetMapping("/board/HJHBoardWrite")
 	public String boardWrite() {
-
 		return "board/HJHBoardWrite";
+	}
+	@PostMapping("/board/writeSave")
+	public String writeSave(HttpServletRequest request) {
+		String writeTitle = request.getParameter("writeTitle");
+		String writeContent = request.getParameter("writeContent");
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("writeTitle", writeTitle);
+		map.put("writeContent", writeContent);
+		HJHboardService.writeAdd(map);
+		
+		return"redirect:/board/HJHBoard";
 	}
 	
 	

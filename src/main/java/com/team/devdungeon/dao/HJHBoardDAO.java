@@ -20,4 +20,6 @@ public interface HJHBoardDAO {
 
 	public void commentAdd(Map<String, Object> map);
 
+	public void writeAdd(Map<String, Object> map);
+
 }

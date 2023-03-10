@@ -10,146 +10,85 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <link type="text/css" rel="stylesheet" href="/css/layout.css">
-<title>Board Detail</title>
+<title>Board Write</title>
 </head>
 <style>
-body{
-	margin:0;
-	padding:0;
-}
+body{ margin:0; padding:0; }
 .container{	width:1200px; height:100%; }
-.writeBox{	height:1000px; border:1px solid gray; }
-.detailTop{
+.writeBox{ height:935px; border:2px solid black; border-radius: 5px;}
+.writeTop{ width:100%; height:60px;}
+.writeTitle{
 	margin:5px;
+	padding-left:10px;
 	height:50px;
-	border:1px solid black;
+	border:2px solid black;
 	font-size:20px;
 	font-weight:bold;
-	display: flex;
+	width:1163px;
+	border-radius: 5px;
 }
-.detailTop_item{
-	width:100px;
-	height:100%;
-	line-height:50px;
-	margin-left:5px;
-	font-size: 20px;
-	text-align: center;
-	
-}
-.detailMid{
+.writeContent{
 	margin:5px;
+	width:1163px;
 	height:790px;
-	border:1px solid black;
+	border:2px solid black;
 	display: flex;
 	flex-direction: column;
 	font-size: 25px;
+	border-radius: 5px;
+	font-weight:bold;
+	padding-left:10px;
 }
-.userProfile{
-	height:150px;
-	border:1px solid black;
-	margin:5px;
-	margin-top: auto;
-}
-.btnBox{
-	margin:5px;
-	height:60px;
-	border:1px solid black;
-	text-align: center;
-	line-height:60px;
-}
-.btnBox_1{
-	margin-left: 200px;
-	display:inline-block;
-}
-.btnBox_2{
-	display:inline-block;
-	float:right;
-}
-.detailBtn{
+.btnBox{ margin:5px; height:60px; line-height:60px; float:right; }
+.writeBtn{
+	display:inline-block; 
 	line-height:50px;
-	width:50px;
+	width:100px;
 	height:50px;
 	border:none;
 	border-radius: 5px;
 	color:white;
 	font-weight: bold;
-}
-.boardList{
-	width:100px;
-	margin-right:5px;
+	margin-right:5px; 
 	background-color: #90adac;
-	display: inline-block;
-	text-decoration: none;
 }
-.commentBox{
-	margin:5px;
-	height:70px;
-	border:1px solid black;
-	line-height: 70px;
-}
-.commentText{
-	width:1000px; 
-	height:60px; 
-	font-size: 20px;
-	margin-left:5px;
-
-}
-.commentBtn{
-	margin-left:10px;
-	width:130px; 
-	height:60px;
-	border:none;
-	border-radius: 5px;
-	background-color: #7a14ff;
-	color:white;
-	font-weight: bold;
-	line-height:60px;
-}
-.commentBtn_1{
-	width:40px;
-	height:40px;
-	border:none;
-	color:white;
-	border-radius: 5px;
-	line-height: 40px;
-}
-.comments{
-	margin-top:10px;
-	height:100%;
-	font-size:20px;
-}
-.commentWrited{
-	height: 50px;
-	border-bottom: 1px solid black;
-}
-.commentWrited_But{
-	height: 50px;
-}
-.commentDropdown{
-	float:right;
-	margin-right:20px;
-	border:none;
-	border-radius: 5px;
-	background-color: white;
-}
+.boardList{ margin:5px; float: right; }
+.fileUpload{ padding:5px; font-size: 17px; margin-top:15px; }
 </style>
 <script type="text/javascript">
-
+function check(){
+	let writeTitle = document.getElementById("writeTitle");
+	let writeContent = document.getElementById("writeContent");
+	if(writeTitle.value == ""){
+		alert("제목을 입력해주세요");
+		writeTitle.focus();
+		return false;
+	}
+	if(writeContent.value == ""){
+		alert("내용을 입력해주세요");
+		writeContent.focus();
+		return false;
+	}
+	
+}
 </script>
 <body>
 	<%@ include file="../top.jsp"%>
 	<%@ include file="../menu.jsp"%>
 	<div class="container">
-		<h1>Write</h1>
+		<div class="writeTop">
+			<h1 style="display: inline-block; font-weight: bold; padding-left:10px;">Write</h1>
+			<input type="button"class="writeBtn boardList" onclick="location.href='/board/HJHBoard'" value="목록">
+		</div>
 		<div class="writeBox">
-			<div class="detailTop"></div>
-			<div class="detailMid"></div>
-			<div class="btnBox">
-				<div class="btnBox_2">
-					<button class="detailBtn" style="background-color: #ff3d3d;">저장</button> 
-					<button class="detailBtn boardList" onclick="location.href='/board/HJHBoard'">목록</button>
-				</div>
-			</div>
+		<form action="/board/writeSave" method="post" onsubmit="return check()" enctype="multipart/form-data">
+				<input type="text" name="writeTitle" id="writeTitle"class="writeTitle" placeholder="제목을 입력하세요">
+				<textarea name="writeContent" id="writeContent" class="writeContent" placeholder="내용을 입력하세요"></textarea>
+				<input type="file" name="fileUpload" class="fileUpload">
+				<div class="btnBox"><button class="writeBtn" style="background-color: #6867AC;">저장</button></div>
+		</form>
+		
+			
 		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>

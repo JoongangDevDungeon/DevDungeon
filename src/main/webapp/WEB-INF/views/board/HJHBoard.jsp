@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,29 +10,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <link type="text/css" rel="stylesheet" href="/css/HJHBoard.css">
 <link type="text/css" rel="stylesheet" href="/css/layout.css">
-<title>HJHBoard</title>
+<script type="text/javascript" src="/js/paging.js"></script>
+<script type="text/javascript" src="/js/search.js"></script>
+<title>HJH Board</title>
 </head>
 <script type="text/javascript">
-function moveBefore(pageNo){	//페이징 시작
-	let searchType = document.getElementById("searchType");
-	let searchValue = document.getElementById("searchValue");
-	let url =  document.location.href.split("?",1);
-	if(pageNo < 1) { return false; }
-	else if (pageNo != 1){
-		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
-			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+(pageNo-1);
-		}else{
-			location.href="/board/HJHBoard?pageNo="+(pageNo-1);
-		}
-	}else{
-		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
-			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+1;
-		}else{
-			location.href="/board/HJHBoard?pageNo="+1;
-		}
-	}
-}
-function moveNext(pageNo){
+
+function moveNext(pageNo){	//페이지 뒤쪽 버튼
 	let searchType = document.getElementById("searchType");
 	let searchValue = document.getElementById("searchValue");
 	let url =  document.location.href.split("?",1);
@@ -49,32 +33,6 @@ function moveNext(pageNo){
 		}else{
 			location.href="/board/HJHBoard?pageNo="+pageNo;
 		}
-	}
-	
-}
-function move(pageNo){
-	let searchType = document.getElementById("searchType");
-	let searchValue = document.getElementById("searchValue");
-	let url =  document.location.href.split("?");
-	if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
-		location.href=url[0]+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+pageNo;
-	}else{
-		location.href="/board/HJHBoard?pageNo="+pageNo;
-	}
-	
-}//페이징 끝
-
-
-function check(){	//검색 체크
-	let searchType = document.getElementById("searchType");
-	let searchValue = document.getElementById("searchValue");
-	if(searchType.value=="none") {
-		alert("검색 항목을 선택해주세요");
-		return false;
-	}
-	if(searchValue.value=="") {
-		alert("검색어를 입력해주세요");
-		return false;
 	}
 }
 </script>
@@ -118,7 +76,7 @@ function check(){	//검색 체크
 		</div><br>
 		<!-- 검색 -->
 		<div class="searchForm">
-			<form action="/board/HJHBoard" method="get" onsubmit="return check()">
+			<form action="/board/HJHBoard" method="get" onsubmit="return search()">
 				<select name="searchType" id="searchType">
 					<option value="none">선택</option>
 					<option value="title" <c:if test='${ pages.searchType eq "title"}'>selected</c:if>>제목</option>
