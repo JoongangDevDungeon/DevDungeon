@@ -22,6 +22,7 @@
 	<div class="main">
 		<div class="container">
 			<h1>관리자 QnA FAQ 페이지</h1>
+			<hr class="hr1">
 			<table class="table">
 				<tr class="table-header">
 					<td class="col-1">보드 번호</td>

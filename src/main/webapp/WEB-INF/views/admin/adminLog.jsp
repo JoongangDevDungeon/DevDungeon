@@ -22,6 +22,7 @@
 	<div class="main">
 		<div class="container">
 			<h1>관리자 로그 데이터 페이지</h1>
+			<hr class="hr1">
 			
 			
 		</div>

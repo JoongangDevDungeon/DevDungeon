@@ -22,6 +22,7 @@
 	<div class="main">
 		<div class="container">
 			<h1>관리자 이벤트 페이지</h1>
+			<hr class="hr1">
 			<table class="table">
 				<tr class="table-header">
 					<th class="col-1">번호</th>

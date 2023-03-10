@@ -22,6 +22,7 @@
 	<div class="main">
 		<div class="container">
 			<h1>관리자 페이지 메인 대쉬보드</h1>
+			<hr class="hr1">
 
 
 

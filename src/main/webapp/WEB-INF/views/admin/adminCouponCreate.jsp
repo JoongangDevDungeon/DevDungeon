@@ -22,6 +22,7 @@
 	<div class="main">
 		<div class="container">
 			<h1>관리자 쿠폰생성</h1>
+			<hr class="hr1">
 			
 			<div>
 				<form action="/adminCouponCreate" method="post">

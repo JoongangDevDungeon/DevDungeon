@@ -22,6 +22,7 @@
 	<div class="main">
 		<div class="container">
 		<h1>관리자 사용자 관리 페이지</h1>
+		<hr class="hr1">
 			<table class="table">
 					<tr class="table-header">
 						<td class="col-1">멤버번호</td>

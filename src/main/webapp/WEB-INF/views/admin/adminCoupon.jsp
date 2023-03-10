@@ -22,6 +22,7 @@
 	<div class="main">
 		<div class="container">
 			<h1>관리자 쿠폰발급 페이지</h1>
+			<hr class="hr1">
 			<table class="table">
 				<tr class="table-header">
 					<th class="col-1">쿠폰 유형</th>
