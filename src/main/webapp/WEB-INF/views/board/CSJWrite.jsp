@@ -20,14 +20,14 @@
 				<form action="csjWrite" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="category" value="1">
 					<input type="hidden" name="tag" value="1">
-					<input type="text" name="title" class="form-control">
-					<textarea name="content" class="form-control" rows="20"></textarea>
+					<input type="text" name="title" class="form-control" placeholder="제목을 입력하세요">
+					<textarea name="content" class="form-control" rows="20"  placeholder="내용을 입력하세요"></textarea>
 					<input type="file" name="file" accept="image/*">
 					<button class="btn btn-primary">글쓰기</button>
 				</form>
 				<button class="btn btn-primary">목록</button>
 			</div>
-
+			
             </div>
             <div class="add2">광고2</div>
          </div>

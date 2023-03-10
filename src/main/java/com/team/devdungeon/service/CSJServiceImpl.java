@@ -70,5 +70,11 @@ public class CSJServiceImpl implements CSJService {
 		return csjDAO.readthis(bno);
 	}
 
+	@Override
+	public int commentWrite(Map<String, Object> comment) {
+		// TODO Auto-generated method stub
+		return csjDAO.commentWrite(comment);
+	}
+
 
 }

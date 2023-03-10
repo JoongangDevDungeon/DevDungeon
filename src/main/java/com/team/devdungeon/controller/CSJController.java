@@ -117,4 +117,18 @@ public class CSJController {
 		int result = csjService.readthis(bno);
 		return "redirect:/csjDetail?bno="+bno;
 	}
+	
+	@PostMapping("/csjCommentWrite")
+	public String csjCommentWrite(@RequestParam(value="bno")int bno,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String writer = (String)session.getAttribute("member_name");
+		System.out.println(writer);
+		String content = request.getParameter("commentContent");
+		Map<String,Object> comment = new HashMap<String, Object>();
+		comment.put("board_no", bno);
+		comment.put("writer", writer);
+		comment.put("content", content);
+		int result = csjService.commentWrite(comment);
+		return "redirect:/csjDetail?bno="+bno;
+	}
 }

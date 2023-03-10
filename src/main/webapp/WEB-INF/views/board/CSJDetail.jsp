@@ -122,7 +122,10 @@
 					<div class="detailInfo">글쓴이 ${det.member_name } 날짜
 						${det.board_date } 조회수 ${det.board_read }</div>
 					<div class="detailContent"> ${det.board_content }</div>
-					
+					<button id="boardBtnLike" class="btn btn-success"
+						value="${det.board_no }">추천 ${det.board_like }</button>
+					<button id="boardBtnBan" class="btn btn-danger"
+						value="${det.board_no }">신고</button>
 					<!-- 작성자 프로필 -->
 					<div class="detailUserProfile">
 						<div class="mt-3"
@@ -153,17 +156,18 @@
 							</div>
 						</div>
 					</div>
-					<button id="boardBtnLike" class="btn btn-success"
-						value="${det.board_no }">추천 ${det.board_like }</button>
-					<button id="boardBtnBan" class="btn btn-danger"
-						value="${det.board_no }">신고</button>
+					
 				</div>
 				<br>
 				<div class="detailBtnZone">
+					<c:if test="${sessionScope.member_name eq det.member_name }">
 					<button class="btn btn-primary">삭제</button>
 					<button class="btn btn-primary">수정</button>
+					</c:if>
 					<button class="btn btn-primary" onclick="location.href='/csjboard'">목록</button>
+					<c:if test="${sessionScope.member_name ne null }">
 					<button class="btn btn-primary" onclick="location.href='/csjWrite'">글쓰기</button>
+					</c:if>
 				</div>
 				<div class="CommentAll">
 					<c:forEach items="${comment }" var="c">
@@ -177,7 +181,9 @@
 							<div class="commentBtnZone">
 								<button class="commentBanBtn" value="${c.comment_no }">신고</button>
 								<c:if test="${c.comment_no eq c.comment_root }">
+									<c:if test="${sessionScope.member_name ne null }">
 									<button class="commentReplyBtn" value="${c.comment_no }">답글</button>
+									</c:if>
 									<button class="commentShowBtn" value="${c.comment_no }">show</button>
 								</c:if>
 							</div>
@@ -192,12 +198,15 @@
 							</c:if>
 						</div>
 					</c:forEach>
+					<c:if test="${sessionScope.member_name ne null }">
 					<div id="commentEnter">
-						<form id="commentForm" action="csjcommentWrite" method="post">
+						<form id="commentForm" action="csjCommentWrite" method="post">
+							<input type="hidden" name="bno" value="${det.board_no }">
 							<input type="text" class="commentInput" name="commentContent">
 							<button id="commentEnterBtn">댓글 입력</button>
 						</form>
 					</div>
+					</c:if>
 				</div>
 
 			</div>
