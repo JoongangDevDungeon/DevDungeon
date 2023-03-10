@@ -88,6 +88,51 @@ public class CSJController {
 		}
 	}
 	
+	@GetMapping("/csjBoardUpdate")
+	public ModelAndView csjUpdate(@RequestParam(value="bno") int bno,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/CSJUpdate");
+		HttpSession session = request.getSession();
+		if(session.getAttribute("member_name")==null) {
+			mv.setViewName("redirect:/csjboard");
+			return mv;
+		}else {
+			Map<String,Object> det = csjService.detail(bno);
+			if(session.getAttribute("member_name").equals(det.get("member_name"))) {
+				mv.addObject("det",det);
+				mv.addObject("bno",bno);
+			}else {
+				mv.setViewName("redirect:/csjboard");
+			}
+			return mv;
+		}
+	}
+	
+	@PostMapping("/csjBoardUpdate")
+	public ModelAndView csjUpdatePost(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/csjboard");
+		HttpSession session = request.getSession();
+		if(session.getAttribute("member_name")==null) {
+			return mv;
+		}else {
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String tag = request.getParameter("tag");
+		String file = request.getParameter("file");
+		String bno = request.getParameter("bno");
+		Map<String,Object> updatemap = new HashMap<String, Object>();
+		updatemap.put("board_no", bno);
+		updatemap.put("title", title);
+		updatemap.put("content", content);
+		updatemap.put("tag", tag);
+		updatemap.put("file", file);
+		
+		int result = csjService.updateBoard(updatemap);
+		return mv;
+		}
+	} 
+	
 	@GetMapping("/csjDetail")
 	public ModelAndView detail(@RequestParam(value="bno") int bno) {
 		ModelAndView mv = new ModelAndView();
@@ -145,5 +190,40 @@ public class CSJController {
 		comment.put("root", root);
 		int result = csjService.ReplyWrite(comment);
 		return "redirect:/csjDetail?bno="+bno;
+	}
+	
+	@GetMapping("/userDelete")
+	public String csjuserDelete(@RequestParam(value="bno")int bno) {
+
+		csjService.userDelete(bno);
+		return "redirect:/csjboard";
+	}
+	
+	@GetMapping("/csjfaq")
+	public ModelAndView csjfaq(@RequestParam(defaultValue = "1") Integer pageNo,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/board/CSJFAQ");
+		int pageSize = 10;
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		CSJshowDTO dto = new CSJshowDTO();
+		dto.setPageNo(pageNo);
+		dto.setPageSize(pageSize);
+		
+		if(searchType != null && searchValue != null) {
+			dto.setSearchType(searchType);
+			dto.setSearchValue(searchValue);
+		}
+		
+		PageInfo<Map<String,Object>> faqList = csjService.faqList(dto);
+		mv.addObject("faqList",faqList.getList());
+		mv.addObject("pageInfo",faqList);
+		return mv;
+	}
+	
+	@GetMapping("/csjBan")
+	public String csjban() {
+		
+		return "board/CSJBan";
 	}
 }

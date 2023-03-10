@@ -13,6 +13,8 @@
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link rel="stylesheet" href="/css/layout.css">
 <script>
 	var onoff = 1;
@@ -32,6 +34,7 @@
 		$("#boardBtnBan").click(function() {
 			var no = $(this).val();
 			alert(no + "번 글을 신고합니다");
+			window.open("/csjBan", '신고팝업', 'width=510px,height=600px,scrollbars=yes');
 		});
 		$(".commentShowBtn").click(function() {
 			var no = $(this).val();
@@ -47,15 +50,34 @@
 		});
 		$(".commentReplyBtn").click(function() {
 			var no = $(this).val();
-			$(".rep" + no).toggle(0);
-			$("#commentEnter").attr("display", "none");
-		})
+			if ($(".rep" + no).css("display") == "none") {
+				$(".commentReplyEnter").hide(0);
+				$(".rep" + no).show(0);
+				$("#commentEnter").hide(0);
+			} else {
+				$(".rep" + no).hide(0);
+				$("#commentEnter").show(0);
+			}
+
+		});
+		
+		$("#detailBtnDelete").click(function(){
+			var no = $(this).val();
+			if(confirm("진짜 삭제하시겠습니까?")){
+				location.href="/userDelete?bno=" + no;
+			}
+		});
+		$("#detailBtnUpdate").click(function(){
+			var no = $(this).val();
+			if(confirm("진짜 수정하시겠습니까?")){
+				location.href="/csjBoardUpdate?bno=" + no;
+			}
+		});
 
 	});
 </script>
 <style>
 .commentAll {
-	background-color: pink;
 	text-align: left;
 }
 
@@ -78,6 +100,7 @@
 }
 
 .detailUserProfile {
+	
 }
 
 .detailBtnZone {
@@ -101,7 +124,7 @@
 }
 
 .commentSub {
-	padding-left: 50px;
+	
 }
 
 .commentBtnZone {
@@ -118,10 +141,10 @@
 			<div class="content">
 				<h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
 				<div class="detailBody">
-					<div class="detailTitle">제목 : ${det.board_no }</div>
-					<div class="detailInfo">글쓴이 ${det.member_name } 날짜
+					<div class="detailTitle">제목 : ${det.board_title }</div>
+					<div class="detailInfo">글쓴이 ${det.member_name }<input type="hidden" id="detailWriter"> 날짜
 						${det.board_date } 조회수 ${det.board_read }</div>
-					<div class="detailContent"> ${det.board_content }</div>
+					<div class="detailContent">${det.board_content }</div>
 					<button id="boardBtnLike" class="btn btn-success"
 						value="${det.board_no }">추천 ${det.board_like }</button>
 					<button id="boardBtnBan" class="btn btn-danger"
@@ -156,33 +179,38 @@
 							</div>
 						</div>
 					</div>
-					
+
 				</div>
 				<br>
 				<div class="detailBtnZone">
 					<c:if test="${sessionScope.member_name eq det.member_name }">
-					<button class="btn btn-primary">삭제</button>
-					<button class="btn btn-primary">수정</button>
+						<button class="btn btn-primary" id="detailBtnDelete" value="${det.board_no }">삭제</button>
+						<button class="btn btn-primary" id="detailBtnUpdate" value="${det.board_no }">수정</button>
 					</c:if>
 					<button class="btn btn-primary" onclick="location.href='/csjboard'">목록</button>
 					<c:if test="${sessionScope.member_name ne null }">
-					<button class="btn btn-primary" onclick="location.href='/csjWrite'">글쓰기</button>
+						<button class="btn btn-primary"
+							onclick="location.href='/csjWrite'">글쓰기</button>
 					</c:if>
 				</div>
 				<div class="CommentAll">
 					<c:forEach items="${comment }" var="c">
 						<div id="commentZone"
 							<c:if test="${c.comment_depth ne 0}">class="commentSub sub${c.comment_root }"</c:if>>
-							<c:if test="${c.comment_depth ne 0 }">└</c:if>
+							<c:if test="${c.comment_depth ne 0 }">
+								<div style="width: 20px; min-height:100px; float: left;">
+									<i class="xi-subdirectory-arrow"></i>
+								</div>
+							</c:if>
 							<div>
 								<span>${c.member_name }</span><span> ${c.comment_time }</span>
+								<div>${c.comment_content }</div>
 							</div>
-							<div>${c.comment_content }</div>
 							<div class="commentBtnZone">
 								<button class="commentBanBtn" value="${c.comment_no }">신고</button>
 								<c:if test="${c.comment_no eq c.comment_root }">
 									<c:if test="${sessionScope.member_name ne null }">
-									<button class="commentReplyBtn" value="${c.comment_no }">답글</button>
+										<button class="commentReplyBtn" value="${c.comment_no }">답글</button>
 									</c:if>
 									<button class="commentShowBtn" value="${c.comment_no }">show</button>
 								</c:if>
@@ -201,13 +229,13 @@
 						</div>
 					</c:forEach>
 					<c:if test="${sessionScope.member_name ne null }">
-					<div id="commentEnter">
-						<form id="commentForm" action="csjCommentWrite" method="post">
-							<input type="hidden" name="bno" value="${det.board_no }">
-							<input type="text" class="commentInput" name="commentContent">
-							<button id="commentEnterBtn">댓글 입력</button>
-						</form>
-					</div>
+						<div id="commentEnter">
+							<form id="commentForm" action="csjCommentWrite" method="post">
+								<input type="hidden" name="bno" value="${det.board_no }">
+								<input type="text" class="commentInput" name="commentContent">
+								<button id="commentEnterBtn">댓글 입력</button>
+							</form>
+						</div>
 					</c:if>
 				</div>
 

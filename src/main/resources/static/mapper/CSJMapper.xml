@@ -82,4 +82,18 @@
     	,comment_depth = 1
     	,comment_root = #{root}
     </insert>
+    
+    <select id="faqList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
+    	SELECT *
+    	FROM question_board
+    </select>
+    
+    <update id="updateBoard" parameterType="HashMap">
+    	UPDATE board
+    	SET
+    	board_title = #{title}
+    	,board_content = #{content}
+    	,tag_no = #{tag}
+    	WHERE board_no = #{board_no}
+    </update>
 </mapper>

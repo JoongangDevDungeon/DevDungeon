@@ -31,4 +31,10 @@ public interface CSJService {
 	public int commentWrite(Map<String, Object> comment);
 
 	public int ReplyWrite(Map<String, Object> comment);
+
+	public PageInfo<Map<String, Object>> faqList(CSJshowDTO dto);
+
+	public void userDelete(int bno);
+
+	public int updateBoard(Map<String, Object> updatemap);
 }
