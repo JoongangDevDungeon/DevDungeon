@@ -45,17 +45,22 @@
                      <li>멋진</li>
                   </ul>
                </div>
-               <div class="mt-5">
+
+               <div class="mt-5 mb-5">
                   <input type="text" class="form-control" style="width: 235px; float: left;" placeholder="이모티콘 이름">
                   <button type="button" class="btn btn-primary" style="margin-left: 10px; float: left;">검색</button>
+
+                  <button class="btn btn-primary mt-5" style="width: 300px;" type="button">아이콘 등록 신청</button>
                </div>
+
+
             </div>
             <div class="content">
                <div style="width: 720px; height: 360px; margin: 0 auto;">
                   <!-- 이모티콘 목록 -->
                   <c:forEach var="i" begin="1" end="6" step="1" >
                      <div>
-                        <input type="checkbox" style="background-color: #ff8080; width: 20px; height: 20px; margin-top: 40px; box-sizing: border-box; float: left; margin-left: 10px; margin-right: 10px;">
+                        <input type="checkbox" style="background-color: #ff8080; width: 20px; height: 20px; margin-top: 50px; box-sizing: border-box; float: left; margin-left: 10px; margin-right: 10px;">
                         <div style="border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; margin: 10px; padding: 0; width: 300px; height: 100px; float: left;">
                            <div style="width: 80px; height: 100px; padding-top: 24px; float: left;">
                               <img src="/img/icon/icon${i}.png" style="display: inline-block; width: 45px; height: 45px;">
@@ -83,7 +88,8 @@
                   <span>페이징</span>
                </div>
                <div style="width: 580px; float: right;">
-                  <button type="button" class="btn btn-primary">장바구니</button>
+                  <button type="button" class="btn btn-primary" onclick="location.href='/giftShoppingBag'">선물</button>
+                  <button type="button" class="btn btn-primary" onclick="location.href='/payShoppingBag'">구매</button>
                </div>
             </div>
             <div class="add2">광고2</div>
