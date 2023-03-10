@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <!-- Favicon-->
 <link rel="icon" href="/img/admin/adminGazi.png" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <title>admin QnA</title>
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
@@ -19,32 +20,38 @@
 	
 	<!-- 메인 시작 -->
 	<div class="main">
-		<h1>관리자 QnA FAQ 페이지</h1>
-		<table class="table">
-				<tr>
-					<td>보드번호</td>
-					<td>멤버번호</td>
-					<td>질문 제목</td>
-					<td>질문 내용</td>
-					<td>질문한 날짜</td>
-					<td>답변상태</td>								
-				</tr><c:forEach items="${qna }" var="row">
-				<tr>
-					<td>${row.question_board_no}</td>
-					<td>${row.member_no }</td>
-					<td>${row.question_board_title }</td>
-					<td>${row.question_board_content }</td>
-					<td>${row.question_board_date }</td>
-					<td>
-					<c:choose>
-						<c:when test="${row.question_board_status eq 1}"><button>답변달기</button></c:when>
-					<c:otherwise></c:otherwise>
-					</c:choose>
-					</td>
-				</tr></c:forEach>
-		</table>	
-		
-		
+		<div class="container">
+			<h1>관리자 QnA FAQ 페이지</h1>
+			<table class="table">
+				<tr class="table-header">
+					<td class="col-1">보드 번호</td>
+					<td class="col-1">멤버 번호</td>
+					<td class="col-3">질문 제목</td>
+					<td class="col-2">질문 내용</td>
+					<td class="col-1">질문한 날짜</td>
+					<td class="col-1">답변상태</td>								
+				</tr>
+				<c:forEach items="${qna }" var="row">
+					<tr>
+						<td>${row.question_board_no}</td>
+						<td>${row.member_no }</td>
+						<td>${row.question_board_title }</td>
+						<td>${row.question_board_content }</td>
+						<td>${row.question_board_date }</td>
+						<td>
+							<c:choose>
+								<c:when test="${row.question_board_status eq 1}">
+									<button class="btn btn-success">답변달기</button>
+								</c:when>
+								<c:otherwise>
+									
+								</c:otherwise>
+							</c:choose>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>	
+		</div>
 	</div>
 </div>
 </body>

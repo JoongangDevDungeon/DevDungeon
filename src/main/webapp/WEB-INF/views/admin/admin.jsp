@@ -15,7 +15,7 @@
 <body>
 <div id="container">
 	<div class="header">
-		<%@include file="adminMenu.jsp"%>
+		<%@include file="./adminMenu.jsp"%>
 	</div>
 	
 	<!-- 메인 시작 -->
