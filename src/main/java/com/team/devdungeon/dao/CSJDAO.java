@@ -62,4 +62,10 @@ public class CSJDAO {
 		return sqlSession.insert(namespace+"commentWrite",comment);
 	}
 
+	public int csjReplyWrite(Map<String, Object> comment) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+"replyCommentWrite",comment);
+	}
+
+
 }

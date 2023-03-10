@@ -29,4 +29,6 @@ public interface CSJService {
 	public int readthis(int bno);
 
 	public int commentWrite(Map<String, Object> comment);
+
+	public int ReplyWrite(Map<String, Object> comment);
 }

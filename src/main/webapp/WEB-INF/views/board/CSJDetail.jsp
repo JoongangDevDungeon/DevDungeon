@@ -190,7 +190,9 @@
 							<hr>
 							<c:if test="${c.comment_no eq c.comment_root }">
 								<div class="commentReplyEnter rep${c.comment_no }">
-									<form action="commentReplyForm" method="post">
+									<form action="csjReplyWrite" method="post">
+										<input type="hidden" name="root" value=${c.comment_no }>
+										<input type="hidden" name="bno" value=${det.board_no }>
 										<input type="text" class="commentInput" name="commentContent">
 										<button id="commentEnterBtn">댓글 입력</button>
 									</form>
