@@ -13,10 +13,7 @@
 <title>Board Detail</title>
 </head>
 <style>
-body{
-	margin:0;
-	padding:0;
-}
+body{ margin:0;	padding:0; }
 .container{	width:1200px; height:100%; }
 .detailBox{	height:1000px; border:1px solid gray; }
 .detailTop{
@@ -34,7 +31,6 @@ body{
 	margin-left:5px;
 	font-size: 20px;
 	text-align: center;
-	
 }
 .detailTop_item:nth-child(1){ flex-grow:2; }
 .detailMid{
@@ -59,14 +55,8 @@ body{
 	text-align: center;
 	line-height:60px;
 }
-.btnBox_1{
-	margin-left: 200px;
-	display:inline-block;
-}
-.btnBox_2{
-	display:inline-block;
-	float:right;
-}
+.btnBox_1{ margin-left: 200px; display:inline-block; }
+.btnBox_2{ display:inline-block; float:right; }
 .detailBtn{
 	line-height:50px;
 	width:50px;
@@ -94,7 +84,6 @@ body{
 	height:60px; 
 	font-size: 20px;
 	margin-left:5px;
-
 }
 .commentBtn{
 	margin-left:10px;
@@ -115,18 +104,9 @@ body{
 	border-radius: 5px;
 	line-height: 40px;
 }
-.comments{
-	margin-top:10px;
-	height:100%;
-	font-size:20px;
-}
-.commentWrited{
-	height: 50px;
-	border-bottom: 1px solid black;
-}
-.commentWrited_But{
-	height: 50px;
-}
+.comments{	margin-top:10px; height:100%; font-size:20px; }
+.commentWrited{ height: 50px; border-bottom: 1px solid black; }
+.commentWrited_But{	height: 50px; }
 .commentDropdown{
 	float:right;
 	margin-right:20px;
@@ -136,21 +116,39 @@ body{
 }
 </style>
 <script type="text/javascript">
-$(function(){
+$(function(){ //제이쿼리 시작
 
 	$(".commentDropdown").click(function(){
 		$(".subComment").toggle();
 	});
 	
-});
+	$("#thumsUp").click(function(){
+		$.ajax({
+			url: "/board/boardLike",	//데이터를 전송할 url
+//	 		dataType: 서버가 리턴한는 데이터 타입,
+			type: "POST",
+			data: { 'board_no' : ${ boardDetail.board_no } },	//서버에 전송할 데이터, key/value형태의 객체
+			dataType:"json",
+			success: function(data){
+				$("#thumsUp").load(location.href+" #thumsUp");	//주의사항 공백 한칸 띄워야 함
+			},
+			error: function(xhr,status,error){ alert("실패") }
+		});
+	});
+	
+});//제이쿼리 끝
 
-
-function check(){
+function check(){	//공백 체크
 	let commentText = document.getElementById("commentText");
 	if(commentText.value ==""){
 		alert("댓글을 입력하세요");
 		return false;
 	}
+}
+function boardUpdate(board_no){
+	
+	location.href="/board/HJHBoardUpdate?board_no="+board_no;
+	
 }
 
 </script>
@@ -171,13 +169,15 @@ function check(){
 			</div>
 			<div class="btnBox">
 				<div class="btnBox_1">
-					<button class="detailBtn" style="background-color: #3dcc00;"><img src="/img/thumbs-up
-					.png" style="margin-bottom: 5px; width:25px; height:25px;"></button> 
-					<button class="detailBtn" style="background-color: #ff8080;"><img src="/img/siren.png" style="margin-bottom: 7px;"></button>
-<!-- 					style="background-color: #ff8080;" -->
+					<button class="detailBtn" style="background-color: #3dcc00; width:100px;" id="thumsUp">
+						<img src="/img/thumbs-up.png" style="margin-bottom: 5px; width:25px; height:25px;"> (${boardDetail.board_like })
+					</button>&nbsp;
+					<button class="detailBtn" style="background-color: #ff8080;">
+						<img src="/img/siren.png" style="margin-bottom: 7px;">
+					</button>
 				</div>
 				<div class="btnBox_2">
-					<button class="detailBtn" style="background-color: #ffc414;">수정</button> 
+					<button class="detailBtn" style="background-color: #ffc414;" onclick="boardUpdate(${boardDetail.board_no })">수정</button> 
 					<button class="detailBtn" style="background-color: #ff3d3d;">삭제</button> 
 					<button class="detailBtn boardList" onclick="location.href='/board/HJHBoard'">목록</button>
 				</div>

@@ -69,7 +69,6 @@ function check(){
 		writeContent.focus();
 		return false;
 	}
-	
 }
 </script>
 <body>
@@ -80,12 +79,26 @@ function check(){
 			<h1 style="display: inline-block; font-weight: bold; padding-left:10px;">Write</h1>
 			<input type="button"class="writeBtn boardList" onclick="location.href='/board/HJHBoard'" value="목록">
 		</div>
+		
 		<div class="writeBox">
-		<form action="/board/writeSave" method="post" onsubmit="return check()" enctype="multipart/form-data">
-				<input type="text" name="writeTitle" id="writeTitle"class="writeTitle" placeholder="제목을 입력하세요">
-				<textarea name="writeContent" id="writeContent" class="writeContent" placeholder="내용을 입력하세요"></textarea>
-				<input type="file" name="fileUpload" class="fileUpload">
-				<div class="btnBox"><button class="writeBtn" style="background-color: #6867AC;">저장</button></div>
+		<form action=
+		<c:choose>
+			<c:when test="${boardDetail.board_no ne null }">"/board/HJHBoardWrite?board_no=${boardDetail.board_no}"</c:when>
+			<c:otherwise>"/board/HJHBoardWrite"</c:otherwise>
+		</c:choose>
+		method="post" onsubmit="return check()" enctype="multipart/form-data">
+				<input type="text" name="writeTitle" id="writeTitle"class="writeTitle" 
+				placeholder="제목을 입력하세요" <c:if test="${boardDetail.board_title ne null }">value="${ boardDetail.board_title }"</c:if>>
+				<textarea name="writeContent" id="writeContent" class="writeContent" 
+				placeholder="내용을 입력하세요" ><c:if test="${boardDetail.board_content ne null }">${ boardDetail.board_content }</c:if></textarea>
+				<input type="file" class="fileUpload">
+				<div class="btnBox">
+				<button class="writeBtn" style="background-color: #6867AC;">
+				<c:choose>
+					<c:when test="${boardDetail.board_no ne null }">수정</c:when>
+					<c:otherwise>저장</c:otherwise>
+				</c:choose></button></div>
+				
 		</form>
 		
 			

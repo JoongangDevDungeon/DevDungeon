@@ -4,6 +4,7 @@
 .pagingBox{	width:700px; margin:0 auto; }
 .title{	text-align: left; }
 a {	text-decoration: none; color:black; }
+a:hover{ color:#ccc; }
 .pagingList{
 	margin:0;
 	padding:0;

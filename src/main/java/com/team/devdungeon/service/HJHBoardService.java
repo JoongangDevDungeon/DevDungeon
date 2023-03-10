@@ -18,26 +18,29 @@ public class HJHBoardService {
 	public int boardCount(Map<String, Object> pages) {
 		return HJHboardDAO.boardCount(pages);
 	}
-
 	public List<Map<String, Object>> boardList(Map<String, Object> pages) {
 		return HJHboardDAO.boardList(pages);
 	}
-
 	public Map<String, Object> boardDetail(String board_no) {
 		return HJHboardDAO.boardDetail(board_no);
 	}
-
 	public List<Map<String, Object>> detailComment(String board_no) {
 		return HJHboardDAO.detailComment(board_no);
 	}
-
-	public void commentAdd(Map<String, Object> map) {
-		HJHboardDAO.commentAdd(map);
-		
+	public void boardComment(Map<String, Object> map) {
+		HJHboardDAO.boardComment(map);
 	}
-
-	public void writeAdd(Map<String, Object> map) {
-		HJHboardDAO.writeAdd(map);
+	public void boardWrite(Map<String, Object> map) {
+		HJHboardDAO.boardWrite(map);
+	}
+	public void boardRead(String board_no) {
+		HJHboardDAO.boardRead(board_no);
+	}
+	public int boardLike(String board_no) {
+		return HJHboardDAO.boardLike(board_no);
+	}
+	public void boardUpdate(Map<String, Object> map) {
+		HJHboardDAO.boardUpdate(map);
 		
 	}
 
