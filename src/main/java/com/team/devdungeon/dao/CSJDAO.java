@@ -58,4 +58,8 @@ public class CSJDAO {
 		return sqlSession.update(namespace+"readthis",bno);
 	}
 
+	public int commentWrite(Map<String, Object> comment) {
+		return sqlSession.insert(namespace+"commentWrite",comment);
+	}
+
 }

@@ -45,10 +45,10 @@
 				}
 			});
 		});
-		$(".commentReplyBtn").click(function(){
+		$(".commentReplyBtn").click(function() {
 			var no = $(this).val();
-			$(".rep"+no).toggle(0);
-			$("#commentEnter").attr("display","none");
+			$(".rep" + no).toggle(0);
+			$("#commentEnter").attr("display", "none");
 		})
 
 	});
@@ -78,7 +78,6 @@
 }
 
 .detailUserProfile {
-	background-color: skyblue;
 }
 
 .detailBtnZone {
@@ -122,21 +121,53 @@
 					<div class="detailTitle">제목 : ${det.board_no }</div>
 					<div class="detailInfo">글쓴이 ${det.member_name } 날짜
 						${det.board_date } 조회수 ${det.board_read }</div>
-					<div class="detailContent">본문 ${det.board_content }</div>
-					<div class="detailUserProfile">
-						유저프로필 ${mem.member_name }<br>${mem.member_email }
-					</div>
+					<div class="detailContent"> ${det.board_content }</div>
 					<button id="boardBtnLike" class="btn btn-success"
 						value="${det.board_no }">추천 ${det.board_like }</button>
 					<button id="boardBtnBan" class="btn btn-danger"
 						value="${det.board_no }">신고</button>
+					<!-- 작성자 프로필 -->
+					<div class="detailUserProfile">
+						<div class="mt-3"
+							style="margin: 0 auto; width: 810px; height: 242px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box;">
+							<div style="width: 180px; height: 240px; float: left;">
+								<img src="/img/profile/test.jpeg"
+									style="width: 180px; height: 240px; border-radius: 10px 0px 0px 10px;">
+							</div>
+							<div
+								style="width: 620px; height: 240px; float: left; text-align: left;">
+								<!-- 레벨, 아이콘, 이름 -->
+								<div
+									style="width: 620px; height: 60px; box-sizing: border-box; padding-top: 7px; padding-left: 10px;">
+									<span
+										style="display: inline-block; width: 45px; height: 45px; border-radius: 8px; text-align: center; line-height: 40px; background-color: black; color: white;">
+										LV.1 </span> <span> <img src="/img/icon/icon1.png"
+										style="display: inline-block; width: 45px; height: 45px;">
+									</span> <span
+										style="display: inline-block; width: 500px; height: 45px; border-radius: 8px; text-align: left; box-sizing: border-box; padding-left: 5px; line-height: 40px; font-size: 20px;">
+										${det.member_name } </span>
+								</div>
+
+								<div
+									style="padding: 10px; padding-top: 5px; box-sizing: border-box;">
+									<textarea class="form-control" rows="6" readonly
+										placeholder="간단한 자기소개를 입력해주세요."></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 				</div>
 				<br>
 				<div class="detailBtnZone">
+					<c:if test="${sessionScope.member_name eq det.member_name }">
 					<button class="btn btn-primary">삭제</button>
 					<button class="btn btn-primary">수정</button>
+					</c:if>
 					<button class="btn btn-primary" onclick="location.href='/csjboard'">목록</button>
+					<c:if test="${sessionScope.member_name ne null }">
 					<button class="btn btn-primary" onclick="location.href='/csjWrite'">글쓰기</button>
+					</c:if>
 				</div>
 				<div class="CommentAll">
 					<c:forEach items="${comment }" var="c">
@@ -150,27 +181,32 @@
 							<div class="commentBtnZone">
 								<button class="commentBanBtn" value="${c.comment_no }">신고</button>
 								<c:if test="${c.comment_no eq c.comment_root }">
+									<c:if test="${sessionScope.member_name ne null }">
 									<button class="commentReplyBtn" value="${c.comment_no }">답글</button>
+									</c:if>
 									<button class="commentShowBtn" value="${c.comment_no }">show</button>
 								</c:if>
 							</div>
 							<hr>
 							<c:if test="${c.comment_no eq c.comment_root }">
-							<div class="commentReplyEnter rep${c.comment_no }">
-								<form action="commentReplyForm" method="post">
-									<input type="text" class="commentInput" name="commentContent">
-									<button id="commentEnterBtn">댓글 입력</button>
-								</form>
-							</div>
+								<div class="commentReplyEnter rep${c.comment_no }">
+									<form action="commentReplyForm" method="post">
+										<input type="text" class="commentInput" name="commentContent">
+										<button id="commentEnterBtn">댓글 입력</button>
+									</form>
+								</div>
 							</c:if>
 						</div>
 					</c:forEach>
+					<c:if test="${sessionScope.member_name ne null }">
 					<div id="commentEnter">
-						<form id="commentForm" action="csjcommentWrite" method="post">
+						<form id="commentForm" action="csjCommentWrite" method="post">
+							<input type="hidden" name="bno" value="${det.board_no }">
 							<input type="text" class="commentInput" name="commentContent">
 							<button id="commentEnterBtn">댓글 입력</button>
 						</form>
 					</div>
+					</c:if>
 				</div>
 
 			</div>

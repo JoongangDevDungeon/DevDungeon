@@ -8,7 +8,7 @@
 			WHERE
 			<choose>
 				<when test="searchType == 'title'">board_title</when>
-				<when test="searchType == 'writer'">member_no</when>
+				<when test="searchType == 'writer'">member_name</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
         </if>
@@ -52,4 +52,23 @@
     	status_no = 2
     	WHERE board_no = #{bno}
     </update>
+    
+    <insert id="boardWrite" parameterType="HashMap">
+		INSERT INTO board
+		SET
+		member_no = (SELECT member_no FROM member WHERE member_name=#{member_name} )
+		,board_title = #{title}
+		,tag_no = #{tag}
+		,category_no = #{category}
+		,board_content = #{content}    
+    </insert>
+    
+    <insert id="commentWrite" parameterType="HashMap">
+    	INSERT INTO board_comment
+    	SET
+    	board_no = #{board_no}
+    	,comment_writer = (SELECT member_no FROM member WHERE member_name=#{writer})
+    	,comment_content = #{content}
+    	,comment_root = comment_no
+    </insert>
 </mapper>

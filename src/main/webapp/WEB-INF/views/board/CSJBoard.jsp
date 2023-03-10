@@ -30,7 +30,7 @@ function detail(bno){
 				<div>
 				<h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
 					<div>
-						<table class="table">
+						<table class="table table-striped">
 							<tr>
 								<th>구분</th>
 								<th>번호</th>
@@ -65,7 +65,9 @@ function detail(bno){
 							<button class="btn btn-primary">검색</button>
 						</form>
 					</div>
+					<c:if test="${sessionScope.member_name ne null }">
 					<button class="btn btn-primary" onclick="location.href='/csjWrite'">글쓰기</button>
+					</c:if>
 				</div>
 
 			</div>
