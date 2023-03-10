@@ -63,12 +63,37 @@
 		,board_content = #{content}    
     </insert>
     
-    <insert id="commentWrite" parameterType="HashMap">
+    <insert id="commentWrite" parameterType="HashMap" statementType="CALLABLE">
+    	{CALL
+    			RootComment(
+    				#{board_no, mode=IN,jdbcType=INTEGER}
+    				,#{writer, mode=IN,jdbcType=VARCHAR}
+    				,#{content, mode=IN,jdbcType=VARCHAR}
+    		)
+    	}
+    </insert>
+    
+    <insert id="replyCommentWrite" parameterType="HashMap">
     	INSERT INTO board_comment
     	SET
     	board_no = #{board_no}
-    	,comment_writer = (SELECT member_no FROM member WHERE member_name=#{writer})
+    	,comment_writer = (SELECT member_no FROM member WHERE member_name = #{writer})
     	,comment_content = #{content}
-    	,comment_root = comment_no
+    	,comment_depth = 1
+    	,comment_root = #{root}
     </insert>
+    
+    <select id="faqList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
+    	SELECT *
+    	FROM question_board
+    </select>
+    
+    <update id="updateBoard" parameterType="HashMap">
+    	UPDATE board
+    	SET
+    	board_title = #{title}
+    	,board_content = #{content}
+    	,tag_no = #{tag}
+    	WHERE board_no = #{board_no}
+    </update>
 </mapper>

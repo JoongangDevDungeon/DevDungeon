@@ -17,18 +17,18 @@
 	<div class="header">
 		<%@include file="./adminMenu.jsp"%>
 	</div>
-	
 	<!-- 메인 시작 -->
 	<div class="main">
 		<div class="container">
-			<h1>관리자 게시글 관리</h1>
+			<h1>관리자 게시글 관리 Detail</h1>
 			<hr class="hr1">
+			<!-- 
 			<table class="table">
 				<tr class="table-header">
 					<th class="col-1">번호</th>
-					<th class="col-4">제목</th>
+					<th class="col-3">제목</th>
 					<th class="col-2">글쓴이</th>
-					<th class="col-1">날짜</th>
+					<th class="col-2">날짜</th>
 					<th class="col-1">조회수</th>
 					<th class="col-1">좋아요</th>
 					<th class="col-1">관리</th>
@@ -36,7 +36,7 @@
 				<c:forEach items="${list }" var="row">
 				<tr>
 					<td>${row.board_no }</td>
-					<td><a href="/adminBoardDetail?board_no=${row.board_no }">${row.board_title }</a></td>
+					<td>${row.board_title }</td>
 					<td>${row.member_id }</td>
 					<td>${row.board_date }</td>
 					<td>${row.board_read }</td>
@@ -51,6 +51,7 @@
 				</tr>
 				</c:forEach>
 			</table>
+			 -->
 			
 			
 			

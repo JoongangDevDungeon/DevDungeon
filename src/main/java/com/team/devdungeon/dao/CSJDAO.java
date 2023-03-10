@@ -62,4 +62,25 @@ public class CSJDAO {
 		return sqlSession.insert(namespace+"commentWrite",comment);
 	}
 
+	public int csjReplyWrite(Map<String, Object> comment) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+"replyCommentWrite",comment);
+	}
+
+	public PageInfo<Map<String, Object>> faqList(CSJshowDTO dto) {
+		PageHelper.startPage(dto.getPageNo(),dto.getPageSize());
+		return PageInfo.of(sqlSession.selectList(namespace+"faqList",dto));
+	}
+
+	public void userDelete(int bno) {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+"deleteByUser",bno);
+	}
+
+	public int updateBoard(Map<String, Object> updatemap) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+"updateBoard",updatemap);
+	}
+
+
 }

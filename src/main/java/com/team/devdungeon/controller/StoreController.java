@@ -1,6 +1,5 @@
 package com.team.devdungeon.controller;
 
-import com.team.devdungeon.service.PointService;
 import com.team.devdungeon.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,20 @@ public class StoreController {
     @GetMapping("/store")
     public String level() {
         return "content/store";
+    }
+
+    @GetMapping("/payShoppingBag")
+    public String payShoppingBag() {
+        return "content/payShoppingBag";
+    }
+    @GetMapping("/giftShoppingBag")
+    public String giftShoppingBag() {
+        return "content/giftShoppingBag";
+    }
+
+    @GetMapping("/couponChoice")
+    public String couponChoice() {
+        return "content/couponChoice";
     }
 
 }

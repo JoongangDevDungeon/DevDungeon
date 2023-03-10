@@ -76,5 +76,30 @@ public class CSJServiceImpl implements CSJService {
 		return csjDAO.commentWrite(comment);
 	}
 
+	@Override
+	public int ReplyWrite(Map<String, Object> comment) {
+		// TODO Auto-generated method stub
+		return csjDAO.csjReplyWrite(comment);
+	}
+
+	@Override
+	public PageInfo<Map<String, Object>> faqList(CSJshowDTO dto) {
+		// TODO Auto-generated method stub
+		return csjDAO.faqList(dto);
+	}
+
+	@Override
+	public void userDelete(int bno) {
+		// TODO Auto-generated method stub
+		csjDAO.userDelete(bno);
+	}
+
+	@Override
+	public int updateBoard(Map<String, Object> updatemap) {
+		// TODO Auto-generated method stub
+		return csjDAO.updateBoard(updatemap);
+	}
+
+
 
 }
