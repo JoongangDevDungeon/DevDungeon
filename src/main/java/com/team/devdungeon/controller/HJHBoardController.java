@@ -99,7 +99,7 @@ public class HJHBoardController {
 			map.put("board_content", board_content);
 			map.put("board_no", board_no);
 			HJHboardService.boardUpdate(map);
-			return"redirect:/board/HJHBoard";
+			return "redirect:/board/HJHBoardDetail?board_no="+board_no;
 		}
 		
 	}

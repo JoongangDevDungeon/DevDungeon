@@ -114,15 +114,25 @@ body{ margin:0;	padding:0; }
 	border-radius: 5px;
 	background-color: white;
 }
+.subComment{
+	display: inline-block;
+	width:96%;
+}
 </style>
 <script type="text/javascript">
 $(function(){ //제이쿼리 시작
+	
+	$(".subComment").toggle();
+	$(".subArrow").toggle();
 
 	$(".commentDropdown").click(function(){
+		
 		$(".subComment").toggle();
+		$(".subArrow").toggle();
+		
 	});
 	
-	$("#thumsUp").click(function(){
+	$("#thumsUp").click(function(){	//ajax 통신
 		$.ajax({
 			url: "/board/boardLike",	//데이터를 전송할 url
 //	 		dataType: 서버가 리턴한는 데이터 타입,
@@ -138,25 +148,22 @@ $(function(){ //제이쿼리 시작
 	
 });//제이쿼리 끝
 
-function check(){	//공백 체크
+function check(){	//검색 공백체크
 	let commentText = document.getElementById("commentText");
 	if(commentText.value ==""){
 		alert("댓글을 입력하세요");
 		return false;
 	}
 }
-function boardUpdate(board_no){
-	
-	location.href="/board/HJHBoardUpdate?board_no="+board_no;
-	
-}
+function boardUpdate(board_no){	location.href="/board/HJHBoardUpdate?board_no="+board_no; }
 
 </script>
 <body>
 	<%@ include file="../top.jsp"%>
 	<%@ include file="../menu.jsp"%>
 	<div class="container">
-		<h1>Detail</h1>
+		<h1 style="font-weight: bold;">Detail</h1>
+		<!-- 상세화면 -->
 		<div class="detailBox">
 			<div class="detailTop">
 				<div class="detailTop_item">${boardDetail.board_title }</div>
@@ -182,6 +189,7 @@ function boardUpdate(board_no){
 					<button class="detailBtn boardList" onclick="location.href='/board/HJHBoard'">목록</button>
 				</div>
 			</div>
+			<!-- 댓글쓰기 -->
 			<div class="commentBox">
 				<form action="/board/HJHComment" method="post" onsubmit="return check()">
 					<input type="hidden" value="${boardDetail.board_no }" name="board_no">
@@ -190,7 +198,11 @@ function boardUpdate(board_no){
 				</form>
 			</div>
 		</div>
-		<c:forEach var="comment" items="${ detailComments }">			
+		<!-- 댓글창 -->
+		<c:forEach var="comment" items="${ detailComments }">
+			<c:if test="${ comment.comment_depth eq 1 }">
+				<div class="subArrow" style="display: inline-block; height:50px; line-height: 50px;"><i class="xi-subdirectory-arrow xi-2x"></i></div>
+			</c:if>		
 				<div class="comments <c:if test="${ comment.comment_depth eq 1 }"> subComment </c:if>">
 					<div class="commentWrited ">${ comment.member_name } ${ comment.comment_time } 
 						<button class="commentBtn_1" style="background-color: #CB0E00; position: relative;"><i class="xi-trash-o "></i></button>
@@ -202,8 +214,7 @@ function boardUpdate(board_no){
 					<div class="commentWrited_But">${ comment.comment_content }</div>
 				</div>
 		</c:forEach>
-	</div><br>
+	</div>
 	<%@ include file="../footer.jsp"%>
-
 </body>
 </html>

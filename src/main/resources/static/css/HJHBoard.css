@@ -28,12 +28,12 @@ a:hover{ color:#ccc; }
 	margin:0 2px;
 	color:white;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 14px;
 }
 .page_btn:hover{ background-color: #8887cc; }
 .write{	display: flex; justify-content: end; }
 .write_btn{
-	width:70px;
+	width:100px;
 	height:40px;
 	background-color: #6867AC;
 	border:none;
