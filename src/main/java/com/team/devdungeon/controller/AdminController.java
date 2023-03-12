@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.dto.AdminDTO;
@@ -29,9 +28,9 @@ public class AdminController {
 	public String admin(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("id") == null) {
-			return "adminLogin";
+			return "admin/adminLogin";
 		}else {
-			return "admin";			
+			return "admin/admin";
 		}
 		
 	}
@@ -40,7 +39,7 @@ public class AdminController {
 	//로그인
 	@GetMapping("/adminLogin")
 	public String adminLogin() {
-		return "adminLogin";
+		return "admin/adminLogin";
 	}
 	
 	@PostMapping("/adminLogin")

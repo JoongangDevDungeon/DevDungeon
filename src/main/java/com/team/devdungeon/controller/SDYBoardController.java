@@ -16,7 +16,7 @@ public class SDYBoardController {
 	
 	@GetMapping("/sim")
 	public ModelAndView Recipe() {
-		ModelAndView mv = new ModelAndView("sim");
+		ModelAndView mv = new ModelAndView("board/sim");
 		
 		
 		

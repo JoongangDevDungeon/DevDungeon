@@ -29,7 +29,7 @@
                         <td>로그인</td>
                         <td>192.168.0.${i}</td>
                         <td>test</td>
-                        <td>test</td>
+                        <td>2023-03-09 12:03:27.00</td>
                     </tbody>
                 </c:forEach>
             </table>

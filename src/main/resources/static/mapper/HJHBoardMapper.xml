@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.devdungeon.dao.HJHBoardDAO">
+
     <select id="boardList"  parameterType="Integer"  resultType="HashMap">
         SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read, bno
         FROM boardview
@@ -8,31 +9,32 @@
 			WHERE
 			<choose>
 				<when test="searchType == 'title'">board_title</when>
-				<when test="searchType == 'writer'">member_no</when>
+				<when test="searchType == 'writer'">member_name</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
         </if>
         ORDER BY board_no DESC
         LIMIT #{startPage}, 10
     </select>
+    
     <select id="boardCount" parameterType="HashMap" resultType="Integer">
-        SELECT COUNT(*)
-        FROM boardview
+        SELECT COUNT(*) FROM boardview
          <if test="searchType != null">
 			WHERE
 			<choose>
 				<when test="searchType == 'title'">board_title</when>
-				<when test="searchType == 'writer'">member_no</when>
+				<when test="searchType == 'writer'">member_name</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
         </if>
     </select>
+    
     <select id="boardDetail" parameterType="String" resultType="HashMap">
   		SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read,board_content
   		FROM boardview
   		WHERE board_no = #{board_no}
-    
     </select>
+    
     <select id="detailComment" parameterType="String" resultType="HashMap">
     	SELECT comment_no,board_no,comment_writer,comment_depth,comment_root,comment_time,member_name,comment_content
     	FROM commentview
@@ -40,4 +42,28 @@
     	ORDER BY comment_root DESC;
     </select>
     
+    <insert id="boardWrite" parameterType="HashMap">
+		INSERT INTO board(member_no, tag_no, status_no, board_title, board_content, category_no)
+		VALUES(3, 1, 1, '${board_title}', '${board_content}', 1)
+   </insert>
+   
+   <update id="boardUpdate" parameterType="HashMap">
+   		UPDATE board SET board_title= '${board_title}', board_content = '${board_content}'
+   		WHERE board_no = ${ board_no }
+   </update>
+    
+   <insert id="boardComment" parameterType="HashMap">
+		INSERT INTO board_comment(board_no, comment_writer, comment_content, comment_depth)
+		VALUES( '${ board_no }', 3, '${ comment_content }' , 0)
+   </insert>
+   
+   <update id="boardRead" parameterType="String">
+   		UPDATE board SET board_read = board_read + 1 WHERE board_no=${ board_no }
+   </update>
+   
+   <update id="boardLike" parameterType="String">
+   		UPDATE board SET board_like = board_like + 1 WHERE board_no=${ board_no }
+   </update>
+   
+   
 </mapper>

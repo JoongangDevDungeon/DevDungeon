@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
@@ -16,15 +17,14 @@ public class SignController {
     private SignService signService;
 
     @GetMapping("/index")
-    public String index() {
-        return "index";
-    }
+    public ModelAndView index(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView("index");
 
-    @PostMapping("/login")
-    public String login(HttpServletRequest request) {
-        System.out.println("ID : " + request.getParameter("member_id"));
-        System.out.println("PW : " + request.getParameter("member_pw"));
-        return "redirect:/index";
+        if(request.getParameter("error") != null) {
+            mv.addObject("error_msg", request.getParameter("error"));
+        }
+
+        return mv;
     }
 
     @GetMapping("/agree")

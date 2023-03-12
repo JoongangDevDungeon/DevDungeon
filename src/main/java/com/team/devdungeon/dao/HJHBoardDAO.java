@@ -18,4 +18,14 @@ public interface HJHBoardDAO {
 
 	public List<Map<String, Object>> detailComment(String board_no);
 
+	public void boardComment(Map<String, Object> map);
+
+	public void boardWrite(Map<String, Object> map);
+
+	public void boardRead(String board_no);
+
+	public int boardLike(String board_no);
+
+	public void boardUpdate(Map<String, Object> map);
+
 }

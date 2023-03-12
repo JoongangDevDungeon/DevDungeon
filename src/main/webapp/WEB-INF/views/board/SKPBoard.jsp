@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>광표 게시물</title>
 </head>
 <body>
 
