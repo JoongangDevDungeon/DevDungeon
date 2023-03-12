@@ -11,6 +11,15 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	
+});
+
+
+</script>
 <body>
 <div id="container">
 	<div class="header">
@@ -38,7 +47,7 @@
 				<td>${row.coupon_content }</td>
 				<td>${row.coupon_start }</td>
 				<td>${row.coupon_end }</td>
-				<td><button value="${row.coupon_type }" name="coupon_type" type="submit">쿠폰삭제</button></td>
+				<td><button type="button" onclick="couponDel(${row.coupon_type });">쿠폰삭제</button></td>
 			</tr>
 			</c:forEach>
 		</table>

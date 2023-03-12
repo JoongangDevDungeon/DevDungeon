@@ -97,15 +97,14 @@ public class AdminController {
 		List<BoardDTO> list = adminService.adminBoard();
 		mv.addObject("list", list);
 
-<<<<<<< HEAD
-=======
+
 		System.out.println("list : "+list);
 
 
 		System.out.println(mv);
 
 
->>>>>>> ab1835a000cff60527ce0e3bfe715f5c4acb0455
+
 		return mv;
 	}
 	//게시글 삭제

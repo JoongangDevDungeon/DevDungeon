@@ -47,7 +47,7 @@ public class AdminService {
 
 	public void memberUpdate(MemberDTO memberDTO) {
 		adminDAO.memberUpdate(memberDTO);
-<<<<<<< HEAD
+
 	}
 		
 
@@ -58,12 +58,9 @@ public class AdminService {
 
 	public List<QuestionBoardDTO> Answer(int no) {
 		return adminDAO.Answer(no);
-=======
->>>>>>> ab1835a000cff60527ce0e3bfe715f5c4acb0455
+
 	}
 
-	public void adminBoardDel(BoardDTO boardDTO) {
-		adminDAO.adminBoardDel(boardDTO);
-	}
+	
 
 }

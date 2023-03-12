@@ -27,23 +27,13 @@ public interface AdminDAO {
 
 	List<QuestionBoardDTO> QnA();
 
-<<<<<<< HEAD
 
-=======
->>>>>>> ab1835a000cff60527ce0e3bfe715f5c4acb0455
 	void memberUpdate(MemberDTO memberDTO);
 
 	void adminBoardDel(BoardDTO boardDTO);
 
-<<<<<<< HEAD
+
 	List<QuestionBoardDTO> Answer(int no);
 
-	
 
-	
-	
-
-
-=======
->>>>>>> ab1835a000cff60527ce0e3bfe715f5c4acb0455
 }
