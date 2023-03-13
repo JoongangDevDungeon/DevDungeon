@@ -52,6 +52,13 @@
     	status_no = 2
     	WHERE board_no = #{bno}
     </update>
+   
+    <update id="commentDelete" parameterType="Integer">
+    	UPDATE board_comment
+    	SET
+    	status_no = 2
+    	WHERE comment_no = #{cno}
+    </update>
     
     <insert id="boardWrite" parameterType="HashMap">
 		INSERT INTO board
@@ -96,4 +103,22 @@
     	,tag_no = #{tag}
     	WHERE board_no = #{board_no}
     </update>
+    
+    <insert id="banBoard" parameterType="HashMap">
+    	INSERT INTO ban_board
+    	SET
+    	board_no = #{banBoard}
+    	,ban_member_no = (SELECT member_no FROM member WHERE member_name = #{banMember})
+    	,member_no = (SELECT member_no FROM member WHERE member_name = #{singoman})
+    	,ban_content = #{banWhy}
+    </insert>
+    <insert id="banComment" parameterType="HashMap">
+    	INSERT INTO ban_comment
+    	SET
+    	board_no = #{banBoard}
+    	,comment_no = #{banComment}
+    	,ban_member_no = (SELECT member_no FROM member WHERE member_name = #{banMember})
+    	,member_no = (SELECT member_no FROM member WHERE member_name = #{singoman})
+    	,ban_content = #{banWhy}
+    </insert>
 </mapper>
