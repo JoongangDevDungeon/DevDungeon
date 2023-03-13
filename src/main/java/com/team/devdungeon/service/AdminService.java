@@ -48,12 +48,16 @@ public class AdminService {
 
 	public void memberUpdate(MemberDTO memberDTO) {
 		adminDAO.memberUpdate(memberDTO);
+
 	}
+		
 
 	public void adminBoardDel(BoardDTO boardDTO) {
 		adminDAO.adminBoardDel(boardDTO);
+
 	}
 
+<<<<<<< HEAD
 	public int boardCount(Map<String, Object> pages) {
 		return adminDAO.boardCount(pages);
 	}
@@ -61,5 +65,13 @@ public class AdminService {
 	public List<Map<String, Object>> AdminBoard(Map<String, Object> pages) {
 		return adminDAO.adminBoard(pages);
 	}
+=======
+	public List<QuestionBoardDTO> Answer(int no) {
+		return adminDAO.Answer(no);
+
+	}
+
+	
+>>>>>>> d6f24def3d6fe4537a94a65b60278758da73e683
 
 }

@@ -14,82 +14,88 @@
    <%@include file="../menu.jsp"%>
    <section>
          <div class="main">
-            <div style="width: 300px; min-height: 800px; float: left; box-sizing: border-box; text-align: center;">
-               <!-- 레벨, 아이콘, 이름 -->
-               <div style="border: 1px solid #ccc; border-radius: 5px;">
-                  <div style="width: 299px; height: 60px; box-sizing: border-box; padding-top: 7px; margin: 0 auto; border-bottom: 1px solid #ccc;">
-                     <span style="display: inline-block; width: 45px; height: 45px; border-radius: 8px; text-align: center; line-height: 40px; background-color: black; color: white;">
-                        LV.1
-                     </span>
-                     <span>
-                        <img src="/img/icon/icon1.png" style="display: inline-block; width: 45px; height: 45px;">
-                     </span>
-                     <span style="display: inline-block; width: 100px; height: 45px; border-radius: 8px; text-align: left; box-sizing: border-box; padding-left: 5px; line-height: 40px; font-size: 20px;">
-                        유정목
-                     </span>
-                  </div>
-                  <div style="font-size: 18px; width: 300px; height: 37px;">
-                     <table class="table">
-                        <tr>
-                           <th style="border-right: 1px solid #ccc; width: 100px; background-color: #8EA9D7; color: white; border: 0;">보유 포인트</th>
-                           <td style="border: 0;">1,000</td>
-                        </tr>
-                     </table>
-                  </div>
-               </div>
-               <div class="mt-5" style="border: 1px solid #ccc; border-radius: 5px;">
-                  <div style="background-color: #ccc; height: 30px; line-height: 30px;">카테고리</div>
-                  <ul style="list-style: none; margin: 0; padding: 0;">
-                     <li style="border-bottom: 1px dashed #ccc;">전체</li>
-                     <li style="border-bottom: 1px dashed #ccc;">귀여운</li>
-                     <li>멋진</li>
-                  </ul>
-               </div>
-
-               <div class="mt-5 mb-5">
-                  <input type="text" class="form-control" style="width: 235px; float: left;" placeholder="이모티콘 이름">
-                  <button type="button" class="btn btn-primary" style="margin-left: 10px; float: left;">검색</button>
-
-                  <button class="btn btn-primary mt-5" style="width: 300px;" type="button">아이콘 등록 신청</button>
-               </div>
-
-
-            </div>
+            <div class="add1">광고1</div>
             <div class="content">
-               <div style="width: 720px; height: 360px; margin: 0 auto;">
-                  <!-- 이모티콘 목록 -->
-                  <c:forEach var="i" begin="1" end="6" step="1" >
+               <!-- 좌측 화면 인포메이션 -->
+               <div style=" width: 200px; height: 800px; float: left;">
+                  <!-- 구매자 현재 상태 -->
+                  <div style="width: 200px; height: 90px; border: 1px solid #ccc; border-radius: 5px;">
+                     <div style="width: 198px; height: 30px; line-height: 30px; background-color: black; color: white; border-radius: 5px 5px 0 0; box-sizing: border-box;">현재 아이콘 상태</div>
+                     <div style="width: 200px; height: 30px;">
+                        <span style="display: block; width: 30px; height: 30px; line-height: 30px; margin-left: 5px; float: left;">Lv.1</span>
+                        <span style="display: block; width: 30px; height: 30px; margin-left: 5px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">
+                           <img src="/img/icon/icon1.png" style="width: 25px; height: 25px;">
+                        </span>
+                        <span style="display: block; width: 120px; height: 30px; margin-left: 5px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">유정목</span>
+                     </div>
                      <div>
-                        <input type="checkbox" style="background-color: #ff8080; width: 20px; height: 20px; margin-top: 50px; box-sizing: border-box; float: left; margin-left: 10px; margin-right: 10px;">
-                        <div style="border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; margin: 10px; padding: 0; width: 300px; height: 100px; float: left;">
-                           <div style="width: 80px; height: 100px; padding-top: 24px; float: left;">
-                              <img src="/img/icon/icon${i}.png" style="display: inline-block; width: 45px; height: 45px;">
-                           </div>
-                           <div style="width: 214px; height: 100px; padding-left: 10px; box-sizing: border-box; float: left;">
-                              <label style="width: 214px; height: 23px; line-height: 23px; text-align: left; font-weight: bold; float: left;">이모티콘 이름</label>
-                              <div style="width: 214px; height: 23px; line-height: 33px; text-align: left; float: left;">
-                                 <span style="display: inline-block; width: 60px; height: inherit;">가격</span>
-                                 <span style="display: inline-block; width: 60px; height: inherit;">수량</span>
+                        <span style="display: block; width: 200px; height: 30px; line-height: 30px;">보유 포인트 : 12,000</span>
+                     </div>
+                  </div>
+
+                  <!-- 아이콘 검색 -->
+                  <div class="mt-3 list-group" style="width: 200px; height: 65px;">
+                     <input class="form-control" type="text" style="width: 200px; height: 30px;" placeholder="아이콘 이름을 입력하세요.">
+                     <button class="btn btn-primary" type="text" style="width: 200px; height: 30px; margin-top: 5px;">검색</button>
+                  </div>
+
+                  <!-- 카테고리 -->
+                  <div class="mt-3 list-group" style="width: 200px; height: auto;">
+                     <ul class="list-group" style="list-style: none; margin: 0; padding: 0;">
+                        <li class="list-group-item list-group-item-action">카테고리1</li>
+                        <li class="list-group-item list-group-item-action">카테고리2</li>
+                        <li class="list-group-item list-group-item-action">카테고리3</li>
+                        <li class="list-group-item list-group-item-action">카테고리4</li>
+                     </ul>
+                  </div>
+               </div>
+               <!-- 아이콘 목록 화면 전체 -->
+               <div style="width: 950px; height: 800px; margin-left: 50px; float: left;">
+                  <!-- 아이콘 리스트 -->
+                  <div style="width: 660px; height: 800px; margin: 0 auto;">
+                     <!-- 아이콘 개별 -->
+                     <c:forEach step="1" begin="1" end="8" var="i">
+                        <div style="width: 330px; height: 150px; margin-top: 10px; float: left;">
+                           <input type="checkbox" style="width: 20px; height: 20px; margin-top: 60px; margin-right: 5px; margin-left: 5px; float: left;">
+                           <div style="border: 1px solid #ccc; border-radius: 10px; width: 280px; height: 150px; float: left;">
+                              <!-- 아이콘 이미지 -->
+                              <div style="width: 60px; height: 150px;  float: left;">
+                                 <span style="display: block; width: 45px; height: 45px; padding-top: 45px; box-sizing: border-box; margin: 0 auto;">
+                                    <img src="/img/icon/icon${i}.png" style="width: 45px; height: 45px;">
+                                 </span>
                               </div>
-                              <div style="width: 214px; height: 23px; line-height: 33px; text-align: left; float: left;">
-                                 <span style="display: inline-block; width: 60px; height: inherit;">사용 기간</span>
-                                 <span style="display: inline-block; width: 60px; height: inherit;">등록일</span>
-                              </div>
-                              <div style="width: 214px; height: 23px; line-height: 33px; text-align: left; float: left;">
-                                 <span style="display: inline-block; width: 60px; height: inherit;">구매</span>
-                                 <span style="display: inline-block; width: 60px; height: inherit;">선물</span>
+                              <!-- 아이콘 내용 -->
+                              <div style="width: 217px; height: 150px; float: left;">
+                                 <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                    <span>아이콘 이름</span>
+                                 </div>
+                                 <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">수량</span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">가격</span>
+                                 </div>
+                                 <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">사용 시간</span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">등록일</span>
+                                 </div>
+                                 <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">구매</span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">선물</span>
+                                 </div>
                               </div>
                            </div>
                         </div>
+                     </c:forEach>
+                     <div class="mt-3" style="width: 660px; float: left;">
+                        <span>페이징</span>
                      </div>
-                  </c:forEach>
-               </div>
-               <div class="mt-3">
-                  <span>페이징</span>
-               </div>
-               <div style="width: 580px; float: right;">
-                  <button type="button" class="btn btn-primary" onclick="location.href='/giftShoppingBag'">선물</button>
-                  <button type="button" class="btn btn-primary" onclick="location.href='/payShoppingBag'">구매</button>
+                     <div class="mt-3" style="width: 660px; float: left; position: relative;">
+                        <div style="position: absolute; right: 0;">
+                           <button class="btn btn-primary" onclick="location.href='/payShoppingBag'">구매</button>
+                           <button class="btn btn-primary" onclick="location.href='/giftShoppingBag'">선물</button>
+                        </div>
+                     </div>
+                  </div>
+
                </div>
             </div>
             <div class="add2">광고2</div>

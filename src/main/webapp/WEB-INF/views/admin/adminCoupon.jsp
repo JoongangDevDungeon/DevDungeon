@@ -12,6 +12,14 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	
+});
+
+</script>
 <body>
 <div id="container">
 	<div class="header">
@@ -47,10 +55,7 @@
 				</tr>
 				</c:forEach>
 			</table>
-			
-			
 			<button class="btn btn-primary" type="button" onclick="location.href='/adminCouponCreate';">쿠폰생성</button>
-			
 		</div>	
 	</div>
 </div>

@@ -30,10 +30,13 @@
 		$(".commentBanBtn").click(function() {
 			var no = $(this).val();
 			alert(no + "번 댓글을 신고합니다");
+			$("#banType").val("댓글 신고");
+			window.open("/csjBan?cno="+no, '신고팝업', 'width=510px,height=600px,scrollbars=yes');
 		});
 		$("#boardBtnBan").click(function() {
 			var no = $(this).val();
 			alert(no + "번 글을 신고합니다");
+			$("#banType").val("게시글 신고");
 			window.open("/csjBan", '신고팝업', 'width=510px,height=600px,scrollbars=yes');
 		});
 		$(".commentShowBtn").click(function() {
@@ -64,13 +67,19 @@
 		$("#detailBtnDelete").click(function(){
 			var no = $(this).val();
 			if(confirm("진짜 삭제하시겠습니까?")){
-				location.href="/userDelete?bno=" + no;
+				location.href="/userBoardDelete?bno=" + no;
 			}
 		});
 		$("#detailBtnUpdate").click(function(){
 			var no = $(this).val();
 			if(confirm("진짜 수정하시겠습니까?")){
 				location.href="/csjBoardUpdate?bno=" + no;
+			}
+		});
+		$(".commentDeleteBtn").click(function(){
+			var no = $(this).val();
+			if(confirm("진짜 삭제하시겠습니까?")){
+				location.href="/userCommentDelete?cno=" + no;
 			}
 		});
 
@@ -142,13 +151,14 @@
 				<h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
 				<div class="detailBody">
 					<div class="detailTitle">제목 : ${det.board_title }</div>
-					<div class="detailInfo">글쓴이 ${det.member_name }<input type="hidden" id="detailWriter"> 날짜
+					<div class="detailInfo">글쓴이 ${det.member_name }<input type="hidden" id="detailWriter" value="${det.member_name }"> 날짜
 						${det.board_date } 조회수 ${det.board_read }</div>
 					<div class="detailContent">${det.board_content }</div>
 					<button id="boardBtnLike" class="btn btn-success"
 						value="${det.board_no }">추천 ${det.board_like }</button>
 					<button id="boardBtnBan" class="btn btn-danger"
 						value="${det.board_no }">신고</button>
+						<input type="hidden" id="banType">
 					<!-- 작성자 프로필 -->
 					<div class="detailUserProfile">
 						<div class="mt-3"
@@ -208,6 +218,9 @@
 							</div>
 							<div class="commentBtnZone">
 								<button class="commentBanBtn" value="${c.comment_no }">신고</button>
+								<c:if test="${sessionScope.member_name eq c.member_name  }">
+									<button class="commentDeleteBtn" value="${c.comment_no }">삭제</button>
+								</c:if>
 								<c:if test="${c.comment_no eq c.comment_root }">
 									<c:if test="${sessionScope.member_name ne null }">
 										<button class="commentReplyBtn" value="${c.comment_no }">답글</button>
@@ -217,7 +230,7 @@
 							</div>
 							<hr>
 							<c:if test="${c.comment_no eq c.comment_root }">
-								<div class="commentReplyEnter rep${c.comment_no }">
+								<div class="commentReplyEnter rep${c.comment_no }" style="background-color:gray;">
 									<form action="csjReplyWrite" method="post">
 										<input type="hidden" name="root" value=${c.comment_no }>
 										<input type="hidden" name="bno" value=${det.board_no }>
