@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
-<script type="text/javascript" src="/js/admin/AdminPaging.js"></script>
-<script type="text/javascript" src="/js/admin/AdminSearch.js"></script>
+<script type="text/javascript" src="/js/admin/AdminBoardPaging.js"></script>
+<script type="text/javascript" src="/js/admin/AdminBoardSearch.js"></script>
 </head>
 <script type="text/javascript">
 function moveNext(pageNo){	//페이지 뒤쪽 버튼

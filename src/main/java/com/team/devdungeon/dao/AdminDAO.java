@@ -18,8 +18,8 @@ public interface AdminDAO {
 
 	AdminDTO adminLogin(AdminDTO adminDTO);
 
-	List<MemberDTO> adminMember();
-
+	//List<MemberDTO> adminMember();
+	List<Map<String, Object>> adminMember(Map<String, Object> pages);
 
 	List<CouponDTO> Coupon();
 

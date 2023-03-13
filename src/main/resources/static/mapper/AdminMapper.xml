@@ -7,7 +7,18 @@
     </select>
     
     <select id="adminMember" resultType="MemberDTO">
-    	select * from member
+    	SELECT * 
+    	FROM member AS m
+    	<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">board_title</when>
+				<when test="searchType == 'writer'">member_name</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+		ORDER BY m.member_no ASC
+		LIMIT #{startPage}, 10
     </select>
     
 	<select id="adminBoard"  parameterType="Integer"  resultType="HashMap">

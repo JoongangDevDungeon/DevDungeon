@@ -11,7 +11,35 @@
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
+<script type="text/javascript" src="/js/admin/AdminMemberPaging.js"></script>
+<script type="text/javascript" src="/js/admin/AdminMemberSearch.js"></script>
 </head>
+<script type="text/javascript">
+function moveNext(pageNo){	//페이지 뒤쪽 버튼
+	let searchType = document.getElementById("searchType");
+	let searchValue = document.getElementById("searchValue");
+	let url =  document.location.href.split("?",1);
+	
+	if(pageNo > ${pages.lastPage } ) { return false; }
+	else if (pageNo != ${pages.lastPage } ){
+		
+		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+(pageNo+1);
+		}else{
+			location.href="/adminMember?pageNo="+(pageNo+1);
+		}
+		
+	}else if(pageNo == ${pages.lastPage }){
+		
+		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+pageNo;
+		}else{ 
+			location.href="/adminMember?pageNo="+pageNo;
+		}
+	}
+}
+
+</script>
 <body>
 <div id="container">
 	<div class="header">
@@ -43,6 +71,7 @@
 						<td>${row.member_email }</td>
 						<td>${row.member_birth }</td>
 						<td>
+						<input type="hidden" name="pageNo" value="${pageNo }">
 						<c:choose>
 							<c:when test="${row.member_grade eq 0}">
 								<button class="btn btn-primary" type="submit" value="1" name="member_grade">활성화</button>
@@ -55,7 +84,34 @@
 					</tr>
 					</form>
 					</c:forEach>
-			</table>
+			</table><br>
+			<!-- 페이징 -->
+			<div class="pagingBox">
+				<ul class="pagingList">
+					<li class="pageNo page_btn" onclick="moveBefore(1)"><i class="xi-backward xi-x"></i></li>
+					<li class="pageNo page_btn" onclick="moveBefore(${pageNo})"><i class="xi-step-backward xi-x"></i></li>
+					<c:forEach var="i" begin="${Math.floor((pageNo-1)/10)*10+1 }" end="${Math.floor((pageNo-1)/10)*10 +10 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}">
+						<li class="pageNo" onclick="move(${i })" <c:if test="${pageNo eq i }" >style="color:red; font-weight: bold;"</c:if>>${i }</li>
+					</c:forEach>
+					<li class="pageNo page_btn" onclick="moveNext(${pageNo})"><i class="xi-step-forward xi-x"></i></li>
+					<li class="pageNo page_btn" onclick="moveNext(${pages.lastPage })"><i class="xi-forward xi-x"></i></li>
+				</ul>
+			</div>
+			<br>
+			
+			<!-- 검색 -->
+				<div class="searchForm">
+					<form action="/adminBoard" method="get" onsubmit="return search()">
+						<select name="searchType" id="searchType">
+							<option value="none">선택</option>
+							<option value="title" <c:if test='${ pages.searchType eq "title"}'>selected</c:if>>제목</option>
+							<option value="writer" <c:if test='${ pages.searchType eq "writer"}'>selected</c:if>>글쓴이</option>
+						</select>
+						<input type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
+						<button class="search_btn">검색</button>
+					</form>
+				</div>
+				
 		</div>
 	</div>
 </div>

@@ -82,23 +82,46 @@ public class AdminController {
 	//사용자관리
 
 	@GetMapping("/adminMember")
-	public ModelAndView adminMember() {
+	public ModelAndView adminMember(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("./admin/adminMember");
-		List<MemberDTO> list = adminService.adminMember();
-		mv.addObject("list", list);
+		Map<String, Object> pages = new HashMap<String, Object>();
+		
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		
+		pages.put("searchType", searchType);
+		pages.put("searchValue", searchValue);
+		
+		int startPage = (pageNo*10)-10;
+		int totalCount = adminService.boardCount(pages);
+		int lastPage = (int)Math.ceil((double)totalCount/10);
+
+
+		pages.put("startPage", startPage);
+		pages.put("lastPage", lastPage);
+		
+		List<Map<String, Object>> list = adminService.adminMember(pages);
+		
+		mv.addObject("pages",pages);
+		mv.addObject("list",list);
+		mv.addObject("pageNo", pageNo);
 		
 		return mv;
 	}
 	
 	@PostMapping("/adminMember")
 	public String adminMember(HttpServletRequest request) {
+		
+		String pageNo = request.getParameter("pageNo");
+		
 		MemberDTO memberDTO = new MemberDTO();
+		
 		memberDTO.setMember_grade(Integer.parseInt(request.getParameter("member_grade")));
 		memberDTO.setMember_no(Integer.parseInt(request.getParameter("member_no")));
 		
 		adminService.memberUpdate(memberDTO);
 		
-		return "redirect:/adminMember";
+		return "redirect:/adminMember?pageNo="+pageNo;
 	}
 	
 	//게시글 관리

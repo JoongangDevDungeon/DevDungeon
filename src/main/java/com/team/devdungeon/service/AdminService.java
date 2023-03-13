@@ -24,8 +24,8 @@ public class AdminService {
 		return adminDAO.adminLogin(adminDTO);
 	}
 
-	public List<MemberDTO> adminMember() {
-		return adminDAO.adminMember();
+	public List<Map<String, Object>> adminMember(Map<String, Object> pages) {
+	return adminDAO.adminMember(pages);
 	}
 
 
@@ -65,5 +65,7 @@ public class AdminService {
 		return adminDAO.Answer(no);
 
 	}
+
+	
 
 }
