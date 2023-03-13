@@ -12,8 +12,21 @@
 <link type="text/css" rel="stylesheet" href="/css/layout.css">
 <script type="text/javascript" src="/js/paging.js"></script>
 <script type="text/javascript" src="/js/search.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <title>HJH Board</title>
 </head>
+<style>
+h6{
+	display: inline-block; 
+	width:20px; 
+	height:20px; 
+	background-color: red;
+	line-height: 20px;
+	text-align: center;
+	color:white;
+	border-radius: 5px;
+}
+</style>
 <script type="text/javascript">
 
 function moveNext(pageNo){	//페이지 뒤쪽 버튼
@@ -60,7 +73,8 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 					<c:forEach var="board" items="${list }">
 						<tr>
 							<td>${board.bno }</td>
-							<td class="title"><a href="/board/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }</a></td>
+							<td class="title"><a href="/board/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }
+							<c:if test="${ board.comment_cnt ne 0 }"><h6>${ board.comment_cnt }</h6></c:if></a></td>
 							<td>${board.member_name}</td>
 							<td>${board.board_date }</td>
 							<td>${board.board_read }</td>
@@ -95,7 +109,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 				</div>
 				<!-- 글쓰기 -->
 				<div class="write">
-					<c:if test="${sessionScope.member_no ne null }">
+					<c:if test="${sessionScope.member_id ne null }">
 						<button class="write_btn" onclick="location.href='/board/HJHBoardWrite'">글쓰기</button>
 					</c:if>
 				</div>

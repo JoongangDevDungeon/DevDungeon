@@ -3,10 +3,10 @@
 <mapper namespace="com.team.devdungeon.dao.HJHBoardDAO">
 
     <select id="boardList"  parameterType="Integer"  resultType="HashMap">
-        SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read, bno
+        SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read,comment_cnt, bno
         FROM boardview
         <if test="searchType != null">
-			WHERE
+         	WHERE 
 			<choose>
 				<when test="searchType == 'title'">board_title</when>
 				<when test="searchType == 'writer'">member_name</when>
@@ -30,13 +30,13 @@
     </select>
     
     <select id="boardDetail" parameterType="String" resultType="HashMap">
-  		SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read,board_content
+  		SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read,board_content,member_id
   		FROM boardview
   		WHERE board_no = #{board_no}
     </select>
     
     <select id="detailComment" parameterType="String" resultType="HashMap">
-    	SELECT comment_no,board_no,comment_writer,comment_depth,comment_root,comment_time,member_name,comment_content
+    	SELECT comment_no,board_no,comment_writer,comment_depth,comment_root,comment_time,member_name,comment_content,member_id
     	FROM commentview
     	WHERE board_no=${ board_no }
     	ORDER BY comment_root DESC;
@@ -52,9 +52,14 @@
    		WHERE board_no = ${ board_no }
    </update>
     
-   <insert id="boardComment" parameterType="HashMap">
-		INSERT INTO board_comment(board_no, comment_writer, comment_content, comment_depth)
-		VALUES( '${ board_no }', 3, '${ comment_content }' , 0)
+   <insert id="boardComment" parameterType="HashMap" statementType="CALLABLE">
+		{CALL
+             RootComment(
+                #{board_no, mode=IN,jdbcType=INTEGER}
+                ,#{member_name, mode=IN,jdbcType=VARCHAR}
+                ,#{comment_content, mode=IN,jdbcType=VARCHAR}
+         	 )
+         }
    </insert>
    
    <update id="boardRead" parameterType="String">
@@ -65,5 +70,25 @@
    		UPDATE board SET board_like = board_like + 1 WHERE board_no=${ board_no }
    </update>
    
+   <select id="boardLikeAjax" parameterType="String" resultType="String">
+   		SELECT board_like FROM boardview WHERE board_no = ${ board_no }
+   </select>
+   
+   <update id="boardDelete" parameterType="String">
+   		UPDATE board SET status_no = 2 WHERE board_no = ${board_no}
+   </update>
+   
+    <update id="boardCommentDel" parameterType="String">
+   		UPDATE board_comment SET status_no = 2 WHERE
+   		if((SELECT comment_depth FROM board_comment WHERE comment_no = ${ comment_no } ) = 0 , comment_root = ${ comment_no }, comment_no = ${ comment_no })
+
+   		
+   		
+   		
+   </update>
+   <insert id="boardSubComment" parameterType="HashMap">
+   		INSERT INTO board_comment(board_no, comment_writer, comment_content, comment_depth,comment_root)
+		VALUES( '${ board_no }', 3, '${ subComment_content }' , 1,${comment_root})
+   </insert>
    
 </mapper>
