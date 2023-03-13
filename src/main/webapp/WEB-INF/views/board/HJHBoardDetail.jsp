@@ -14,8 +14,7 @@
 <title>Board Detail</title>
 </head>
 <style>
-.container{	width:1200px; height:100%; }
-
+.container{	width:1200px; height:100%; text-align: left; }
 </style>
 <script type="text/javascript">
 $(function(){ //제이쿼리 시작
@@ -52,11 +51,10 @@ $(function(){ //제이쿼리 시작
 		});
 	});
 	
-	$(".commentDel").click(function(){	//ajax 통신
+	$(".commentDel").click(function(){
 		if(confirm("삭제하시겠습니까?")){
 			$.ajax({
 				url: "/board/HJHBoardCommentDel",	//데이터를 전송할 url
-//	 			dataType: 서버가 리턴한는 데이터 타입,
 				type: "POST",
 				data: { 'comment_no' : $(this).val() },	//서버에 전송할 데이터, key/value형태의 객체
 				dataType:"json",
@@ -65,7 +63,7 @@ $(function(){ //제이쿼리 시작
 			});
 		}
 	});
-	
+	//댓글 게시글 신고
 	$("#boardBanBtn").click(function() {
 		var no = $(this).val();
 		alert(no + "번 글을 신고합니다");
@@ -97,6 +95,9 @@ function subComment_check(){
 <body>
 	<%@ include file="../top.jsp"%>
 	<%@ include file="../menu.jsp"%>
+<div class="main">
+	<div class="add1">광고1</div>
+	<div class="content">
 	<div class="container">
 		<h1 style="font-weight: bold; display: inline-block;">Detail</h1>
 		<button class="detailBtn boardList" onclick="location.href='/board/HJHBoard'">목록</button>
@@ -174,6 +175,9 @@ function subComment_check(){
 					</div>
 				</c:if>
 		</c:forEach>
+		</div>
+		</div>
+		<div class="add2">광고2</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
 </body>
