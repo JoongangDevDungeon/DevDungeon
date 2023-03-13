@@ -66,6 +66,19 @@ $(function(){ //제이쿼리 시작
 		}
 	});
 	
+	$("#boardBanBtn").click(function() {
+		var no = $(this).val();
+		alert(no + "번 글을 신고합니다");
+		$("#banType").val("게시글 신고");
+		window.open("/board/boardBan", '신고팝업', 'width=510px,height=600px,scrollbars=yes');
+	});
+	$(".commentBanBtn").click(function() {
+		var no = $(this).val();
+		alert(no + "번 댓글을 신고합니다");
+		$("#banType").val("댓글 신고");
+		window.open("/board/boardBan?cno="+no, '신고팝업', 'width=510px,height=600px,scrollbars=yes');
+	});
+	
 });//제이쿼리 끝
 
 function comment_check(){	//댓글 공백체크
@@ -104,8 +117,9 @@ function subComment_check(){
 					<button class="detailBtn" style="background-color: #3dcc00; width:100px;" id="thumsUp">
 						<img src="/img/thumbs-up.png" style="margin-bottom: 5px; width:25px; height:25px;"> (${boardDetail.board_like })
 					</button>&nbsp;
-					<button class="detailBtn" style="background-color: #ff8080;">
+					<button class="detailBtn" style="background-color: #ff8080;" id="boardBanBtn" value="${boardDetail.board_no}">
 						<img src="/img/siren.png" style="margin-bottom: 7px;">
+						<input type="hidden" id="banType">
 					</button>
 					</c:if>
 				</div>
@@ -131,7 +145,7 @@ function subComment_check(){
 				<div class="subArrow subArrow${c.comment_root }" style="display: inline-block; height:50px; line-height: 50px;"><i class="xi-subdirectory-arrow xi-2x"></i></div>
 			</c:if>
 				<div class="comments <c:if test="${ c.comment_depth eq 1 }"> subComment subComment${c.comment_root }</c:if>">
-					<div class="commentWrited ">${ c.member_name } ${ c.comment_time } ()
+					<div class="commentWrited ">${ c.member_name } ${ c.comment_time } <c:if test="${ c.comment_depth eq 0 }">()</c:if>
 						<c:if test="${sessionScope.member_id eq c.member_id  }">
 							<button class="commentBtn_1 commentDel" style="background-color: #CB0E00; position: relative;" value="${c.comment_no }"><i class="xi-trash-o "></i></button>
 						</c:if>
@@ -139,7 +153,7 @@ function subComment_check(){
 							<button class="commentBtn_1 c_comment" style="background-color: #A267AC; position: relative;" value="${c.comment_root }" ><i class="xi-pen-o "></i></button>
 						</c:if>
 						<c:if test="${sessionScope.member_id ne null}">
-							<button class="commentBtn_1" style="background-color: #ff8080; margin-left:5px;"><img src="/img/siren.png" style="margin-bottom: 10px;"></button>
+							<button class="commentBtn_1 commentBanBtn" style="background-color: #ff8080; margin-left:5px;" value="${c.comment_no }"><img src="/img/siren.png" style="margin-bottom: 10px;"></button>
 						</c:if>
 						<c:if test="${c.comment_depth eq 0 }">
 							<button class="commentDropdown" value="${c.comment_root }"><i class="xi-caret-down "></i></button>

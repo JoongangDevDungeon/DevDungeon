@@ -144,9 +144,12 @@ public class HJHBoardController {
 	public String boardCommentDel(String comment_no) {
 		int result = HJHboardService.boardCommentDel(comment_no);
 		System.out.println(result+" 개의 댓글이 비활성화 되었습니다.");
-		
 		return result+"";
-		
+	}
+	
+	@GetMapping("/board/boardBan")
+	public String boardBan() {
+		return "/board/CSJBan";
 	}
 	
 }
