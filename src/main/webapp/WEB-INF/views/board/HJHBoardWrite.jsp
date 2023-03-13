@@ -14,6 +14,8 @@
 </head>
 <style>
 body{ margin:0; padding:0; }
+a {	text-decoration: none; color:black; }
+a:hover{ color:#ccc; }
 .container{	width:1200px; height:100%; }
 .writeBox{ height:935px; border:2px solid black; border-radius: 5px;}
 .writeTop{ width:100%; height:60px;}

@@ -28,4 +28,12 @@ public interface HJHBoardDAO {
 
 	public void boardUpdate(Map<String, Object> map);
 
+	public String boardLikeAjax(String board_no);
+
+	public int boardDelete(String board_no);
+
+	public int boardCommentDel(String comment_no);
+
+	public void boardSubComment(Map<String, Object> map);
+
 }
