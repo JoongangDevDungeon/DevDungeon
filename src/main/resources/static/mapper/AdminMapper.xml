@@ -48,9 +48,28 @@
 	</update>
 
 	<select id="Answer" parameterType="Integer" resultType="QuestionBoardDTO">
-		SELECT question_board_title, question_board_content
+		SELECT question_board_title, question_board_content, question_board_no
 		FROM question_board
-		WHERE question_board_no = #{answer}
+		WHERE question_board_no = #{no}
 	</select>
+	
+	<delete id="adminCouponDel" parameterType="Integer">
+		delete from coupon
+		where coupon_type = #{couponDel}
+	</delete>
+
+	
+	<insert id="adminAnswerComplete" parameterType="AnswerDTO">
+  		INSERT INTO answer_board
+  		SET answer_board_title = #{answer_board_title}, 
+  			answer_board_content = #{answer_board_content}, 
+  			question_board_no = #{question_board_no}
+	</insert>
+	
+	<update id="adminAnswerChange" parameterType="Integer">
+		update question_board
+		set question_board_status = 0
+		where question_board_no = #{change}
+	</update>
 
 </mapper>

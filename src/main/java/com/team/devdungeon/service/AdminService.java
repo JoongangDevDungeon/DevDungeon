@@ -2,11 +2,14 @@ package com.team.devdungeon.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team.devdungeon.dao.AdminDAO;
 import com.team.devdungeon.dto.AdminDTO;
+import com.team.devdungeon.dto.AnswerDTO;
 import com.team.devdungeon.dto.BoardDTO;
 import com.team.devdungeon.dto.CouponDTO;
 import com.team.devdungeon.dto.MemberDTO;
@@ -59,6 +62,20 @@ public class AdminService {
 	public List<QuestionBoardDTO> Answer(int no) {
 		return adminDAO.Answer(no);
 
+	}
+
+	public void adminCouponDel(int couponDel) {
+		adminDAO.adminCouponDel(couponDel);
+	}
+
+	public void adminAnswerComplete(AnswerDTO answerDTO) {
+		adminDAO.adminAnswerComplete(answerDTO);
+		
+	}
+
+	public void adminAnswerChange(int change) {
+		adminDAO.adminAnswerChange(change);
+		
 	}
 
 	

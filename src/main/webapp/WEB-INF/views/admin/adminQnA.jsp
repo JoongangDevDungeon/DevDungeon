@@ -42,7 +42,10 @@
 						<td>
 							<c:choose>
 								<c:when test="${row.question_board_status eq 1}">
-									<button class="btn btn-success">답변달기</button>
+									<form action="/adminAnswer">
+										<input type="hidden" value="${row.question_board_no}" name="qnaNo">
+										<button class="btn btn-success" onclick="location.href='/adminAnswer'">답변달기</button>
+									</form>
 								</c:when>
 								<c:otherwise>
 									

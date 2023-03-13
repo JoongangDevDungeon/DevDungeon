@@ -9,9 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.dto.AdminDTO;
+import com.team.devdungeon.dto.AnswerDTO;
 import com.team.devdungeon.dto.BoardDTO;
 import com.team.devdungeon.dto.CouponDTO;
 import com.team.devdungeon.dto.MemberDTO;
@@ -27,6 +32,7 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String admin(HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		System.out.println("확인");
 		if(session.getAttribute("id") == null) {
 			return "admin/adminLogin";
 		}else {
@@ -57,23 +63,27 @@ public class AdminController {
 			session.setAttribute("grade", result.getAdmin_grade());
 			System.out.println("로그인성공, 세션생성완료");
 			
-			
 			return "redirect:/admin";
 		} else {
 			return "redirect:/adminLogin";
 		}
 		
 	}
+	//로그아웃
+	   @GetMapping("/adminLogout")
+	   public String logout(HttpSession session) {
+	      session.invalidate();
+	      return "redirect:/adminLogin.do";
+	   }
 	
-
+	
 	//사용자관리
-
 	@GetMapping("/adminMember")
-	public ModelAndView adminMember() {
+	public ModelAndView adminMember(HttpSession session) {
 		ModelAndView mv = new ModelAndView("./admin/adminMember");
 		List<MemberDTO> list = adminService.adminMember();
 		mv.addObject("list", list);
-		
+		System.out.println(session.getAttribute("id"));
 		return mv;
 	}
 	
@@ -92,18 +102,8 @@ public class AdminController {
 	@GetMapping("/adminBoard")
 	public ModelAndView adminBoard() {
 		ModelAndView mv = new ModelAndView("./admin/adminBoard");
-
 		List<BoardDTO> list = adminService.adminBoard();
 		mv.addObject("list", list);
-
-
-		System.out.println("list : "+list);
-
-
-		System.out.println(mv);
-
-
-
 		return mv;
 	}
 	//게시글 삭제
@@ -161,6 +161,13 @@ public class AdminController {
 		return "redirect:/adminCoupon";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/adminCouponDel", method = { RequestMethod.POST })	
+	public void test(@RequestParam("couponDel") int couponDel) {
+	    adminService.adminCouponDel(couponDel);    
+	    
+	}
+	
 	//QnA
 	@GetMapping("/adminQnA")
 	public ModelAndView adminQnA() {
@@ -173,12 +180,26 @@ public class AdminController {
 	@GetMapping("/adminAnswer")
 	public ModelAndView adminAnswer(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("./admin/adminAnswer");
-		int no = Integer.parseInt(request.getParameter("answer"));
+		int no = Integer.parseInt(request.getParameter("qnaNo"));
 		
 		List<QuestionBoardDTO> qna = adminService.Answer(no);
 		mv.addObject("qna", qna);
 		return mv;
 	}
+	@PostMapping("/adminAnswerComplete")
+	public String adminAnswerComplete(HttpServletRequest request) {
+		AnswerDTO answerDTO = new AnswerDTO();
+		answerDTO.setAnswer_board_content(request.getParameter("answerContent"));
+		answerDTO.setQuestion_board_no(Integer.parseInt(request.getParameter("questionNo")));
+		answerDTO.setAnswer_board_title(request.getParameter("answerTitle"));
+		
+		adminService.adminAnswerComplete(answerDTO);
+		int change = Integer.parseInt(request.getParameter("questionNo"));
+		adminService.adminAnswerChange(change);
+		
+		return "redirect:/adminQnA";
+	}
+	
 	
 	//스토어
 	@GetMapping("/adminStore")

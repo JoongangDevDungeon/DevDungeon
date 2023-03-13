@@ -15,8 +15,30 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	
-	
+	$(".coupon_type").click(function(){
+		let button = $(this);
+		if(confirm("삭제하시겠습니까?")){
+			let coupon_del = $(this).val();
+			$.ajax({
+				url : "/adminCouponDel",
+				type : 'post',
+				data : {
+					couponDel : coupon_del
+				},
+				success : function(data) {
+					button.closest('tr').fadeOut();
+					alert('삭제되었습니다.');	
+		     	},
+				error : function() {
+					alert("error");
+				}
+			});
+			
+		};
+		
+		
+		
+	});
 });
 
 </script>
@@ -50,7 +72,7 @@ $(function(){
 					<td>${row.coupon_start }</td>
 					<td>${row.coupon_end }</td>
 					<td>
-						<button class="btn btn-danger" value="${row.coupon_type }" name="coupon_type" type="submit">쿠폰삭제</button>
+						<button class="btn btn-danger coupon_type" value="${row.coupon_type }">쿠폰삭제</button>
 					</td>
 				</tr>
 				</c:forEach>

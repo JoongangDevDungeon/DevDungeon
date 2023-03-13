@@ -22,12 +22,14 @@
 		<h1>QnA 댓글달기</h1>
 		board_status = 변경시키기 -> 테이블 board에 있음.
 		answer_board 에 값담아주기 를 동시에 수행해야함. 
-		<form action="">
-			<input type="text" value="${qna.get(0).question_board_title }" disabled="disabled"><br>
-			<textarea rows="10" cols="100" disabled="disabled">${qna.get(0).question_board_content }</textarea><br>
+		<form action="/adminAnswerComplete" method="post">
+			<input type="text" name="title" value="${qna.get(0).question_board_title }" readonly><br>
+			<textarea rows="10" name="content" cols="100" readonly>${qna.get(0).question_board_content }</textarea><br>
 			답변<br>
-			<textarea rows="10" cols="100"></textarea><br>
-			<button>답변달기</button>
+			<input type="hidden" name="questionNo" value="${qna.get(0).question_board_no }">
+			<input type="text" name="answerTitle"><br>
+			<textarea rows="10" cols="100" name="answerContent"></textarea><br>
+			<button type="submit">답변달기</button>
 		</form>
 	</div>
 </div>
