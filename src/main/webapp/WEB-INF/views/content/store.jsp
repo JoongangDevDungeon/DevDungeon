@@ -16,9 +16,38 @@
          <div class="main">
             <div class="add1">광고1</div>
             <div class="content">
-               <!-- 구매자 정보 -->
-               <div style="background-color: #8EA9D7; width: 200px; height: 800px; float: left;">
-                  구매자 정보
+               <!-- 좌측 화면 인포메이션 -->
+               <div style=" width: 200px; height: 800px; float: left;">
+                  <!-- 구매자 현재 상태 -->
+                  <div style="width: 200px; height: 90px; border: 1px solid #ccc; border-radius: 5px;">
+                     <div style="width: 198px; height: 30px; line-height: 30px; background-color: black; color: white; border-radius: 5px 5px 0 0; box-sizing: border-box;">현재 아이콘 상태</div>
+                     <div style="width: 200px; height: 30px;">
+                        <span style="display: block; width: 30px; height: 30px; line-height: 30px; margin-left: 5px; float: left;">Lv.1</span>
+                        <span style="display: block; width: 30px; height: 30px; margin-left: 5px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">
+                           <img src="/img/icon/icon1.png" style="width: 25px; height: 25px;">
+                        </span>
+                        <span style="display: block; width: 120px; height: 30px; margin-left: 5px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">유정목</span>
+                     </div>
+                     <div>
+                        <span style="display: block; width: 200px; height: 30px; line-height: 30px;">보유 포인트 : 12,000</span>
+                     </div>
+                  </div>
+
+                  <!-- 아이콘 검색 -->
+                  <div class="mt-3 list-group" style="width: 200px; height: 65px;">
+                     <input class="form-control" type="text" style="width: 200px; height: 30px;" placeholder="아이콘 이름을 입력하세요.">
+                     <button class="btn btn-primary" type="text" style="width: 200px; height: 30px; margin-top: 5px;">검색</button>
+                  </div>
+
+                  <!-- 카테고리 -->
+                  <div class="mt-3 list-group" style="width: 200px; height: auto;">
+                     <ul class="list-group" style="list-style: none; margin: 0; padding: 0;">
+                        <li class="list-group-item list-group-item-action">카테고리1</li>
+                        <li class="list-group-item list-group-item-action">카테고리2</li>
+                        <li class="list-group-item list-group-item-action">카테고리3</li>
+                        <li class="list-group-item list-group-item-action">카테고리4</li>
+                     </ul>
+                  </div>
                </div>
                <!-- 아이콘 목록 화면 전체 -->
                <div style="width: 950px; height: 800px; margin-left: 50px; float: left;">
@@ -32,7 +61,7 @@
                               <!-- 아이콘 이미지 -->
                               <div style="width: 60px; height: 150px;  float: left;">
                                  <span style="display: block; width: 45px; height: 45px; padding-top: 45px; box-sizing: border-box; margin: 0 auto;">
-                                    <img src="/img/icon/icon${i}.png">
+                                    <img src="/img/icon/icon${i}.png" style="width: 45px; height: 45px;">
                                  </span>
                               </div>
                               <!-- 아이콘 내용 -->
@@ -56,13 +85,13 @@
                            </div>
                         </div>
                      </c:forEach>
-                     <div style="width: 660px; float: left;">
+                     <div class="mt-3" style="width: 660px; float: left;">
                         <span>페이징</span>
                      </div>
-                     <div style="width: 660px; float: left; position: relative;">
+                     <div class="mt-3" style="width: 660px; float: left; position: relative;">
                         <div style="position: absolute; right: 0;">
-                           <button class="btn btn-primary">구매</button>
-                           <button class="btn btn-primary">선물</button>
+                           <button class="btn btn-primary" onclick="location.href='/payShoppingBag'">구매</button>
+                           <button class="btn btn-primary" onclick="location.href='/giftShoppingBag'">선물</button>
                         </div>
                      </div>
                   </div>
