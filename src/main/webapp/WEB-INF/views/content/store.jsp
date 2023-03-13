@@ -54,7 +54,7 @@
                   <!-- 아이콘 리스트 -->
                   <div style="width: 660px; height: 800px; margin: 0 auto;">
                      <!-- 아이콘 개별 -->
-                     <c:forEach step="1" begin="1" end="6" var="i">
+                     <c:forEach step="1" begin="1" end="8" var="i">
                         <div style="width: 330px; height: 150px; margin-top: 10px; float: left;">
                            <input type="checkbox" style="width: 20px; height: 20px; margin-top: 60px; margin-right: 5px; margin-left: 5px; float: left;">
                            <div style="border: 1px solid #ccc; border-radius: 10px; width: 280px; height: 150px; float: left;">
