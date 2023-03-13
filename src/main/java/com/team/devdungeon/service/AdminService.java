@@ -1,6 +1,7 @@
 package com.team.devdungeon.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,9 @@ public class AdminService {
 	}
 
 
-	public List<BoardDTO> adminBoard() {
-		return adminDAO.adminBoard();
-	}
+//	public List<BoardDTO> adminBoard() {
+//		return adminDAO.adminBoard();
+//	}
 
 
 	public List<CouponDTO> Coupon() {
@@ -51,6 +52,14 @@ public class AdminService {
 
 	public void adminBoardDel(BoardDTO boardDTO) {
 		adminDAO.adminBoardDel(boardDTO);
+	}
+
+	public int boardCount(Map<String, Object> pages) {
+		return adminDAO.boardCount(pages);
+	}
+
+	public List<Map<String, Object>> AdminBoard(Map<String, Object> pages) {
+		return adminDAO.adminBoard(pages);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.team.devdungeon.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,7 @@ public interface AdminDAO {
 
 	List<MemberDTO> adminMember();
 
-	List<BoardDTO> adminBoard();
+//	List<BoardDTO> adminBoard();
 
 	List<CouponDTO> Coupon();
 
@@ -30,5 +31,9 @@ public interface AdminDAO {
 	void memberUpdate(MemberDTO memberDTO);
 
 	void adminBoardDel(BoardDTO boardDTO);
+
+	int boardCount(Map<String, Object> pages);
+
+	List<Map<String, Object>> adminBoard(Map<String, Object> pages);
 
 }

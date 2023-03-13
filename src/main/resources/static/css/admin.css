@@ -22,6 +22,56 @@ th, tr{
 	padding: 0;
 	width: 100%;
 }
+
+/* adminLogout */
+.adminlogout{
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+/* adminPaging*/
+.pagingBox{	width:700px; margin:0 auto; }
+.pagingList{
+	margin:0;
+	padding:0;
+	list-style: none;
+	display: flex;
+	justify-content: start;
+	justify-content: center;
+	font-size: 13px;
+}
+.pageNo{	
+	cursor: pointer;
+	width:30px;
+	height:30px;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 5px;
+}
+.pageNo:hover{ background-color: #d3d3d3; }
+.page_btn{
+	background-color: #6867AC;
+	margin:0 2px;
+	color:white;
+	font-weight: bold;
+	font-size: 14px;
+}
+.page_btn:hover{ background-color: #8887cc; }
+
+/* adminSearch bar */
+.searchForm{ display: flex; justify-content: center; }
+.search_btn{
+	background-color: #6867AC;
+	border:none;
+	border-radius: 5px;
+	font-size: 15px;
+	width:60px;
+	height:30px;
+	color:white;
+	font-weight: bold;
+}
+
+/* adminMenu*/
 .header{
 	width: 210px;
 	height: 100vh;
