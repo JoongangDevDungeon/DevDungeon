@@ -90,13 +90,6 @@ public class AdminController {
 
 	//사용자관리
 	@GetMapping("/adminMember")
-
-	public ModelAndView adminMember(HttpSession session) {
-		ModelAndView mv = new ModelAndView("./admin/adminMember");
-		List<MemberDTO> list = adminService.adminMember();
-		mv.addObject("list", list);
-	}
-
 	public ModelAndView adminMember(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("./admin/adminMember");
 		Map<String, Object> pages = new HashMap<String, Object>();
@@ -145,9 +138,6 @@ public class AdminController {
 	public ModelAndView adminBoard(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("./admin/adminBoard");
 
-		List<BoardDTO> list = adminService.adminBoard();
-		mv.addObject("list", list);
-
 		Map<String, Object> pages = new HashMap<String, Object>();
 		
 		String searchType = request.getParameter("searchType");
@@ -177,13 +167,9 @@ public class AdminController {
 	//게시글 삭제
 	@PostMapping("/adminBoard")
 	public String adminBoardDel(HttpServletRequest request) {
-
-
 		request.getParameter("board_no");
 		request.getParameter("status_no");
 		String pageNo = request.getParameter("pageNo");
-		//System.out.println("pageNo : "+pageNo);
-		
 
 		request.getParameter("board_no");
 		request.getParameter("status_no");
