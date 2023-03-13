@@ -145,6 +145,9 @@ body {
   transition: .2s;
 }
 
+.s{
+	cursor: default;
+}
 .login__submit:active,
 .login__submit:focus,
 .login__submit:hover {
@@ -204,7 +207,11 @@ body {
         <button class="button login__submit">
           <span class="button__text">관리자 로그인</span>
           <i class="button__icon fas fa-chevron-right"></i>
-        </button>       
+        </button>
+        <div class="button login__submit s">
+          <span class="button__text">id,pw찾기는 DBA에 문의하세요</span>
+          <i class="button__icon fas fa-chevron-right"></i>
+        </div>
       </form>
     </div>
     <div class="screen__background">

@@ -1,6 +1,7 @@
 package com.team.devdungeon.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,9 +21,8 @@ public interface AdminDAO {
 
 	AdminDTO adminLogin(AdminDTO adminDTO);
 
-	List<MemberDTO> adminMember();
-
-	List<BoardDTO> adminBoard();
+	//List<MemberDTO> adminMember();
+	List<Map<String, Object>> adminMember(Map<String, Object> pages);
 
 	List<CouponDTO> Coupon();
 
@@ -30,10 +30,14 @@ public interface AdminDAO {
 
 	List<QuestionBoardDTO> QnA();
 
-
 	void memberUpdate(MemberDTO memberDTO);
 
 	void adminBoardDel(BoardDTO boardDTO);
+
+
+	int boardCount(Map<String, Object> pages);
+
+	List<Map<String, Object>> adminBoard(Map<String, Object> pages);
 
 
 	List<QuestionBoardDTO> Answer(int no);
@@ -43,6 +47,7 @@ public interface AdminDAO {
 	void adminAnswerComplete(AnswerDTO answerDTO);
 
 	void adminAnswerChange(int change);
+
 
 
 }

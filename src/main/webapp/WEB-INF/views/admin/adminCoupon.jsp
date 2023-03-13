@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
+<script type="text/javascript" src="/js/admin/AdminCouponPaging.js"></script>
+<script type="text/javascript" src="/js/admin/AdminCouponSearch.js"></script>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script type="text/javascript">

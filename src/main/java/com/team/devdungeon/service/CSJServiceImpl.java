@@ -100,6 +100,24 @@ public class CSJServiceImpl implements CSJService {
 		return csjDAO.updateBoard(updatemap);
 	}
 
+	@Override
+	public void banBoard(Map<String, Object> banMap) {
+		// TODO Auto-generated method stub
+		csjDAO.banBoard(banMap);
+	}
+
+	@Override
+	public void userCommentDelete(int cno) {
+		// TODO Auto-generated method stub
+		csjDAO.userCommentDelete(cno);
+	}
+
+	@Override
+	public void banComment(Map<String, Object> banMap) {
+		// TODO Auto-generated method stub
+		csjDAO.banComment(banMap);
+	}
+
 
 
 }

@@ -10,6 +10,11 @@
 		<div class="adminuser">
 			<img src="./img/admin/adminManage.png">${sessionScope.id } 님
 		</div>
+		<div class="adminlogout">
+			<a href="adminLogout">
+				<button class="btn btn-outline-danger" type="button">로그아웃</button>
+			</a>
+		</div>
 	</div>
 	
 	<!-- 선 -->

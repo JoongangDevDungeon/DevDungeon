@@ -1,6 +1,7 @@
 package com.team.devdungeon.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,13 +27,8 @@ public class AdminService {
 		return adminDAO.adminLogin(adminDTO);
 	}
 
-	public List<MemberDTO> adminMember() {
-		return adminDAO.adminMember();
-	}
-
-
-	public List<BoardDTO> adminBoard() {
-		return adminDAO.adminBoard();
+	public List<Map<String, Object>> adminMember(Map<String, Object> pages) {
+	return adminDAO.adminMember(pages);
 	}
 
 
@@ -57,6 +53,15 @@ public class AdminService {
 	public void adminBoardDel(BoardDTO boardDTO) {
 		adminDAO.adminBoardDel(boardDTO);
 
+	}
+
+
+	public int boardCount(Map<String, Object> pages) {
+		return adminDAO.boardCount(pages);
+	}
+
+	public List<Map<String, Object>> AdminBoard(Map<String, Object> pages) {
+		return adminDAO.adminBoard(pages);
 	}
 
 	public List<QuestionBoardDTO> Answer(int no) {

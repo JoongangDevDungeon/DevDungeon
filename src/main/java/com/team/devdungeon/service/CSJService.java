@@ -37,4 +37,10 @@ public interface CSJService {
 	public void userDelete(int bno);
 
 	public int updateBoard(Map<String, Object> updatemap);
+
+	public void banBoard(Map<String, Object> banMap);
+
+	public void userCommentDelete(int bno);
+
+	public void banComment(Map<String, Object> banMap);
 }

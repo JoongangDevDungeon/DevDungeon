@@ -82,5 +82,20 @@ public class CSJDAO {
 		return sqlSession.update(namespace+"updateBoard",updatemap);
 	}
 
+	public void banBoard(Map<String, Object> banMap) {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+"banBoard",banMap);
+	}
+
+	public void userCommentDelete(int cno) {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+"commentDelete",cno);
+	}
+
+	public void banComment(Map<String, Object> banMap) {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+"banComment",banMap);
+	}
+
 
 }
