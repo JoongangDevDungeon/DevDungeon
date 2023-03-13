@@ -29,11 +29,6 @@ public class AdminService {
 	}
 
 
-//	public List<BoardDTO> adminBoard() {
-//		return adminDAO.adminBoard();
-//	}
-
-
 	public List<CouponDTO> Coupon() {
 		return adminDAO.Coupon();
 	}
@@ -57,7 +52,7 @@ public class AdminService {
 
 	}
 
-<<<<<<< HEAD
+
 	public int boardCount(Map<String, Object> pages) {
 		return adminDAO.boardCount(pages);
 	}
@@ -65,13 +60,10 @@ public class AdminService {
 	public List<Map<String, Object>> AdminBoard(Map<String, Object> pages) {
 		return adminDAO.adminBoard(pages);
 	}
-=======
+
 	public List<QuestionBoardDTO> Answer(int no) {
 		return adminDAO.Answer(no);
 
 	}
-
-	
->>>>>>> d6f24def3d6fe4537a94a65b60278758da73e683
 
 }

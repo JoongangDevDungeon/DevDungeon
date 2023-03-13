@@ -117,7 +117,7 @@ public class AdminController {
 		int totalCount = adminService.boardCount(pages);
 		int lastPage = (int)Math.ceil((double)totalCount/10);
 
-<<<<<<< HEAD
+
 		pages.put("startPage", startPage);
 		pages.put("lastPage", lastPage);
 		
@@ -127,48 +127,34 @@ public class AdminController {
 		mv.addObject("list",list);
 		mv.addObject("pageNo", pageNo);
 		
-=======
-		List<BoardDTO> list = adminService.adminBoard();
-		mv.addObject("list", list);
 
 
-		System.out.println("list : "+list);
-
-
-		System.out.println(mv);
-
-
-
->>>>>>> d6f24def3d6fe4537a94a65b60278758da73e683
 		return mv;
 	}
 	
 	//게시글 삭제
 	@PostMapping("/adminBoard")
 	public String adminBoardDel(HttpServletRequest request) {
-<<<<<<< HEAD
+
 
 		request.getParameter("board_no");
 		request.getParameter("status_no");
 		String pageNo = request.getParameter("pageNo");
 		//System.out.println("pageNo : "+pageNo);
 		
-=======
+
 		request.getParameter("board_no");
 		request.getParameter("status_no");
->>>>>>> d6f24def3d6fe4537a94a65b60278758da73e683
+
 		BoardDTO boardDTO = new BoardDTO();
 		
 		boardDTO.setBoard_no(Integer.parseInt(request.getParameter("board_no")));
 		boardDTO.setStatus_no(Integer.parseInt(request.getParameter("status_no")));
 		
 		adminService.adminBoardDel(boardDTO);
-<<<<<<< HEAD
+
 
 		return "redirect:/adminBoard?pageNo="+pageNo;
-=======
-		return "redirect:/adminBoard";
->>>>>>> d6f24def3d6fe4537a94a65b60278758da73e683
 	}
 	
 	

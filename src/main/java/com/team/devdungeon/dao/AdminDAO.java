@@ -20,7 +20,6 @@ public interface AdminDAO {
 
 	List<MemberDTO> adminMember();
 
-//	List<BoardDTO> adminBoard();
 
 	List<CouponDTO> Coupon();
 
@@ -28,19 +27,18 @@ public interface AdminDAO {
 
 	List<QuestionBoardDTO> QnA();
 
-
 	void memberUpdate(MemberDTO memberDTO);
 
 	void adminBoardDel(BoardDTO boardDTO);
 
-<<<<<<< HEAD
+
 	int boardCount(Map<String, Object> pages);
 
 	List<Map<String, Object>> adminBoard(Map<String, Object> pages);
-=======
+
 
 	List<QuestionBoardDTO> Answer(int no);
 
->>>>>>> d6f24def3d6fe4537a94a65b60278758da73e683
+
 
 }
