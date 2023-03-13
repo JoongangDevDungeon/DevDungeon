@@ -16,7 +16,7 @@
 body{ margin:0; padding:0; }
 a {	text-decoration: none; color:black; }
 a:hover{ color:#ccc; }
-.container{	width:1200px; height:100%; }
+.container{	width:1200px; height:100%; text-align: left;}
 .writeBox{ height:935px; border:2px solid black; border-radius: 5px;}
 .writeTop{ width:100%; height:60px;}
 .writeTitle{
@@ -76,6 +76,9 @@ function check(){
 <body>
 	<%@ include file="../top.jsp"%>
 	<%@ include file="../menu.jsp"%>
+<div class="main">
+	<div class="add1">광고1</div>
+	<div class="content">	
 	<div class="container">
 		<div class="writeTop">
 			<h1 style="display: inline-block; font-weight: bold; padding-left:10px;">Write</h1>
@@ -101,11 +104,12 @@ function check(){
 					<c:otherwise>저장</c:otherwise>
 				</c:choose></button></div>
 				
-		</form>
-		
-			
+			</form>
+			</div>
 		</div>
 	</div>
+	<div class="add2">광고2</div>
+</div>
 	<%@ include file="../footer.jsp"%>
 
 </body>

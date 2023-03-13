@@ -55,7 +55,7 @@ public class HJHBoardController {
 		return mv;
 	}
 	@PostMapping("/board/HJHBoardComment")
-	public String boardComment(HttpServletRequest request,HttpSession session) {
+	public String boardComment(HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		String comment_content = request.getParameter("commentText");
 		String board_no = request.getParameter("board_no");
@@ -68,14 +68,15 @@ public class HJHBoardController {
 		return "redirect:/board/HJHBoardDetail?board_no="+board_no;
 	}
 	@PostMapping("/board/HJHSubComment")
-	public String boardSubComment(HttpServletRequest request) {
+	public String boardSubComment(HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		String subComment_content = request.getParameter("c_commentText");
 		String comment_root = request.getParameter("comment_root");
 		String board_no = request.getParameter("board_no");
-		System.out.println(subComment_content+board_no);
+		String member_name = (String)session.getAttribute("member_name");
 		map.put("subComment_content", subComment_content);
 		map.put("comment_root", comment_root);
+		map.put("member_name", member_name);
 		map.put("board_no", board_no);
 		HJHboardService.boardSubComment(map);
 		return "redirect:/board/HJHBoardDetail?board_no="+board_no;
@@ -144,9 +145,12 @@ public class HJHBoardController {
 	public String boardCommentDel(String comment_no) {
 		int result = HJHboardService.boardCommentDel(comment_no);
 		System.out.println(result+" 개의 댓글이 비활성화 되었습니다.");
-		
 		return result+"";
-		
+	}
+	
+	@GetMapping("/board/boardBan")
+	public String boardBan() {
+		return "/board/CSJBan";
 	}
 	
 }

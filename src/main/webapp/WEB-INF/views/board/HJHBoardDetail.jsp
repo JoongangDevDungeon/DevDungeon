@@ -14,8 +14,7 @@
 <title>Board Detail</title>
 </head>
 <style>
-.container{	width:1200px; height:100%; }
-
+.container{	width:1200px; height:100%; text-align: left; }
 </style>
 <script type="text/javascript">
 $(function(){ //제이쿼리 시작
@@ -52,11 +51,10 @@ $(function(){ //제이쿼리 시작
 		});
 	});
 	
-	$(".commentDel").click(function(){	//ajax 통신
+	$(".commentDel").click(function(){
 		if(confirm("삭제하시겠습니까?")){
 			$.ajax({
 				url: "/board/HJHBoardCommentDel",	//데이터를 전송할 url
-//	 			dataType: 서버가 리턴한는 데이터 타입,
 				type: "POST",
 				data: { 'comment_no' : $(this).val() },	//서버에 전송할 데이터, key/value형태의 객체
 				dataType:"json",
@@ -64,6 +62,19 @@ $(function(){ //제이쿼리 시작
 				error: function(xhr,status,error){ alert("실패") }
 			});
 		}
+	});
+	//댓글 게시글 신고
+	$("#boardBanBtn").click(function() {
+		var no = $(this).val();
+		alert(no + "번 글을 신고합니다");
+		$("#banType").val("게시글 신고");
+		window.open("/board/boardBan", '신고팝업', 'width=510px,height=600px,scrollbars=yes');
+	});
+	$(".commentBanBtn").click(function() {
+		var no = $(this).val();
+		alert(no + "번 댓글을 신고합니다");
+		$("#banType").val("댓글 신고");
+		window.open("/board/boardBan?cno="+no, '신고팝업', 'width=510px,height=600px,scrollbars=yes');
 	});
 	
 });//제이쿼리 끝
@@ -84,6 +95,9 @@ function subComment_check(){
 <body>
 	<%@ include file="../top.jsp"%>
 	<%@ include file="../menu.jsp"%>
+<div class="main">
+	<div class="add1">광고1</div>
+	<div class="content">
 	<div class="container">
 		<h1 style="font-weight: bold; display: inline-block;">Detail</h1>
 		<button class="detailBtn boardList" onclick="location.href='/board/HJHBoard'">목록</button>
@@ -104,8 +118,9 @@ function subComment_check(){
 					<button class="detailBtn" style="background-color: #3dcc00; width:100px;" id="thumsUp">
 						<img src="/img/thumbs-up.png" style="margin-bottom: 5px; width:25px; height:25px;"> (${boardDetail.board_like })
 					</button>&nbsp;
-					<button class="detailBtn" style="background-color: #ff8080;">
+					<button class="detailBtn" style="background-color: #ff8080;" id="boardBanBtn" value="${boardDetail.board_no}">
 						<img src="/img/siren.png" style="margin-bottom: 7px;">
+						<input type="hidden" id="banType">
 					</button>
 					</c:if>
 				</div>
@@ -131,7 +146,7 @@ function subComment_check(){
 				<div class="subArrow subArrow${c.comment_root }" style="display: inline-block; height:50px; line-height: 50px;"><i class="xi-subdirectory-arrow xi-2x"></i></div>
 			</c:if>
 				<div class="comments <c:if test="${ c.comment_depth eq 1 }"> subComment subComment${c.comment_root }</c:if>">
-					<div class="commentWrited ">${ c.member_name } ${ c.comment_time } ()
+					<div class="commentWrited ">${ c.member_name } ${ c.comment_time } <c:if test="${ c.comment_depth eq 0 }">()</c:if>
 						<c:if test="${sessionScope.member_id eq c.member_id  }">
 							<button class="commentBtn_1 commentDel" style="background-color: #CB0E00; position: relative;" value="${c.comment_no }"><i class="xi-trash-o "></i></button>
 						</c:if>
@@ -139,7 +154,7 @@ function subComment_check(){
 							<button class="commentBtn_1 c_comment" style="background-color: #A267AC; position: relative;" value="${c.comment_root }" ><i class="xi-pen-o "></i></button>
 						</c:if>
 						<c:if test="${sessionScope.member_id ne null}">
-							<button class="commentBtn_1" style="background-color: #ff8080; margin-left:5px;"><img src="/img/siren.png" style="margin-bottom: 10px;"></button>
+							<button class="commentBtn_1 commentBanBtn" style="background-color: #ff8080; margin-left:5px;" value="${c.comment_no }"><img src="/img/siren.png" style="margin-bottom: 10px;"></button>
 						</c:if>
 						<c:if test="${c.comment_depth eq 0 }">
 							<button class="commentDropdown" value="${c.comment_root }"><i class="xi-caret-down "></i></button>
@@ -160,6 +175,9 @@ function subComment_check(){
 					</div>
 				</c:if>
 		</c:forEach>
+		</div>
+		</div>
+		<div class="add2">광고2</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
 </body>
