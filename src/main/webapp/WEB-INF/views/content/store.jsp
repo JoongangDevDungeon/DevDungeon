@@ -17,26 +17,56 @@
             <div class="add1">광고1</div>
             <div class="content">
                <!-- 구매자 정보 -->
-               <div>
-
+               <div style="background-color: #8EA9D7; width: 200px; height: 800px; float: left;">
+                  구매자 정보
                </div>
-               <!-- 아이콘 목록 -->
-               <div>
-                  <c:forEach var="i" begin="1" end="6" step="1" >
-                     <div style="border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; margin: 10px; padding: 0; width: 300px; height: 100px; float: left;">
-                        <div style="width: 80px; height: 100px; padding-top: 24px; float: left;">
-                           <img src="/img/icon/icon${i}.png" style="display: inline-block; width: 45px; height: 45px;">
-                        </div>
-                        <div style="width: 214px; height: 100px; padding-left: 10px; box-sizing: border-box; float: left;">
-                           <label style="width: 214px; height: 33px; line-height: 33px; text-align: left; font-weight: bold; float: left;">이모티콘 이름</label>
-                           <label style="width: 214px; height: 33px; line-height: 33px; text-align: left; float: left;">사용기간</label>
-                           <div style="width: 214px; height: 33px; line-height: 33px; text-align: left; float: left;">
-                              <label style="width: 50px;">구매</label>
-                              <label style="width: 50px;">선물</label>
+               <!-- 아이콘 목록 화면 전체 -->
+               <div style="width: 950px; height: 800px; margin-left: 50px; float: left;">
+                  <!-- 아이콘 리스트 -->
+                  <div style="width: 660px; height: 800px; margin: 0 auto;">
+                     <!-- 아이콘 개별 -->
+                     <c:forEach step="1" begin="1" end="6" var="i">
+                        <div style="width: 330px; height: 150px; margin-top: 10px; float: left;">
+                           <input type="checkbox" style="width: 20px; height: 20px; margin-top: 60px; margin-right: 5px; margin-left: 5px; float: left;">
+                           <div style="border: 1px solid #ccc; border-radius: 10px; width: 280px; height: 150px; float: left;">
+                              <!-- 아이콘 이미지 -->
+                              <div style="width: 60px; height: 150px;  float: left;">
+                                 <span style="display: block; width: 45px; height: 45px; padding-top: 45px; box-sizing: border-box; margin: 0 auto;">
+                                    <img src="/img/icon/icon${i}.png">
+                                 </span>
+                              </div>
+                              <!-- 아이콘 내용 -->
+                              <div style="width: 217px; height: 150px; float: left;">
+                                 <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                    <span>아이콘 이름</span>
+                                 </div>
+                                 <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">수량</span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">가격</span>
+                                 </div>
+                                 <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">사용 시간</span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">등록일</span>
+                                 </div>
+                                 <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">구매</span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">선물</span>
+                                 </div>
+                              </div>
                            </div>
                         </div>
+                     </c:forEach>
+                     <div style="width: 660px; float: left;">
+                        <span>페이징</span>
                      </div>
-                  </c:forEach>
+                     <div style="width: 660px; float: left; position: relative;">
+                        <div style="position: absolute; right: 0;">
+                           <button class="btn btn-primary">구매</button>
+                           <button class="btn btn-primary">선물</button>
+                        </div>
+                     </div>
+                  </div>
+
                </div>
             </div>
             <div class="add2">광고2</div>
