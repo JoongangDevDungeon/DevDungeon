@@ -57,7 +57,8 @@
     	UPDATE board_comment
     	SET
     	status_no = 2
-    	WHERE comment_no = #{cno}
+    	WHERE IF((select comment_depth from board_comment where comment_no=#{cno})=0,comment_root,comment_no) = #{cno}
+
     </update>
     
     <insert id="boardWrite" parameterType="HashMap">

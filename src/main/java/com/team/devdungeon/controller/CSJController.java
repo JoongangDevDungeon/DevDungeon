@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
@@ -68,7 +69,7 @@ public class CSJController {
 	}
 
 	@PostMapping("/csjWrite")
-	public ModelAndView csjWritePost(HttpServletRequest request) {
+	public ModelAndView csjWritePost(HttpServletRequest request,MultipartFile File) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/csjboard");
 		HttpSession session = request.getSession();
@@ -145,6 +146,10 @@ public class CSJController {
 		mv.setViewName("board/CSJDetail");
 
 		Map<String, Object> det = csjService.detail(bno);
+		if(det==null) {
+			mv.setViewName("redirect:/csjboard");
+			return mv;
+		}
 		int member_no = (int) det.get("member_no");
 		Map<String, Object> mem = csjService.memberProfile(member_no);
 
@@ -207,7 +212,6 @@ public class CSJController {
 
 	@GetMapping("/userCommentDelete")
 	public String csjCommentDelete(@RequestParam(value = "cno") int cno, HttpServletRequest request) {
-
 		csjService.userCommentDelete(cno);
 		return "redirect:" + request.getHeader("Referer");
 	}
