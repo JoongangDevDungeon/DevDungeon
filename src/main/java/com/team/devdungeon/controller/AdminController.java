@@ -139,7 +139,8 @@ public class AdminController {
 		int startPage = (pageNo*10)-10;
 		int totalCount = adminService.boardCount(pages);
 		int lastPage = (int)Math.ceil((double)totalCount/10);
-
+		
+		System.out.println(startPage);
 
 		pages.put("startPage", startPage);
 		pages.put("lastPage", lastPage);
