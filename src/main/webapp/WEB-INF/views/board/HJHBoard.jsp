@@ -20,17 +20,21 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 	let searchType = document.getElementById("searchType");
 	let searchValue = document.getElementById("searchValue");
 	let url =  document.location.href.split("?",1);
+	
 	if(pageNo > ${pages.lastPage } ) { return false; }
 	else if (pageNo != ${pages.lastPage } ){
+		
 		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+(pageNo+1);
-		}else{
-			location.href="/board/HJHBoard?pageNo="+(pageNo+1);
+		}else{ 
+			location.href="/board/HJHBoard?pageNo="+(pageNo+1); 
 		}
+		
 	}else if(pageNo == ${pages.lastPage }){
+		
 		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+pageNo;
-		}else{
+		}else{ 
 			location.href="/board/HJHBoard?pageNo="+pageNo;
 		}
 	}
@@ -39,57 +43,65 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 <body>
 	<%@ include file="../top.jsp" %>
 	<%@ include file="../menu.jsp" %>
-	<div class="container">
-		<h1>B O A R D</h1>
-		<table class="table">
-			<tr class="table-header">
-				<th class="col-1">번호</th>
-				<th class="col-5">제목</th>
-				<th class="col-2">글쓴이</th>
-				<th class="col-2">날짜</th>
-				<th class="col-1">조회수</th>
-				<th class="col-1">좋아요</th>
-			</tr>
-			<c:forEach var="board" items="${list }">
-				<tr>
-					<td>${board.bno }</td>
-					<td class="title"><a href="/board/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }</a></td>
-					<td>${board.member_name}</td>
-					<td>${board.board_date }</td>
-					<td>${board.board_read }</td>
-					<td>${board.board_like }</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<!-- 페이징 -->
-		<div class="pagingBox">
-			<ul class="pagingList">
-				<li class="pageNo page_btn" onclick="moveBefore(1)"> << </li>
-				<li class="pageNo page_btn" onclick="moveBefore(${pageNo})" > < </li>
-				<c:forEach var="i" begin="${Math.floor((pageNo-1)/10)*10+1 }" 
-					end="${Math.floor((pageNo-1)/10)*10 +10 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}" >
-					<li class="pageNo" onclick="move(${i })" <c:if test="${pageNo eq i }" >style="color:red; font-weight: bold;"</c:if>>${i }</li>
-				</c:forEach>
-				<li class="pageNo page_btn" onclick="moveNext(${pageNo})"> > </li>
-				<li class="pageNo page_btn" onclick="moveNext(${pages.lastPage })"> >> </li>
-			</ul>
-		</div><br>
-		<!-- 검색 -->
-		<div class="searchForm">
-			<form action="/board/HJHBoard" method="get" onsubmit="return search()">
-				<select name="searchType" id="searchType">
-					<option value="none">선택</option>
-					<option value="title" <c:if test='${ pages.searchType eq "title"}'>selected</c:if>>제목</option>
-					<option value="writer" <c:if test='${ pages.searchType eq "writer"}'>selected</c:if>>글쓴이</option>
-				</select>
-				<input type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
-				<button class="search_btn">검색</button>
-			</form>
+	<div class="main">
+		<div class="add1">광고1</div>
+		<div class="content">
+			<div class="container">
+				<h1>B O A R D</h1>
+				<table class="table">
+					<tr class="table-header">
+						<th class="col-1">번호</th>
+						<th class="col-5">제목</th>
+						<th class="col-2">글쓴이</th>
+						<th class="col-2">날짜</th>
+						<th class="col-1">조회수</th>
+						<th class="col-1">좋아요</th>
+					</tr>
+					<c:forEach var="board" items="${list }">
+						<tr>
+							<td>${board.bno }</td>
+							<td class="title"><a href="/board/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }</a></td>
+							<td>${board.member_name}</td>
+							<td>${board.board_date }</td>
+							<td>${board.board_read }</td>
+							<td>${board.board_like }</td>
+						</tr>
+					</c:forEach>
+				</table><br><br><br><br>
+				<!-- 페이징 -->
+				<div class="pagingBox">
+					<ul class="pagingList">
+						<li class="pageNo page_btn" onclick="moveBefore(1)"><i class="xi-backward xi-x"></i></li>
+						<li class="pageNo page_btn" onclick="moveBefore(${pageNo})"><i class="xi-step-backward xi-x"></i></li>
+						<c:forEach var="i" begin="${Math.floor((pageNo-1)/10)*10+1 }" end="${Math.floor((pageNo-1)/10)*10 +10 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}">
+							<li class="pageNo" onclick="move(${i })" <c:if test="${pageNo eq i }" >style="color:red; font-weight: bold;"</c:if>>${i }</li>
+						</c:forEach>
+						<li class="pageNo page_btn" onclick="moveNext(${pageNo})"><i class="xi-step-forward xi-x"></i></li>
+						<li class="pageNo page_btn" onclick="moveNext(${pages.lastPage })"><i class="xi-forward xi-x"></i></li>
+					</ul>
+				</div>
+				<br>
+				<!-- 검색 -->
+				<div class="searchForm">
+					<form action="/board/HJHBoard" method="get" onsubmit="return search()">
+						<select name="searchType" id="searchType">
+							<option value="none">선택</option>
+							<option value="title" <c:if test='${ pages.searchType eq "title"}'>selected</c:if>>제목</option>
+							<option value="writer" <c:if test='${ pages.searchType eq "writer"}'>selected</c:if>>글쓴이</option>
+						</select>
+						<input type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
+						<button class="search_btn">검색</button>
+					</form>
+				</div>
+				<!-- 글쓰기 -->
+				<div class="write">
+					<c:if test="${sessionScope.member_no ne null }">
+						<button class="write_btn" onclick="location.href='/board/HJHBoardWrite'">글쓰기</button>
+					</c:if>
+				</div>
+			</div>
 		</div>
-		<!-- 글쓰기 -->
-		<div class="write">
-			<button class="write_btn"onclick="location.href='/board/HJHBoardWrite'">글쓰기</button>
-		</div>
+		<div class="add2">광고2</div>
 	</div>
 	<%@ include file="../footer.jsp" %>
 </body>
