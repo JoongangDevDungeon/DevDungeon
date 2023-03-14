@@ -293,12 +293,23 @@
 
 <!-- 포인트 정산 -->
 	<select id="AdminPoint" parameterType="Integer" resultType="HashMap">
-		
+		SELECT *
+		FROM event
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">point_title</when>
+				<when test="searchType == 'writer'">point_content</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+		ORDER BY event_no DESC
+		LIMIT #{startPage}, 10
 	</select>
 	
 <!-- 페이징 서치바 카운트 -->
 	<select id="adminPointCount" parameterType="HashMap" resultType="Integer">
-		SELECT COUNT(*) FROM point
+		SELECT COUNT(*) FROM event
 		<if test="searchType != null">
 			WHERE
 			<choose>

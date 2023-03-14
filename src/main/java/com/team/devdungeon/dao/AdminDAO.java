@@ -3,8 +3,6 @@ package com.team.devdungeon.dao;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -76,7 +74,7 @@ public interface AdminDAO {
 	int adminStoreCount(Map<String, Object> pages);
 
 	int adminEventCount(Map<String, Object> pages);
-
+	//포인트 페이징 카운트(필요없을시 삭제)
 	int adminPointCount(Map<String, Object> pages);
 
 	int adminLogCount(Map<String, Object> pages);
