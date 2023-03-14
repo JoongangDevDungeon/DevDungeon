@@ -7,7 +7,11 @@
          <!-- 로그인 성공 시 -->
          <div class="dropdown" id="login_success" style="<c:choose><c:when test="${sessionScope.member_name != null}">display: block;</c:when><c:otherwise>display: none;</c:otherwise></c:choose>">
                <button type="button" class="btn dropdown-toggle" id="member_info" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                  ${sessionScope.member_name} 님
+                  <c:choose>
+                     <c:when test="${sessionScope.member_name != null}">${sessionScope.member_name} 님</c:when>
+                     <c:otherwise>${sessionScope.id}</c:otherwise>
+                  </c:choose>
+
                </button>
                <div class="dropdown-menu">
                   <ul>
