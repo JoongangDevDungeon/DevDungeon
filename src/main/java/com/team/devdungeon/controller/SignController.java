@@ -2,6 +2,8 @@ package com.team.devdungeon.controller;
 
 import com.team.devdungeon.dto.SignDTO;
 import com.team.devdungeon.service.SignService;
+import com.team.devdungeon.util.Email;
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,8 +75,24 @@ public class SignController {
         return agrees;
     }
 
+
+
+    @PostMapping("/mail")
+    public  String Mail(HttpServletRequest request) throws EmailException {
+        SignDTO signDTO = new SignDTO();
+        signDTO.setMember_email(request.getParameter("member_email"));
+        System.out.println(signDTO.getMember_email());
+
+        String title = "가지 회원가입 인증번호 입니다.";
+        String msg = "123456";
+        Email.simpleMail("kingdori902@naver.com","test",title, msg);
+
+
+        return "";
+    }
+
     @PostMapping("/signup")
-    public String signup(HttpServletRequest request) {
+    public String signup(HttpServletRequest request) {/*회원가입*/
         SignDTO signDTO = new SignDTO();
 
         signDTO.setAgree1(request.getParameter("agree1"));
@@ -99,8 +117,7 @@ public class SignController {
 
         return "redirect:/index";
     }
-
-    @PostMapping("/checkid")
+    @PostMapping("/checkid")/*아이디 체크*/
     @ResponseBody
     public String checkid(HttpServletRequest request){
 
@@ -111,7 +128,7 @@ public class SignController {
 
         System.out.println("유저가 입력한 값 : " + result.getMember_id());
         System.err.println("서치 결과 : " + result.getCount());
-        return "";
+        return "result";
     }
 
     @GetMapping("/accountInquiry")

@@ -10,9 +10,8 @@
 </head>
 <script>
     $(function() {
-        $('#member_id').focusout(function (){
+        $('#member_id').focusout(function (result){
             let member_id = $('#member_id').val();
-            alert(member_id);
             // 비정상
             $.ajax({
                 url: 'checkid',
@@ -50,7 +49,6 @@
     .inner_fild {
         margin: auto;
         width: 450px;
-        background-color: greenyellow;
     }
 
     .text_box {
@@ -88,7 +86,7 @@
     }
 </style>
 <body>
-    <div class="all_fild" style="background-color: red;"><!-- 전체 범위 -->
+    <div class="all_fild"><!-- 전체 범위 -->
         <div class="banner"><img src="/img/banner.png"></div>
         <%-- 배너 --%>
         <form action="signup" method="post">
@@ -158,12 +156,12 @@
                 <label>본인 확인 이메일</label><br>
                 <div class="text_fild">
                     <input class="text_box_id" type="email" name="member_email" placeholder="이메일을 입력하세요.">
-                    <button class="check_btn">전송하기</button>
+                    <button class="check_btn" loc>전송하기</button>
                 </div>
                 <br>
                 <div class="text_fild" id="verify_code">
                     <input class="text_box_id" type="text" name="verify_code" placeholder="인증번호를 입력하세요.">
-                    <button class="check_btn" id="verify_btn">인증하기</button>
+                    <button class="check_btn" id="verify_btn" onclick="location.href='/myinfo.do'">인증하기</button>
                 </div>
                 <br>
 

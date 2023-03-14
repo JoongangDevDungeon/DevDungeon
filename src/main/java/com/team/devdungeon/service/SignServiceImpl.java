@@ -25,6 +25,7 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public SignDTO checkid(SignDTO signDTO) {
+
         return signDAO.checkid(signDTO);
     }
 }
