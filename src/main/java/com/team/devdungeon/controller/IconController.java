@@ -54,7 +54,9 @@ public class IconController {
 
             ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
             sftpChannel.connect();
+
             sftpChannel.put(filePath, remotePath);
+
             sftpChannel.exit();
             session.disconnect();
         } catch (Exception e) {

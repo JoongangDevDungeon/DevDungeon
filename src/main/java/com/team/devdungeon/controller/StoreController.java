@@ -36,14 +36,8 @@ public class StoreController {
             session.setConfig("StrictHostKeyChecking", "no");
             session.connect();
 
-            // 실제 동작, 다운로드
-//            ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
-//            sftpChannel.connect();
-//            sftpChannel.get(remotePath, filePath);
-
             ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
             sftpChannel.connect();
-
 
             // 원격 서버에서 이미지 파일 읽어오기
             InputStream inputStream = sftpChannel.get(remotePath);
