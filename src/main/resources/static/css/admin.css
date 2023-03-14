@@ -142,13 +142,8 @@ th, tr{
 	color: white;
 }
 
-/* 통계css */
-
-canvas{
-	width: 330px;
-	height: 250px;
-}
-.graph{
+/* admin main css */
+.mboard{
 	width: 850px;
 	height: 750px;
 /* 	border: 1px solid black; */
@@ -156,7 +151,29 @@ canvas{
 	margin: 50px 0 30px 50px;
 /* 	display: block; */
 }
+.mtoday{
+	margin: 30px 50px 50px 20px;
+	border: 1px solid black;
+	
+}
+.mtable{
+	position: absolute;
+	left: 0;
+}
+.mbar{
+	position: absolute;
+	right: 0;
+}
 
+
+
+/* 통계css */
+
+canvas{
+	width: 330px;
+	height: 250px;
+}
+.
 
 
 
