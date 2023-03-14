@@ -12,8 +12,17 @@
 <script>
    $(function() {
       $("#icon_file").change(function() {
-         var file_name = $("#icon_file").val();
-         $(".upload-name").val(file_name);
+         const icon_file = this.files[0];
+         const reader = new FileReader();
+
+         $(".upload-name").val(icon_file.name);
+         reader.onload = function(event) {
+            $("#previewText").css("display", "none");
+            $("#previewImg").css({"width" : "45px", "height" : "45px", "display" : "inline-block", "padding-top" : "3px", "box-sizing" : "border-box"});
+            $("#previewImg").attr("src", event.target.result);
+         };
+
+         reader.readAsDataURL(icon_file);
       });
    });
 </script>
@@ -24,43 +33,50 @@
          <div class="main">
             <div class="add1">광고1</div>
             <div class="content">
-               <div style="padding-top: 100px;">
-                  <div style="margin: 0 auto; width: 700px; height: 530px; border: 1px solid #ccc; border-radius: 10px;">
-                     <div class="mt-4" style="width: 700px; height: 50px; font-size: 30px;">아이콘 신청</div>
-                     <!-- 파일 등록 -->
-                     <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
-                        <input class="form-control upload-name" style="width: 500px; height: 50px; float: left;" value="첨부파일" placeholder="첨부파일">
-                        <label class="btn btn-primary" for="icon_file" style="width: 100px; height: 50px; line-height: 40px; margin-left: 10px; float: left;">아이콘 등록</label>
-                        <input type="file" id="icon_file" style="display: none;">
+               <form action="/iconApply" method="post" enctype="multipart/form-data">
+                  <div style="padding-top: 100px;">
+                     <div style="margin: 0 auto; width: 700px; height: 530px; border: 1px solid #ccc; border-radius: 10px;">
+                        <div class="mt-4" style="width: 700px; height: 50px; font-size: 30px;">아이콘 신청</div>
+                        <!-- 파일 등록 -->
+                        <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
+                           <!-- 이미지 미리보기 -->
+                           <div style="width: 50px; height: 50px; border-radius: 5px; float: left;">
+                              <span id="previewText" style="text-align: center;">미리<br>보기</span>
+                              <img id="previewImg" style="display: none;"/>
+                           </div>
+                           <input class="form-control upload-name" style="width: 440px; height: 50px; margin-left: 10px; float: left;" value="첨부파일" placeholder="첨부파일">
+                           <label class="btn btn-primary" for="icon_file" style="width: 100px; height: 50px; line-height: 40px; margin-left: 10px; float: left;">아이콘 등록</label>
+                           <input type="file" id="icon_file" name="icon_file" accept="image/*" style="display: none;">
+                        </div>
+                        <!-- 아이콘 이름 -->
+                        <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
+                           <label class="badge bg-secondary" for="icon_name" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">아이콘 이름</label>
+                           <input class="form-control" type="text" id="icon_name" name="icon_name" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 이름을 입력해주세요.">
+                        </div>
+                        <!-- 수량 -->
+                        <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
+                           <label class="badge bg-secondary" for="icon_count" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">수량</label>
+                           <input class="form-control" type="number" id="icon_count" name="icon_count" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 수량을 입력해주세요.">
+                        </div>
+                        <!-- 유효기간 선택 -->
+                        <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
+                           <label class="badge bg-secondary" for="icon_expiration" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">유효기간</label>
+                           <select class="form-select" id="icon_expiration" name="icon_expiration" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 수량을 입력해주세요.">
+                              <option value="">선택</option>
+                              <option value="30">30일</option>
+                              <option value="60">60일</option>
+                              <option value="90">90일</option>
+                           </select>
+                        </div>
+                        <!-- 가격 -->
+                        <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
+                           <label class="badge bg-secondary" for="icon_price" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">가격</label>
+                           <input class="form-control" type="number" id="icon_price" name="icon_price" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 가격을 입력해주세요.">
+                        </div>
+                        <button class="mt-4 btn btn-primary" type="submit" style="width: 610px; height: 50px; line-height: 40px;">등록 신청</button>
                      </div>
-                     <!-- 아이콘 이름 -->
-                     <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
-                        <label class="badge bg-secondary" for="icon_name" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">아이콘 이름</label>
-                        <input class="form-control" type="text" id="icon_name" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 이름을 입력해주세요.">
-                     </div>
-                     <!-- 수량 -->
-                     <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
-                        <label class="badge bg-secondary" for="icon_count" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">수량</label>
-                        <input class="form-control" type="number" id="icon_count" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 수량을 입력해주세요.">
-                     </div>
-                     <!-- 유효기간 선택 -->
-                     <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
-                        <label class="badge bg-secondary" for="icon_expiration" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">유효기간</label>
-                        <select class="form-select" id="icon_expiration" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 수량을 입력해주세요.">
-                           <option value="">선택</option>
-                           <option value="30">30일</option>
-                           <option value="60">60일</option>
-                           <option value="90">90일</option>
-                        </select>
-                     </div>
-                     <!-- 가격 -->
-                     <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
-                        <label class="badge bg-secondary" for="icon_price" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">가격</label>
-                        <input class="form-control" type="number" id="icon_price" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 가격을 입력해주세요.">
-                     </div>
-                     <button class="mt-4 btn btn-primary" style="width: 610px; height: 50px; line-height: 40px;">등록 신청</button>
                   </div>
-               </div>
+               </form>
             </div>
             <div class="add2">광고2</div>
          </div>
