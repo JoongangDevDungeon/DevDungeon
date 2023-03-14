@@ -1,12 +1,10 @@
 package com.team.devdungeon.controller;
 
-import com.team.devdungeon.dto.SignDTO;
-import com.team.devdungeon.service.SignService;
-import com.team.devdungeon.util.Email;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
+import com.team.devdungeon.dto.SignDTO;
+import com.team.devdungeon.service.SignService;
 
 @Controller
 public class SignController {
