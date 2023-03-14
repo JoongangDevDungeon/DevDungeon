@@ -11,11 +11,13 @@
 </head>
 <script>
    $(function() {
-      $("#icon_file").change(function() {
+
+      $("#icon_file").change(function() { // 이미지 미리보기
          const icon_file = this.files[0];
          const reader = new FileReader();
 
          $(".upload-name").val(icon_file.name);
+
          reader.onload = function(event) {
             $("#previewText").css("display", "none");
             $("#previewImg").css({"width" : "45px", "height" : "45px", "display" : "inline-block", "padding-top" : "3px", "box-sizing" : "border-box"});
@@ -24,6 +26,7 @@
 
          reader.readAsDataURL(icon_file);
       });
+
    });
 </script>
 <body>
@@ -33,7 +36,7 @@
          <div class="main">
             <div class="add1">광고1</div>
             <div class="content">
-               <form action="/iconApply" method="post" enctype="multipart/form-data">
+               <form class="icon-form" action="/iconApply" method="post" enctype="multipart/form-data">
                   <div style="padding-top: 100px;">
                      <div style="margin: 0 auto; width: 700px; height: 530px; border: 1px solid #ccc; border-radius: 10px;">
                         <div class="mt-4" style="width: 700px; height: 50px; font-size: 30px;">아이콘 신청</div>
@@ -73,7 +76,7 @@
                            <label class="badge bg-secondary" for="icon_price" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">가격</label>
                            <input class="form-control" type="number" id="icon_price" name="icon_price" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 가격을 입력해주세요.">
                         </div>
-                        <button class="mt-4 btn btn-primary" type="submit" style="width: 610px; height: 50px; line-height: 40px;">등록 신청</button>
+                        <button class="mt-4 btn btn-primary" type="submit" id="btn-submit" style="width: 610px; height: 50px; line-height: 40px;">등록 신청</button>
                      </div>
                   </div>
                </form>

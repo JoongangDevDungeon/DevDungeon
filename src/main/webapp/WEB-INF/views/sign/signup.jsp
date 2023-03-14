@@ -34,13 +34,14 @@
 
         });
 
-        $('#send_mail').click(function (send){
+        $('#send_mail').click(function (){
             let member_email = $('#member_email').val();
             alert("사용자가 입력한 이메일"+member_email);
 
             $.ajax({
                 url: 'send_mail',
                 type: 'post',
+                data : {"member_email" : member_email},
                 dataType: 'text',
                 success : function(send) {
                     alert("메일 성공적으로 보냄.");
