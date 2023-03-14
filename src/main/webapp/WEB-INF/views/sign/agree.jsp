@@ -7,40 +7,29 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/agree.css">
 </head>
-<style>
-    .all_fild {
-        width: 100%;
-    }
+<script>
+    $(function() {
 
-    .agree_fild {
-        width: 700px;
-        margin: 0 auto;
-        background-color: yellow;
-    }
+        $("#chk_all").click(function(){
+           /*alert("누름");*/
+            if ($(this).is(":checked")) {
 
-    .banner {
-        text-align: center;
-    }
+                $("input[name=agree1],[name=agree2],[name=agree3]:checkbox").prop("checked", true);
 
-    .agree_inner {
-        width: 700px;
-        height: 200px;
-    }
+            } else if($("input[name=agree1]").is(":not(:checked)")) {
 
-    .text_box {
-        width: 700px;
-        height: 150px;
-        border: 2px solid gray;
-        box-sizing: border-box;
-        overflow: auto;
-    }
+                $("#chk_all").prop("checked", false);
 
-    button {
-        width: 700px;
-        height:50px;
-    }
-</style>
+            }else{
+
+                $("input[name=agree1],[name=agree2],[name=agree3]:checkbox").prop("checked", false);
+
+            }
+        });
+    });
+</script>
 <body>
 <div class="all_fild">
     <div class="banner">
@@ -57,7 +46,7 @@
             <br>
 
             <!-- 약관동의 A범위 -->
-            <div class="agree_inner" style="background-color: #BDE08C;">
+            <div class="agree_text">
                 <div>
                     <input type="checkbox" id="agree1" name="agree1" value="check">
                     <label for="agree1">가지 이용약관 동의(필수)</label>
@@ -79,7 +68,7 @@
             <br>
 
             <!-- 약관동의 B범위 -->
-            <div class="agree_inner" style="background-color: #8EA9D7;">
+            <div class="agree_text">
                 <input type="checkbox" id="agree2" name="agree2" value="check">
                 <label for="agree2">개인정보 수집 및 이용 동의(필수)</label>
                 <div class="text_box">
@@ -104,7 +93,7 @@
             <br>
 
             <!-- 약관동의 C범위 -->
-            <div class="agree_inner" style="background-color: #FBD262;">
+            <div class="agree_text">
                 <input type="checkbox" id="agree3" name="agree3" value="check">
                 <label for="agree3">프로모션 정보 수신 동의(선택)</label>
                 <div class="text_box">

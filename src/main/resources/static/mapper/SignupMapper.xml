@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sign">
+
+    <insert id="signup">
+        INSERT INTO member
+            SET
+                member_name = #{member_name},
+                member_id = #{member_id},
+                member_pw = #{member_pw},
+                member_email = #{member_email},
+                member_tel = #{member_tel},
+                member_birth = #{member_birth}
+    </insert>
+
+    <select id="check" parameterType="SignDTO" resultType="SignDTO">
+        SELECT COUNT(*) as count, member_id
+            FROM member
+                WHERE member_id = #{member_id}
+    </select>
+
+</mapper>
