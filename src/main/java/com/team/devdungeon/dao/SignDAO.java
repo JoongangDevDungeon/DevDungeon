@@ -13,7 +13,7 @@ public class SignDAO {
     @Autowired
     private SqlSession sqlSession;
 
-    public void signup(SignDTO signDTO) {/*회원 가입*/
+    public void signup(SignDTO signDTO) {/* 회원 가입 */
     sqlSession.insert("sign.signup",signDTO);
     }
 
