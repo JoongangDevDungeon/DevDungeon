@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SignServiceImpl implements SignService {
+
     @Autowired
     private SignDAO signDAO;
 
@@ -24,9 +25,6 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public SignDTO checkid(SignDTO signDTO) {
-
-
-        signDAO.checkid(signDTO);
-        return signDTO;
+        return signDAO.checkid(signDTO);
     }
 }

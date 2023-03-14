@@ -109,8 +109,8 @@ public class SignController {
 
         SignDTO result = signService.checkid(signDTO);
 
-        System.out.println("유저가 입력한 값"+result.getMember_id());
-        System.out.println("서치 결과"+result.getCount());
+        System.out.println("유저가 입력한 값 : " + result.getMember_id());
+        System.err.println("서치 결과 : " + result.getCount());
         return "";
     }
 

@@ -13,17 +13,12 @@ public class SignDAO {
     @Autowired
     private SqlSession sqlSession;
 
-
     public void signup(SignDTO signDTO) {/*회원 가입*/
     sqlSession.insert("sign.signup",signDTO);
     }
 
-
-    public void checkid(SignDTO signDTO) {
-        System.out.println("DAO 전달 값" + signDTO.getMember_id());
-
-        sqlSession.selectOne("sign.check",signDTO);
+    public SignDTO checkid(SignDTO signDTO) {
+        return sqlSession.selectOne("sign.check",signDTO);
     }
-
 
 }

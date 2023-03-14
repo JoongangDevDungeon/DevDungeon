@@ -89,6 +89,7 @@
                         <span>페이징</span>
                      </div>
                      <div class="mt-3" style="width: 660px; float: left; position: relative;">
+                        <button class="btn btn-primary" style="position: absolute; left: 0;" onclick="location.href='/iconApply'">아이콘 신청</button>
                         <div style="position: absolute; right: 0;">
                            <button class="btn btn-primary" onclick="location.href='/payShoppingBag'">구매</button>
                            <button class="btn btn-primary" onclick="location.href='/giftShoppingBag'">선물</button>
