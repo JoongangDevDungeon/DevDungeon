@@ -118,6 +118,18 @@ public class CSJServiceImpl implements CSJService {
 		csjDAO.banComment(banMap);
 	}
 
+	@Override
+	public PageInfo<Map<String, Object>> eventList(CSJshowDTO dto) {
+		// TODO Auto-generated method stub
+		return csjDAO.eventList(dto);
+	}
+
+	@Override
+	public Map<String, Object> eventdetail(int bno) {
+		// TODO Auto-generated method stub
+		return csjDAO.eventdetail(bno);
+	}
+
 
 
 }

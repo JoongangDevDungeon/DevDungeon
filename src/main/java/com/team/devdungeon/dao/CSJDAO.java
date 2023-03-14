@@ -97,5 +97,15 @@ public class CSJDAO {
 		sqlSession.insert(namespace+"banComment",banMap);
 	}
 
+	public PageInfo<Map<String, Object>> eventList(CSJshowDTO dto) {
+		PageHelper.startPage(dto.getPageNo(),dto.getPageSize());
+		return PageInfo.of(sqlSession.selectList(namespace+"eventList",dto));
+	}
+
+	public Map<String, Object> eventdetail(int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+"eventPageDetail",bno);
+	}
+
 
 }

@@ -14,11 +14,29 @@
         </if>
         ORDER BY board_no DESC
     </select>
+
+    <select id="eventList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
+        SELECT *
+        FROM event
+        <if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">event_title</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+        </if>
+        ORDER BY event_no DESC
+    </select>
  
     <select id="detail" parameterType="Integer" resultType="HashMap">
     	SELECT *
     	FROM boardview
     	WHERE board_no=#{bno}
+    </select>
+    <select id="eventPageDetail" parameterType="Integer" resultType="HashMap">
+    	SELECT *
+    	FROM event
+    	WHERE event_no=#{bno}
     </select>
     <select id="memberProfile" parameterType="Integer" resultType="HashMap">
     	SELECT *
