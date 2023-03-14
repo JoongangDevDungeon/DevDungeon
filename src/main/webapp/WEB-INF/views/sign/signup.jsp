@@ -10,16 +10,16 @@
 </head>
 <script>
     $(function() {
+
         $('#member_id').focusout(function (result){
             let member_id = $('#member_id').val();
-            // 비정상
             $.ajax({
                 url: 'checkid',
                 type: 'post',
                 data: {"member_id" : member_id},
                 dataType: 'text',
                 success : function(result) {
-                    if(result == 0){
+                    if(result == "0"){
                         $("#checkId").html('가능');
                         $("#checkId").css('color', 'green');
                     } else{
@@ -33,9 +33,27 @@
             });
 
         });
+
+        $('#send_mail').click(function (send){
+            let member_email = $('#member_email').val();
+            alert("사용자가 입력한 이메일"+member_email);
+
+            $.ajax({
+                url: 'send_mail',
+                type: 'post',
+                dataType: 'text',
+                success : function(send) {
+                    alert("메일 성공적으로 보냄.");
+                },
+                error : function() {
+                    alert("요청 실패 재시도 바람.");
+                }
+            });
+
+        });
+
+
     });
-
-
 </script>
 <style>
     .all_fild {
@@ -155,8 +173,8 @@
 
                 <label>본인 확인 이메일</label><br>
                 <div class="text_fild">
-                    <input class="text_box_id" type="email" name="member_email" placeholder="이메일을 입력하세요.">
-                    <button class="check_btn" loc>전송하기</button>
+                    <input class="text_box_id" type="email" id="member_email" name="member_email" placeholder="이메일을 입력하세요.">
+                    <a class="check_btn" id="send_mail">전송하기</a>
                 </div>
                 <br>
                 <div class="text_fild" id="verify_code">

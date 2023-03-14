@@ -75,21 +75,23 @@ public class SignController {
         return agrees;
     }
 
-
-
-    @PostMapping("/mail")
+    @PostMapping("/send_mail")
+    @ResponseBody
     public  String Mail(HttpServletRequest request) throws EmailException {
         SignDTO signDTO = new SignDTO();
         signDTO.setMember_email(request.getParameter("member_email"));
-        System.out.println(signDTO.getMember_email());
 
-        String title = "가지 회원가입 인증번호 입니다.";
+        System.err.println("자바에들어온 이메일"+signDTO.getMember_email());
+
+       /* String title = "가지 회원가입 인증번호 입니다.";
         String msg = "123456";
-        Email.simpleMail("kingdori902@naver.com","test",title, msg);
-
+        Email.simpleMail("kingdori902@naver.com","test",title, msg);*/
+     /*   System.out.println("연결됨");*/
 
         return "";
     }
+
+
 
     @PostMapping("/signup")
     public String signup(HttpServletRequest request) {/*회원가입*/
@@ -123,12 +125,12 @@ public class SignController {
 
         SignDTO signDTO = new SignDTO();
         signDTO.setMember_id((request.getParameter("member_id")));
-
         SignDTO result = signService.checkid(signDTO);
-
-        System.out.println("유저가 입력한 값 : " + result.getMember_id());
-        System.err.println("서치 결과 : " + result.getCount());
-        return "result";
+        if (result.getCount() == 0){
+            return "0";/*중복 없음*/
+        }else{
+            return "1";/*중복 있음*/
+        }
     }
 
     @GetMapping("/accountInquiry")

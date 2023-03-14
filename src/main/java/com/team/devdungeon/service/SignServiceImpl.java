@@ -20,6 +20,7 @@ public class SignServiceImpl implements SignService {
 
         signDTO.setMember_birth(year+ "-"+ month + "-" + day);
         signDAO.signup(signDTO);
+
         return signDTO;
     }
 
