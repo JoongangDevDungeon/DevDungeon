@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.all_fild {
+    width: 100%;
+}
+
+.agree_fild {
+    width: 700px;
+    margin: 0 auto;
+}
+
+.banner {
+    text-align: center;
+}
+
+.agree_text {
+    width: 700px;
+    height: 200px;
+}
+
+.text_box {
+    width: 700px;
+    height: 150px;
+    border: 2px solid gray;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+button {
+    width: 700px;
+    height:50px;
+}
