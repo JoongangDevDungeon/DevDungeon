@@ -29,13 +29,12 @@
 		});
 		$(".commentBanBtn").click(function() {
 			var no = $(this).val();
-			alert(no + "번 댓글을 신고합니다");
 			$("#banType").val("댓글 신고");
+			$("#banCommentWriter").val($("#commentWriter"+no).val());
 			window.open("/csjBan?cno="+no, '신고팝업', 'width=510px,height=600px,scrollbars=yes');
 		});
 		$("#boardBtnBan").click(function() {
 			var no = $(this).val();
-			alert(no + "번 글을 신고합니다");
 			$("#banType").val("게시글 신고");
 			window.open("/csjBan", '신고팝업', 'width=510px,height=600px,scrollbars=yes');
 		});
@@ -159,6 +158,7 @@
 					<button id="boardBtnBan" class="btn btn-danger"
 						value="${det.board_no }">신고</button>
 						<input type="hidden" id="banType">
+						<input type="hidden" id="banCommentWriter">
 					<!-- 작성자 프로필 -->
 					<div class="detailUserProfile">
 						<div class="mt-3"
@@ -189,7 +189,6 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<br>
 				<div class="detailBtnZone">
@@ -213,7 +212,7 @@
 								</div>
 							</c:if>
 							<div>
-								<span>${c.member_name }</span><span> ${c.comment_time }</span>
+								<span>${c.member_name }</span><input type="hidden" id="commentWriter${c.comment_no }" value="${c.member_name }"><span> ${c.comment_time }</span>
 								<div>${c.comment_content }</div>
 							</div>
 							<div class="commentBtnZone">

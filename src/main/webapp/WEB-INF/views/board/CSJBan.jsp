@@ -18,9 +18,16 @@
 <link rel="stylesheet" href="/css/layout.css">
 <script type="text/javascript">
 	$(document).ready(function() {
-		var banMember = opener.$("#detailWriter").val();
+		var banMember = "";
+		var banBoardWriter = opener.$("#detailWriter").val();
+		var banCommentWriter = opener.$("#banCommentWriter").val();
 		var banBoard = opener.$("#boardBtnBan").val();
 		var banType = opener.$("#banType").val();
+		if(banType == "게시글 신고"){
+			banMember = banBoardWriter;
+		}else{
+			banMember = banCommentWriter;
+		}
 		$("#bantype").text("신고 유형 : " + banType);
 		var url = $(location).attr('href');
 		var number = url.split("no=");
