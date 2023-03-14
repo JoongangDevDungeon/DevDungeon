@@ -23,7 +23,7 @@
 		<div class="container">
 			<h1>관리자 페이지 메인 대쉬보드</h1>
 			<hr class="hr1">
-			<a href="adminLogout"><button>로그아웃</button></a>
+			
 			
 
 

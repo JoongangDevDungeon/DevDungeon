@@ -11,7 +11,35 @@
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
+<script type="text/javascript" src="/js/admin/AdminLogPaging.js"></script>
+<script type="text/javascript" src="/js/admin/AdminLogSearch.js"></script>
 </head>
+<script type="text/javascript">
+//페이지 뒤쪽 버튼
+function moveNext(pageNo){
+	let searchType = document.getElementById("searchType");
+	let searchValue = document.getElementById("searchValue");
+	let url =  document.location.href.split("?",1);
+	
+	if(pageNo > ${pages.lastPage } ) { return false; }
+	else if (pageNo != ${pages.lastPage } ){
+		
+		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+(pageNo+1);
+		}else{
+			location.href="/adminLog?pageNo="+(pageNo+1);
+		}
+		
+	}else if(pageNo == ${pages.lastPage }){
+		
+		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+pageNo;
+		}else{ 
+			location.href="/adminLog?pageNo="+pageNo;
+		}
+	}
+}
+</script>
 <body>
 <div id="container">
 	<div class="header">
@@ -23,7 +51,61 @@
 		<div class="container">
 			<h1>관리자 로그 데이터 페이지</h1>
 			<hr class="hr1">
+			<table class="table">
+				<tr class="table-header">
+					<th class="col-1">번호</th>
+					<th class="col-3">이벤트 제목</th>
+					<th class="col-2">글쓴이</th>
+					<th class="col-2">이벤트 기간</th>
+					<th class="col-1">추천수</th>
+					<th class="col-1">관리</th>
+				</tr>
+				<!-- 수정 하면댐 -->
+<%-- 				<c:forEach items="${list }" var="row"> --%>
+<!-- 				<tr> -->
+<%-- 					<td>${row.board_no }</td> --%>
+<%-- 					<td>${row.board_title }</td> --%>
+<%-- 					<td>${row.member_id }</td> --%>
+<%-- 					<td>${row.board_date }</td> --%>
+<!-- 					<td> -->
+<!-- 						<form action="/adminBoard" method="post"> -->
+<%-- 							<input type="hidden" name="board_no" value="${row.board_no }"> --%>
+<%-- 							<input type="hidden" name="status_no" value="${row.status_no }"> --%>
+<%-- 							<input type="hidden" name="pageNo" value="${pageNo }"> --%>
+<%-- 							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화' : '비활성화'}</button> --%>
+<!-- 						</form> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+<%-- 				</c:forEach> --%>
+				<!-- 수정 하면댐 -->
+			</table>
 			
+			<!-- 페이징 -->
+			<div class="pagingBox">
+				<ul class="pagingList">
+					<li class="pageNo page_btn" onclick="moveBefore(1)"><i class="xi-backward xi-x"></i></li>
+					<li class="pageNo page_btn" onclick="moveBefore(${pageNo})"><i class="xi-step-backward xi-x"></i></li>
+					<c:forEach var="i" begin="${Math.floor((pageNo-1)/10)*10+1 }" end="${Math.floor((pageNo-1)/10)*10 +10 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}">
+						<li class="pageNo" onclick="move(${i })" <c:if test="${pageNo eq i }" >style="color:red; font-weight: bold;"</c:if>>${i }</li>
+					</c:forEach>
+					<li class="pageNo page_btn" onclick="moveNext(${pageNo})"><i class="xi-step-forward xi-x"></i></li>
+					<li class="pageNo page_btn" onclick="moveNext(${pages.lastPage })"><i class="xi-forward xi-x"></i></li>
+				</ul>
+			</div>
+			<br>
+			
+			<!-- 검색 -->
+			<div class="searchForm">
+				<form action="/adminLog" method="get" onsubmit="return search()">
+					<select name="searchType" id="searchType">
+						<option value="none">선택</option>
+						<option value="title" <c:if test='${ pages.searchType eq "title"}'>selected</c:if>>제목</option>
+						<option value="writer" <c:if test='${ pages.searchType eq "writer"}'>selected</c:if>>내용</option>
+					</select>
+					<input type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
+					<button class="search_btn">검색</button>
+				</form>
+			</div>
 			
 		</div>
 	</div>
