@@ -52,9 +52,16 @@
 			}
 		});
 		$("#banWrite").click(function(){
+			$("#banChoice1").attr("checked",false);
+			$("#banChoice2").attr("checked",false);
+			$("#banChoice3").attr("checked",false);
+			$("#banChoice4").attr("checked",false);
+			$("#banChoice5").attr("checked",false);
+			$("#banChoice6").attr("checked",false);
 			$("#banChoice6").attr("checked",true);
 		});
 	});
+
 </script>
 </head>
 <body>
@@ -90,7 +97,7 @@
 			<input
 				type="radio" id="banChoice6" name="banWhy" value="기타"> <label
 				for="banChoice6">기타</label><br> 
-			<input type="text" id="banWrite" name="banWrite" placeholder="신고 사유를 직접 입력하세요" onclick="selectEtc()">
+			<input type="text" style="width:500px;height:200px;" id="banWrite" name="banWrite" placeholder="신고 사유를 직접 입력하세요">
 			<input type="button"
 				id="btnBan"
 				style="width: 500px; height: 50px; background-color: red color:white"

@@ -225,6 +225,7 @@
 									<c:if test="${sessionScope.member_name ne null }">
 										<button class="commentReplyBtn" value="${c.comment_no }">답글</button>
 									</c:if>
+									<c:if test="${c.comment_cnt ne 0 }">${c.comment_cnt }</c:if>
 									<button class="commentShowBtn" value="${c.comment_no }">show</button>
 								</c:if>
 							</div>
