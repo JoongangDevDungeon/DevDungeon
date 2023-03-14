@@ -34,7 +34,7 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String admin(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		System.out.println("확인");
+		//System.out.println("확인");
 		if(session.getAttribute("id") == null) {
 			return "admin/adminLogin";
 		}else {
