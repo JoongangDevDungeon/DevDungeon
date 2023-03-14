@@ -121,7 +121,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 				</div>
 				<!-- 글쓰기 -->
 				<div class="write">
-					<c:if test="${sessionScope.admin_id ne null }">
+					<c:if test="${sessionScope.admin_id ne null }">글스끼
 						<button class="write_btn" onclick="location.href='/board/HJHBoardWrite'">글쓰기</button>
 					</c:if>
 				</div>
