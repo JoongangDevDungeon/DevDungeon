@@ -34,7 +34,7 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String admin(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		System.out.println("확인");
+		//System.out.println("확인");
 		if(session.getAttribute("id") == null) {
 			return "admin/adminLogin";
 		}else {
@@ -63,9 +63,6 @@ public class AdminController {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", result.getAdmin_id());
 			session.setAttribute("grade", result.getAdmin_grade());
-			//System.out.println("id : " + session.getAttribute("id"));
-			//System.out.println("grade : " + session.getAttribute("grade"));
-			//System.out.println("로그인성공, 세션생성완료");
 			
 			return "redirect:/admin";
 		} else {
@@ -108,7 +105,6 @@ public class AdminController {
 		mv.addObject("list",list);
 		mv.addObject("pageNo", pageNo);
 		
-
 		return mv;
 	}
 	
@@ -143,8 +139,9 @@ public class AdminController {
 		int startPage = (pageNo*10)-10;
 		int totalCount = adminService.boardCount(pages);
 		int lastPage = (int)Math.ceil((double)totalCount/10);
-		
+
 		//System.out.println(startPage);
+
 
 		pages.put("startPage", startPage);
 		pages.put("lastPage", lastPage);

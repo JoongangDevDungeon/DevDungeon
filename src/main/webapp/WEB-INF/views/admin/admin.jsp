@@ -20,25 +20,29 @@
 	<!-- 메인 시작 -->
 	<div class="main">
 		<div class="container">
+<!-- 		<img class="logo" src="./img/admin/adminGazi.png"> -->
 			<h1>관리자 페이지 메인 대쉬보드</h1>
 			<hr class="hr1">
+<<<<<<< HEAD
+=======
 			<div class="mtoday">
-				<div>오늘의 할일</div>
+				<div class="mth">오늘의 할일</div>
 				<hr class="hr1">
-				<div>
+				<div class="mtc1">
 					신규주문
 				</div>
-				<div>
+				<div class="mtc2">
 					취소관리
 				</div>
-				<div>
+				<div class="mtc3">
 					답변대기문의
 				</div>
 			</div>
+>>>>>>> f4ea2fbd956c07a7092a49607759e2d6dfb90e40
 			
-			<div class="mboard">
-				<div class="row">
-				<!-- 월별 그래프 -->
+			<div class="">
+				<div class="mboard">
+				<!-- 표 그래프 -->
 					<div class=" mtable">
 						<div class="card mb-4">
 							<div class="card-header">
@@ -66,7 +70,7 @@
 						</div>
 					</div>
 				
-					<!-- 막대그래프 -->
+					<!-- 막대 그래프 -->
 					<div class="col-xl-6 mbar">
 						<div class="card mb-4">
 							<div class="card-header">

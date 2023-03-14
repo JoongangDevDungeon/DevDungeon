@@ -153,9 +153,47 @@ th, tr{
 }
 .mtoday{
 	margin: 30px 50px 50px 20px;
-	border: 1px solid black;
-	
+	height: 150px;
+	font-size: 18px;
+	padding: 5px;
 }
+
+.mtoday > hr.hr1 {
+  margin: 5px 0;
+}
+
+.mth {
+	font-size: 30px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+.mtc1{
+	margin-top: 15px;
+	margin-left: 25px;
+	margin-bottom: 5px;
+	width: 150px;
+	height: 30px;
+/* 	border: 1px solid black; */
+}
+
+.mtc2{
+	margin-left: 25px;
+	margin-bottom: 5px;
+	width: 150px;
+	height: 30px;
+/* 	border: 1px solid black; */
+}
+.mtc3{
+	margin-left: 25px;
+	margin-bottom: 5px;
+	width: 150px;
+	height: 30px;
+/* 	border: 1px solid black; */
+}
+
+
+/* 아직안한것들 */
 .mtable{
 	position: absolute;
 	left: 0;
