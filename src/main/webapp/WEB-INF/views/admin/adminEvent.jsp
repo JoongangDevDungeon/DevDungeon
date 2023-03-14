@@ -55,28 +55,25 @@ function moveNext(pageNo){
 				<tr class="table-header">
 					<th class="col-1">번호</th>
 					<th class="col-3">이벤트 제목</th>
-					<th class="col-2">글쓴이</th>
 					<th class="col-2">이벤트 기간</th>
-					<th class="col-1">추천수</th>
 					<th class="col-1">관리</th>
 				</tr>
 				<!-- 수정 하면댐 -->
-<%-- 				<c:forEach items="${list }" var="row"> --%>
-<!-- 				<tr> -->
-<%-- 					<td>${row.board_no }</td> --%>
-<%-- 					<td>${row.board_title }</td> --%>
-<%-- 					<td>${row.member_id }</td> --%>
-<%-- 					<td>${row.board_date }</td> --%>
-<!-- 					<td> -->
-<!-- 						<form action="/adminBoard" method="post"> -->
-<%-- 							<input type="hidden" name="board_no" value="${row.board_no }"> --%>
-<%-- 							<input type="hidden" name="status_no" value="${row.status_no }"> --%>
-<%-- 							<input type="hidden" name="pageNo" value="${pageNo }"> --%>
-<%-- 							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화' : '비활성화'}</button> --%>
-<!-- 						</form> -->
-<!-- 					</td> -->
-<!-- 				</tr> -->
-<%-- 				</c:forEach> --%>
+				<c:forEach items="${list }" var="row">
+				<tr>
+					<td>${row.event_no }</td>
+					<td>${row.event_title }</td>
+					<td>${row.event_date } - ${row.event_update }</td>
+					<td>
+						<form action="/adminEvent" method="post">
+							<input type="hidden" name="event_no" value="${row.event_no }">
+							<input type="hidden" name="status_no" value="${row.status_no }">
+							<input type="hidden" name="pageNo" value="${pageNo }">
+							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화' : '비활성화'}</button>
+						</form>
+					</td>
+				</tr>
+				</c:forEach>
 				<!-- 수정 하면댐 -->
 			</table>
 			

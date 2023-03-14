@@ -27,20 +27,28 @@
 				<div class="mth">오늘의 할일</div>
 				<hr class="hr1">
 				<div class="mtc1">
-					신규주문
+					<a class="mhov" href="/adminQnA">
+						답변대기문의
+					</a>
 				</div>
 				<div class="mtc2">
-					취소관리
+					<a class="mhov" href="/adminEvent">
+						이벤트 기간만료
+					</a>
 				</div>
 				<div class="mtc3">
-					답변대기문의
+					<a class="mhov" href="/adminCoupon">
+						쿠폰 만료
+					</a>
 				</div>
 			</div>
+			<hr class="hr1">
 			
-			<div class="">
+			
+			<div class="row">
 				<div class="mboard">
 				<!-- 표 그래프 -->
-					<div class=" mtable">
+					<div class="">
 						<div class="card mb-4">
 							<div class="card-header">
 								<i class="fas fa-chart-bar me-1">일자별 요약</i>

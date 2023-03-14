@@ -21,6 +21,7 @@ import com.team.devdungeon.dto.AdminDTO;
 import com.team.devdungeon.dto.AnswerDTO;
 import com.team.devdungeon.dto.BoardDTO;
 import com.team.devdungeon.dto.CouponDTO;
+import com.team.devdungeon.dto.EventDTO;
 import com.team.devdungeon.dto.MemberDTO;
 import com.team.devdungeon.dto.QuestionBoardDTO;
 import com.team.devdungeon.service.AdminService;
@@ -409,15 +410,15 @@ public class AdminController {
   		
   		String pageNo = request.getParameter("pageNo");
 
-//  		BoardDTO boardDTO = new BoardDTO();
-//  		
-//  		boardDTO.setBoard_no(Integer.parseInt(request.getParameter("board_no")));
-//  		boardDTO.setStatus_no(Integer.parseInt(request.getParameter("status_no")));
-//  		
-//  		adminService.adminBoardDel(boardDTO);
+  		EventDTO eventDTO = new EventDTO();
+  		
+  		eventDTO.setEvent_no(Integer.parseInt(request.getParameter("event_no")));
+  		eventDTO.setStatus_no(Integer.parseInt(request.getParameter("status_no")));
+  		
+  		adminService.adminEventDel(eventDTO);
 
 
-  		return "redirect:/adminevent?pageNo="+pageNo;
+  		return "redirect:/adminEvent?pageNo="+pageNo;
   	}
 	
 	//포인트
