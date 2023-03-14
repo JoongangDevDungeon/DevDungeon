@@ -1,73 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.devdungeon.dao.AdminDAO">
-    <select id="adminLogin" parameterType="AdminDTO" resultType="AdminDTO">
-       select count(*) as count, admin_id, admin_pw, admin_grade from admin
-       where admin_id = #{admin_id} AND admin_pw = #{admin_pw}
-    </select>
-    
-     <select id="Coupon" resultType="CouponDTO">
-    	select * from coupon
-    </select>
-    
-    <insert id="adminCouponCreate" parameterType="CouponDTO">
-    	INSERT INTO coupon
- 		SET
- 			event_no = #{event_no},
- 			coupon_name = #{coupon_name},
- 			coupon_content = #{coupon_content}
-    </insert>
-    
-    <select id="QnA" resultType="QuestionBoardDTO">
-    	select * from question_board
-    </select>
 
+<!-- 로그인 -->
+	<select id="adminLogin" parameterType="AdminDTO" resultType="AdminDTO">
+		select count(*) as count, admin_id, admin_pw, admin_grade from admin
+		where admin_id = #{admin_id} AND admin_pw = #{admin_pw}
+	</select>
+	
+<!-- 메인 대쉬보드 -->
+
+
+
+
+
+
+
+
+
+<!-- 사용자 관리 -->
+	<select id="adminMember" resultType="MemberDTO">
+    	SELECT * 
+		FROM member
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">member_name</when>
+				<when test="searchType == 'writer'">member_id</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+		ORDER BY member_no ASC
+		LIMIT #{startPage}, 10
+    </select>
+    
+<!-- 사용자 업데이트 -->
 	<update id="memberUpdate" parameterType="MemberDTO">
 		UPDATE member
 		SET member_grade = #{member_grade}
 		where member_no = #{member_no}
 	</update>
-
-	<select id="Answer" parameterType="Integer" resultType="QuestionBoardDTO">
-		SELECT question_board_title, question_board_content, question_board_no
-		FROM question_board
-		WHERE question_board_no = #{no}
-	</select>
 	
-	<delete id="adminCouponDel" parameterType="Integer">
-		delete from coupon
-		where coupon_type = #{couponDel}
-	</delete>
-
-	
-	<insert id="adminAnswerComplete" parameterType="AnswerDTO">
-  		INSERT INTO answer_board
-  		SET answer_board_title = #{answer_board_title}, 
-  			answer_board_content = #{answer_board_content}, 
-  			question_board_no = #{question_board_no}
-	</insert>
-	
-	<update id="adminAnswerChange" parameterType="Integer">
-		update question_board
-		set question_board_status = 0
-		where question_board_no = #{change}
-	</update>
-    
-    <select id="adminMember" resultType="MemberDTO">
-    	SELECT * 
-    	FROM member AS m
-    	<if test="searchType != null">
+<!-- 페이징 서치바 카운트 -->
+	<select id="adminMemberCount" parameterType="HashMap" resultType="Integer">
+		SELECT COUNT(*) FROM member
+		<if test="searchType != null">
 			WHERE
 			<choose>
-				<when test="searchType == 'title'">board_title</when>
-				<when test="searchType == 'writer'">member_name</when>
+				<when test="searchType == 'title'">member_name</when>
+				<when test="searchType == 'writer'">member_id</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
 		</if>
-		ORDER BY m.member_no ASC
-		LIMIT #{startPage}, 10
-    </select>
-    
+	</select>
+	
+<!-- 게시글 관리 -->
 	<select id="adminBoard"  parameterType="Integer"  resultType="HashMap">
 		SELECT b.*, m.member_id
 		FROM board AS b
@@ -83,13 +70,14 @@
 		ORDER BY b.board_no DESC
 		LIMIT #{startPage}, 10
 	</select>
-	
+
+<!-- 게시글 활성화 비활성화 -->
 	<update id="adminBoardDel" parameterType="BoardDTO">
 		UPDATE board SET status_no = if(#{status_no}=1,2,1)
 		WHERE board_no = #{board_no}
 	</update>
-    
-
+	
+<!-- 페이징 서치바 카운트 -->
 	<select id="boardCount" parameterType="HashMap" resultType="Integer">
 		SELECT COUNT(*) FROM board
 		<if test="searchType != null">
@@ -102,5 +90,238 @@
 		</if>
     </select>
     
+<!-- 로그 데이터(필요한 데이터 join해야함) -->
+	<select id="AdminLog" parameterType="Integer" resultType="HashMap">
+		SELECT *
+		FROM event
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">event_title</when>
+				<when test="searchType == 'writer'">event_content</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+		ORDER BY event_no DESC
+		LIMIT #{startPage}, 10
+	</select>
+	
+<!-- 페이징 서치바 카운트 -->
+	<select id="adminLogCount" parameterType="HashMap" resultType="Integer">
+		SELECT COUNT(*) FROM event
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">event_title</when>
+				<when test="searchType == 'writer'">event_content</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+    </select>
 
+
+
+
+
+<!-- 통계 -->
+
+
+
+
+
+
+
+<!-- 쿠폰발급 -->
+	<select id="adminCoupon" parameterType="Integer" resultType="HashMap">
+		SELECT * 
+		FROM coupon
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">coupon_name</when>
+				<when test="searchType == 'writer'">coupon_content</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+		ORDER BY coupon_type DESC
+		LIMIT #{startPage}, 10
+	</select>
+	
+<!-- 쿠폰 생성 -->
+	<insert id="adminCouponCreate" parameterType="CouponDTO">
+		INSERT INTO coupon
+ 		SET
+			event_no = #{event_no},
+			coupon_name = #{coupon_name},
+			coupon_content = #{coupon_content}
+	</insert>
+	
+<!-- 쿠폰 삭제 -->
+	<delete id="adminCouponDel" parameterType="Integer">
+		delete from coupon
+		where coupon_type = #{couponDel}
+	</delete>
+	
+<!-- 페이징 서치바 카운트 -->
+	<select id="adminCouponCount" parameterType="HashMap" resultType="Integer">
+		SELECT COUNT(*) FROM coupon
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">coupon_name</when>
+				<when test="searchType == 'writer'">coupon_content</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+    </select>
+    
+<!-- QnA -->
+	<select id="adminQnA" parameterType="Integer" resultType="HashMap">
+		SELECT *
+		FROM question_board
+		<if test="searchType != null">
+		WHERE
+		<choose>
+			<when test="searchType == 'title'">question_board_title</when>
+			<when test="searchType == 'writer'">question_board_content</when>
+		</choose>
+		LIKE CONCAT('%', #{searchValue }, '%')
+	</if>
+	ORDER BY question_board_no DESC
+	LIMIT #{startPage}, 10
+	</select>
+	
+<!-- QnA 답 -->
+	<select id="Answer" parameterType="Integer" resultType="QuestionBoardDTO">
+		SELECT question_board_title, question_board_content, question_board_no
+		FROM question_board
+		WHERE question_board_no = #{no}
+	</select>
+	
+<!-- QnA 답 완료 -->
+	<insert id="adminAnswerComplete" parameterType="AnswerDTO">
+  		INSERT INTO answer_board
+  		SET answer_board_title = #{answer_board_title}, 
+  			answer_board_content = #{answer_board_content}, 
+  			question_board_no = #{question_board_no}
+	</insert>
+	
+<!-- QnA 답 변경 -->
+	<update id="adminAnswerChange" parameterType="Integer">
+		update question_board
+		set question_board_status = 0
+		where question_board_no = #{change}
+	</update>
+	
+<!-- 페이징 서치바 카운트 -->
+	<select id="adminQnACount" parameterType="HashMap" resultType="Integer">
+		SELECT COUNT(*) FROM question_board
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">question_board_title</when>
+				<when test="searchType == 'writer'">question_board_content</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+    </select>
+	
+<!-- 스토어 -->
+	<select id="AdminStore" parameterType="Integer" resultType="HashMap">
+		SELECT *
+		FROM product
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">product_name</when>
+				<when test="searchType == 'writer'">product_price</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+		ORDER BY product_no DESC
+		LIMIT #{startPage}, 10
+	</select>
+	
+<!-- 페이징 서치바 카운트 -->
+	<select id="adminStoreCount" parameterType="HashMap" resultType="Integer">
+		SELECT COUNT(*) FROM product
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">product_name</when>
+				<when test="searchType == 'writer'">product_price</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+    </select>
+
+
+
+
+<!-- 이벤트 -->
+	<select id="AdminEvent" parameterType="Integer" resultType="HashMap">
+		SELECT *
+		FROM event
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">event_title</when>
+				<when test="searchType == 'writer'">event_content</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+		ORDER BY event_no DESC
+		LIMIT #{startPage}, 10
+	</select>
+	
+<!-- 페이징 서치바 카운트 -->
+	<select id="adminEventCount" parameterType="HashMap" resultType="Integer">
+		SELECT COUNT(*) FROM event
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">event_title</when>
+				<when test="searchType == 'writer'">event_content</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+    </select>
+
+
+
+
+
+<!-- 포인트 정산 -->
+	<select id="AdminPoint" parameterType="Integer" resultType="HashMap">
+		SELECT *
+		FROM event
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">point_title</when>
+				<when test="searchType == 'writer'">point_content</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+		ORDER BY event_no DESC
+		LIMIT #{startPage}, 10
+	</select>
+	
+<!-- 페이징 서치바 카운트 -->
+	<select id="adminPointCount" parameterType="HashMap" resultType="Integer">
+		SELECT COUNT(*) FROM event
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">point_title</when>
+				<when test="searchType == 'writer'">point_content</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+    </select>
+ 
+    
+
+    
+	
 </mapper>

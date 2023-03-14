@@ -22,7 +22,7 @@
 		<div class="container">
 			<h1>관리자 통계 페이지</h1>
 			<hr class="hr1">
-			<div class="graph">
+			<div class="mboard">
 				<div class="row">
 					<div class="col-xl-6">
 						<div class="card mb-4">

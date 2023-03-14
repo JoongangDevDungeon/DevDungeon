@@ -9,7 +9,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <title>admin</title>
 <link rel="stylesheet" href="/css/admin.css">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
 </head>
 <body>
@@ -21,13 +20,75 @@
 	<!-- 메인 시작 -->
 	<div class="main">
 		<div class="container">
+<!-- 		<img class="logo" src="./img/admin/adminGazi.png"> -->
 			<h1>관리자 페이지 메인 대쉬보드</h1>
 			<hr class="hr1">
+<<<<<<< HEAD
+=======
+			<div class="mtoday">
+				<div class="mth">오늘의 할일</div>
+				<hr class="hr1">
+				<div class="mtc1">
+					신규주문
+				</div>
+				<div class="mtc2">
+					취소관리
+				</div>
+				<div class="mtc3">
+					답변대기문의
+				</div>
+			</div>
+>>>>>>> f4ea2fbd956c07a7092a49607759e2d6dfb90e40
 			
-
-
+			<div class="">
+				<div class="mboard">
+				<!-- 표 그래프 -->
+					<div class=" mtable">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fas fa-chart-bar me-1">일자별 요약</i>
+							</div>
+							<div class="card-body">
+								<table class="table">
+									<tr class="table-header">
+										<th class="col-1">일자</th>
+										<th class="col-1">방문자</th>
+										<th class="col-1">문의</th>
+										<th class="col-1">가입</th>
+										
+									</tr>
+									<tr>
+										<td>2023-03-14</td>
+										<td>count(Log방문자)</td>
+										<td>count(question_board_status)</td>
+										<td>count(Log가입)</td>
+										
+									</tr>
+									
+								</table>
+							</div>
+						</div>
+					</div>
+				
+					<!-- 막대 그래프 -->
+					<div class="col-xl-6 mbar">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fas fa-chart-bar me-1">일별 방문자 현황</i>
+							</div>
+							<div class="card-body">
+								<canvas id="myBarChart1"></canvas>
+							</div>
+						</div>
+					</div>
+					
+					
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="/js/admin/AdminStatistics.js"></script>
 </body>
 </html>

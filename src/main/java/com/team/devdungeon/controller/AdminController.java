@@ -4,23 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.dto.AdminDTO;
@@ -40,7 +34,7 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String admin(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		System.out.println("확인");
+		//System.out.println("확인");
 		if(session.getAttribute("id") == null) {
 			return "admin/adminLogin";
 		}else {
@@ -98,7 +92,7 @@ public class AdminController {
 		pages.put("searchValue", searchValue);
 		
 		int startPage = (pageNo*10)-10;
-		int totalCount = adminService.boardCount(pages);
+		int totalCount = adminService.adminMemberCount(pages);
 		int lastPage = (int)Math.ceil((double)totalCount/10);
 
 
@@ -145,7 +139,9 @@ public class AdminController {
 		int startPage = (pageNo*10)-10;
 		int totalCount = adminService.boardCount(pages);
 		int lastPage = (int)Math.ceil((double)totalCount/10);
-		
+
+		//System.out.println(startPage);
+
 
 		pages.put("startPage", startPage);
 		pages.put("lastPage", lastPage);
@@ -162,12 +158,8 @@ public class AdminController {
 	//게시글 삭제
 	@PostMapping("/adminBoard")
 	public String adminBoardDel(HttpServletRequest request) {
-		request.getParameter("board_no");
-		request.getParameter("status_no");
+		
 		String pageNo = request.getParameter("pageNo");
-
-		request.getParameter("board_no");
-		request.getParameter("status_no");
 
 		BoardDTO boardDTO = new BoardDTO();
 		
@@ -184,8 +176,30 @@ public class AdminController {
 	
 	//로그 데이터
 	@GetMapping("/adminLog")
-	public ModelAndView adminLog() {
+	public ModelAndView adminLog(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("./admin/adminLog");
+		Map<String, Object> pages = new HashMap<String, Object>();
+		
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		
+		pages.put("searchType", searchType);
+		pages.put("searchValue", searchValue);
+		
+		int startPage = (pageNo*10)-10;
+		int totalCount = adminService.adminLogCount(pages);
+		int lastPage = (int)Math.ceil((double)totalCount/10);
+		
+
+		pages.put("startPage", startPage);
+		pages.put("lastPage", lastPage);
+		
+		List<Map<String, Object>> list = adminService.AdminLog(pages);
+		
+		mv.addObject("pages",pages);
+		mv.addObject("pageNo", pageNo);
+		mv.addObject("list",list);
+		
 		return mv;
 	}
 	
@@ -197,12 +211,33 @@ public class AdminController {
 	}
 	
 	
-	//쿠폰발급
+	//쿠폰발급(페이징 서치바 추가)
 	@GetMapping("/adminCoupon")
-	public ModelAndView adminCoupon() {
+	public ModelAndView adminCoupon(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("./admin/adminCoupon");
-		List<CouponDTO> list = adminService.Coupon();
-		mv.addObject("list", list);
+		
+		Map<String, Object> pages = new HashMap<String, Object>();
+		
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		
+		pages.put("searchType", searchType);
+		pages.put("searchValue", searchValue);
+		
+		int startPage = (pageNo*10)-10;
+		int totalCount = adminService.adminCouponCount(pages);
+		int lastPage = (int)Math.ceil((double)totalCount/10);
+		
+		//System.out.println(startPage);
+
+		pages.put("startPage", startPage);
+		pages.put("lastPage", lastPage);
+		
+		List<Map<String, Object>> list = adminService.adminCoupon(pages);
+		
+		mv.addObject("pages",pages);
+		mv.addObject("list",list);
+		mv.addObject("pageNo", pageNo);
 		
 		return mv;
 	}
@@ -214,11 +249,15 @@ public class AdminController {
 	@PostMapping("/adminCouponCreate")
 	public String adminCouponCreate(HttpServletRequest request) {
 		CouponDTO couponDTO = new CouponDTO();
+		
+		String pageNo = request.getParameter("pageNo");
+		
 		couponDTO.setCoupon_name(request.getParameter("couponName"));
 		couponDTO.setCoupon_content(request.getParameter("couponContent"));
 		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("coupon")));
+		
 		adminService.adminCouponCreate(couponDTO);
-		return "redirect:/adminCoupon";
+		return "redirect:/adminCoupon?pageNo="+pageNo;
 	}
 	
 	@ResponseBody
@@ -230,10 +269,31 @@ public class AdminController {
 	
 	//QnA
 	@GetMapping("/adminQnA")
-	public ModelAndView adminQnA() {
+	public ModelAndView adminQnA(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("./admin/adminQnA");
-		List<QuestionBoardDTO> qna = adminService.QnA();
+		
+		Map<String, Object> pages = new HashMap<String, Object>();
+		
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		
+		pages.put("searchType", searchType);
+		pages.put("searchValue", searchValue);
+		
+		int startPage = (pageNo*10)-10;
+		int totalCount = adminService.adminQnACount(pages);
+		int lastPage = (int)Math.ceil((double)totalCount/10);
+		
+
+		pages.put("startPage", startPage);
+		pages.put("lastPage", lastPage);
+		
+		
+		List<Map<String, Object>> qna = adminService.adminQnA(pages);
+		
 		mv.addObject("qna", qna);
+		mv.addObject("pages",pages);
+		mv.addObject("pageNo", pageNo);
 		
 		return mv;
 	} 
@@ -249,6 +309,9 @@ public class AdminController {
 	@PostMapping("/adminAnswerComplete")
 	public String adminAnswerComplete(HttpServletRequest request) {
 		AnswerDTO answerDTO = new AnswerDTO();
+		
+		String pageNo = request.getParameter("pageNo");
+		
 		answerDTO.setAnswer_board_content(request.getParameter("answerContent"));
 		answerDTO.setQuestion_board_no(Integer.parseInt(request.getParameter("questionNo")));
 		answerDTO.setAnswer_board_title(request.getParameter("answerTitle"));
@@ -257,29 +320,108 @@ public class AdminController {
 		int change = Integer.parseInt(request.getParameter("questionNo"));
 		adminService.adminAnswerChange(change);
 		
-		return "redirect:/adminQnA";
+		return "redirect:/adminQnA?pageNo="+pageNo;
 	}
 	
 	
 	//스토어
 	@GetMapping("/adminStore")
-	public ModelAndView adminStore() {
+	public ModelAndView adminStore(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("./admin/adminStore");
+		Map<String, Object> pages = new HashMap<String, Object>();
+		
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		
+		pages.put("searchType", searchType);
+		pages.put("searchValue", searchValue);
+		
+		int startPage = (pageNo*10)-10;
+		int totalCount = adminService.adminStoreCount(pages);
+		int lastPage = (int)Math.ceil((double)totalCount/10);
+		
+
+		pages.put("startPage", startPage);
+		pages.put("lastPage", lastPage);
+		
+		List<Map<String, Object>> list = adminService.AdminStore(pages);
+		
+		mv.addObject("pages",pages);
+		mv.addObject("pageNo", pageNo);
+		mv.addObject("list",list);
+		
 		return mv;
 	}
 	
+	//스토어 삭제
+  	@PostMapping("/adminStore")
+  	public String adminStoreDel(HttpServletRequest request) {
+  		
+  		String pageNo = request.getParameter("pageNo");
+
+//  		BoardDTO boardDTO = new BoardDTO();
+//  		
+//  		boardDTO.setBoard_no(Integer.parseInt(request.getParameter("board_no")));
+//  		boardDTO.setStatus_no(Integer.parseInt(request.getParameter("status_no")));
+//  		
+//  		adminService.adminBoardDel(boardDTO);
+
+
+  		return "redirect:/adminBoard?pageNo="+pageNo;
+  	}
+	
+	
 	//이벤트
 	@GetMapping("/adminEvent")
-	public ModelAndView adminEvent() {
+	public ModelAndView adminEvent(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("./admin/adminEvent");
+		Map<String, Object> pages = new HashMap<String, Object>();
+		
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		
+		pages.put("searchType", searchType);
+		pages.put("searchValue", searchValue);
+		
+		int startPage = (pageNo*10)-10;
+		int totalCount = adminService.adminEventCount(pages);
+		int lastPage = (int)Math.ceil((double)totalCount/10);
+		
+
+		pages.put("startPage", startPage);
+		pages.put("lastPage", lastPage);
+		
+		List<Map<String, Object>> list = adminService.AdminEvent(pages);
+		
+		mv.addObject("pages",pages);
+		mv.addObject("pageNo", pageNo);
+
+		mv.addObject("list",list);
 		return mv;
 	}
+	
+	//이벤트 삭제
+  	@PostMapping("/adminEvent")
+  	public String adminEventDel(HttpServletRequest request) {
+  		
+  		String pageNo = request.getParameter("pageNo");
 
+//  		BoardDTO boardDTO = new BoardDTO();
+//  		
+//  		boardDTO.setBoard_no(Integer.parseInt(request.getParameter("board_no")));
+//  		boardDTO.setStatus_no(Integer.parseInt(request.getParameter("status_no")));
+//  		
+//  		adminService.adminBoardDel(boardDTO);
+
+
+  		return "redirect:/adminevent?pageNo="+pageNo;
+  	}
 	
 	//포인트
 	@GetMapping("/adminPoint")
 	public ModelAndView adminPoint() {
 		ModelAndView mv = new ModelAndView("./admin/adminPoint");
+		
 		return mv;
 	}
 	

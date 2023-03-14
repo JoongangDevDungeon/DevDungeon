@@ -1,3 +1,4 @@
+body{ margin:0; padding:0; }
 .table{	text-align: center; width:1200px; margin:0 auto;}
 .table-header{ background-color: #d3d3d3; }
 .container{	max-width:1200px; margin:0 auto;}
@@ -53,12 +54,127 @@ a:hover{ color:#ccc; }
 	color:white;
 	font-weight: bold;
 }
-.menubar{
-	width:100%; 
-	height:100px; 
-	background-color: purple; 
-	color:white;
+
+/* HJHBoardDetail */
+.detailBox{	height:1000px; border:1px solid gray; }
+.detailTop{
+	margin:5px;
+	height:50px;
+	border:1px solid black;
+	font-size:20px;
+	font-weight:bold;
+	display: flex;
+}
+.detailTop_item{
+	width:100px;
+	height:100%;
+	line-height:50px;
+	margin-left:5px;
+	font-size: 20px;
 	text-align: center;
-	font-size: 30px;
-	line-height: 100px;
+}
+.detailTop_item:nth-child(1){ flex-grow:2; }
+.detailMid{
+	margin:5px;
+	height:790px;
+	border:1px solid black;
+	display: flex;
+	flex-direction: column;
+	font-size: 25px;
+}
+.detailMid_item{ margin-left:5px; }
+.userProfile{
+	height:150px;
+	border:1px solid black;
+	margin:5px;
+	margin-top: auto;
+}
+.btnBox{
+	margin:5px;
+	height:60px;
+	border:1px solid black;
+	text-align: center;
+	line-height:60px;
+}
+.btnBox_1{ display:inline-block; }
+.btnBox_2{ display:inline-block; float:right; }
+.detailBtn{
+	line-height:50px;
+	width:100px;
+	height:50px;
+	border:none;
+	border-radius: 5px;
+	color:white;
+	font-weight: bold;
+	margin-right:5px;
+}
+.boardList{
+	background-color: #90adac;
+	margin-bottom:5px;
+	float: right;
+}
+.commentBox{
+	margin:10px 5px 5px 5px;
+	height:70px;
+	line-height: 70px;
+}
+.commentText{
+	width:1000px; 
+	height:60px; 
+	font-size: 20px;
+	margin-left:5px;
+	border-radius: 5px;
+}
+.commentBtn{
+	margin-left:10px;
+	width:130px; 
+	height:60px;
+	border:none;
+	border-radius: 5px;
+	background-color: #A267AC;
+	color:white;
+	font-weight: bold;
+	line-height:60px;
+}
+.commentBtn_1{
+	width:40px;
+	height:40px;
+	border:none;
+	color:white;
+	border-radius: 5px;
+	line-height: 40px;
+}
+.comments{	margin-top:10px; height:100%; font-size:20px; }
+.commentWrited{ height: 50px; border-bottom: 1px solid black; }
+.commentWrited_But{	height: 50px; }
+.commentDropdown{
+	float:right;
+	margin-right:20px;
+	border:none;
+	border-radius: 5px;
+	background-color: white;
+}
+.subComment{
+	display: inline-block;
+	width:96%;
+}
+.c_commentBox{ display: inline-block; margin-top:10px;}
+.c_commentText {
+	width:1030px;
+	height:50px;
+	font-size: 20px;
+	margin-left:5px;
+	border-radius: 5px;
+}
+.c_commentBtn{
+	display: inline-block;
+	width:80px;
+	height:50px;
+	margin-left:10px;
+	border:none;
+	border-radius: 5px;
+	background-color: #A267AC;
+	color:white;
+	font-weight: bold;
+	line-height:50px;
 }

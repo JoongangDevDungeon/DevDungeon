@@ -1,14 +1,19 @@
 package com.team.devdungeon.controller;
 
-import com.team.devdungeon.service.SignService;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
+import com.team.devdungeon.dto.SignDTO;
+import com.team.devdungeon.service.SignService;
 
 @Controller
 public class SignController {
@@ -33,61 +38,97 @@ public class SignController {
     }
 
     @PostMapping("/agree")
-    public String agree(HttpServletRequest request) {
+    public String agree(HttpServletRequest request, RedirectAttributes agree) {
         String agree1 = request.getParameter("agree1");
         String agree2 = request.getParameter("agree2");
         String agree3 = request.getParameter("agree3");
 
-        if( (agree1 != null && agree1.equals("check")) &&
-                    (agree2 != null && agree2.equals("check")) ) {
-            System.out.println("필수 약관 모두 동의");
-        }
 
         if(agree3 != null && agree3.equals("check")) {
             System.out.println("선택 약관 동의");
         }
+        if( (agree1 != null && agree1.equals("check")) && (agree2 != null && agree2.equals("check")) ) {
 
-        return "redirect:/signup";
+            agree.addAttribute("Service", agree1);
+            agree.addAttribute("Privacy", agree2);
+            agree.addAttribute("Email", agree3);
+            return "redirect:/signup";
+        }
+
+        return "redirect:/agree";
     }
+
 
     @GetMapping("/signup")
-    public String signup() {
-        return "sign/signup";
+    public ModelAndView signup(@RequestParam("Service") String agree1, @RequestParam("Privacy") String agree2, @RequestParam(value = "Email", defaultValue = "none") String agree3) {
+
+      /*  System.out.println(agree1);*//*check 값 넘어옴*/
+        ModelAndView agrees = new ModelAndView("sign/signup");
+
+        agrees.addObject("agree1", agree1);
+        agrees.addObject("agree2", agree2);
+        agrees.addObject("agree3", agree3);
+
+
+        return agrees;
     }
 
+    @PostMapping("/send_mail")
+    @ResponseBody
+    public  String Mail(HttpServletRequest request) throws EmailException {
+        SignDTO signDTO = new SignDTO();
+        signDTO.setMember_email(request.getParameter("member_email"));
+
+        System.err.println("자바에들어온 이메일"+signDTO.getMember_email());
+
+       /* String title = "가지 회원가입 인증번호 입니다.";
+        String msg = "123456";
+        Email.simpleMail("kingdori902@naver.com","test",title, msg);*/
+     /*   System.out.println("연결됨");*/
+
+        return "";
+    }
+
+
+
     @PostMapping("/signup")
-    public String signup(HttpServletRequest request) {
-        System.out.println("회원가입 정보 입력 완료");
+    public String signup(HttpServletRequest request) {/*회원가입*/
+        SignDTO signDTO = new SignDTO();
 
-        String member_id = request.getParameter("member_id");
-        String member_pw1 = request.getParameter("member_pw1");
-        String member_pw2 = request.getParameter("member_pw2");
-        String member_name = request.getParameter("member_name");
+        signDTO.setAgree1(request.getParameter("agree1"));
+        signDTO.setAgree2(request.getParameter("agree2"));
+        signDTO.setAgree3(request.getParameter("agree3"));
 
-        int year = Integer.parseInt( request.getParameter("year") );
-        int month = Integer.parseInt( request.getParameter("month") );
-        int day = Integer.parseInt( request.getParameter("day") );
+        signDTO.setMember_id(request.getParameter("member_id"));
+        signDTO.setMember_pw(request.getParameter("member_pw1"));
+        signDTO.setMember_name(request.getParameter("member_name"));
 
-        String member_gender = request.getParameter("member_gender");
-        String member_email = request.getParameter("member_email");
-        String verify_code = request.getParameter("verify_code");
-        String member_tel = request.getParameter("member_tel");
+        signDTO.setYear(Integer.parseInt(request.getParameter("year")));
+        signDTO.setMonth(Integer.parseInt(request.getParameter("month")));
+        signDTO.setDay(Integer.parseInt(request.getParameter("day")));
 
-        System.out.println("아이디 : " + member_id);
-        System.out.println("비밀번호1 : " + member_pw1);
-        System.out.println("비밀번호2 : " + member_pw2);
-        System.out.println("이름 : " + member_name);
+        signDTO.setMember_email(request.getParameter("member_email"));
+        signDTO.setMember_tel(request.getParameter("member_tel"));
+        signDTO.setVerify_code((request.getParameter("verify_code")));
 
-        System.out.println("연도 : " + year);
-        System.out.println("월 : " + month);
-        System.out.println("일 : " + day);
 
-        System.out.println("성별 : " + member_gender);
-        System.out.println("이메일 : " + member_email);
-        System.out.println("인증코드 : " + verify_code);
-        System.out.println("전화번호 : " + member_tel);
+
+        signService.signup(signDTO);
 
         return "redirect:/index";
+    }
+    @PostMapping("/checkid")/*아이디 체크*/
+    @ResponseBody
+    public String checkid(HttpServletRequest request){
+
+        SignDTO signDTO = new SignDTO();
+        signDTO.setMember_id((request.getParameter("member_id")));
+        SignDTO result = signService.checkid(signDTO);
+        if (result.getCount() == 0){
+            return "0";/*중복 없음*/
+        }else{
+            return "1";/*중복 있음*/
+        }
     }
 
     @GetMapping("/accountInquiry")

@@ -10,10 +10,33 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <link type="text/css" rel="stylesheet" href="/css/HJHBoard.css">
 <link type="text/css" rel="stylesheet" href="/css/layout.css">
-<script type="text/javascript" src="/js/paging.js"></script>
+<script type="text/javascript" src="/js/BoardPaging.js"></script>
 <script type="text/javascript" src="/js/search.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <title>HJH Board</title>
 </head>
+<style>
+h6{
+	display: inline-block; 
+	width:20px; 
+	height:20px; 
+	background-color: red;
+	line-height: 20px;
+	text-align: center;
+	color:white;
+	border-radius: 5px;
+}
+.board_tag{
+	display: inline-block;
+	width:50px;
+	height:30px;
+	background-color: #0080f0;
+	line-height: 30px;
+	color:white;
+	border-radius: 5px;
+	font-weight: bold;
+}
+</style>
 <script type="text/javascript">
 
 function moveNext(pageNo){	//페이지 뒤쪽 버튼
@@ -50,17 +73,20 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 				<h1>B O A R D</h1>
 				<table class="table">
 					<tr class="table-header">
+						<th class="col-1">구분</th>
 						<th class="col-1">번호</th>
-						<th class="col-5">제목</th>
-						<th class="col-2">글쓴이</th>
-						<th class="col-2">날짜</th>
+						<th class="col-6">제목</th>
+						<th class="col-1">글쓴이</th>
+						<th class="col-1">날짜</th>
 						<th class="col-1">조회수</th>
 						<th class="col-1">좋아요</th>
 					</tr>
 					<c:forEach var="board" items="${list }">
 						<tr>
+							<td><span class="board_tag">${board.tag_name }</span></td>
 							<td>${board.bno }</td>
-							<td class="title"><a href="/board/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }</a></td>
+							<td class="title"><a href="/board/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }
+							<c:if test="${ board.comment_cnt ne 0 }"><h6>${ board.comment_cnt }</h6></c:if></a></td>
 							<td>${board.member_name}</td>
 							<td>${board.board_date }</td>
 							<td>${board.board_read }</td>
@@ -95,7 +121,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 				</div>
 				<!-- 글쓰기 -->
 				<div class="write">
-					<c:if test="${sessionScope.member_no ne null }">
+					<c:if test="${sessionScope.member_id ne null }">
 						<button class="write_btn" onclick="location.href='/board/HJHBoardWrite'">글쓰기</button>
 					</c:if>
 				</div>

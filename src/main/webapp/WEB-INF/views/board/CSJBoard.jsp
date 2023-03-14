@@ -32,20 +32,21 @@ function detail(bno){
 					<div>
 						<table class="table table-striped">
 							<tr>
-								<th>구분</th>
-								<th>번호</th>
-								<th>제목</th>
-								<th>글쓴이</th>
-								<th>날짜</th>
-								<th>조회수</th>
-								<th>좋아요</th>
+								<th class="col-1">구분</th>
+								<th class="col-1">번호</th>
+								<th class="col-5">제목</th>
+								<th class="col-2">글쓴이</th>
+								<th class="col-1">날짜</th>
+								<th class="col-1">조회수</th>
+								<th class="col-1">좋아요</th>
 							</tr>
 							<c:forEach items="${list }" var="b">
 								<tr>
-									<td>${b.tag_no }</td>
+									<td>${b.tag_name }</td>
 									<td>${b.board_no }</td>
-									<td onclick="detail(${b.board_no})">${b.board_title }</td>
-									<td>${b.member_name }</td>
+									<td onclick="detail(${b.board_no})" class="text-truncate" style="max-width:1px;">${b.board_title }
+									<c:if test="${b.comment_cnt ne 0 }">[${b.comment_cnt}]</c:if></td>
+									<td class="text-truncate" style="max-width:1px;">${b.member_name }</td>
 									<td>${b.board_date }</td>
 									<td>${b.board_read }</td>
 									<td>${b.board_like }</td>
@@ -66,7 +67,9 @@ function detail(bno){
 						</form>
 					</div>
 					<c:if test="${sessionScope.member_name ne null }">
+					<div  style="display:flex; justify-content:end;">
 					<button class="btn btn-primary" onclick="location.href='/csjWrite'">글쓰기</button>
+					</div>
 					</c:if>
 				</div>
 

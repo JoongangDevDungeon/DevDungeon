@@ -43,4 +43,8 @@ public interface CSJService {
 	public void userCommentDelete(int bno);
 
 	public void banComment(Map<String, Object> banMap);
+
+	public PageInfo<Map<String, Object>> eventList(CSJshowDTO dto);
+
+	public Map<String, Object> eventdetail(int bno);
 }

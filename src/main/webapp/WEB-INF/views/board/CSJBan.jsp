@@ -18,9 +18,16 @@
 <link rel="stylesheet" href="/css/layout.css">
 <script type="text/javascript">
 	$(document).ready(function() {
-		var banMember = opener.$("#detailWriter").val();
+		var banMember = "";
+		var banBoardWriter = opener.$("#detailWriter").val();
+		var banCommentWriter = opener.$("#banCommentWriter").val();
 		var banBoard = opener.$("#boardBtnBan").val();
 		var banType = opener.$("#banType").val();
+		if(banType == "게시글 신고"){
+			banMember = banBoardWriter;
+		}else{
+			banMember = banCommentWriter;
+		}
 		$("#bantype").text("신고 유형 : " + banType);
 		var url = $(location).attr('href');
 		var number = url.split("no=");
@@ -52,9 +59,16 @@
 			}
 		});
 		$("#banWrite").click(function(){
+			$("#banChoice1").attr("checked",false);
+			$("#banChoice2").attr("checked",false);
+			$("#banChoice3").attr("checked",false);
+			$("#banChoice4").attr("checked",false);
+			$("#banChoice5").attr("checked",false);
+			$("#banChoice6").attr("checked",false);
 			$("#banChoice6").attr("checked",true);
 		});
 	});
+
 </script>
 </head>
 <body>
@@ -90,7 +104,7 @@
 			<input
 				type="radio" id="banChoice6" name="banWhy" value="기타"> <label
 				for="banChoice6">기타</label><br> 
-			<input type="text" id="banWrite" name="banWrite" placeholder="신고 사유를 직접 입력하세요" onclick="selectEtc()">
+			<input type="text" style="width:500px;height:200px;" id="banWrite" name="banWrite" placeholder="신고 사유를 직접 입력하세요">
 			<input type="button"
 				id="btnBan"
 				style="width: 500px; height: 50px; background-color: red color:white"

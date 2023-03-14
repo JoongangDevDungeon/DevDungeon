@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
@@ -26,6 +28,8 @@ public class CSJController {
 
 	private final CSJService csjService;
 
+	private final ServletContext context;
+	
 	@GetMapping("/csjboard")
 	public ModelAndView csjboard(@RequestParam(defaultValue = "1") Integer pageNo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
@@ -68,7 +72,7 @@ public class CSJController {
 	}
 
 	@PostMapping("/csjWrite")
-	public ModelAndView csjWritePost(HttpServletRequest request) {
+	public ModelAndView csjWritePost(HttpServletRequest request,MultipartFile file) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/csjboard");
 		HttpSession session = request.getSession();
@@ -80,14 +84,13 @@ public class CSJController {
 			String content = request.getParameter("content");
 			String category = request.getParameter("category");
 			String tag = request.getParameter("tag");
-			String file = request.getParameter("file");
 			Map<String, Object> writemap = new HashMap<String, Object>();
 			writemap.put("member_name", writer);
 			writemap.put("title", title);
 			writemap.put("content", content);
 			writemap.put("category", category);
 			writemap.put("tag", tag);
-			writemap.put("file", file);
+			String fileName = null;
 
 			int result = csjService.write(writemap);
 			return mv;
@@ -145,6 +148,10 @@ public class CSJController {
 		mv.setViewName("board/CSJDetail");
 
 		Map<String, Object> det = csjService.detail(bno);
+		if(det==null) {
+			mv.setViewName("redirect:/csjboard");
+			return mv;
+		}
 		int member_no = (int) det.get("member_no");
 		Map<String, Object> mem = csjService.memberProfile(member_no);
 
@@ -207,7 +214,6 @@ public class CSJController {
 
 	@GetMapping("/userCommentDelete")
 	public String csjCommentDelete(@RequestParam(value = "cno") int cno, HttpServletRequest request) {
-
 		csjService.userCommentDelete(cno);
 		return "redirect:" + request.getHeader("Referer");
 	}
@@ -233,6 +239,11 @@ public class CSJController {
 		mv.addObject("pageInfo", faqList);
 		return mv;
 	}
+	
+	@GetMapping("/csjCloser")
+	public String csjCloser() {
+		return "board/CSJcloser";
+	}
 
 	@GetMapping("/csjBan")
 	public String csjban() {
@@ -242,7 +253,7 @@ public class CSJController {
 	@PostMapping("/csjBan")
 	public String csjbanPost(HttpServletRequest request) {
 		if (request.getSession().getAttribute("member_name") == null) {
-			return "board/CSJcloser";
+			return "redirect:/csjCloser";
 		} else {
 			if (request.getParameter("formbanType").equals("게시글 신고")) {
 				String banBoard = request.getParameter("banBoard");
@@ -269,10 +280,10 @@ public class CSJController {
 				banMap.put("banWhy", banWhy);
 				banMap.put("singoman", singoman);
 				csjService.banComment(banMap);
-				return "board/CSJcloser";
+				return "redirect:/csjCloser";
 			}else {
 				System.out.println("unknown way");
-				return "board/CSJcloser";
+				return "redirect:/csjCloser";
 			}
 		}
 	}

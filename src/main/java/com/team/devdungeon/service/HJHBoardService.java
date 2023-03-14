@@ -41,8 +41,18 @@ public class HJHBoardService {
 	}
 	public void boardUpdate(Map<String, Object> map) {
 		HJHboardDAO.boardUpdate(map);
+	}
+	public String boardLikeAjax(String board_no) {
+		return HJHboardDAO.boardLikeAjax(board_no);
+	}
+	public int boardDelete(String board_no) {
+		return HJHboardDAO.boardDelete(board_no);
+	}
+	public int boardCommentDel(String comment_no) {
+		return HJHboardDAO.boardCommentDel(comment_no);
+	}
+	public void boardSubComment(Map<String, Object> map) {
+		HJHboardDAO.boardSubComment(map);
 		
 	}
-
-
 }

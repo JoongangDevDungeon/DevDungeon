@@ -14,11 +14,29 @@
         </if>
         ORDER BY board_no DESC
     </select>
+
+    <select id="eventList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
+        SELECT *
+        FROM event
+        <if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">event_title</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+        </if>
+        ORDER BY event_no DESC
+    </select>
  
     <select id="detail" parameterType="Integer" resultType="HashMap">
     	SELECT *
     	FROM boardview
     	WHERE board_no=#{bno}
+    </select>
+    <select id="eventPageDetail" parameterType="Integer" resultType="HashMap">
+    	SELECT *
+    	FROM event
+    	WHERE event_no=#{bno}
     </select>
     <select id="memberProfile" parameterType="Integer" resultType="HashMap">
     	SELECT *
@@ -57,7 +75,8 @@
     	UPDATE board_comment
     	SET
     	status_no = 2
-    	WHERE comment_no = #{cno}
+    	WHERE IF((select comment_depth from board_comment where comment_no=#{cno})=0,comment_root,comment_no) = #{cno}
+
     </update>
     
     <insert id="boardWrite" parameterType="HashMap">

@@ -54,7 +54,7 @@
                   <!-- 아이콘 리스트 -->
                   <div style="width: 660px; height: 800px; margin: 0 auto;">
                      <!-- 아이콘 개별 -->
-                     <c:forEach step="1" begin="1" end="8" var="i">
+                     <c:forEach step="1" begin="1" end="6" var="i">
                         <div style="width: 330px; height: 150px; margin-top: 10px; float: left;">
                            <input type="checkbox" style="width: 20px; height: 20px; margin-top: 60px; margin-right: 5px; margin-left: 5px; float: left;">
                            <div style="border: 1px solid #ccc; border-radius: 10px; width: 280px; height: 150px; float: left;">
@@ -85,10 +85,41 @@
                            </div>
                         </div>
                      </c:forEach>
+                     <!-- 테스트용 이미지 -->
+                     <div style="width: 330px; height: 150px; margin-top: 10px; float: left;">
+                        <input type="checkbox" style="width: 20px; height: 20px; margin-top: 60px; margin-right: 5px; margin-left: 5px; float: left;">
+                        <div style="border: 1px solid #ccc; border-radius: 10px; width: 280px; height: 150px; float: left;">
+                           <!-- 아이콘 이미지 -->
+                           <div style="width: 60px; height: 150px;  float: left;">
+                                 <span style="display: block; width: 45px; height: 45px; padding-top: 45px; box-sizing: border-box; margin: 0 auto;">
+                                    <img src="data:image/png;base64,${imageDataString}" style="width: 45px; height: 45px;">
+                                 </span>
+                           </div>
+                           <!-- 아이콘 내용 -->
+                           <div style="width: 217px; height: 150px; float: left;">
+                              <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                 <span>아이콘 이름</span>
+                              </div>
+                              <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">수량</span>
+                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">가격</span>
+                              </div>
+                              <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">사용 시간</span>
+                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">등록일</span>
+                              </div>
+                              <div style="width: inherit; height: 37.5px; line-height: 37px;">
+                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">구매</span>
+                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">선물</span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
                      <div class="mt-3" style="width: 660px; float: left;">
                         <span>페이징</span>
                      </div>
                      <div class="mt-3" style="width: 660px; float: left; position: relative;">
+                        <button class="btn btn-primary" style="position: absolute; left: 0;" onclick="location.href='/iconApply'">아이콘 신청</button>
                         <div style="position: absolute; right: 0;">
                            <button class="btn btn-primary" onclick="location.href='/payShoppingBag'">구매</button>
                            <button class="btn btn-primary" onclick="location.href='/giftShoppingBag'">선물</button>
