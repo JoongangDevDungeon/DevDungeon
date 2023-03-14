@@ -17,16 +17,23 @@ body{ margin:0; padding:0; }
 a {	text-decoration: none; color:black; }
 a:hover{ color:#ccc; }
 .container{	width:1200px; height:100%; text-align: left;}
+.board_tag{
+	display: inline-block;
+	margin:10px;
+	border-radius: 0px;
+	border:2px solid black;
+	font-size: 20px;
+}
 .writeBox{ height:935px; border:2px solid black; border-radius: 5px;}
 .writeTop{ width:100%; height:60px;}
 .writeTitle{
-	margin:5px;
+	margin:5px 5px 0px 0px;
 	padding-left:10px;
 	height:50px;
 	border:2px solid black;
 	font-size:20px;
 	font-weight:bold;
-	width:1163px;
+	width:1068px;
 	border-radius: 5px;
 }
 .writeContent{
@@ -61,6 +68,7 @@ a:hover{ color:#ccc; }
 function check(){
 	let writeTitle = document.getElementById("writeTitle");
 	let writeContent = document.getElementById("writeContent");
+	let board_tag = document.getElementById("board_tag");
 	if(writeTitle.value == ""){
 		alert("제목을 입력해주세요");
 		writeTitle.focus();
@@ -71,6 +79,12 @@ function check(){
 		writeContent.focus();
 		return false;
 	}
+	if(board_tag.value == 0){
+		alert("게시글 유형을 확인해주세요");
+		board_tag.focus();
+		return false;
+	}
+	
 }
 </script>
 <body>
@@ -92,6 +106,11 @@ function check(){
 			<c:otherwise>"/board/HJHBoardWrite"</c:otherwise>
 		</c:choose>
 		method="post" onsubmit="return check()" enctype="multipart/form-data">
+				<select class="board_tag" name="boardd_tag" id="board_tag">
+					<option value="0">구분</option>
+					<option value="1">잡담</option>
+					<option value="2">유머</option>
+				</select>
 				<input type="text" name="writeTitle" id="writeTitle"class="writeTitle" 
 				placeholder="제목을 입력하세요" <c:if test="${boardDetail.board_title ne null }">value="${ boardDetail.board_title }"</c:if>>
 				<textarea name="writeContent" id="writeContent" class="writeContent" 

@@ -15,6 +15,16 @@
 </head>
 <style>
 .container{	width:1200px; height:100%; text-align: left; }
+h6{
+	display: inline-block;
+	width:20px;
+	height:20px;
+	line-height:20px;
+	text-align: center;
+	color:white;
+	background-color: red;
+	border-radius: 5px;
+}
 </style>
 <script type="text/javascript">
 $(function(){ //제이쿼리 시작
@@ -64,17 +74,16 @@ $(function(){ //제이쿼리 시작
 		}
 	});
 	//댓글 게시글 신고
-	$("#boardBanBtn").click(function() {
-		var no = $(this).val();
-		alert(no + "번 글을 신고합니다");
-		$("#banType").val("게시글 신고");
-		window.open("/board/boardBan", '신고팝업', 'width=510px,height=600px,scrollbars=yes');
-	});
 	$(".commentBanBtn").click(function() {
 		var no = $(this).val();
-		alert(no + "번 댓글을 신고합니다");
 		$("#banType").val("댓글 신고");
-		window.open("/board/boardBan?cno="+no, '신고팝업', 'width=510px,height=600px,scrollbars=yes');
+		$("#banCommentWriter").val($("#commentWriter"+no).val());
+		window.open("/csjBan?cno="+no, '신고팝업', 'width=510px,height=600px,scrollbars=yes');
+	});
+	$("#boardBtnBan").click(function() {
+		var no = $(this).val();
+		$("#banType").val("게시글 신고");
+		window.open("/csjBan", '신고팝업', 'width=510px,height=600px,scrollbars=yes');
 	});
 	
 });//제이쿼리 끝
@@ -105,7 +114,7 @@ function subComment_check(){
 		<div class="detailBox">
 			<div class="detailTop">
 				<div class="detailTop_item">${boardDetail.board_title }</div>
-				<div class="detailTop_item">${boardDetail.member_name }</div>
+				<div class="detailTop_item"><input type="hidden" id="detailWriter" value="${boardDetail.member_name }">${boardDetail.member_name }</div>
 				<div class="detailTop_item">${boardDetail.board_date }</div>
 			</div>
 			<div class="detailMid">
@@ -118,9 +127,10 @@ function subComment_check(){
 					<button class="detailBtn" style="background-color: #3dcc00; width:100px;" id="thumsUp">
 						<img src="/img/thumbs-up.png" style="margin-bottom: 5px; width:25px; height:25px;"> (${boardDetail.board_like })
 					</button>&nbsp;
-					<button class="detailBtn" style="background-color: #ff8080;" id="boardBanBtn" value="${boardDetail.board_no}">
+					<button class="detailBtn" style="background-color: #ff8080;" id="boardBtnBan" value="${boardDetail.board_no}">
 						<img src="/img/siren.png" style="margin-bottom: 7px;">
 						<input type="hidden" id="banType">
+						<input type="hidden" id="banCommentWriter">
 					</button>
 					</c:if>
 				</div>
@@ -146,7 +156,8 @@ function subComment_check(){
 				<div class="subArrow subArrow${c.comment_root }" style="display: inline-block; height:50px; line-height: 50px;"><i class="xi-subdirectory-arrow xi-2x"></i></div>
 			</c:if>
 				<div class="comments <c:if test="${ c.comment_depth eq 1 }"> subComment subComment${c.comment_root }</c:if>">
-					<div class="commentWrited ">${ c.member_name } ${ c.comment_time } <c:if test="${ c.comment_depth eq 0 }">()</c:if>
+					<div class="commentWrited ">${ c.member_name } <input type="hidden" id="commentWriter${c.comment_no }" value="${c.member_name }"> ${ c.comment_time } 
+					<c:if test="${c.comment_depth eq 0 && c.comment_cnt ne 0 }"><h6>${c.comment_cnt}</h6></c:if>
 						<c:if test="${sessionScope.member_id eq c.member_id  }">
 							<button class="commentBtn_1 commentDel" style="background-color: #CB0E00; position: relative;" value="${c.comment_no }"><i class="xi-trash-o "></i></button>
 						</c:if>

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.team.devdungeon.dao.HJHBoardDAO">
+<mapper namespace="com.team.devdungeon.dao.NoticeDAO">
 
-    <select id="boardList"  parameterType="Integer"  resultType="HashMap">
-        SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read,comment_cnt,tag_name, bno
-        FROM boardview
+    <select id="noticeList"  parameterType="Integer"  resultType="HashMap">
+        SELECT notice_no,notice_title,admin_id,admin_no,notice_date,notice_like,notice_read,comment_cnt,tag_name, nno
+        FROM noticeview
         <if test="searchType != null">
          	WHERE 
 			<choose>
-				<when test="searchType == 'title'">board_title</when>
-				<when test="searchType == 'writer'">member_name</when>
+				<when test="searchType == 'title'">notice_title</when>
+				<when test="searchType == 'writer'">admin_id</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
         </if>
-        ORDER BY board_no DESC
+        ORDER BY notice_no DESC
         LIMIT #{startPage}, 10
     </select>
     
-    <select id="boardCount" parameterType="HashMap" resultType="Integer">
-        SELECT COUNT(*) FROM boardview
+    <select id="noticeCount" parameterType="HashMap" resultType="Integer">
+        SELECT COUNT(*) FROM noticeview
          <if test="searchType != null">
 			WHERE
 			<choose>
-				<when test="searchType == 'title'">board_title</when>
-				<when test="searchType == 'writer'">member_name</when>
+				<when test="searchType == 'title'">notice_title</when>
+				<when test="searchType == 'writer'">member_id</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
         </if>

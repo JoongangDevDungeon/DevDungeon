@@ -10,10 +10,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <link type="text/css" rel="stylesheet" href="/css/HJHBoard.css">
 <link type="text/css" rel="stylesheet" href="/css/layout.css">
-<script type="text/javascript" src="/js/BoardPaging.js"></script>
+<script type="text/javascript" src="/js/NoticePaging.js"></script>
 <script type="text/javascript" src="/js/search.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<title>HJH Board</title>
+<title>Notice</title>
 </head>
 <style>
 h6{
@@ -26,7 +26,7 @@ h6{
 	color:white;
 	border-radius: 5px;
 }
-.board_tag{
+.notice_tag{
 	display: inline-block;
 	width:50px;
 	height:30px;
@@ -70,7 +70,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 		<div class="add1">광고1</div>
 		<div class="content">
 			<div class="container">
-				<h1>B O A R D</h1>
+				<h1>N O T I C E</h1>
 				<table class="table">
 					<tr class="table-header">
 						<th class="col-1">구분</th>
@@ -81,20 +81,20 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 						<th class="col-1">조회수</th>
 						<th class="col-1">좋아요</th>
 					</tr>
-					<c:forEach var="board" items="${list }">
+					<c:forEach var="notice" items="${list }">
 						<tr>
-							<td><span class="board_tag">${board.tag_name }</span></td>
-							<td>${board.bno }</td>
-							<td class="title"><a href="/board/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }
-							<c:if test="${ board.comment_cnt ne 0 }"><h6>${ board.comment_cnt }</h6></c:if></a></td>
-							<td>${board.member_name}</td>
-							<td>${board.board_date }</td>
-							<td>${board.board_read }</td>
-							<td>${board.board_like }</td>
+							<td><span class="notice_tag">${notice.tag_name }</span></td>
+							<td>${notice.nno }</td>
+							<td class="title"><a href="/board/HJHBoardDetail?board_no=${notice.notice_no }">${notice.notice_title }
+							<c:if test="${ notice.comment_cnt ne 0 }"><h6>${ notice.comment_cnt }</h6></c:if></a></td>
+							<td>${notice.member_id}</td>
+							<td>${notice.notice_date }</td>
+							<td>${notice.notice_read }</td>
+							<td>${notice.notice_like }</td>
 						</tr>
 					</c:forEach>
 				</table><br><br><br><br>
-				<!-- 페이징 -->
+				<!--페이징 -->
 				<div class="pagingBox">
 					<ul class="pagingList">
 						<li class="pageNo page_btn" onclick="moveBefore(1)"><i class="xi-backward xi-x"></i></li>
@@ -121,7 +121,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 				</div>
 				<!-- 글쓰기 -->
 				<div class="write">
-					<c:if test="${sessionScope.member_id ne null }">
+					<c:if test="${sessionScope.admin_id ne null }">
 						<button class="write_btn" onclick="location.href='/board/HJHBoardWrite'">글쓰기</button>
 					</c:if>
 				</div>
