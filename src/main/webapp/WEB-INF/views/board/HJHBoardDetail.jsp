@@ -25,6 +25,8 @@ h6{
 	background-color: red;
 	border-radius: 5px;
 }
+.message{ width:50px; cursor: pointer; }
+.message:hover{ background-color: #ccc; border-radius: 5px;}
 </style>
 <script type="text/javascript">
 $(function(){ //제이쿼리 시작
@@ -86,6 +88,12 @@ $(function(){ //제이쿼리 시작
 		window.open("/csjBan", '신고팝업', 'width=510px,height=600px,scrollbars=yes');
 	});
 	
+	$("#message").click(function(){
+		let receiver = $("#detailWriter").val();
+		
+		window.open("/message?receiver="+receiver, '쪽지', 'width=510px,height=600px,scrollbars=yes');
+	});
+	
 });//제이쿼리 끝
 
 function comment_check(){	//댓글 공백체크
@@ -115,6 +123,9 @@ function subComment_check(){
 			<div class="detailTop">
 				<div class="detailTop_item">${boardDetail.board_title }</div>
 				<div class="detailTop_item"><input type="hidden" id="detailWriter" value="${boardDetail.member_name }">${boardDetail.member_name }</div>
+				<c:if test="${sessionScope.member_id ne null && sessionScope.member_id ne boardDetail.member_id }">
+					<div class="detailTop_item message"><span id="message"><img src="/img/send.png" style="width:30px; height:30px;"></span></div>
+				</c:if>
 				<div class="detailTop_item">${boardDetail.board_date }</div>
 			</div>
 			<div class="detailMid">

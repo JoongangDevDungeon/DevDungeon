@@ -91,7 +91,8 @@ a:hover{ color:black; }
 	font-size: 20px;
 }
 .none{ margin:0; padding:0; width:250px; height:100px; box-sizing: border-box; }
-.items{ box-sizing: border-box; height: 50px; line-height: 50px;}
+.items{ box-sizing: border-box; width:248px; height: 50px; line-height: 50px;}
+.dropdown-item:hover{ border-radius: 5px; height: 48px;}
 
 /* 섹션 */
 .main {

@@ -30,5 +30,18 @@
             SET
 
     </update>
+    <insert id="msgReceive" parameterType="HashMap">
+        INSERT INTO message(post_member_no,get_member_no, message_title, message_content)
+		VALUES(
+		
+			(SELECT member_no FROM member WHERE member_name = '${post_member_no}'),
+			(SELECT member_no FROM member WHERE member_name = '${get_member_no}'),
+			'${message_title}','${message_content}'
+		)
+    </insert>
+    
+    <select id="messageIdCheck" parameterType="String" resultType="Integer">
+    	SELECT COUNT(member_name) FROM member WHERE member_name = '${member_name}'
+    </select>
 
 </mapper>
