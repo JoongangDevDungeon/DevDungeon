@@ -31,7 +31,8 @@
 						if(data==1){
 							alert("확인되었습니다.");
 							$("#id_check").attr("disabled","disabled");
-							$("#member_name").attr("disabled","disabled");
+							$("#member_name").attr("readonly","readonly");
+                            $("#member_name").css("background-color", "#e2e2e2");
 						}else{
 							alert("닉네임을 확인해주세요");
 						}
@@ -49,12 +50,12 @@
 function null_ck(){
 	let member_name = document.getElementById("member_name");
 	let msg_title = document.getElementById("msg_title");
-	let msg_content = document.getElementById("msg_content");
+	let msg_content = document.getElementById("msg_content");정
 	
 	if(member_name.value == ""){ alert("닉네임을 확인해주세요"); return false; }
 	if(msg_title.value == ""){ alert("제목을 입력해주세요"); return false; }
 	if(msg_content.value == ""){ alert("내용을 입력해주세요"); return false; }
-	if(member_name.getAttribute("disabled") != "disabled"){ alert("ID를 확인해주세요"); return false; }
+	if(member_name.getAttribute("readonly") != "readonly"){ alert("ID를 확인해주세요"); return false; }
 	
 	
 }

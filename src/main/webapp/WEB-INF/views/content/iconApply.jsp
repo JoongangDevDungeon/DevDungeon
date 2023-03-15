@@ -12,16 +12,21 @@
 <script>
    $(function() {
 
+      var apply = "${apply}";
+      if(apply == "success") {
+         alert("아이콘 등록 신청완료");
+      }
+
       $("#icon_file").change(function() { // 이미지 미리보기
          const icon_file = this.files[0];
          const reader = new FileReader();
          reader.onload = function(event) {
             const img = new Image();
             img.onload = function () {
-               if(img.width > 45 || img.height > 45) {
-                  alert("45x45 픽셀을 넘어갑니다.\n이미지 크기를 확인해주세요.");
-                  return false;
-               }
+               // if(img.width > 45 || img.height > 45) {
+               //    alert("45x45 픽셀을 넘어갑니다.\n이미지 크기를 확인해주세요.");
+               //    return false;
+               // }
                $(".upload-name").val(icon_file.name);
                $("#previewText").css("display", "none");
                $("#previewImg").css({"width" : "45px", "height" : "45px", "display" : "inline-block", "padding-top" : "3px", "box-sizing" : "border-box"});
@@ -29,7 +34,6 @@
             }
             img.src = event.target.result;
          };
-
          reader.readAsDataURL(icon_file);
       });
 
