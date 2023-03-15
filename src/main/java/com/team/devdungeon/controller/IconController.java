@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
@@ -27,9 +28,13 @@ public class IconController {
     }
 
     @PostMapping("/iconApply")
-    public String iconApply(@RequestParam Map<String, Object> map, @RequestPart("icon_file") MultipartFile iconFile) throws IOException {
-        int result = iconService.iconApply(map, iconFile);
-        return "redirect:/iconApply?apply=success";
+    public String iconApply(@RequestParam Map<String, Object> map, @RequestPart("icon_file") MultipartFile iconFile, HttpSession session) throws IOException {
+        int result = iconService.iconApply(map, iconFile, session);
+        if(result == 1) {
+            return "redirect:/iconApply?apply=success";
+        } else {
+            return "redirect:/iconApply?apply=fail";
+        }
     }
 
 }
