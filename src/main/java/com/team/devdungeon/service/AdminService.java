@@ -135,6 +135,10 @@ public class AdminService {
 		return adminDAO.adminLogCount(pages);
 	}
 
+	public void adminEventWrite(EventDTO eventDTO) {
+		adminDAO.adminEventWrite(eventDTO);
+	}
+
 
 
 
