@@ -23,8 +23,7 @@
 <!-- 		<img class="logo" src="./img/admin/adminGazi.png"> -->
 			<h1>관리자 페이지 메인 대쉬보드</h1>
 			<hr class="hr1">
-<<<<<<< HEAD
-=======
+
 			<div class="mtoday">
 				<div class="mth">오늘의 할일</div>
 				<hr class="hr1">
@@ -38,7 +37,7 @@
 					답변대기문의
 				</div>
 			</div>
->>>>>>> f4ea2fbd956c07a7092a49607759e2d6dfb90e40
+
 			
 			<div class="">
 				<div class="mboard">
