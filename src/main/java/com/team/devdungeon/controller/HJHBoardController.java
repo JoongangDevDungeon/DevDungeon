@@ -131,8 +131,8 @@ public class HJHBoardController {
 		return result+"";
 	}
 	@GetMapping("/board/HJHBoardDelete")
-	public String boardDelete(String comment_no) {
-		int result = HJHboardService.boardDelete(comment_no);
+	public String boardDelete(String board_no) {
+		int result = HJHboardService.boardDelete(board_no);
 		System.out.println(result+" 개의 게시글이 비활성화 되었습니다.");
 		return "redirect:/board/HJHBoard";
 	}
