@@ -83,8 +83,8 @@
                     <div style="width: 620px; height: 240px; float: left; text-align: left;">
                         <!-- 레벨, 아이콘, 이름 -->
                         <div style="width: 620px; height: 60px; box-sizing: border-box; padding-top: 7px; padding-left: 10px;">
-                            <span style="display: inline-block; width: 40px; height: 40px; border-radius: 8px; text-align: center; line-height: 38px; background-color: black; color: white;">
-                                ${profile.member_point}
+                            <span style="display: inline-block; width: 48px; height: 40px; border-radius: 8px; text-align: center; line-height: 38px; background-color: black; color: white;">
+                                Lv.${profile.member_level}
                             </span>
                             <span>
                                 <img src="/img/icon/icon${profile.icon_no}.png" style="display: inline-block; width: 40px; height: 40px;">

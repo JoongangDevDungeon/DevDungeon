@@ -39,7 +39,7 @@
                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                   로그인
                </button>
-               <form class="dropdown-menu" action="/login" method="post">
+               <div class="dropdown-menu" action="/login" method="post">
                   <div class="mb-3">
                      <label for="member_id" class="form-label">아이디</label>
                      <a href="/accountInquiry">계정찾기</a>
@@ -59,7 +59,7 @@
                   </div>
                   <button type="button" class="btn btn-primary" id="login_btn">로그인</button>
                   <button type="button" class="btn btn-secondary" onclick="location.href='/agree'">회원가입</button>
-               </form>
+               </div>
             </div>
       </li>
    </ul>

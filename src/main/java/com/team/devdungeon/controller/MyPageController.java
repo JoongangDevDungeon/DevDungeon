@@ -57,7 +57,7 @@ public class MyPageController {
     @PostMapping("/profile")
     public String profile(@RequestParam Map<String, Object> map, MultipartFile profile_img) {
         System.out.println(map);
-        System.out.println(profile_img.getOriginalFilename());
+        System.out.println(profile_img.getOriginalFilename().equals(""));
         return "redirect:/profile";
     }
 
