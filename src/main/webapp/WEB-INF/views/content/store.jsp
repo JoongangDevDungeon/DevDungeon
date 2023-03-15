@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
    <meta charset="UTF-8">
@@ -22,14 +23,14 @@
                   <div style="width: 200px; height: 90px; border: 1px solid #ccc; border-radius: 5px;">
                      <div style="width: 198px; height: 30px; line-height: 30px; background-color: black; color: white; border-radius: 5px 5px 0 0; box-sizing: border-box;">현재 아이콘 상태</div>
                      <div style="width: 200px; height: 30px;">
-                        <span style="display: block; width: 30px; height: 30px; line-height: 30px; margin-left: 5px; float: left;">Lv.1</span>
-                        <span style="display: block; width: 30px; height: 30px; margin-left: 5px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">
-                           <img src="/img/icon/icon1.png" style="width: 25px; height: 25px;">
+                        <span style="display: block; width: 30px; height: 30px; line-height: 30px; margin-left: 5px; float: left;">Lv.${profile.member_level}</span>
+                        <span style="display: block; width: 30px; height: 30px; margin-left: 10px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">
+                           <img src="data:image/png;base64,${profile.icon_image}" onerror="this.src='/img/Gazi_shortCut.png'" style="width: 25px; height: 25px;">
                         </span>
-                        <span style="display: block; width: 120px; height: 30px; margin-left: 5px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">유정목</span>
+                        <span style="display: block; width: 120px; height: 30px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">${profile.member_name}</span>
                      </div>
                      <div>
-                        <span style="display: block; width: 200px; height: 30px; line-height: 30px;">보유 포인트 : 12,000</span>
+                        <span style="display: block; width: 200px; height: 30px; line-height: 30px;">보유 포인트 : <fmt:formatNumber value="${profile.member_point }" pattern="#,###" /></span>
                      </div>
                   </div>
 
@@ -54,68 +55,38 @@
                   <!-- 아이콘 리스트 -->
                   <div style="width: 660px; height: 800px; margin: 0 auto;">
                      <!-- 아이콘 개별 -->
-                     <c:forEach step="1" begin="1" end="6" var="i">
+                     <c:forEach var="iconList" items="${iconList}">
                         <div style="width: 330px; height: 150px; margin-top: 10px; float: left;">
-                           <input type="checkbox" style="width: 20px; height: 20px; margin-top: 60px; margin-right: 5px; margin-left: 5px; float: left;">
+                           <input type="checkbox" style="width: 20px; height: 20px; margin-top: 60px; margin-right: 5px; margin-left: 5px; float: left;" value="${iconList.product_no}" onclick="alert(this.value);">
                            <div style="border: 1px solid #ccc; border-radius: 10px; width: 280px; height: 150px; float: left;">
                               <!-- 아이콘 이미지 -->
                               <div style="width: 60px; height: 150px;  float: left;">
                                  <span style="display: block; width: 45px; height: 45px; padding-top: 45px; box-sizing: border-box; margin: 0 auto;">
-                                    <img src="/img/icon/icon${i}.png" style="width: 45px; height: 45px;">
+                                    <img src="data:image/png;base64,${iconList.icon_image}" alt="${iconList.emo_img_name}" onerror="this.src='/img/Gazi_shortCut.png'" style="width: 45px; height: 45px;">
                                  </span>
                               </div>
                               <!-- 아이콘 내용 -->
                               <div style="width: 217px; height: 150px; float: left;">
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                    <span>아이콘 이름</span>
+                                    <span style="font-size: 18px; font-weight: bold;">${iconList.product_name}</span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">수량</span>
-                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">가격</span>
+                                    <span style="display: block; width: 100px; height: 37.5px; float: left;">재고:${iconList.product_sell_cnt}</span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">가격:<fmt:formatNumber value="${iconList.product_price }" pattern="#,###" /></span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">사용 시간</span>
-                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">등록일</span>
+                                    <span style="display: block; width: 100px; float: left;">등록일</span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;"><fmt:formatDate value="${iconList.product_update}" pattern="yyyy-MM-dd" type="date"/></span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">구매</span>
-                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">선물</span>
+                                    <span style="display: block; width: 100px; height: 37.5px; float: left;"><a href="">구매</a>&nbsp;|&nbsp;<a href="">선물</a></span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">${iconList.member_name}</span>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </c:forEach>
-                     <!-- 테스트용 이미지 -->
-                     <div style="width: 330px; height: 150px; margin-top: 10px; float: left;">
-                        <input type="checkbox" style="width: 20px; height: 20px; margin-top: 60px; margin-right: 5px; margin-left: 5px; float: left;">
-                        <div style="border: 1px solid #ccc; border-radius: 10px; width: 280px; height: 150px; float: left;">
-                           <!-- 아이콘 이미지 -->
-                           <div style="width: 60px; height: 150px;  float: left;">
-                                 <span style="display: block; width: 45px; height: 45px; padding-top: 45px; box-sizing: border-box; margin: 0 auto;">
-                                    <img src="data:image/png;base64,${imageDataString}" style="width: 45px; height: 45px;">
-                                 </span>
-                           </div>
-                           <!-- 아이콘 내용 -->
-                           <div style="width: 217px; height: 150px; float: left;">
-                              <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                 <span>아이콘 이름</span>
-                              </div>
-                              <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">수량</span>
-                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">가격</span>
-                              </div>
-                              <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">사용 시간</span>
-                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">등록일</span>
-                              </div>
-                              <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">구매</span>
-                                 <span style="display: block; width: 108px; height: 37.5px; float: left;">선물</span>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="mt-3" style="width: 660px; float: left;">
+                     <div class="mt-5 mb-4" style="width: 660px; float: left;">
                         <span>페이징</span>
                      </div>
                      <div class="mt-3" style="width: 660px; float: left; position: relative;">
