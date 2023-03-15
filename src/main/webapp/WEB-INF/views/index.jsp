@@ -15,7 +15,14 @@
          <div class="main">
             <div class="add1">광고1</div>
             <div class="content">
-               <!-- 이 곳을 수정하여 사용해주세요. -->
+			<!-- 이 곳을 수정하여 사용해주세요. -->
+				<!-- 임시 이미지파일 넣었음ㄴ -->
+				<img alt="index..." src="/img/index.jpg" style="width:1000px; height:700px; margin-top:50px;">
+               
+               
+               
+               
+               
             </div>
             <div class="add2">광고2</div>
          </div>
