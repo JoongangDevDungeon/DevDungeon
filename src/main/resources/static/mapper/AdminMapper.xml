@@ -273,7 +273,12 @@
 		ORDER BY event_no DESC
 		LIMIT #{startPage}, 10
 	</select>
-	
+<!-- 이벤트Del -->
+	<update id="AdminEventDel" parameterType="EventDTO">
+		UPDATE event SET status_no = if(#{status_no}=1,2,1)
+		WHERE event_no = #{event_no}
+	</update>
+
 <!-- 페이징 서치바 카운트 -->
 	<select id="adminEventCount" parameterType="HashMap" resultType="Integer">
 		SELECT COUNT(*) FROM event

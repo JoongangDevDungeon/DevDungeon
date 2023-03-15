@@ -10,6 +10,7 @@ import com.team.devdungeon.dto.AdminDTO;
 import com.team.devdungeon.dto.AnswerDTO;
 import com.team.devdungeon.dto.BoardDTO;
 import com.team.devdungeon.dto.CouponDTO;
+import com.team.devdungeon.dto.EventDTO;
 import com.team.devdungeon.dto.MemberDTO;
 import com.team.devdungeon.dto.QuestionBoardDTO;
 
@@ -59,6 +60,8 @@ public interface AdminDAO {
 	//이벤트
 	List<Map<String, Object>> AdminEvent(Map<String, Object> pages);
 	
+	void AdminEventDel(EventDTO eventDTO);
+	
 	//포인트 정산
 	List<Map<String, Object>> AdminPoint(Map<String, Object> pages);
 	
@@ -78,6 +81,7 @@ public interface AdminDAO {
 	int adminPointCount(Map<String, Object> pages);
 
 	int adminLogCount(Map<String, Object> pages);
+
 
 
 

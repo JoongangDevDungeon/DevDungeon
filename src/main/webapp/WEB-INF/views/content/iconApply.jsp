@@ -15,13 +15,19 @@
       $("#icon_file").change(function() { // 이미지 미리보기
          const icon_file = this.files[0];
          const reader = new FileReader();
-
-         $(".upload-name").val(icon_file.name);
-
          reader.onload = function(event) {
-            $("#previewText").css("display", "none");
-            $("#previewImg").css({"width" : "45px", "height" : "45px", "display" : "inline-block", "padding-top" : "3px", "box-sizing" : "border-box"});
-            $("#previewImg").attr("src", event.target.result);
+            const img = new Image();
+            img.onload = function () {
+               if(img.width > 45 || img.height > 45) {
+                  alert("45x45 픽셀을 넘어갑니다.\n이미지 크기를 확인해주세요.");
+                  return false;
+               }
+               $(".upload-name").val(icon_file.name);
+               $("#previewText").css("display", "none");
+               $("#previewImg").css({"width" : "45px", "height" : "45px", "display" : "inline-block", "padding-top" : "3px", "box-sizing" : "border-box"});
+               $("#previewImg").attr("src", event.target.result);
+            }
+            img.src = event.target.result;
          };
 
          reader.readAsDataURL(icon_file);
@@ -47,7 +53,7 @@
                               <span id="previewText" style="text-align: center;">미리<br>보기</span>
                               <img id="previewImg" style="display: none;"/>
                            </div>
-                           <input class="form-control upload-name" style="width: 440px; height: 50px; margin-left: 10px; float: left;" value="첨부파일" placeholder="첨부파일">
+                           <input class="form-control upload-name" style="width: 440px; height: 50px; margin-left: 10px; float: left;" value="이미지의 크기는 45x45 제한 됩니다." placeholder="이미지의 크기는 45x45 제한 됩니다.">
                            <label class="btn btn-primary" for="icon_file" style="width: 100px; height: 50px; line-height: 40px; margin-left: 10px; float: left;">아이콘 등록</label>
                            <input type="file" id="icon_file" name="icon_file" accept="image/*" style="display: none;">
                         </div>
