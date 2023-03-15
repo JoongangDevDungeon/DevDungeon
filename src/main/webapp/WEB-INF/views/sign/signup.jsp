@@ -11,17 +11,19 @@
 <script>
     $(function() {
 
+        var id_check_success = 1;
+
         $('#member_id').focusout(function (result){
-            let member_id = $('#member_id').val();
             $.ajax({
                 url: 'checkid',
                 type: 'post',
-                data: {"member_id" : member_id},
+                data: {"member_id" : $("#member_id").val()},
                 dataType: 'text',
                 success : function(result) {
                     if(result == "0"){
                         $("#checkId").html('가능');
                         $("#checkId").css('color', 'green');
+                        id_check_success = 0;
                     } else{
                         $("#checkId").html('불가능');
                         $("#checkId").css('color','red');
@@ -34,17 +36,31 @@
 
         });
 
-        $('#send_mail').click(function (){
-            let member_email = $('#member_email').val();
-            alert("사용자가 입력한 이메일"+member_email);
-
+        $('#send_mail').click(function (att_num){
             $.ajax({
                 url: 'send_mail',
                 type: 'post',
-                data : {"member_email" : member_email},
+                data : {"member_email" : $("#member_email").val(),"member_id" : $("#member_id").val()},
                 dataType: 'text',
-                success : function(send) {
-                    alert("메일 성공적으로 보냄.");
+                success : function(att_num) {
+
+                    alert("인증 번호가 발송 되었습니다."+att_num);
+                },
+                error : function() {
+                    alert("이미 등록되어 있는 이메일 입니다.");
+                }
+            });
+
+        });
+
+        $('#check_mail').click(function (){
+            $.ajax({
+                url: 'check_mail_num',
+                type: 'post',
+                data : {"member_email" : $("#member_email").val()},
+                dataType: 'text',
+                success : function() {
+                    alert("인증 번호가 발송 되었습니다.");
                 },
                 error : function() {
                     alert("요청 실패 재시도 바람.");
@@ -180,7 +196,7 @@
                 <br>
                 <div class="text_fild" id="verify_code">
                     <input class="text_box_id" type="text" name="verify_code" placeholder="인증번호를 입력하세요.">
-                    <button class="check_btn" id="verify_btn" onclick="location.href='/myinfo.do'">인증하기</button>
+                    <button class="check_btn" id="verify_btn" id="check_mail">인증하기</button>
                 </div>
                 <br>
 
