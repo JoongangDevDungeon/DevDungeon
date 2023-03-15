@@ -24,7 +24,6 @@ public class StoreController {
         ModelAndView mv = new ModelAndView("content/store");
 
         String remotePath = "/home/woori/ftp/files/" + "icon2.png";
-//        String filePath = "/Users/yjm/Downloads/" + "icon1.png";
 
         try {
             JSch jsch = new JSch();

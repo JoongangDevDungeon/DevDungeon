@@ -78,7 +78,7 @@
                 </div>
                 <div class="mt-3" style="margin: 0 auto; width: 810px; height: 242px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box;">
                     <div style="width: 180px; height: 240px; float: left;">
-                        <img id="previewImg" src="/img/Gazi_shortCut.png" style="width: 180px; height: 240px; border-radius: 10px 0px 0px 10px; object-fit: none;">
+                        <img id="previewImg" src="data:image/png;base64,${profile.profile_image}" style="width: 180px; height: 240px; border-radius: 10px 0px 0px 10px; object-fit: none;">
                     </div>
                     <div style="width: 620px; height: 240px; float: left; text-align: left;">
                         <!-- 레벨, 아이콘, 이름 -->
@@ -87,7 +87,7 @@
                                 Lv.${profile.member_level}
                             </span>
                             <span>
-                                <img src="/img/icon/icon${profile.icon_no}.png" style="display: inline-block; width: 40px; height: 40px;">
+                                <img src="data:image/png;base64,${profile.profile_image}" style="display: inline-block; width: 40px; height: 40px;">
 
                             </span>
                             <span style="display: inline-block; width: 500px; height: 45px; border-radius: 8px; text-align: left; box-sizing: border-box; padding-left: 5px; line-height: 40px; font-size: 20px;">
