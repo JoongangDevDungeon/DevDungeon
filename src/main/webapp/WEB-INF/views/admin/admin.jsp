@@ -29,17 +29,17 @@
 				<hr class="hr1">
 				<div class="mtc1">
 					<a class="mhov" href="/adminQnA">
-						답변대기문의
+						답변대기문의 1
 					</a>
 				</div>
 				<div class="mtc2">
 					<a class="mhov" href="/adminEvent">
-						이벤트 기간만료
+						이벤트 기간만료 1
 					</a>
 				</div>
 				<div class="mtc3">
 					<a class="mhov" href="/adminCoupon">
-						쿠폰 만료
+						쿠폰 만료 1
 					</a>
 				</div>
 			</div>
@@ -51,7 +51,7 @@
 			<div class="row">
 				<div class="mboard">
 				<!-- 표 그래프 -->
-					<div class="">
+					<div class="mbar">
 						<div class="card mb-4">
 							<div class="card-header">
 								<i class="fas fa-chart-bar me-1">일자별 요약</i>
@@ -66,7 +66,7 @@
 										
 									</tr>
 									<tr>
-										<td>2023-03-14</td>
+										<td>(날짜)</td>
 										<td>count(Log방문자)</td>
 										<td>count(question_board_status)</td>
 										<td>count(Log가입)</td>
@@ -79,20 +79,23 @@
 					</div>
 				
 					<!-- 막대 그래프 -->
-					<div class="col-xl-6 mbar">
-						<div class="card mb-4">
-							<div class="card-header">
-								<i class="fas fa-chart-bar me-1">일별 방문자 현황</i>
-							</div>
-							<div class="card-body">
-								<canvas id="myBarChart1"></canvas>
+					<div class="mbar">
+					
+						<div class="col-xl-6 mbar">
+							<div class="card mb-4">
+								<div class="card-header">
+									<i class="fas fa-chart-bar me-1">일별 방문자 현황</i>
+								</div>
+								<div class="card-body">
+									<canvas id="myBarChart1"></canvas>
+								</div>
 							</div>
 						</div>
 					</div>
 					
-					
 				</div>
 			</div>
+			
 		</div>
 	</div>
 </div>

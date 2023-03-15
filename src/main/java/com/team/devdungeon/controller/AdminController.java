@@ -174,7 +174,6 @@ public class AdminController {
 	}
 	
 	
-	
 	//로그 데이터
 	@GetMapping("/adminLog")
 	public ModelAndView adminLog(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
@@ -251,14 +250,13 @@ public class AdminController {
 	public String adminCouponCreate(HttpServletRequest request) {
 		CouponDTO couponDTO = new CouponDTO();
 		
-		String pageNo = request.getParameter("pageNo");
 		
 		couponDTO.setCoupon_name(request.getParameter("couponName"));
 		couponDTO.setCoupon_content(request.getParameter("couponContent"));
 		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("coupon")));
 		
 		adminService.adminCouponCreate(couponDTO);
-		return "redirect:/adminCoupon?pageNo="+pageNo;
+		return "redirect:/adminCoupon";
 	}
 	
 	@ResponseBody
@@ -307,11 +305,10 @@ public class AdminController {
 		mv.addObject("qna", qna);
 		return mv;
 	}
+	
 	@PostMapping("/adminAnswerComplete")
 	public String adminAnswerComplete(HttpServletRequest request) {
 		AnswerDTO answerDTO = new AnswerDTO();
-		
-		String pageNo = request.getParameter("pageNo");
 		
 		answerDTO.setAnswer_board_content(request.getParameter("answerContent"));
 		answerDTO.setQuestion_board_no(Integer.parseInt(request.getParameter("questionNo")));
@@ -321,7 +318,7 @@ public class AdminController {
 		int change = Integer.parseInt(request.getParameter("questionNo"));
 		adminService.adminAnswerChange(change);
 		
-		return "redirect:/adminQnA?pageNo="+pageNo;
+		return "redirect:/adminQnA";
 	}
 	
 	
