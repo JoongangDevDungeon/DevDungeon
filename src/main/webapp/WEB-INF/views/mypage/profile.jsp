@@ -72,7 +72,7 @@
                     <!-- 파일 등록 -->
                     <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
                         <input class="form-control upload-name" style="width: 440px; height: 50px; margin-left: 10px; float: left;" value="이미지의 크기는 180x240 제한 됩니다." placeholder="이미지의 크기는 180x240 제한 됩니다.">
-                        <label class="btn btn-primary" for="profile_img" style="width: 110px; height: 50px; line-height: 40px; margin-left: 10px; float: left;">이미지 등록</label>
+                        <label class="btn btn-primary" for="profile_img" style="width: 120px; height: 50px; line-height: 40px; margin-left: 10px; float: left;">이미지 등록</label>
                         <input type="file" id="profile_img" name="profile_img" accept="image/*" style="display: none;">
                     </div>
                 </div>

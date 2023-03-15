@@ -44,36 +44,51 @@ public class MyPageServiceImpl implements MyPageService {
             ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
             sftpChannel.connect();
 
-            InputStream inputStream = sftpChannel.get(remotePath + "/" + profile.getPfp_name() + "." + profile.getPfp_extension());
+            InputStream inputStream = null;
+            ByteArrayOutputStream baos = null;
+            byte[] buffer = null;
+            byte[] imageData = null;
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = inputStream.read(buffer)) > -1 ) {
-                baos.write(buffer, 0, len);
+            try {
+                inputStream = sftpChannel.get(remotePath + "/" + profile.getPfp_name() + "." + profile.getPfp_extension());
+
+                baos = new ByteArrayOutputStream();
+                buffer = new byte[1024];
+                int len;
+                while ((len = inputStream.read(buffer)) > -1 ) {
+                    baos.write(buffer, 0, len);
+                }
+                baos.flush();
+                imageData = baos.toByteArray();
+
+                String profile_image = Base64.getEncoder().encodeToString(imageData);
+                profile.setProfile_image(profile_image);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("프로필 이미지 로딩중 에러 발생");
             }
-            baos.flush();
-            byte[] imageData = baos.toByteArray();
 
-            String profile_image = Base64.getEncoder().encodeToString(imageData);
-            profile.setProfile_image(profile_image);
+            try {
+                inputStream = sftpChannel.get(remotePath + "/" + profile.getEmo_img_name() + "." + profile.getEmo_img_extension());
 
-            inputStream = sftpChannel.get(remotePath + "/" + profile.getEmo_img_name() + "." + profile.getEmo_img_extension());
+                baos = new ByteArrayOutputStream();
+                buffer = new byte[1024];
+                int len;
+                while ((len = inputStream.read(buffer)) > -1) {
+                    baos.write(buffer, 0, len);
+                }
+                baos.flush();
+                imageData = baos.toByteArray();
 
-            baos = new ByteArrayOutputStream();
-            buffer = new byte[1024];
-            len = 0;
-            while ((len = inputStream.read(buffer)) > -1 ) {
-                baos.write(buffer, 0, len);
+                String icon_image = Base64.getEncoder().encodeToString(imageData);
+                profile.setIcon_image(icon_image);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("아이콘 이미지 로딩중 에러 발생");
             }
-            baos.flush();
-            imageData = baos.toByteArray();
-
-            String icon_image = Base64.getEncoder().encodeToString(imageData);
-            profile.setIcon_image(icon_image);
-
             sftpChannel.exit();
             session.disconnect();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
