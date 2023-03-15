@@ -55,7 +55,7 @@ public class MyPageController {
     @PostMapping("/profile")
     public String profile(HttpSession session,@RequestParam Map<String, Object> map, MultipartFile profile_img) {
         map.put("member_id", (String)session.getAttribute("member_id"));
-        int result = myPageService.introUpdate(map, profile_img);
+        int result = myPageService.memberIntro(map, profile_img);
         return "redirect:/profile";
     }
 

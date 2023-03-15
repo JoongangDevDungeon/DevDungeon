@@ -22,7 +22,7 @@ public class MyPageDAO {
         return sqlSession.selectOne("mypage.profile", memberId);
     }
 
-    public int introUpdate(Map<String, Object> map) {
+    public int memberIntro(Map<String, Object> map) {
         int result = sqlSession.update("mypage.introUpdate", map);
 
         if (map.containsKey("pfp_name")) {

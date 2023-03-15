@@ -4,6 +4,7 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import com.team.devdungeon.service.StoreService;
+import com.team.devdungeon.util.SFTPFileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,31 +14,29 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Base64;
 
+import static com.team.devdungeon.util.SFTPFileUtil.*;
+
 @RequiredArgsConstructor
 @Controller
 public class StoreController {
 
     private final StoreService storeService;
+    private final SFTPFileUtil sftpFileUtil;
 
     @GetMapping("/store")
     public ModelAndView store() {
         ModelAndView mv = new ModelAndView("content/store");
-
-        String remotePath = "/home/woori/ftp/files/" + "icon2.png";
-
         try {
             JSch jsch = new JSch();
-
-            Session session = jsch.getSession(IconController.FTP_USER, IconController.FTP_HOST, IconController.FTP_PORT);
-            session.setPassword(IconController.FTP_PASSWORD);
+            Session session = jsch.getSession(FTP_USER, FTP_HOST, FTP_PORT);
+            session.setPassword(FTP_PASSWORD);
             session.setConfig("StrictHostKeyChecking", "no");
             session.connect();
-
             ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
             sftpChannel.connect();
 
             // 원격 서버에서 이미지 파일 읽어오기
-            InputStream inputStream = sftpChannel.get(remotePath);
+            InputStream inputStream = sftpChannel.get(remotePath + "icon2.png");
 
             // Inputstream -> byte[] 변환
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
