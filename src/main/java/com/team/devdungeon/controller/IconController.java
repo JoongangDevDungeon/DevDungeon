@@ -12,7 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.ServletContext;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -41,9 +44,7 @@ public class IconController {
         String extension = FilenameUtils.getExtension(originalFileName); // 파일 확장자
         String savedFileName = UUID.randomUUID().toString() + "." + extension; // 저장될 파일 이름
 
-        String filePath = "/Users/yjm/Downloads/" + originalFileName;
         String remotePath = "/home/woori/ftp/files/" + savedFileName;
-
         try {
             JSch jsch = new JSch();
 
@@ -55,7 +56,9 @@ public class IconController {
             ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
             sftpChannel.connect();
 
-            sftpChannel.put(filePath, remotePath);
+            InputStream inputStream = new ByteArrayInputStream(iconFile.getBytes());
+
+            sftpChannel.put(inputStream, remotePath);
 
             sftpChannel.exit();
             session.disconnect();
@@ -63,9 +66,9 @@ public class IconController {
             e.printStackTrace();
         }
 
-        System.out.println("원본 파일 위치, 파일명 : " + filePath);
-        System.out.println("저장 파일 위치, 파일명 : " + remotePath);
-        System.out.println("아이콘 신청 정보 : " + map);
+        //System.out.println("원본 파일 위치, 파일명 : " + filePath);
+//        System.out.println("저장 파일 위치, 파일명 : " + remotePath);
+//        System.out.println("아이콘 신청 정보 : " + map);
 
         return "index";
     }

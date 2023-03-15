@@ -10,8 +10,29 @@
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/sign.css">
 </head>
-<style>
-</style>
+<script>
+    $(function() {
+        $("#profile_img").change(function() { // 이미지 미리보기
+            const profile_img = this.files[0];
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function () {
+                    if(img.width > 180 || img.height > 240) {
+                        alert("180x240 픽셀을 넘어갑니다.\n이미지 크기를 확인해주세요.");
+                        return false;
+                    }
+                    $(".upload-name").val(profile_img.name);
+                    $("#previewText").css("display", "none");
+                    $("#previewImg").css({"width" : "180px", "height" : "240px", "border-radius" : "10px 0px 0px 10px", "object-fit" : "none", "display" : "inline-block"});
+                    $("#previewImg").attr("src", event.target.result);
+                }
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(profile_img);
+        });
+    });
+</script>
 <body>
 <%@include file="../top.jsp"%>
 <%@include file="myPageMenu.jsp"%>
@@ -44,31 +65,38 @@
             </div>
 
             <hr>
-            <div class="mt-3">
-                파일 업로드
-            </div>
+
             <!-- 유저 프로필 미리보기 -->
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="mt-3">
+                    <!-- 파일 등록 -->
+                    <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
+                        <input class="form-control upload-name" style="width: 440px; height: 50px; margin-left: 10px; float: left;" value="이미지의 크기는 180x240 제한 됩니다." placeholder="이미지의 크기는 180x240 제한 됩니다.">
+                        <label class="btn btn-primary" for="profile_img" style="width: 110px; height: 50px; line-height: 40px; margin-left: 10px; float: left;">이미지 등록</label>
+                        <input type="file" id="profile_img" name="profile_img" accept="image/*" style="display: none;">
+                    </div>
+                </div>
                 <div class="mt-3" style="margin: 0 auto; width: 810px; height: 242px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box;">
                     <div style="width: 180px; height: 240px; float: left;">
-                        <img src="/img/profile/test.jpeg" style="width: 180px; height: 240px; border-radius: 10px 0px 0px 10px;">
+                        <img id="previewImg" src="/img/Gazi_shortCut.png" style="width: 180px; height: 240px; border-radius: 10px 0px 0px 10px; object-fit: none;">
                     </div>
                     <div style="width: 620px; height: 240px; float: left; text-align: left;">
                         <!-- 레벨, 아이콘, 이름 -->
                         <div style="width: 620px; height: 60px; box-sizing: border-box; padding-top: 7px; padding-left: 10px;">
-                            <span style="display: inline-block; width: 45px; height: 45px; border-radius: 8px; text-align: center; line-height: 40px; background-color: black; color: white;">
-                                LV.1
+                            <span style="display: inline-block; width: 40px; height: 40px; border-radius: 8px; text-align: center; line-height: 38px; background-color: black; color: white;">
+                                ${profile.member_point}
                             </span>
                             <span>
-                                <img src="/img/icon/icon1.png" style="display: inline-block; width: 45px; height: 45px;">
+                                <img src="/img/icon/icon${profile.icon_no}.png" style="display: inline-block; width: 40px; height: 40px;">
+
                             </span>
                             <span style="display: inline-block; width: 500px; height: 45px; border-radius: 8px; text-align: left; box-sizing: border-box; padding-left: 5px; line-height: 40px; font-size: 20px;">
-                                유정목
+                                ${profile.member_name}
                             </span>
                         </div>
 
                         <div style="padding: 10px; padding-top: 5px; box-sizing: border-box;">
-                            <textarea class="form-control" rows="6" placeholder="간단한 자기소개를 입력해주세요."></textarea>
+                            <textarea class="form-control" rows="6" name="member_intro" placeholder="간단한 자기소개를 입력해주세요.">${profile.member_intro}</textarea>
                         </div>
                     </div>
                 </div>
