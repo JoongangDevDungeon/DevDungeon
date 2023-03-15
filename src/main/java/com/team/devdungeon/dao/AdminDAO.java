@@ -82,6 +82,8 @@ public interface AdminDAO {
 
 	int adminLogCount(Map<String, Object> pages);
 
+	void adminEventWrite(EventDTO eventDTO);
+
 
 
 

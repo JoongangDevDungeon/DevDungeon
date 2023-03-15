@@ -67,7 +67,7 @@ public class AdminController {
 			
 			return "redirect:/admin";
 		} else {
-			return "redirect:/adminLogin";
+			return "redirect:/adminLogin?error="+ 0;
 		}
 		
 	}
@@ -399,6 +399,24 @@ public class AdminController {
 
 		mv.addObject("list",list);
 		return mv;
+	}
+	
+	@GetMapping("/adminEventWrite")
+	public ModelAndView adminEventWrite() {
+		ModelAndView mv = new ModelAndView("./admin/adminEventWrite");
+		return mv;
+	}
+	
+	@PostMapping("/adminEventWrite")
+	public String adminEventWrite(HttpServletRequest request) {
+		EventDTO eventDTO = new EventDTO();
+		eventDTO.setEvent_content(request.getParameter("eventContent"));
+		eventDTO.setEvent_title(request.getParameter("eventTitle"));
+		eventDTO.setTag_no(Integer.parseInt(request.getParameter("eventTag")));
+		
+		adminService.adminEventWrite(eventDTO);
+		
+		return "redirect:/adminEvent";
 	}
 	
 	//이벤트 삭제
