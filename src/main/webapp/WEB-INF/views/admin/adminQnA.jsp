@@ -78,7 +78,7 @@ function moveNext(pageNo){
 								</c:when>
 								<c:otherwise>
 									<!-- 답변 수정으로 변경 해야할듯 -->
-									<button class="btn btn-primary">답변완료</button>
+									<div class="btn btn-primary btn1">답변완료</div>
 								</c:otherwise>
 							</c:choose>
 						</td>

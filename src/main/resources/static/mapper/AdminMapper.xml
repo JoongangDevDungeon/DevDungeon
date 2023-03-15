@@ -209,7 +209,7 @@
 <!-- QnA 답 변경 -->
 	<update id="adminAnswerChange" parameterType="Integer">
 		update question_board
-		set question_board_status = 0
+		set question_board_status = 1
 		where question_board_no = #{change}
 	</update>
 	
