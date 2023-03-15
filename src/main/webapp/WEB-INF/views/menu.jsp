@@ -5,12 +5,12 @@
       <li><a href="/notice">공지사항</a></li>
       <li>
          <div class="dropdown">
-            <button class="btn btn-secondary board_dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="board_dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                게시판
-            </button>
+            </a>
             <ul class="dropdown-menu none">
-               <li class="drop_menu"><a class="dropdown-item items" href="/board/HJHBoard">HJH</a></li>
-               <li class="drop_menu"><a class="dropdown-item items" href="/csjboard">CSJ</a></li>
+               <li class="drop_menu"><a class="dropdown-item items" href="/board/HJHBoard">HJH Board</a></li>
+               <li class="drop_menu"><a class="dropdown-item items" href="/csjboard">CSJ Board</a></li>
             </ul>
          </div>
       </li>

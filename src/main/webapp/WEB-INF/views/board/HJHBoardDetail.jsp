@@ -27,6 +27,7 @@ h6{
 }
 .message{ width:50px; cursor: pointer; }
 .message:hover{ background-color: #ccc; border-radius: 5px;}
+.dropdown-item{ height:50px; }
 </style>
 <script type="text/javascript">
 $(function(){ //제이쿼리 시작
