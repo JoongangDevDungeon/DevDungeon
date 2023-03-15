@@ -2,8 +2,18 @@
 <nav class="menu">
    <ul class="menu_ul">
       <li onclick="location.href='/index'"><img src="/img/logo.png" alt="가지"></li>
-      <li>공지사항</li>
-      <li>게시판</li>
+      <li onclick="location.href='/notice'">공지사항</li>
+      <li >
+         <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+               게시판
+            </button>
+            <ul class="dropdown-menu">
+               <li><a class="dropdown-item" href="/board/HJHBoard">HJH</a></li>
+               <li><a class="dropdown-item" href="/csjboard">CSJ</a></li>
+            </ul>
+         </div>
+      </li>
       <li><a href="/store">스토어</a></li>
       <li><a href="/level">레벨 등급표</a></li>
    </ul>

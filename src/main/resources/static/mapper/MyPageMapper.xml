@@ -25,4 +25,10 @@
                         LIMIT 1
     </select>
 
+    <update id="introUpdate" parameterType="HashMap">
+        UPDATE member
+            SET
+
+    </update>
+
 </mapper>

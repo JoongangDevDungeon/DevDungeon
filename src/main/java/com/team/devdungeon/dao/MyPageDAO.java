@@ -21,4 +21,10 @@ public class MyPageDAO {
     public MyPageDTO profile(String memberId) {
         return sqlSession.selectOne("mypage.profile", memberId);
     }
+
+    public int introUpdate(Map<String, Object> map) {
+        map = sqlSession.selectOne("mypage.introUpdate", map);
+        System.out.println(map);
+        return 0;
+    }
 }
