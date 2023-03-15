@@ -106,7 +106,7 @@ function check(){
 			<c:otherwise>"/board/HJHBoardWrite"</c:otherwise>
 		</c:choose>
 		method="post" onsubmit="return check()" enctype="multipart/form-data">
-				<select class="board_tag" name="boardd_tag" id="board_tag">
+				<select class="board_tag" name="board_tag" id="board_tag">
 					<option value="0">구분</option>
 					<option value="1">잡담</option>
 					<option value="2">유머</option>

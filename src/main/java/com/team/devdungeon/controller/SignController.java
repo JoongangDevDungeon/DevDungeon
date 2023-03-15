@@ -1,10 +1,12 @@
 package com.team.devdungeon.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.team.devdungeon.dto.SignDTO;
+import com.team.devdungeon.service.SignService;
+import com.team.devdungeon.util.Email;
 import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.team.devdungeon.dto.SignDTO;
-import com.team.devdungeon.service.SignService;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 @Controller
 public class SignController {
@@ -32,67 +34,75 @@ public class SignController {
         return mv;
     }
 
-    @GetMapping("/agree")
+    @GetMapping("/agree")/*약관 동의 1, 2, 3*/
     public String agree() {
         return "sign/agree";
     }
 
-    @PostMapping("/agree")
+    @PostMapping("/agree")/*약관 동의 1, 2, 3*/
     public String agree(HttpServletRequest request, RedirectAttributes agree) {
         String agree1 = request.getParameter("agree1");
         String agree2 = request.getParameter("agree2");
         String agree3 = request.getParameter("agree3");
 
-
-        if(agree3 != null && agree3.equals("check")) {
-            System.out.println("선택 약관 동의");
-        }
         if( (agree1 != null && agree1.equals("check")) && (agree2 != null && agree2.equals("check")) ) {
-
             agree.addAttribute("Service", agree1);
             agree.addAttribute("Privacy", agree2);
             agree.addAttribute("Email", agree3);
             return "redirect:/signup";
         }
-
         return "redirect:/agree";
     }
 
-
-    @GetMapping("/signup")
+    @GetMapping("/signup")/*약관 동의 1, 2, 3*/
     public ModelAndView signup(@RequestParam("Service") String agree1, @RequestParam("Privacy") String agree2, @RequestParam(value = "Email", defaultValue = "none") String agree3) {
-
-      /*  System.out.println(agree1);*//*check 값 넘어옴*/
         ModelAndView agrees = new ModelAndView("sign/signup");
-
         agrees.addObject("agree1", agree1);
         agrees.addObject("agree2", agree2);
         agrees.addObject("agree3", agree3);
-
-
         return agrees;
     }
+    @PostMapping("/checkid")/*아이디 중복 체크*/
+    @ResponseBody
+    public String checkid(HttpServletRequest request){
+        SignDTO signDTO = new SignDTO();
+        signDTO.setMember_id((request.getParameter("member_id")));
+        SignDTO result = signService.checkid(signDTO);
+        System.err.println("id 중복 체크"+result.getCount());
+        if (result.getCount() == 0){
+            return "0";/*중복 없음*/
+        }else{
+            return "1";/*중복 있음*/
+        }
+    }
 
-    @PostMapping("/send_mail")
+    @PostMapping("/send_mail")/*인증 번호 전송하면서 임시 테이블에(id, email, code) 저장함*/
     @ResponseBody
     public  String Mail(HttpServletRequest request) throws EmailException {
         SignDTO signDTO = new SignDTO();
+        String att_num = Email.att_num();/*인증번호 가져옴*/
         signDTO.setMember_email(request.getParameter("member_email"));
+        signDTO.setMember_id(request.getParameter("member_id"));
+        signDTO.setVerify_code(att_num);
+        SignDTO result = signService.mail_code(signDTO);
 
-        System.err.println("자바에들어온 이메일"+signDTO.getMember_email());
-
-       /* String title = "가지 회원가입 인증번호 입니다.";
-        String msg = "123456";
-        Email.simpleMail("kingdori902@naver.com","test",title, msg);*/
-     /*   System.out.println("연결됨");*/
+        String user_mail = signDTO.getMember_email();
+        String title = "가지 회원가입 인증번호 입니다.";
+        String msg = "회원 가입 인증번호<br><div style='color:red'>"+att_num+"</div>";
+        Email.Mail(user_mail,"",title, msg);
 
         return "";
     }
 
+    @PostMapping("/check_mail_num")/*인증 번호가 동일한지 체크*/
+    @ResponseBody
+    public  String check_mail_num(HttpServletRequest request){
+        SignDTO signDTO = new SignDTO();
+        return "";
+    }
 
-
-    @PostMapping("/signup")
-    public String signup(HttpServletRequest request) {/*회원가입*/
+    @PostMapping("/signup")/*최종 회원가입*/
+    public String signup(HttpServletRequest request) {
         SignDTO signDTO = new SignDTO();
 
         signDTO.setAgree1(request.getParameter("agree1"));
@@ -111,24 +121,9 @@ public class SignController {
         signDTO.setMember_tel(request.getParameter("member_tel"));
         signDTO.setVerify_code((request.getParameter("verify_code")));
 
-
-
         signService.signup(signDTO);
 
         return "redirect:/index";
-    }
-    @PostMapping("/checkid")/*아이디 체크*/
-    @ResponseBody
-    public String checkid(HttpServletRequest request){
-
-        SignDTO signDTO = new SignDTO();
-        signDTO.setMember_id((request.getParameter("member_id")));
-        SignDTO result = signService.checkid(signDTO);
-        if (result.getCount() == 0){
-            return "0";/*중복 없음*/
-        }else{
-            return "1";/*중복 있음*/
-        }
     }
 
     @GetMapping("/accountInquiry")

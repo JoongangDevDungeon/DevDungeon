@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sign">
 
-    <insert id="signup">
+    <insert id="signup"><!--최종 회원가입-->
         INSERT INTO member
             SET
                 member_name = #{member_name},
@@ -14,9 +14,17 @@
     </insert>
 
     <select id="check" parameterType="SignDTO" resultType="SignDTO">
-        SELECT COUNT(*) as count, member_id
+        SELECT COUNT(*) as COUNT, member_id
             FROM member
                 WHERE member_id = #{member_id}
     </select>
+
+    <insert id="code">
+        INSERT INTO email_verify
+            SET
+                member_email = #{member_email},
+                member_id = #{member_id},
+                email_code = #{verify_code}
+    </insert>
 
 </mapper>

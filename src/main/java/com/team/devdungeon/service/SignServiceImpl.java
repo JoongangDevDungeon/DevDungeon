@@ -29,4 +29,13 @@ public class SignServiceImpl implements SignService {
 
         return signDAO.checkid(signDTO);
     }
+
+
+    @Override
+    public SignDTO mail_code(SignDTO signDTO) {
+        signDAO.mail_code(signDTO);
+        return signDTO;
+    }
+
+
 }

@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/sign.css">
 </head>
+<script>
+    $(function() {
+        var msg = "${error}";
+        if(msg == "password_fail") {
+            alert("비밀번호가 틀렸습니다.\n다시 확인해주세요.");
+        }
+    });
+</script>
 <body>
 <%@include file="../top.jsp"%>
 <%@include file="myPageMenu.jsp"%>

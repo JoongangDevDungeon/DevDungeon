@@ -30,7 +30,7 @@ h6{
 	display: inline-block;
 	width:50px;
 	height:30px;
-	background-color: #0080f0;
+	background-color: red;
 	line-height: 30px;
 	color:white;
 	border-radius: 5px;
@@ -50,7 +50,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+(pageNo+1);
 		}else{ 
-			location.href="/board/HJHBoard?pageNo="+(pageNo+1); 
+			location.href="/notice?pageNo="+(pageNo+1); 
 		}
 		
 	}else if(pageNo == ${pages.lastPage }){
@@ -58,7 +58,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 		if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
 			location.href=url+"?searchType="+ searchType.value+"&searchValue="+searchValue.value+"&pageNo="+pageNo;
 		}else{ 
-			location.href="/board/HJHBoard?pageNo="+pageNo;
+			location.href="/notice?pageNo="+pageNo;
 		}
 	}
 }
@@ -85,9 +85,9 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 						<tr>
 							<td><span class="notice_tag">${notice.tag_name }</span></td>
 							<td>${notice.nno }</td>
-							<td class="title"><a href="/board/HJHBoardDetail?board_no=${notice.notice_no }">${notice.notice_title }
+							<td class="title"><a href="/noticeDetail?notice_no=${notice.notice_no }">${notice.notice_title }
 							<c:if test="${ notice.comment_cnt ne 0 }"><h6>${ notice.comment_cnt }</h6></c:if></a></td>
-							<td>${notice.member_id}</td>
+							<td>${notice.admin_id}</td>
 							<td>${notice.notice_date }</td>
 							<td>${notice.notice_read }</td>
 							<td>${notice.notice_like }</td>
@@ -121,8 +121,8 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 				</div>
 				<!-- 글쓰기 -->
 				<div class="write">
-					<c:if test="${sessionScope.admin_id ne null }">글스끼
-						<button class="write_btn" onclick="location.href='/board/HJHBoardWrite'">글쓰기</button>
+					<c:if test="${sessionScope.id eq 'admin' }">
+						<button class="write_btn" onclick="location.href='/noticeWrite'">글쓰기</button>
 					</c:if>
 				</div>
 			</div>

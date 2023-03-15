@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+
+    <select id="checkPassword" parameterType="HashMap" resultType="Integer">
+        SELECT COUNT(*)
+            FROM member
+                WHERE
+                    member_id = #{member_id}
+                AND
+                    member_pw = #{member_pw}
+    </select>
+
+    <select id="profile" parameterType="String" resultType="MyPageDTO">
+        SELECT m.member_no, m.member_id, m.member_name, m.icon_no, p.member_point, l.member_level, pif.pfp_name, pif.pfp_extension
+            FROM member m
+                JOIN point p ON m.member_no = p.member_no
+                JOIN level l ON p.member_point >= l.level_to_point
+                LEFT JOIN profile_image_file pif ON m.member_no = pif.member_no
+            WHERE
+                m.member_id = #{memberId}
+            AND
+                p.member_point >= l.level_to_point
+                    ORDER BY l.member_level DESC
+                        LIMIT 1
+    </select>
+
+</mapper>
