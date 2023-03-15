@@ -12,6 +12,20 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
 </head>
+<script type="text/javascript">
+function couponbtn() {
+	let couponKind = document.getElementById("couponKind").value;
+	let couponName = document.getElementById("couponName").value;
+	let couponContent = document.getElementById("couponContent").value;
+	
+	if(couponKind === "쿠폰종류를 선택하세요" || couponName === "" || couponContent === ""){
+		alert("모든 항목을 입력해주세요");
+	} else{
+		document.getElementById("couponForm").submit();
+	}
+}
+
+</script>
 <body>
 <div id="container">
 	<div class="header">
@@ -23,19 +37,19 @@
 		<div class="container">
 			<h1>관리자 쿠폰생성</h1>
 			<hr class="hr1">
-			
-			<div>
-				<form action="/adminCouponCreate" method="post">
-					<select name="coupon">
+			<br><br>
+			<div class="admincoupon">
+				<form action="/adminCouponCreate" method="post" id="couponForm">
+					<select class="form-select" name="coupon" id="couponKind">
 						<option selected="selected">쿠폰종류를 선택하세요</option>
 	    				<option value="1">쿠폰발급</option>
-	    				<option value="">x</option>
-	    				<option value="">x</option>
-	    				<option value="">x</option>
-					</select>
-					<input type="text" name="couponName" placeholder="쿠폰이름 지정해주세요">
-					<input type="text" name="couponContent" placeholder="쿠폰내용을 지정해주세요">
-					<button type="submit">쿠폰 생성하기</button>
+	    				<option value="2">x</option>
+	    				<option value="3">x</option>
+	    				<option value="4">x</option>
+					</select><br>
+					<input type="text" class="form-control" name="couponName" id="couponName" placeholder="쿠폰이름 지정해주세요"><br>
+					<input type="text" class="form-control coupontxt" name="couponContent" id="couponContent" placeholder="쿠폰내용을 지정해주세요"><br>
+					<button class="btn btn-success" type="button" onclick="couponbtn()">쿠폰 생성하기</button>
 				</form>
 			</div>
 		

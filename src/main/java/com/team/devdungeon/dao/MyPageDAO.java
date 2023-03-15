@@ -22,9 +22,20 @@ public class MyPageDAO {
         return sqlSession.selectOne("mypage.profile", memberId);
     }
 
-    public int introUpdate(Map<String, Object> map) {
-        map = sqlSession.selectOne("mypage.introUpdate", map);
-        System.out.println(map);
-        return 0;
+    public int memberIntro(Map<String, Object> map) {
+        int result = sqlSession.update("mypage.introUpdate", map);
+
+        if (map.containsKey("pfp_name")) {
+            int count = sqlSession.selectOne("mypage.pfpCount", map.get("member_id"));
+            if(count == 0) {
+                System.out.println("인서트");
+                result = sqlSession.insert("mypage.pfpInsert", map);
+            } else {
+                System.out.println("업데이트");
+                result = sqlSession.update("mypage.pfpUpdate", map);
+            }
+        }
+
+        return result;
     }
 }

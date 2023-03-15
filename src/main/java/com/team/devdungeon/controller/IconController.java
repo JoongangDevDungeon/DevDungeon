@@ -1,7 +1,10 @@
 package com.team.devdungeon.controller;
 
-import com.jcraft.jsch.*;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
 import com.team.devdungeon.service.IconService;
+import com.team.devdungeon.util.SFTPFileUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
@@ -11,26 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.ServletContext;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.UUID;
+
+import static com.team.devdungeon.util.SFTPFileUtil.*;
 
 @RequiredArgsConstructor
 @Controller
 public class IconController {
-    public static final String FTP_USER = "woori";
-    public static final String FTP_PASSWORD = "0326655522";
-    public static final String FTP_HOST = "172.30.1.21";
-    public static final int FTP_PORT = 22;
 
     private final IconService iconService;
-    private final ServletContext context;
+    private final SFTPFileUtil sftpFileUtil;
 
     @GetMapping("/iconApply")
     public String iconApply() {
@@ -44,31 +41,24 @@ public class IconController {
         String extension = FilenameUtils.getExtension(originalFileName); // 파일 확장자
         String savedFileName = UUID.randomUUID().toString() + "." + extension; // 저장될 파일 이름
 
-        String remotePath = "/home/woori/ftp/files/" + savedFileName;
         try {
             JSch jsch = new JSch();
-
             Session session = jsch.getSession(FTP_USER, FTP_HOST, FTP_PORT);
             session.setPassword(FTP_PASSWORD);
             session.setConfig("StrictHostKeyChecking", "no");
             session.connect();
-
             ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
             sftpChannel.connect();
 
             InputStream inputStream = new ByteArrayInputStream(iconFile.getBytes());
 
-            sftpChannel.put(inputStream, remotePath);
+            sftpChannel.put(inputStream, remotePath + "testName2.png");
 
             sftpChannel.exit();
             session.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        //System.out.println("원본 파일 위치, 파일명 : " + filePath);
-//        System.out.println("저장 파일 위치, 파일명 : " + remotePath);
-//        System.out.println("아이콘 신청 정보 : " + map);
 
         return "index";
     }

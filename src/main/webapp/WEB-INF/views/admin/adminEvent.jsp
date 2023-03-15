@@ -78,7 +78,7 @@ function moveNext(pageNo){
 			</table>
 			
 			<!-- 이벤트 글쓰기 버튼 -->
-			<div><button onclick="location.href='/adminEventWrite'">이벤트 글쓰기</button></div>
+			<div><button class="btn btn-primary" onclick="location.href='/adminEventWrite'">이벤트 글쓰기</button></div>
 			
 			<!-- 페이징 -->
 			<div class="pagingBox">
