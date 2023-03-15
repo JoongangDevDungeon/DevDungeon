@@ -35,6 +35,7 @@ h6{
 	border-radius: 5px;
 	font-weight: bold;
 }
+.none{ width:252px; height:104px; line-height:48px; padding:0; margin:0; }
 </style>
 <script type="text/javascript">
 

@@ -25,6 +25,7 @@ h6{
 	background-color: red;
 	border-radius: 5px;
 }
+.none{ width:252px; height:104px; line-height:48px; padding:0; margin:0; }
 </style>
 <script type="text/javascript">
 $(function(){ //제이쿼리 시작
