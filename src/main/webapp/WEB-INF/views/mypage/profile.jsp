@@ -87,7 +87,7 @@
                                 Lv.${profile.member_level}
                             </span>
                             <span>
-                                <img src="data:image/png;base64,${profile.profile_image}" style="display: inline-block; width: 40px; height: 40px;">
+                                <img src="data:image/png;base64,${profile.icon_image}" style="display: inline-block; width: 40px; height: 40px;">
 
                             </span>
                             <span style="display: inline-block; width: 500px; height: 45px; border-radius: 8px; text-align: left; box-sizing: border-box; padding-left: 5px; line-height: 40px; font-size: 20px;">

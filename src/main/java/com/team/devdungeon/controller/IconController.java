@@ -52,7 +52,7 @@ public class IconController {
 
             InputStream inputStream = new ByteArrayInputStream(iconFile.getBytes());
 
-            sftpChannel.put(inputStream, remotePath + "testName.png");
+            sftpChannel.put(inputStream, remotePath + "testName2.png");
 
             sftpChannel.exit();
             session.disconnect();

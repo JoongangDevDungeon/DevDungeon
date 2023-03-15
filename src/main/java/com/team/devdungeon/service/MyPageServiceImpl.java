@@ -58,6 +58,20 @@ public class MyPageServiceImpl implements MyPageService {
             String profile_image = Base64.getEncoder().encodeToString(imageData);
             profile.setProfile_image(profile_image);
 
+            inputStream = sftpChannel.get(remotePath + "/" + profile.getEmo_img_name() + "." + profile.getEmo_img_extension());
+
+            baos = new ByteArrayOutputStream();
+            buffer = new byte[1024];
+            len = 0;
+            while ((len = inputStream.read(buffer)) > -1 ) {
+                baos.write(buffer, 0, len);
+            }
+            baos.flush();
+            imageData = baos.toByteArray();
+
+            String icon_image = Base64.getEncoder().encodeToString(imageData);
+            profile.setIcon_image(icon_image);
+
             sftpChannel.exit();
             session.disconnect();
         } catch (Exception e) {
