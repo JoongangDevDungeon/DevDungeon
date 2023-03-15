@@ -26,7 +26,6 @@ public class MessageController {
     	ModelAndView mv = new ModelAndView("message/message");
     	System.out.println(request.getParameter("receiver"));
     	mv.addObject("receiver",request.getParameter("receiver"));
-    	
         return mv;
     }
 

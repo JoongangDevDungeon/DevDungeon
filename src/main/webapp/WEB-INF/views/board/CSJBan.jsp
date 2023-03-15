@@ -71,44 +71,70 @@
 
 </script>
 </head>
+<style>
+.singo_top{
+	width: 100%; 
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 20px;
+	color:white;
+	font-weight: bold;
+	background-color: #A267AC;
+	border-bottom: 2px solid #ccc;
+}
+.singo_mid{
+	width:100%;
+	height:400px;
+}
+#btnBan{
+	border-top: 2px solid #ccc;
+	font-weight: bold;	
+	width: 100%; 
+	height: 60px; 
+	background-color: #A267AC; 
+	color:white; border:none; 
+	border-radius: 5px;
+}
+#btnBan:hover{ background-color: #d0abd6; }
+input{
+	font-weight: bold;
+	margin:20px 0px 20px 10px;
+ } 
+</style>
 <body>
-	<div>
-		<h1>신고창</h1>
+	<div style="width:100%; text-align: center;">
+		<img src="/img/logo.png" alt="가지" style="width:220px;">
 	</div>
-	<div>
+	<div style="font-weight: bold;">
 		<div id="banMember"></div>
 		<div id="bantype"></div>
 	</div>
-	<div style="width: 500px; height: 500px; background-color: pink;">
-		<div style="width: 500px; height: 50px; background-color: gray;">신고사유</div>
+	<div style="width:100%; height: 100%;">
+		<div class="singo_top" style="">신고사유</div>
 		<form action="csjBan" id="formBan" method="post">
+		<div class="singo_mid">
 			<input type="hidden" name="banMember" id="banMem"> 
 			<input type="hidden" name="formbanType" id="formbanType">
 			<input type="hidden" name="banBoard" id="banBoard">
 			<input type="hidden" name="banComment" id="banComment">
-			
 			<input type="radio" id="banChoice1" name="banWhy" value="스팸홍보/도배글입니다.">
-			<label for="banChoice1">스팸홍보/도배글입니다.</label><br> 
-			<input
-				type="radio" id="banChoice2" name="banWhy" value="음란물입니다.">
-			<label for="banChoice2">음란물입니다.</label><br> 
-			<input type="radio"
-				id="banChoice3" name="banWhy" value="불법정보를 포함하고 있습니다."> <label
-				for="banChoice3">불법정보를 포함하고 있습니다.</label><br> 
-			<input
-				type="radio" id="banChoice4" name="banWhy" value="청소년에게 유해한 내용입니다.">
-			<label for="banChoice4">청소년에게 유해한 내용입니다.</label><br> 
-			<input
-				type="radio" id="banChoice5" name="banWhy" value="욕설/혐오/차별적 표현입니다.">
-			<label for="banChoice5">욕설/혐오/차별적 표현입니다.</label><br> 
-			<input
-				type="radio" id="banChoice6" name="banWhy" value="기타"> <label
-				for="banChoice6">기타</label><br> 
-			<input type="text" style="width:500px;height:200px;" id="banWrite" name="banWrite" placeholder="신고 사유를 직접 입력하세요">
-			<input type="button"
-				id="btnBan"
-				style="width: 500px; height: 50px; background-color: red color:white"
-				value="신고하기">
+			<label for="banChoice1">스팸홍보/도배글입니다.</label><br>
+			<input type="radio" id="banChoice2" name="banWhy" value="음란물입니다.">
+			<label for="banChoice2">음란물입니다.</label><br>
+			<input type="radio"	id="banChoice3" name="banWhy" value="불법정보를 포함하고 있습니다.">
+			<label for="banChoice3">불법정보를 포함하고 있습니다.</label><br>
+			<input type="radio" id="banChoice4" name="banWhy" value="청소년에게 유해한 내용입니다.">
+			<label for="banChoice4">청소년에게 유해한 내용입니다.</label><br>
+			<input type="radio" id="banChoice5" name="banWhy" value="욕설/혐오/차별적 표현입니다.">
+			<label for="banChoice5">욕설/혐오/차별적 표현입니다.</label><br>
+			<input type="radio" id="banChoice6" name="banWhy" value="기타"> 
+			<label for="banChoice6">기타</label><br>
+			<input type="text" style="width: 97%; height:40px; border-radius: 5px;" id="banWrite" name="banWrite" placeholder="신고 사유를 직접 입력하세요">
+		</div>
+			<div style="width:100%; border-top: 2px solid #ccc;">
+				<button id="btnBan">신고하기</button>
+			</div>
 		</form>
 	</div>
 </body>

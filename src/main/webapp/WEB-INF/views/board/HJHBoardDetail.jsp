@@ -80,18 +80,18 @@ $(function(){ //제이쿼리 시작
 		var no = $(this).val();
 		$("#banType").val("댓글 신고");
 		$("#banCommentWriter").val($("#commentWriter"+no).val());
-		window.open("/csjBan?cno="+no, '신고팝업', 'width=510px,height=600px,scrollbars=yes');
+		window.open("/csjBan?cno="+no, '신고팝업', 'width=450px,height=500px,scrollbars=yes');
 	});
 	$("#boardBtnBan").click(function() {
 		var no = $(this).val();
 		$("#banType").val("게시글 신고");
-		window.open("/csjBan", '신고팝업', 'width=510px,height=600px,scrollbars=yes');
+		window.open("/csjBan", '신고팝업', 'width=450px,height=500px,scrollbars=yes');
 	});
 	
 	$("#message").click(function(){
 		let receiver = $("#detailWriter").val();
 		
-		window.open("/message?receiver="+receiver, '쪽지', 'width=510px,height=600px,scrollbars=yes');
+		window.open("/message?receiver="+receiver, '쪽지', 'width=510px,height=450px,scrollbars=yes');
 	});
 	
 });//제이쿼리 끝
