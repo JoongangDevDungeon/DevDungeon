@@ -111,11 +111,9 @@ function check(){
 					<option value="1">잡담</option>
 					<option value="2">유머</option>
 				</select>
-				<input type="text" name="writeTitle" id="writeTitle"class="writeTitle" 
-				placeholder="제목을 입력하세요" <c:if test="${boardDetail.board_title ne null }">value="${ boardDetail.board_title }"</c:if>>
-				<textarea name="writeContent" id="writeContent" class="writeContent" 
-				placeholder="내용을 입력하세요" ><c:if test="${boardDetail.board_content ne null }">${ boardDetail.board_content }</c:if></textarea>
-				<input type="file" class="fileUpload">
+				<input type="text" name="writeTitle" id="writeTitle"class="writeTitle" placeholder="제목을 입력하세요" <c:if test="${boardDetail.board_title ne null }">value="${ boardDetail.board_title }"</c:if>>
+				<textarea name="writeContent" id="writeContent" class="writeContent" placeholder="내용을 입력하세요" ><c:if test="${boardDetail.board_content ne null }">${ boardDetail.board_content }</c:if></textarea>
+				<input type="file" class="fileUpload" name="fileUpload">
 				<div class="btnBox">
 				<button class="writeBtn" style="background-color: #6867AC;">
 				<c:choose>
@@ -129,7 +127,7 @@ function check(){
 	</div>
 	<div class="add2">광고2</div>
 </div>
-	<%@ include file="../footer.jsp"%>
+<%@ include file="../footer.jsp"%>
 
 </body>
 </html>

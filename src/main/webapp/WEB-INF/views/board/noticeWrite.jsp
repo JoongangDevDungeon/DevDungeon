@@ -159,7 +159,12 @@ a:hover {
 						<textarea name="writeContent" id="writeContent"	class="writeContent" placeholder="내용을 입력하세요"><c:if test="${noticeDetail.notice_content ne null }">${ noticeDetail.notice_content }</c:if></textarea>
 						<input type="file" class="fileUpload">
 						<div class="btnBox">
-							<button class="writeBtn" style="background-color: #6867AC;">저장</button>
+							<button class="writeBtn" style="background-color: #6867AC;">
+							<c:choose>
+								<c:when test="${noticeDetail.notice_no ne null }">수정</c:when>
+								<c:otherwise>저장</c:otherwise>
+							</c:choose>
+							</button>
 						</div>
 					</form>
 				</div>
