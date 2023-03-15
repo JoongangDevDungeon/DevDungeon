@@ -12,11 +12,12 @@
     </select>
 
     <select id="profile" parameterType="String" resultType="MyPageDTO">
-        SELECT m.member_no, m.member_id, m.member_name, m.icon_no, p.member_point, l.member_level, pif.pfp_name, pif.pfp_extension
+        SELECT m.member_no, m.member_id, m.member_name, m.member_intro, m.icon_no, p.member_point, l.member_level, pif.pfp_name, pif.pfp_extension, emo.emo_img_name , emo.emo_img_extension
             FROM member m
                 JOIN point p ON m.member_no = p.member_no
                 JOIN level l ON p.member_point >= l.level_to_point
                 LEFT JOIN profile_image_file pif ON m.member_no = pif.member_no
+        LEFT JOIN product emo ON m.icon_no = emo.product_no
             WHERE
                 m.member_id = #{memberId}
             AND
@@ -24,5 +25,39 @@
                     ORDER BY l.member_level DESC
                         LIMIT 1
     </select>
+
+    <update id="introUpdate" parameterType="HashMap">
+        UPDATE member
+            SET
+                member_intro = #{member_intro}
+            WHERE
+                member_id = #{member_id}
+    </update>
+
+    <select id="pfpCount" parameterType="String" resultType="Integer">
+        SELECT COUNT(*)
+            FROM profile_image_file
+                WHERE
+                    member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+    </select>
+
+    <insert id="pfpInsert" parameterType="HashMap">
+        INSERT INTO profile_image_file
+            SET
+                member_no = (SELECT member_no FROM member WHERE member_id = #{member_id}),
+                pfp_name = #{pfp_name},
+                pfp_extension = #{pfp_extension},
+                pfp_size = #{pfp_size}
+    </insert>
+
+    <update id="pfpUpdate" parameterType="HashMap">
+        UPDATE profile_image_file
+            SET
+                pfp_name = #{pfp_name},
+                pfp_extension = #{pfp_extension},
+                pfp_size = #{pfp_size}
+            WHERE
+                member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+    </update>
 
 </mapper>

@@ -174,7 +174,6 @@ public class AdminController {
 	}
 	
 	
-	
 	//로그 데이터
 	@GetMapping("/adminLog")
 	public ModelAndView adminLog(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
@@ -250,7 +249,7 @@ public class AdminController {
 	@PostMapping("/adminCouponCreate")
 	public String adminCouponCreate(HttpServletRequest request) {
 		CouponDTO couponDTO = new CouponDTO();
-				
+
 		couponDTO.setCoupon_name(request.getParameter("couponName"));
 		couponDTO.setCoupon_content(request.getParameter("couponContent"));
 		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("coupon")));
@@ -305,6 +304,7 @@ public class AdminController {
 		mv.addObject("qna", qna);
 		return mv;
 	}
+	
 	@PostMapping("/adminAnswerComplete")
 	public String adminAnswerComplete(HttpServletRequest request) {
 		AnswerDTO answerDTO = new AnswerDTO();

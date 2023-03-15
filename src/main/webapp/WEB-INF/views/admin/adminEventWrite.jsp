@@ -23,13 +23,15 @@
 		<div class="container">
 			<h1>관리자 이벤트 작성</h1>
 			<hr class="hr1">
-			                   
-		<form action="/adminEventWrite" method="post">
-			<input type="hidden" name="eventTag" value="4">
-			<input type="text" name="eventTitle" placeholder="이벤트 제목입력"><br>
-			<input type="textarea" name="eventContent" placeholder="이벤트 내용입력"><br>
-			<button type="submit">게시글 올리기</button>
-		</form>
+			
+			<div>
+				<form action="/adminEventWrite" method="post">
+					<input type="hidden" name="eventTag" value="4">
+					<input type="text" name="eventTitle" placeholder="이벤트 제목입력"><br>
+					<input type="textarea" name="eventContent" placeholder="이벤트 내용입력"><br>
+					<button type="submit">게시글 올리기</button>
+				</form>
+			</div>
 	    
 			
 		
