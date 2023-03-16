@@ -131,6 +131,16 @@ function subComment_check(){
 			</div>
 			<div class="detailMid">
 			<div class="detailMid_item">${boardDetail.board_content }</div>
+				<c:if test="${boardFile ne null }">
+					<div class="form-control">
+						<span>
+							<label class="col-form-label"><a href = "data:image/png;base64,${imageDataString}" download = "${boardFile.file_name }.${boardFile.file_extension}">${boardFile.file_name }</a></label>
+						</span>
+						</div>
+						<div>
+						<img src="data:image/png;base64,${imageDataString}" />
+					</div>
+				</c:if>
 				<div class="userProfile">유저프로필</div>
 			</div>
 			<div class="btnBox">
