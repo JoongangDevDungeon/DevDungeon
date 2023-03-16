@@ -19,13 +19,13 @@
          var icon_no = $(this).val();
 
          if(icon_checked) {
-            alert("물건을 담았습니다.");
+            console.log("장바구니 추가 : " + icon_no);
             shopping_bag.push(icon_no);
          } else {
-            console.log("고른 것 : " + icon_no);
             for(var i = 0; i < shopping_bag.length; i++) {
                if((shopping_bag[i] == icon_no)) {
-
+                    console.log("장바구니 삭제 : " + shopping_bag[i]);
+                    shopping_bag.splice(i, 1);
                }
             }
          }
@@ -36,16 +36,33 @@
          if((shopping_bag == null || shopping_bag == "")) {
             alert("구매 목록이 없습니다.");
             return false;
+         } else {
+             console.log("구매 목록 : " + shopping_bag);
+             $.post({
+                url : "/shoppingBag",
+                data : {"shoppingBag" : shopping_bag },
+                dataType : "text",
+                success : function (result) {
+                    console.log("장바구니에 담았습니다.");
+                },
+                error : function () {
+                    console.log("장바구니에 담지 못했습니다.");
+                }
+             });
          }
-         alert("선물 목록 : " + shopping_bag);
+
       });
 
       $("#gift_shopping_bag").click(function() {
          if((shopping_bag == null || shopping_bag == "")) {
             alert("선물 목록이 없습니다.");
             return false;
+         } else {
+             console.log("선물 목록 : " + shopping_bag);
+             $.post({
+
+             });
          }
-         alert("선물 목록 : " + shopping_bag);
       });
 
    });

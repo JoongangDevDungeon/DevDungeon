@@ -16,4 +16,8 @@ public class StoreDAO {
     public List<Map<String, Object>> iconList() {
         return sqlSession.selectList("store.iconList");
     }
+
+    public int shoppingBagInsert(Map<String, Object> cartInfo) {
+        return 0;
+    }
 }

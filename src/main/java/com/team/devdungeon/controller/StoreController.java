@@ -7,8 +7,11 @@ import com.team.devdungeon.util.SFTPFileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +43,17 @@ public class StoreController {
 
         return mv;
     }
+
+    @PostMapping("/shoppingBag")
+    @ResponseBody
+    public String shoppingBag(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String userId = (String) session.getAttribute("member_id");
+        String[] shoppingBag = request.getParameterValues("shoppingBag[]");
+        int result = storeService.shoppingBagInsert(userId, shoppingBag);
+        return "";
+    }
+
 
     @GetMapping("/payShoppingBag")
     public String payShoppingBag() {
