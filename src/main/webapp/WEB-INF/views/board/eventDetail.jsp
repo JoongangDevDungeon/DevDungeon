@@ -153,7 +153,7 @@
 					<div class="detailContent" style="text-align:center;">
 					<c:if test="${eventFile ne null }">
 						<div>
-							<img src="data:image/png;base64,${imageDataString}" />
+							<img src="data:image/png;base64,${imageDataString}" width="100%" />
 						</div>
 					</c:if>
 					${det.event_content }
@@ -164,8 +164,9 @@
 				<div class="detailBtnZone">
 					
 					<button class="btn btn-primary" onclick="location.href='/eventboard'">목록</button>
-				
+					<button class="btn btn-Info"style="cursor:pointer;" onclick="window.scrollTo(0,0);">TOP</button>
 				</div>
+				
 				<div class="CommentAll">
 					<c:forEach items="${comment }" var="c">
 						<div id="commentZone"
@@ -209,8 +210,8 @@
 						<div id="commentEnter">
 							<form id="commentForm" action="csjCommentWrite" method="post">
 								<input type="hidden" name="bno" value="${det.board_no }">
-								<input type="text" class="commentInput" name="commentContent">
-								<button id="commentEnterBtn">댓글 입력</button>
+								<input type="text" class="commentInput" name="commentContent" disabled>
+								<button id="commentEnterBtn" disabled>지금은 댓글을 막아둠</button>
 							</form>
 						</div>
 					</c:if>

@@ -28,11 +28,21 @@
 			<div class="content">
 				<!-- 이 곳을 수정하여 사용해주세요. -->
 				<div>
-					<h1 onclick="location.href='eventboard'">BOARD NAME HERE</h1>
+					<h1 onclick="location.href='eventboard'">이벤트 페이지</h1>
 					<div style="width:1300px; height:650px;">
 						<ul style="width:1300px;list-style:none;">
 						<c:forEach items="${list }" var="e">
-							<li style="width:390px;height:300px;float:left;border:1px solid black;" onclick="detail(${e.event_no})"><img src="/img/logo.png" width="100%">${e.event_title }</li>
+							<li style="width:390px;height:300px;float:left;border:1px solid black;" onclick="detail(${e.event_no})">
+								<c:choose>
+									<c:when test="${e.imageDataString ne null }">
+									<img src="data:image/png;base64,${e.imageDataString}" style="width:100%;height:270px;" />
+									</c:when>
+									<c:otherwise>
+									<img src="/img/logo.png" width="100%" height="270px">
+									</c:otherwise>
+								</c:choose>
+									${e.event_title }
+							</li>
 						</c:forEach>
 						</ul>
 					</div>

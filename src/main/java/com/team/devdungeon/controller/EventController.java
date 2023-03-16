@@ -48,29 +48,29 @@ public class EventController {
 		dto.setCategory(category);
 
 		PageInfo<Map<String, Object>> pageList = csjService.eventList(dto);
-//		if(eventFile!=null) {
-//			String remotePath = "/home/woori/ftp/files/" + eventFile.get("event_file_name");
-//			mv.addObject("eventFile",eventFile);
-//
-//	        try {
-//	            // 원격 서버에서 이미지 파일 읽어오기
-//	            InputStream inputStream = channelSftp.get(remotePath);
-//	            // Inputstream -> byte[] 변환
-//	            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//	            byte[] buffer = new byte[1024];
-//	            int len;
-//	            while ((len = inputStream.read(buffer)) > -1 ) {
-//	                baos.write(buffer, 0, len);
-//	            }
-//	            baos.flush();
-//	            byte[] imageData = baos.toByteArray();
-//	            // byte[] -> Base64
-//	            String imageDataString = Base64.getEncoder().encodeToString(imageData);
-//	            mv.addObject("imageDataString", imageDataString);
-//	        } catch (Exception e) {
-//	            e.printStackTrace();
-//	        }
-//		}
+		for(Map<String,Object> m : pageList.getList()) {
+			if(m.get("event_file_no") != null) {
+				String remotePath = "/home/woori/ftp/files/" + m.get("event_file_name");
+		        try {
+		            // 원격 서버에서 이미지 파일 읽어오기
+		            InputStream inputStream = channelSftp.get(remotePath);
+		            // Inputstream -> byte[] 변환
+		            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		            byte[] buffer = new byte[1024];
+		            int len;
+		            while ((len = inputStream.read(buffer)) > -1 ) {
+		                baos.write(buffer, 0, len);
+		            }
+		            baos.flush();
+		            byte[] imageData = baos.toByteArray();
+		            // byte[] -> Base64
+		            String imageDataString = Base64.getEncoder().encodeToString(imageData);
+		            m.put("imageDataString", imageDataString);
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+			}
+		}
 		mv.addObject("pageNo", pageNo);
 		mv.addObject("pageInfo", pageList);
 		mv.addObject("list", pageList.getList());
