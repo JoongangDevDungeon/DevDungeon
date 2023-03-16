@@ -18,8 +18,7 @@ $(function() {
                         $("#guest").hide();
                         $("#login_success").show();
                     } else {
-                        alert("아이디 혹은 비밀번호를 확인해주세요.");
-                        location.href='/index?error=login_fail';
+                        location.href="/index?error=login_fail";
                     }
                 },
                 error : function (xhr) {
@@ -47,7 +46,7 @@ $(function() {
                         $("#guest").hide();
                         $("#login_success").show();
                     } else {
-                        alert("아이디 혹은 비밀번호를 확인해주세요.");
+                        location.href="/index?error=login_fail";
                     }
                 },
                 error : function (xhr) {
@@ -73,7 +72,7 @@ $(function() {
                     $("#guest").hide();
                     $("#login_success").show();
                 } else {
-                    alert("아이디 혹은 비밀번호를 확인해주세요.");
+                    location.href="/index?error=login_fail";
                 }
             },
             error : function (xhr) {
