@@ -28,6 +28,9 @@
                         <a href="">쪽지함</a>
                      </li>
                      <li>
+                        <a href="">장바구니</a>
+                     </li>
+                     <li>
                         <a href="/logout">로그아웃</a>
                      </li>
 
