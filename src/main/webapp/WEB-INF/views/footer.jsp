@@ -6,6 +6,6 @@
       <li>운영정책</li>
       <li>청소년보호정책</li>
       <li>콘텐츠 가이드</li>
-      <li>고객센터</li>
+      <li><a href="/qnaboard">고객센터</a></li>
    </ol>
 </footer>

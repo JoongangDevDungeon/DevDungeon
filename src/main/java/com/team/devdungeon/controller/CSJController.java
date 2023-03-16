@@ -404,7 +404,10 @@ public class CSJController {
 	
 	@ResponseBody
 	@PostMapping("/qnaWrite")
-	public String qnaWrite(Map<String,Object> map,HttpSession session) {
+	public String qnaWrite(HttpServletRequest request,HttpSession session) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("title", request.getParameter("title"));
+		map.put("content", request.getParameter("content"));
 		map.put("member_name", session.getAttribute("member_name"));
 		int result = (int)csjService.qnaWrite(map);
 		//json형태로 내보내기

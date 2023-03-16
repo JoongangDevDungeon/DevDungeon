@@ -56,7 +56,6 @@ public class EventController {
 		mv.addObject("searchType", searchType);
 		mv.addObject("searchValue", searchValue);
 		mv.addObject("list", pageList.getList());
-		System.out.println(pageList);
 		return mv;
 	}
 
