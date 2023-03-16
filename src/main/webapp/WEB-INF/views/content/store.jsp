@@ -40,10 +40,14 @@
              console.log("구매 목록 : " + shopping_bag);
              $.post({
                 url : "/shoppingBag",
-                data : {"shoppingBag" : shopping_bag },
+                data : {"shoppingBag" : shopping_bag, "sell_type" : "pay" },
                 dataType : "text",
                 success : function (result) {
-                    console.log("장바구니에 담았습니다.");
+                    if(result > 0) {
+                       alert("구매 장바구니에 담았습니다.");
+                    } else {
+                       alert("이미 구매 장바구니에 아이콘이 있습니다.\n다시 한번 확인해주세요.");
+                    }
                 },
                 error : function () {
                     console.log("장바구니에 담지 못했습니다.");
@@ -59,9 +63,21 @@
             return false;
          } else {
              console.log("선물 목록 : " + shopping_bag);
-             $.post({
-
-             });
+            $.post({
+               url : "/shoppingBag",
+               data : {"shoppingBag" : shopping_bag, "sell_type" : "gift" },
+               dataType : "text",
+               success : function (result) {
+                  if(result > 0) {
+                     alert("선물 장바구니에 담았습니다.");
+                  } else {
+                     alert("이미 선물 장바구니에 아이콘이 있습니다.\n다시 한번 확인해주세요.");
+                  }
+               },
+               error : function () {
+                  console.log("장바구니에 담지 못했습니다.");
+               }
+            });
          }
       });
 

@@ -50,8 +50,9 @@ public class StoreController {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("member_id");
         String[] shoppingBag = request.getParameterValues("shoppingBag[]");
-        int result = storeService.shoppingBagInsert(userId, shoppingBag);
-        return "";
+        String sellType = request.getParameter("sell_type");
+        Integer result = storeService.shoppingBagInsert(userId, shoppingBag, sellType);
+        return result.toString();
     }
 
 

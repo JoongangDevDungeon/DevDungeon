@@ -2,6 +2,7 @@ package com.team.devdungeon.dao;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,6 +19,13 @@ public class StoreDAO {
     }
 
     public int shoppingBagInsert(Map<String, Object> cartInfo) {
-        return 0;
+        int result = 0;
+        try {
+            result = sqlSession.insert("store.shoppingBagInsert", cartInfo);
+        } catch (DuplicateKeyException e) {
+            System.out.println("데이터 삽입 중 중복된 데이터가 있습니다.");
+        }
+
+        return result;
     }
 }

@@ -10,4 +10,12 @@
                 ORDER BY product_no DESC;
     </select>
 
+    <insert id="shoppingBagInsert" parameterType="HashMap">
+        INSERT INTO shopping_cart  (member_no, product_no, sell_type)
+            VALUES
+                <foreach collection="cart" item="cart" separator=",">
+                ( (SELECT member_no FROM member WHERE member_id = #{member_id}), #{cart}, #{sell_type} )
+                </foreach>
+    </insert>
+
 </mapper>

@@ -1,8 +1,5 @@
 package com.team.devdungeon.service;
 
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
 import com.team.devdungeon.dao.StoreDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,8 +7,6 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.*;
-
-import static com.team.devdungeon.util.SFTPFileUtil.*;
 
 @RequiredArgsConstructor
 @Service
@@ -68,7 +63,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public int shoppingBagInsert(String userId, String[] shoppingBag) {
+    public int shoppingBagInsert(String userId, String[] shoppingBag, String sellType) {
         Map<String, Object> cartInfo = new HashMap<>();
         List<String> cart = new ArrayList<>();
 
@@ -76,10 +71,9 @@ public class StoreServiceImpl implements StoreService {
             cart.add(ele);
         }
 
-        cartInfo.put("user_id", userId);
+        cartInfo.put("member_id", userId);
         cartInfo.put("cart", cart);
-
-        System.out.println(cartInfo);
+        cartInfo.put("sell_type", sellType);
 
         return storeDAO.shoppingBagInsert(cartInfo);
     }
