@@ -48,7 +48,7 @@ public class StoreServiceImpl implements StoreService {
                 inputStream = sftpChannel.get(remotePath + emo_img_name + "." + emo_img_extension);
 
                 baos = new ByteArrayOutputStream();
-                buffer = new byte[1024];
+                buffer = new byte[1024 * 8];
                 int len;
                 while ((len = inputStream.read(buffer)) > -1) {
                     baos.write(buffer, 0, len);
@@ -67,8 +67,6 @@ public class StoreServiceImpl implements StoreService {
             resutList.add(map);
         }
 
-        System.out.println(resutList);
-
-        return resutList;
+        return result;
     }
 }

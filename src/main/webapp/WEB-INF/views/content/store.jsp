@@ -10,6 +10,46 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
    <link rel="stylesheet" href="/css/layout.css">
 </head>
+<script>
+   $(function() {
+      const shopping_bag = [];
+
+      $(".icon_check").click(function() {
+         var icon_checked = $(this).is(":checked");
+         var icon_no = $(this).val();
+
+         if(icon_checked) {
+            alert("물건을 담았습니다.");
+            shopping_bag.push(icon_no);
+         } else {
+            console.log("고른 것 : " + icon_no);
+            for(var i = 0; i < shopping_bag.length; i++) {
+               if((shopping_bag[i] == icon_no)) {
+
+               }
+            }
+         }
+
+      });
+
+      $("#pay_shopping_bag").click(function() {
+         if((shopping_bag == null || shopping_bag == "")) {
+            alert("구매 목록이 없습니다.");
+            return false;
+         }
+         alert("선물 목록 : " + shopping_bag);
+      });
+
+      $("#gift_shopping_bag").click(function() {
+         if((shopping_bag == null || shopping_bag == "")) {
+            alert("선물 목록이 없습니다.");
+            return false;
+         }
+         alert("선물 목록 : " + shopping_bag);
+      });
+
+   });
+</script>
 <body>
    <%@include file="../top.jsp"%>
    <%@include file="../menu.jsp"%>
@@ -39,16 +79,6 @@
                      <input class="form-control" type="text" style="width: 200px; height: 30px;" placeholder="아이콘 이름을 입력하세요.">
                      <button class="btn btn-primary" type="text" style="width: 200px; height: 30px; margin-top: 5px;">검색</button>
                   </div>
-
-                  <!-- 카테고리 -->
-                  <div class="mt-3 list-group" style="width: 200px; height: auto;">
-                     <ul class="list-group" style="list-style: none; margin: 0; padding: 0;">
-                        <li class="list-group-item list-group-item-action">카테고리1</li>
-                        <li class="list-group-item list-group-item-action">카테고리2</li>
-                        <li class="list-group-item list-group-item-action">카테고리3</li>
-                        <li class="list-group-item list-group-item-action">카테고리4</li>
-                     </ul>
-                  </div>
                </div>
                <!-- 아이콘 목록 화면 전체 -->
                <div style="width: 950px; height: 800px; margin-left: 50px; float: left;">
@@ -57,7 +87,7 @@
                      <!-- 아이콘 개별 -->
                      <c:forEach var="iconList" items="${iconList}">
                         <div style="width: 330px; height: 150px; margin-top: 10px; float: left;">
-                           <input type="checkbox" style="width: 20px; height: 20px; margin-top: 60px; margin-right: 5px; margin-left: 5px; float: left;" value="${iconList.product_no}" onclick="alert(this.value);">
+                           <input class="icon_check" type="checkbox" style="width: 20px; height: 20px; margin-top: 60px; margin-right: 5px; margin-left: 5px; float: left;" value="${iconList.product_no}">
                            <div style="border: 1px solid #ccc; border-radius: 10px; width: 280px; height: 150px; float: left;">
                               <!-- 아이콘 이미지 -->
                               <div style="width: 60px; height: 150px;  float: left;">
@@ -71,16 +101,15 @@
                                     <span style="font-size: 18px; font-weight: bold;">${iconList.product_name}</span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                    <span style="display: block; width: 100px; height: 37.5px; float: left;">재고:${iconList.product_sell_cnt}</span>
+                                    <span style="display: block; width: 100px; height: 37.5px; float: left;"><span style="display: block; width: 40px; height: inherit; padding-left: 10px; box-sizing: border-box; float: left;">재고</span><span style="display: block; text-align: left; width: 60px; height: inherit; float: left;">:${iconList.product_sell_cnt}</span></span>
                                     <span style="display: block; width: 108px; height: 37.5px; float: left;">가격:<fmt:formatNumber value="${iconList.product_price }" pattern="#,###" /></span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                    <span style="display: block; width: 100px; float: left;">등록일</span>
-                                    <span style="display: block; width: 108px; height: 37.5px; float: left;"><fmt:formatDate value="${iconList.product_update}" pattern="yyyy-MM-dd" type="date"/></span>
+                                    <span style="display: block; width: 228px; height: 37.5px; float: left; padding-right: 50px; box-sizing: border-box;">등록일&nbsp;&nbsp;:&nbsp;&nbsp;<fmt:formatDate value="${iconList.product_update}" pattern="yyyy-MM-dd" type="date"/></span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
                                     <span style="display: block; width: 100px; height: 37.5px; float: left;"><a href="">구매</a>&nbsp;|&nbsp;<a href="">선물</a></span>
-                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">${iconList.member_name}</span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">신청:${iconList.member_name}</span>
                                  </div>
                               </div>
                            </div>
@@ -92,8 +121,8 @@
                      <div class="mt-3" style="width: 660px; float: left; position: relative;">
                         <button class="btn btn-primary" style="position: absolute; left: 0;" onclick="location.href='/iconApply'">아이콘 신청</button>
                         <div style="position: absolute; right: 0;">
-                           <button class="btn btn-primary" onclick="location.href='/payShoppingBag'">구매</button>
-                           <button class="btn btn-primary" onclick="location.href='/giftShoppingBag'">선물</button>
+                           <button class="btn btn-primary" id="pay_shopping_bag">구매</button>
+                           <button class="btn btn-primary" id="gift_shopping_bag">선물</button>
                         </div>
                      </div>
                   </div>
