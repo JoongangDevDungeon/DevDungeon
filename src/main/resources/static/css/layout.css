@@ -46,6 +46,7 @@ a:hover{ color:black; }
     height: 100px;
     margin: 0 auto;
     text-align: center;
+
 }
 
 .menu_ul {
@@ -57,7 +58,7 @@ a:hover{ color:black; }
 
 .menu_ul > li {
     float: left;
-    width: 250px;
+    width: 210px;
     height: 100px;
     line-height: 100px;
     text-align: center;
