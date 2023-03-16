@@ -68,8 +68,8 @@ function moveNext(pageNo){
 					<td>${row.product_date }</td>
 					<td>
 						<form action="/adminStore" method="post">
-							<input type="hidden" name="board_no" value="${row.product_no }">
-							<input type="hidden" name="status_no" value="${row.emoticon_authority }">
+							<input type="hidden" name="product_no" value="${row.product_no }">
+							<input type="hidden" name="emoticon_authority" value="${row.emoticon_authority }">
 							<input type="hidden" name="pageNo" value="${pageNo }">
 							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화' : '비활성화'}</button>
 						</form>

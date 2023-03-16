@@ -350,22 +350,14 @@ public class AdminController {
 		return mv;
 	}
 	
-	//스토어 삭제
+	//스토어 상태변경
   	@PostMapping("/adminStore")
   	public String adminStoreDel(HttpServletRequest request) {
+  		System.out.println(request.getParameter("product_no"));
+  		System.out.println(request.getParameter("emoticon_authority"));
   		
-  		String pageNo = request.getParameter("pageNo");
-  		
 
-//  		BoardDTO boardDTO = new BoardDTO();
-//  		
-//  		boardDTO.setBoard_no(Integer.parseInt(request.getParameter("board_no")));
-//  		boardDTO.setStatus_no(Integer.parseInt(request.getParameter("status_no")));
-//  		
-//  		adminService.adminBoardDel(boardDTO);
-
-
-  		return "redirect:/adminStore?pageNo="+pageNo;
+  		return "redirect:/adminStore";
   	}
 	
 	
