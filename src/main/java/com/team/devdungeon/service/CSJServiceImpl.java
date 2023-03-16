@@ -154,6 +154,12 @@ public class CSJServiceImpl implements CSJService {
 		return csjDAO.qnaWrite(map);
 	}
 
+	@Override
+	public Map<String, Object> callEventFile(int bno) {
+		// TODO Auto-generated method stub
+		return csjDAO.callEventFile(bno);
+	}
+
 
 
 

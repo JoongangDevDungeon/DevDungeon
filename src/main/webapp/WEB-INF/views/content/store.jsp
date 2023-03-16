@@ -98,7 +98,7 @@
                      <div style="width: 200px; height: 30px;">
                         <span style="display: block; width: 30px; height: 30px; line-height: 30px; margin-left: 5px; float: left;">Lv.${profile.member_level}</span>
                         <span style="display: block; width: 30px; height: 30px; margin-left: 10px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">
-                           <img src="data:image/png;base64,${profile.icon_image}" onerror="this.src='/img/Gazi_shortCut.png'" style="width: 25px; height: 25px;">
+                           <img src="data:image/png;base64,${profile.icon_image}" onerror="this.src='/img/Gazi_shortCut.png'" style="width: 25px; height: 25px;"/>
                         </span>
                         <span style="display: block; width: 120px; height: 30px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">${profile.member_name}</span>
                      </div>
@@ -125,7 +125,7 @@
                               <!-- 아이콘 이미지 -->
                               <div style="width: 60px; height: 150px;  float: left;">
                                  <span style="display: block; width: 45px; height: 45px; padding-top: 45px; box-sizing: border-box; margin: 0 auto;">
-                                    <img src="data:image/png;base64,${iconList.icon_image}" alt="${iconList.emo_img_name}" onerror="this.src='/img/Gazi_shortCut.png'" style="width: 45px; height: 45px;">
+                                    <img src="data:image/png;base64,${iconList.icon_image}" onerror="this.src='/img/Gazi_shortCut.png'" style="width: 45px; height: 45px;"></img>
                                  </span>
                               </div>
                               <!-- 아이콘 내용 -->

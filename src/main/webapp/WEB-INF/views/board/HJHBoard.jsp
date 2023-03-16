@@ -12,7 +12,7 @@
 <script type="text/javascript" src="/js/BoardPaging.js"></script>
 <script type="text/javascript" src="/js/search.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<title>HJH Board</title>
+<title>자유게시판</title>
 </head>
 <style>
 h6{
@@ -70,7 +70,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 		<div class="add1">광고1</div>
 		<div class="content">
 			<div class="container">
-				<h1>B O A R D</h1>
+				<h1> 자 유 게 시 판</h1>
 				<table class="table">
 					<tr class="table-header">
 						<th class="col-1">구분</th>
@@ -93,7 +93,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 							<td>${board.board_like }</td>
 						</tr>
 					</c:forEach>
-				</table><br><br><br><br>
+				</table><br><br><br>
 				<!-- 페이징 -->
 				<div class="pagingBox">
 					<ul class="pagingList">

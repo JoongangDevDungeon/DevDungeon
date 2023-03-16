@@ -11,20 +11,53 @@
                 member_email = #{member_email},
                 member_tel = #{member_tel},
                 member_birth = #{member_birth}
+        <selectKey resultType="int" keyProperty="number" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
 
-    <select id="check" parameterType="SignDTO" resultType="SignDTO">
+    <insert id="signup_agree" parameterType="SignDTO"><!--회원 약관 동의 여부-->
+        INSERT INTO tou_agree (member_no, tou_agree_no, agree)
+            VALUES
+                (#{number}, #{agree_no1}, #{agree1}),
+                (#{number}, #{agree_no2}, #{agree2}),
+                (#{number}, #{agree_no3}, #{agree3})
+    </insert>
+
+    <insert id="point_new"><!--최종 회원가입-->
+        INSERT INTO point
+            SET
+                member_no = #{number}
+    </insert>
+
+    <select id="check" parameterType="SignDTO" resultType="SignDTO"><!--중복 검사 -->
         SELECT COUNT(*) as COUNT, member_id
             FROM member
                 WHERE member_id = #{member_id}
     </select>
 
-    <insert id="code">
+    <select id="check_final" parameterType="SignDTO" resultType="SignDTO"><!-- 최종 검사 -->
+        SELECT COUNT(*) as COUNT, member_id
+            FROM member
+                WHERE member_id = #{member_id}
+    </select>
+
+    <select id="check_name" parameterType="SignDTO" resultType="SignDTO"><!--닉네임 중복 검사-->
+        SELECT COUNT(*) as COUNT, member_name
+            FROM member
+                WHERE member_name = #{member_name}
+    </select>
+
+    <select id="check_code" parameterType="SignDTO" resultType="SignDTO"><!--인증번호 검사-->
+        SELECT COUNT(*) as COUNT, email_code
+            FROM email_verify
+                WHERE member_email = #{member_email} AND email_code = #{verify_code}
+    </select>
+
+    <insert id="code"><!--임시테이블 저장-->
         INSERT INTO email_verify
             SET
                 member_email = #{member_email},
-                member_id = #{member_id},
                 email_code = #{verify_code}
     </insert>
-
 </mapper>

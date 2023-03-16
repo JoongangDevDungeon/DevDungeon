@@ -84,10 +84,9 @@ a:hover{ color:#ccc; }
 }
 .detailMid_item{ margin-left:5px; }
 .userProfile{
-	height:150px;
-	border:1px solid black;
-	margin:5px;
-	margin-top: auto;
+	font-size:15px;
+	margin-top:auto;
+	padding-bottom: 10px;
 }
 .btnBox{
 	margin:5px;

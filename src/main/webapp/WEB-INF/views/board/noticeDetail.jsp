@@ -107,17 +107,17 @@ function subComment_check(){
 		<h1 style="font-weight: bold; display: inline-block;">Notice Detail</h1>
 		<button class="detailBtn boardList" onclick="location.href='/notice'">목록</button>
 		<!-- 상세화면 -->
-		<div class="detailBox">
+		<div class="detailBox" <c:if test="${sessionScope.member_id eq null }"> style="height:920px;"</c:if>>
 			<div class="detailTop">
 				<div class="detailTop_item">${noticeDetail.notice_title }</div>
 				<div class="detailTop_item"><input type="hidden" id="detailWriter" value="${noticeDetail.admin_id }">${noticeDetail.admin_id }</div>
 				<div class="detailTop_item">${noticeDetail.notice_date }</div>
 			</div>
 			<div class="detailMid">
-			<div class="detailMid_item">${noticeDetail.notice_content }</div>
-				<div class="userProfile">유저프로필</div>
+				<div class="detailMid_item">${noticeDetail.notice_content }</div>
 			</div>
 			<div class="btnBox">
+				<c:if test="${sessionScope.member_id eq null }"> <b>미로그인시 이용에 제한이 있습니다. 로그인을 해주세요</b></c:if>
 				<div class="btnBox_1">
 					<c:if test="${sessionScope.member_id ne null && sessionScope.member_id ne noticeDetail.admin_id }">
 					<button class="detailBtn" style="background-color: #3dcc00; width:100px;" id="thumsUp">
@@ -133,6 +133,7 @@ function subComment_check(){
 				</div>
 			</div>
 			<!-- 댓글쓰기 -->
+			<c:if test="${sessionScope.member_id ne null }">
 			<div class="commentBox">
 				<form action="/noticeComment" method="post" onsubmit="return comment_check()">
 					<input type="hidden" value="${noticeDetail.notice_no }" name="notice_no">
@@ -140,6 +141,7 @@ function subComment_check(){
 					<button class="commentBtn">댓글쓰기</button>
 				</form>
 			</div>
+			</c:if>
 		</div>
 		<!-- 댓글창 -->
 		<c:forEach var="c" items="${ detailComments }">
@@ -178,9 +180,9 @@ function subComment_check(){
 				</c:if>
 		</c:forEach>
 		</div>
-		</div>
-		<div class="add2">광고2</div>
 	</div>
+	<div class="add2">광고2</div>
 	<%@ include file="../footer.jsp"%>
+</div>
 </body>
 </html>

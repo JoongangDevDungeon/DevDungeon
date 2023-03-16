@@ -15,6 +15,7 @@
          </div>
       </li>
       <li><a href="/store">스토어</a></li>
+      <li><a href="/eventboard">이벤트</a></li>
       <li><a href="/level">레벨 등급표</a></li>
    </ul>
 </nav>

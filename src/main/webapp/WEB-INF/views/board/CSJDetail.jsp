@@ -86,8 +86,7 @@
 </script>
 <script>
 function sendMessageTo(receiver){
-	alert(receiver);
-	window.open("/message?receiver="+receiver,"쪽지",'width=510px,height=600px,scrollbars=yes');
+	window.open("/message?receiver="+receiver,'쪽지', 'width=510px,height=450px,scrollbars=yes');
 }
 </script>
 <style>
@@ -156,7 +155,7 @@ function sendMessageTo(receiver){
 				<h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
 				<div class="detailBody">
 					<div class="detailTitle">제목 : ${det.board_title }</div>
-					<div class="detailInfo">글쓴이 ${det.member_name } <span onclick="sendMessageTo('${det.member_name }')">[쪽지]</span><input type="hidden" id="detailWriter" value="${det.member_name }"> 날짜
+					<div class="detailInfo">글쓴이 ${det.member_name } <span onclick="sendMessageTo('${det.member_name }')"><img src="/img/send.png" style="width:30px; height:30px;"></span><input type="hidden" id="detailWriter" value="${det.member_name }"> 날짜
 						${det.board_date } 조회수 ${det.board_read }</div>
 					<div class="detailContent">
 					<c:if test="${boardFile ne null }">
@@ -172,8 +171,10 @@ function sendMessageTo(receiver){
 					${det.board_content }</div>
 					<button id="boardBtnLike" class="btn btn-success"
 						value="${det.board_no }">추천 ${det.board_like }</button>
+						<c:if test="${sessionScope.member_name ne null }">
 					<button id="boardBtnBan" class="btn btn-danger"
 						value="${det.board_no }">신고</button>
+						</c:if>
 						<input type="hidden" id="banType">
 						<input type="hidden" id="banCommentWriter">
 					<!-- 작성자 프로필 -->
@@ -233,7 +234,9 @@ function sendMessageTo(receiver){
 								<div>${c.comment_content }</div>
 							</div>
 							<div class="commentBtnZone">
-								<button class="commentBanBtn" value="${c.comment_no }">신고</button>
+								<c:if test="${sessionScope.member_name ne null }">
+									<button class="commentBanBtn" value="${c.comment_no }">신고</button>
+								</c:if>
 								<c:if test="${sessionScope.member_name eq c.member_name  }">
 									<button class="commentDeleteBtn" value="${c.comment_no }">삭제</button>
 								</c:if>

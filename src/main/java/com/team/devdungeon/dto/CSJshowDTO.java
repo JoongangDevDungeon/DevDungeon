@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class CSJshowDTO {
 	private int pageNo,pageSize,category;
-	private String searchType,searchValue;
+	private String searchType,searchValue,member_id;
 }

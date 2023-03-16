@@ -56,4 +56,6 @@ public interface CSJService {
 
 	public int qnaWrite(Map<String, Object> map);
 
+	public Map<String, Object> callEventFile(int bno);
+
 }

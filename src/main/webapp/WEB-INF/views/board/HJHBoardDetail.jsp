@@ -120,7 +120,7 @@ function subComment_check(){
 		<h1 style="font-weight: bold; display: inline-block;">Detail</h1>
 		<button class="detailBtn boardList" onclick="location.href='/board/HJHBoard'">목록</button>
 		<!-- 상세화면 -->
-		<div class="detailBox">
+		<div class="detailBox" <c:if test="${sessionScope.member_id eq null }"> style="height:920px;"</c:if> >
 			<div class="detailTop">
 				<div class="detailTop_item">${boardDetail.board_title }</div>
 				<div class="detailTop_item"><input type="hidden" id="detailWriter" value="${boardDetail.member_name }">${boardDetail.member_name }</div>
@@ -141,9 +141,34 @@ function subComment_check(){
 						<img src="data:image/png;base64,${imageDataString}" />
 					</div>
 				</c:if>
-				<div class="userProfile">유저프로필</div>
+				<div class="userProfile">
+					<div class="mt-3" style="margin: 0 auto; width: 810px; height: 242px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box;">
+                    <div style="width: 180px; height: 240px; float: left;">
+                        <img id="previewImg" src="data:image/png;base64,${profile.profile_image}" onerror="this.src='/img/Gazi_shortCut.png'" style="width: 180px; height: 240px; margin-left:5px; border-radius: 10px 0px 0px 10px; object-fit: none;">
+                    </div>
+                    <div style="width: 620px; height: 240px; float: left; text-align: left;">
+                        <!-- 레벨, 아이콘, 이름 -->
+                        <div style="width: 620px; height: 60px; box-sizing: border-box; padding-top: 7px; padding-left: 10px;">
+                            <span style="display: inline-block; width: 48px; height: 40px; border-radius: 8px; text-align: center; line-height: 38px; background-color: black; color: white;">
+                                Lv.${profile.member_level}
+                            </span>
+                            <span>
+                                <img src="data:image/png;base64,${profile.icon_image}" onerror="this.src='/img/Gazi_shortCut.png'" style="display: inline-block; width: 40px; height: 40px;">
+                            </span>
+                            <span style="display: inline-block; width: 500px; height: 45px; border-radius: 8px; text-align: left; box-sizing: border-box; padding-left: 5px; line-height: 40px; font-size: 20px;">
+                                ${profile.member_name}
+                            </span>
+                        </div>
+
+                        <div style="padding: 10px; padding-top: 5px; box-sizing: border-box;">
+                            <span class="form-control" style="height:160px;"readonly="readonly">${profile.member_intro}</span>
+                        </div>
+					</div>
+				</div>
+			</div>
 			</div>
 			<div class="btnBox">
+				<c:if test="${sessionScope.member_id eq null }"><b>미로그인시 이용에 제한이 있습니다. 로그인을 해주세요</b></c:if>
 				<div class="btnBox_1">
 					<c:if test="${sessionScope.member_id ne null && sessionScope.member_id ne boardDetail.member_id }">
 					<button class="detailBtn" style="background-color: #3dcc00; width:100px;" id="thumsUp">
@@ -164,6 +189,7 @@ function subComment_check(){
 				</div>
 			</div>
 			<!-- 댓글쓰기 -->
+			<c:if test="${sessionScope.member_id ne null }">
 			<div class="commentBox">
 				<form action="/board/HJHBoardComment" method="post" onsubmit="return comment_check()">
 					<input type="hidden" value="${boardDetail.board_no }" name="board_no">
@@ -171,6 +197,7 @@ function subComment_check(){
 					<button class="commentBtn">댓글쓰기</button>
 				</form>
 			</div>
+			</c:if>
 		</div>
 		<!-- 댓글창 -->
 		<c:forEach var="c" items="${ detailComments }">
@@ -180,13 +207,13 @@ function subComment_check(){
 				<div class="comments <c:if test="${ c.comment_depth eq 1 }"> subComment subComment${c.comment_root }</c:if>">
 					<div class="commentWrited ">${ c.member_name } <input type="hidden" id="commentWriter${c.comment_no }" value="${c.member_name }"> ${ c.comment_time } 
 					<c:if test="${c.comment_depth eq 0 && c.comment_cnt ne 0 }"><h6>${c.comment_cnt}</h6></c:if>
-						<c:if test="${sessionScope.member_id eq c.member_id  }">
+						<c:if test="${sessionScope.member_id eq c.member_id || sessionScope.id eq 'admin'}">
 							<button class="commentBtn_1 commentDel" style="background-color: #CB0E00; position: relative;" value="${c.comment_no }"><i class="xi-trash-o "></i></button>
 						</c:if>
 						<c:if test="${sessionScope.member_id ne null && sessionScope.member_id ne boardDetail.member_id && c.comment_depth eq 0}">
 							<button class="commentBtn_1 c_comment" style="background-color: #A267AC; position: relative;" value="${c.comment_root }" ><i class="xi-pen-o "></i></button>
 						</c:if>
-						<c:if test="${sessionScope.member_id ne null}">
+						<c:if test="${(sessionScope.member_id ne null && sessionScope.member_id ne c.member_id ) }">
 							<button class="commentBtn_1 commentBanBtn" style="background-color: #ff8080; margin-left:5px;" value="${c.comment_no }"><img src="/img/siren.png" style="margin-bottom: 10px;"></button>
 						</c:if>
 						<c:if test="${c.comment_depth eq 0 }">
