@@ -33,6 +33,7 @@
    $(function() {
       var error_msg = "${error_msg}";
       if(error_msg == "login_fail") alert("아이디와 비밀번호를 확인해주세요.");
+      else if(error_msg == "not_login") alert("로그인이 필요한 서비스 입니다.");
    });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

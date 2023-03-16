@@ -47,4 +47,13 @@ public interface CSJService {
 	public PageInfo<Map<String, Object>> eventList(CSJshowDTO dto);
 
 	public Map<String, Object> eventdetail(int bno);
+
+	public Map<String, Object> callBoardFile(int bno);
+
+	public void putBoardFile(Map<String, Object> fileMap);
+
+	public PageInfo<Map<String, Object>> qnaList(CSJshowDTO dto);
+
+	public int qnaWrite(Map<String, Object> map);
+
 }

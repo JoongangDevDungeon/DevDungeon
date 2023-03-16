@@ -32,6 +32,9 @@
     <insert id="boardWrite" parameterType="HashMap">
 		INSERT INTO board(member_no, tag_no, status_no, board_title, board_content, category_no)
 		VALUES((SELECT member_no FROM member WHERE member_id = '${member_id}'), 1, 1, '${board_title}', '${board_content}', 1)
+		<selectKey resultType="int" keyProperty="writtenNo" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey> 
    </insert>
     
     <select id="boardDetail" parameterType="String" resultType="HashMap">

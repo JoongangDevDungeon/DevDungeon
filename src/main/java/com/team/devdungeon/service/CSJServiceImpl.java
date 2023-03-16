@@ -130,6 +130,31 @@ public class CSJServiceImpl implements CSJService {
 		return csjDAO.eventdetail(bno);
 	}
 
+	@Override
+	public Map<String, Object> callBoardFile(int bno) {
+		// TODO Auto-generated method stub
+		return csjDAO.callBoardFile(bno);
+	}
+
+	@Override
+	public void putBoardFile(Map<String, Object> fileMap) {
+		// TODO Auto-generated method stub
+		csjDAO.putBoardFile(fileMap);
+	}
+
+	@Override
+	public PageInfo<Map<String, Object>> qnaList(CSJshowDTO dto) {
+		// TODO Auto-generated method stub
+		return csjDAO.qnaList(dto);
+	}
+
+	@Override
+	public int qnaWrite(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return csjDAO.qnaWrite(map);
+	}
+
+
 
 
 }

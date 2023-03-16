@@ -107,5 +107,27 @@ public class CSJDAO {
 		return sqlSession.selectOne(namespace+"eventPageDetail",bno);
 	}
 
+	public Map<String, Object> callBoardFile(int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+"callBoardFile",bno);
+	}
+
+	public void putBoardFile(Map<String, Object> fileMap) {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+"putBoardFile",fileMap);
+	}
+
+	public PageInfo<Map<String, Object>> qnaList(CSJshowDTO dto) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(dto.getPageNo(),dto.getPageSize());
+		return PageInfo.of(sqlSession.selectList(namespace+"qnaList",dto));
+	}
+
+	public int qnaWrite(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+"QuestionWrite",map);
+	}
+
+
 
 }

@@ -7,7 +7,6 @@
 <link rel="icon" href="/img/Gazi_shortCut.png" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <link type="text/css" rel="stylesheet" href="/css/HJHBoard.css">
 <link type="text/css" rel="stylesheet" href="/css/layout.css">
 <script type="text/javascript" src="/js/BoardPaging.js"></script>
@@ -36,6 +35,7 @@ h6{
 	border-radius: 5px;
 	font-weight: bold;
 }
+.none{ width:252px; height:104px; line-height:48px; padding:0; margin:0; }
 </style>
 <script type="text/javascript">
 
@@ -131,4 +131,5 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 	</div>
 	<%@ include file="../footer.jsp" %>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </html>

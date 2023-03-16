@@ -25,6 +25,9 @@ h6{
 	background-color: red;
 	border-radius: 5px;
 }
+.message{ width:50px; cursor: pointer; }
+.message:hover{ background-color: #ccc; border-radius: 5px;}
+.none{ width:252px; height:104px; line-height:48px; padding:0; margin:0; }
 </style>
 <script type="text/javascript">
 $(function(){ //제이쿼리 시작
@@ -78,12 +81,18 @@ $(function(){ //제이쿼리 시작
 		var no = $(this).val();
 		$("#banType").val("댓글 신고");
 		$("#banCommentWriter").val($("#commentWriter"+no).val());
-		window.open("/csjBan?cno="+no, '신고팝업', 'width=510px,height=600px,scrollbars=yes');
+		window.open("/csjBan?cno="+no, '신고팝업', 'width=450px,height=500px,scrollbars=yes');
 	});
 	$("#boardBtnBan").click(function() {
 		var no = $(this).val();
 		$("#banType").val("게시글 신고");
-		window.open("/csjBan", '신고팝업', 'width=510px,height=600px,scrollbars=yes');
+		window.open("/csjBan", '신고팝업', 'width=450px,height=500px,scrollbars=yes');
+	});
+	
+	$("#message").click(function(){
+		let receiver = $("#detailWriter").val();
+		
+		window.open("/message?receiver="+receiver, '쪽지', 'width=510px,height=450px,scrollbars=yes');
 	});
 	
 });//제이쿼리 끝
@@ -115,10 +124,23 @@ function subComment_check(){
 			<div class="detailTop">
 				<div class="detailTop_item">${boardDetail.board_title }</div>
 				<div class="detailTop_item"><input type="hidden" id="detailWriter" value="${boardDetail.member_name }">${boardDetail.member_name }</div>
+				<c:if test="${sessionScope.member_id ne null && sessionScope.member_id ne boardDetail.member_id }">
+					<div class="detailTop_item message"><span id="message"><img src="/img/send.png" style="width:30px; height:30px;"></span></div>
+				</c:if>
 				<div class="detailTop_item">${boardDetail.board_date }</div>
 			</div>
 			<div class="detailMid">
 			<div class="detailMid_item">${boardDetail.board_content }</div>
+				<c:if test="${boardFile ne null }">
+					<div class="form-control">
+						<span>
+							<label class="col-form-label"><a href = "data:image/png;base64,${imageDataString}" download = "${boardFile.file_name }.${boardFile.file_extension}">${boardFile.file_name }</a></label>
+						</span>
+						</div>
+						<div>
+						<img src="data:image/png;base64,${imageDataString}" />
+					</div>
+				</c:if>
 				<div class="userProfile">유저프로필</div>
 			</div>
 			<div class="btnBox">

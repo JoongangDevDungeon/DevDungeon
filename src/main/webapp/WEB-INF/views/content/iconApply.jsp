@@ -12,6 +12,13 @@
 <script>
    $(function() {
 
+      var apply = "${apply}";
+      if(apply == "success") {
+         alert("아이콘 등록 신청완료");
+      } else if(apply == "fail") {
+         alert("아이콘 등록 실패");
+      }
+
       $("#icon_file").change(function() { // 이미지 미리보기
          const icon_file = this.files[0];
          const reader = new FileReader();
@@ -29,7 +36,6 @@
             }
             img.src = event.target.result;
          };
-
          reader.readAsDataURL(icon_file);
       });
 
@@ -53,8 +59,8 @@
                               <span id="previewText" style="text-align: center;">미리<br>보기</span>
                               <img id="previewImg" style="display: none;"/>
                            </div>
-                           <input class="form-control upload-name" style="width: 440px; height: 50px; margin-left: 10px; float: left;" value="이미지의 크기는 45x45 제한 됩니다." placeholder="이미지의 크기는 45x45 제한 됩니다.">
-                           <label class="btn btn-primary" for="icon_file" style="width: 100px; height: 50px; line-height: 40px; margin-left: 10px; float: left;">아이콘 등록</label>
+                           <input class="form-control upload-name" style="width: 420px; height: 50px; margin-left: 10px; float: left;" value="이미지의 크기는 45x45 제한 됩니다." placeholder="이미지의 크기는 45x45 제한 됩니다.">
+                           <label class="btn btn-primary" for="icon_file" style="width: 120px; height: 50px; line-height: 40px; margin-left: 10px; float: left;">아이콘 등록</label>
                            <input type="file" id="icon_file" name="icon_file" accept="image/*" style="display: none;">
                         </div>
                         <!-- 아이콘 이름 -->

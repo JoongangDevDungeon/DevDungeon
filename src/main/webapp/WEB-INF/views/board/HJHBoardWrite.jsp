@@ -16,6 +16,7 @@
 body{ margin:0; padding:0; }
 a {	text-decoration: none; color:black; }
 a:hover{ color:#ccc; }
+.none{ width:252px; height:104px; line-height:48px; padding:0; margin:0; }
 .container{	width:1200px; height:100%; text-align: left;}
 .board_tag{
 	display: inline-block;

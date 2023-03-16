@@ -1,5 +1,10 @@
 package com.team.devdungeon.service;
 
-public interface IconService {
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import java.util.Map;
+
+public interface IconService {
+    int iconApply(Map<String, Object> map, MultipartFile iconFile, HttpSession session);
 }

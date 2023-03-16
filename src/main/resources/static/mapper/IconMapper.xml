@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="icon">
+
+    <insert id="iconApply" parameterType="HashMap">
+        INSERT INTO product
+            SET
+                product_name = #{icon_name},
+                product_sell_cnt = #{icon_count},
+                product_price = #{icon_price},
+                emo_img_name = #{emo_img_name},
+                emo_img_extension = #{emo_img_extension},
+                emo_img_size = #{emo_img_size},
+                member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+    </insert>
+
+</mapper>
