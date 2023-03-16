@@ -67,6 +67,6 @@ public class StoreServiceImpl implements StoreService {
             resutList.add(map);
         }
 
-        return result;
+        return resutList;
     }
 }
