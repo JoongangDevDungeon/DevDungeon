@@ -84,6 +84,12 @@
 
 	});
 </script>
+<script>
+function sendMessageTo(receiver){
+	alert(receiver);
+	window.open("/message?receiver="+receiver,"쪽지",'width=510px,height=600px,scrollbars=yes');
+}
+</script>
 <style>
 .commentAll {
 	text-align: left;
@@ -150,9 +156,20 @@
 				<h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
 				<div class="detailBody">
 					<div class="detailTitle">제목 : ${det.board_title }</div>
-					<div class="detailInfo">글쓴이 ${det.member_name }<input type="hidden" id="detailWriter" value="${det.member_name }"> 날짜
+					<div class="detailInfo">글쓴이 ${det.member_name } <span onclick="sendMessageTo('${det.member_name }')">[쪽지]</span><input type="hidden" id="detailWriter" value="${det.member_name }"> 날짜
 						${det.board_date } 조회수 ${det.board_read }</div>
-					<div class="detailContent">${det.board_content }</div>
+					<div class="detailContent">
+					<c:if test="${boardFile ne null }">
+						<div class="form-control">
+							<span>
+							<label class="col-form-label"><a href = "data:image/png;base64,${imageDataString}" download = "${boardFile.file_name }.${boardFile.file_extension}">${boardFile.file_name }</a></label>
+							</span>
+						</div>
+						<div>
+							<img src="data:image/png;base64,${imageDataString}" />
+						</div>
+					</c:if>
+					${det.board_content }</div>
 					<button id="boardBtnLike" class="btn btn-success"
 						value="${det.board_no }">추천 ${det.board_like }</button>
 					<button id="boardBtnBan" class="btn btn-danger"
@@ -164,27 +181,27 @@
 						<div class="mt-3"
 							style="margin: 0 auto; width: 810px; height: 242px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box;">
 							<div style="width: 180px; height: 240px; float: left;">
-								<img src="/img/profile/test.jpeg"
-									style="width: 180px; height: 240px; border-radius: 10px 0px 0px 10px;">
-							</div>
+                        <img id="previewImg" src="data:image/png;base64,${profile.profile_image}" style="width: 180px; height: 240px; border-radius: 10px 0px 0px 10px; object-fit: none;">
+                    </div>
 							<div
 								style="width: 620px; height: 240px; float: left; text-align: left;">
 								<!-- 레벨, 아이콘, 이름 -->
 								<div
 									style="width: 620px; height: 60px; box-sizing: border-box; padding-top: 7px; padding-left: 10px;">
-									<span
-										style="display: inline-block; width: 45px; height: 45px; border-radius: 8px; text-align: center; line-height: 40px; background-color: black; color: white;">
-										LV.1 </span> <span> <img src="/img/icon/icon1.png"
-										style="display: inline-block; width: 45px; height: 45px;">
-									</span> <span
+									<span style="display: inline-block; width: 48px; height: 40px; border-radius: 8px; text-align: center; line-height: 38px; background-color: black; color: white;">
+                                Lv.${profile.member_level}
+                            </span><span>
+                                <img src="data:image/png;base64,${profile.icon_image}" style="display: inline-block; width: 40px; height: 40px;">
+
+                            </span><span
 										style="display: inline-block; width: 500px; height: 45px; border-radius: 8px; text-align: left; box-sizing: border-box; padding-left: 5px; line-height: 40px; font-size: 20px;">
-										${det.member_name } </span>
+										${profile.member_name } </span>
 								</div>
 
 								<div
 									style="padding: 10px; padding-top: 5px; box-sizing: border-box;">
 									<textarea class="form-control" rows="6" readonly
-										placeholder="간단한 자기소개를 입력해주세요."></textarea>
+										placeholder="간단한 자기소개를 입력해주세요.">${mem.member_intro }</textarea>
 								</div>
 							</div>
 						</div>

@@ -86,7 +86,10 @@
 		,board_title = #{title}
 		,tag_no = #{tag}
 		,category_no = #{category}
-		,board_content = #{content}    
+		,board_content = #{content}  
+		<selectKey resultType="int" keyProperty="number" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>  
     </insert>
     
     <insert id="commentWrite" parameterType="HashMap" statementType="CALLABLE">
@@ -109,6 +112,11 @@
     	,comment_root = #{root}
     </insert>
     
+    <select id="qnaList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
+    	SELECT q.question_board_no ,q.member_no ,q.question_board_title ,q.question_board_date ,q.question_board_status ,q.question_board_content ,a.answer_board_no ,a.answer_board_title ,a.answer_board_date ,a.answer_board_update ,a.answer_board_content 
+    	FROM question_board q JOIN answer_board a ON q.question_board_no = a.question_board_no 
+    	ORDER BY question_board_no DESC
+    </select>
     <select id="faqList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
     	SELECT *
     	FROM question_board
@@ -139,5 +147,20 @@
     	,ban_member_no = (SELECT member_no FROM member WHERE member_name = #{banMember})
     	,member_no = (SELECT member_no FROM member WHERE member_name = #{singoman})
     	,ban_content = #{banWhy}
+    </insert>
+    
+    <select id="callBoardFile" parameterType="Integer" resultType="HashMap">
+    	SELECT *
+    	FROM board_file
+    	WHERE board_no = #{bno}
+    </select>
+    
+    <insert id="putBoardFile" parameterType="HashMap">
+    	INSERT INTO board_file
+    	SET
+    	board_no = #{board_no}
+    	,file_name = #{fileName}
+    	,file_extension = #{extension}
+    	,file_size = #{fileSize}
     </insert>
 </mapper>

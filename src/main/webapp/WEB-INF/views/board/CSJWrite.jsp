@@ -22,10 +22,12 @@
 					<input type="hidden" name="tag" value="1">
 					<input type="text" name="title" class="form-control" placeholder="제목을 입력하세요">
 					<textarea name="content" class="form-control" rows="20"  placeholder="내용을 입력하세요"></textarea>
-					<input type="file" name="file" accept="image/*">
-					<button class="btn btn-primary">글쓰기</button>
+					<input type="file" class="form-control" name="board_file" accept="image/*">
+					<div class="d-flex justify-content-between">
+					<button type="button" class="btn btn-primary p-2" onclick="location.href='/csjboard'">목록</button>
+					<button class="btn btn-primary ml-auto p-2">글쓰기</button>
+					</div>
 				</form>
-				<button class="btn btn-primary">목록</button>
 			</div>
 			
             </div>
