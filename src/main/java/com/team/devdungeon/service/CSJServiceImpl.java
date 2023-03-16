@@ -148,6 +148,12 @@ public class CSJServiceImpl implements CSJService {
 		return csjDAO.qnaList(dto);
 	}
 
+	@Override
+	public int qnaWrite(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return csjDAO.qnaWrite(map);
+	}
+
 
 
 

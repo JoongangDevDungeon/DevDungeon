@@ -54,4 +54,6 @@ public interface CSJService {
 
 	public PageInfo<Map<String, Object>> qnaList(CSJshowDTO dto);
 
+	public int qnaWrite(Map<String, Object> map);
+
 }

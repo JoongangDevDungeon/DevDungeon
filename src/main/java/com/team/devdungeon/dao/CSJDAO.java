@@ -123,6 +123,11 @@ public class CSJDAO {
 		return PageInfo.of(sqlSession.selectList(namespace+"qnaList",dto));
 	}
 
+	public int qnaWrite(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+"QuestionWrite",map);
+	}
+
 
 
 }

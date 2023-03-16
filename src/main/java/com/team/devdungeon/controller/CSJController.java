@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +35,7 @@ import com.team.devdungeon.dto.CSJshowDTO;
 import com.team.devdungeon.dto.MyPageDTO;
 import com.team.devdungeon.service.CSJService;
 import com.team.devdungeon.service.MyPageService;
+import com.team.devdungeon.util.SFTPFileUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -43,12 +45,7 @@ public class CSJController {
 
 	private final CSJService csjService;
 	private final MyPageService mypageService;
-
-	public static final String FTP_USER = "woori";
-	public static final String FTP_PASSWORD = "0326655522";
-	public static final String FTP_HOST = "172.30.1.21";
-	public static final int FTP_PORT = 22;
-	private final ServletContext context;
+	private final SFTPFileUtil sftpFileUtil;
 
 	@GetMapping("/csjboard")
 	public ModelAndView csjboard(@RequestParam(defaultValue = "1") Integer pageNo, HttpServletRequest request) {
@@ -120,7 +117,7 @@ public class CSJController {
 				String extension = FilenameUtils.getExtension(originalFileName); // 파일 확장자
 				String savedFileName = UUID.randomUUID().toString() + "." + extension; // 저장될 파일 이름
 				
-				String remotePath = "/home/woori/ftp/files/" + savedFileName;
+				String remotePath = sftpFileUtil.remotePath + savedFileName;
 				long fileSize = boardFile.getSize();
 				Map<String,Object> fileMap = new HashMap<String, Object>();
 				
@@ -132,8 +129,8 @@ public class CSJController {
 		        try {
 		            JSch jsch = new JSch();
 
-		            Session jschSession = jsch.getSession(FTP_USER, FTP_HOST, FTP_PORT);
-		            jschSession.setPassword(FTP_PASSWORD);
+		            Session jschSession = jsch.getSession(sftpFileUtil.FTP_USER, sftpFileUtil.FTP_HOST, sftpFileUtil.FTP_PORT);
+		            jschSession.setPassword(sftpFileUtil.FTP_PASSWORD);
 		            jschSession.setConfig("StrictHostKeyChecking", "no");
 		            jschSession.connect();
 
@@ -224,8 +221,8 @@ public class CSJController {
 	        try {
 	            JSch jsch = new JSch();
 
-	            Session session = jsch.getSession(FTP_USER, FTP_HOST, FTP_PORT);
-	            session.setPassword(FTP_PASSWORD);
+	            Session session = jsch.getSession(sftpFileUtil.FTP_USER, sftpFileUtil.FTP_HOST, sftpFileUtil.FTP_PORT);
+	            session.setPassword(sftpFileUtil.FTP_PASSWORD);
 	            session.setConfig("StrictHostKeyChecking", "no");
 	            session.connect();
 
@@ -403,5 +400,16 @@ public class CSJController {
 		mv.addObject("list",qnaPageInfo.getList());
 		
 		return mv;
+	}
+	
+	@ResponseBody
+	@PostMapping("/qnaWrite")
+	public String qnaWrite(Map<String,Object> map,HttpSession session) {
+		map.put("member_name", session.getAttribute("member_name"));
+		int result = (int)csjService.qnaWrite(map);
+		//json형태로 내보내기
+		JSONObject json = new JSONObject();//json으로변환
+		json.put("result", result);
+		return json.toString(); //json타입을 String화
 	}
 }
