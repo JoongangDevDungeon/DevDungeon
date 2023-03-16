@@ -33,18 +33,11 @@ public class StoreServiceImpl implements StoreService {
 
         for(Map<String, Object> map : result) {
             try {
-                JSch jsch = new JSch();
-                Session session = jsch.getSession(FTP_USER, FTP_HOST, FTP_PORT);
-                session.setPassword(FTP_PASSWORD);
-                session.setConfig("StrictHostKeyChecking", "no");
-                session.connect();
-                ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
-                sftpChannel.connect();
 
                 String emo_img_name = (String) map.get("emo_img_name");
                 String emo_img_extension = (String) map.get("emo_img_extension");
 
-                inputStream = sftpChannel.get(remotePath + emo_img_name + "." + emo_img_extension);
+                inputStream = channelSftp.get(remotePath + emo_img_name + "." + emo_img_extension);
                 baos = new ByteArrayOutputStream();
                 buffer = new byte[1024 * 8];
                 int len;
@@ -56,8 +49,6 @@ public class StoreServiceImpl implements StoreService {
 
                 String icon_image = Base64.getEncoder().encodeToString(imageData);
                 map.put("icon_image", icon_image);
-                sftpChannel.exit();
-                session.disconnect();
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("아이콘 이미지 로딩중 에러 발생");
