@@ -33,7 +33,6 @@ public class StoreServiceImpl implements StoreService {
 
         for(Map<String, Object> map : result) {
             try {
-
                 String emo_img_name = (String) map.get("emo_img_name");
                 String emo_img_extension = (String) map.get("emo_img_extension");
 
