@@ -121,8 +121,8 @@
     <insert id="QuestionWrite" parameterType="HashMap">
     	INSERT INTO question_board
 		SET
-		question_title=#{title},
-		question_content=#{content},
+		question_board_title=#{title},
+		question_board_content=#{content},
 		member_no= (SELECT member_no FROM member WHERE member_name=#{member_name})
     </insert>
     <select id="faqList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
