@@ -18,6 +18,7 @@ public class SFTPFileUtil {
 
     // SSH 연결 생성
     public void connect() throws JSchException {
+        System.out.println("FTP 연결 시작");
         JSch jsch = new JSch();
         session = jsch.getSession(FTP_USER, FTP_HOST, FTP_PORT);
         session.setPassword(FTP_PASSWORD);
@@ -26,6 +27,7 @@ public class SFTPFileUtil {
         Channel channel = session.openChannel("sftp");
         channel.connect();
         channelSftp = (ChannelSftp) channel;
+        System.out.println("FTP 연결 완료");
     }
 
     // SSH 연결 종료
