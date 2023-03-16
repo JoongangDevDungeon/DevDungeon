@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class Email {
 
-    private static String emailAddr = "kingdori902@gmail.com";
-    private static String passwd = "!@#$yong8255";
+    private static String emailAddr = "lms1994@outlook.kr";
+    private static String passwd = "wnsgh1533";
     private static String hostName = "smtp.office365.com";
     private static int    port = 587;
     private static String name = "가지 커뮤니티";
