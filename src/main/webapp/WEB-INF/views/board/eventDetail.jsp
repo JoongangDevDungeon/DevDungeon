@@ -114,17 +114,23 @@
 .detailBtnZone {
 	text-align: right;
 }
+.commentEnter{
+	width:1200px;
+	height:100px;
+	margin:0;
+	padding:0;
+}
 
 .commentInput {
-	width: 1090px;
-	height: 100px;
-	box-sizing: border-box;
+/* 	width: 1070px; */
+ 	height: 100px; 
+/* 	box-sizing: border-box; */
 }
 
 #commentEnterBtn {
-	width: 100px;
-	height: 100px;
-	box-sizing: border-box;
+/* 	width: 100px; */
+ 	height: 100px; 
+/* 	box-sizing: border-box; */
 }
 
 .commentZone {
@@ -166,6 +172,7 @@
 					<button class="btn btn-primary" onclick="location.href='/eventboard'">목록</button>
 					<button class="btn btn-Info"style="cursor:pointer;" onclick="window.scrollTo(0,0);">TOP</button>
 				</div>
+				<br>
 				
 				<div class="CommentAll">
 					<c:forEach items="${comment }" var="c">
@@ -208,10 +215,14 @@
 					</c:forEach>
 					<c:if test="${sessionScope.member_name ne null }">
 						<div id="commentEnter">
-							<form id="commentForm" action="csjCommentWrite" method="post">
+							<form id="commentForm" action="csjCommentWrite" method="post" class="row g-3">
 								<input type="hidden" name="bno" value="${det.board_no }">
-								<input type="text" class="commentInput" name="commentContent" disabled>
-								<button id="commentEnterBtn" disabled>지금은 댓글을 막아둠</button>
+								<div class="col-10">
+								<input type="text" class="commentInput form-control" name="commentContent" disabled>
+								</div>
+								<div class="col-2">
+								<button id="commentEnterBtn" class="btn" disabled>지금은 댓글을 막아둠</button>								
+							</div>
 							</form>
 						</div>
 					</c:if>

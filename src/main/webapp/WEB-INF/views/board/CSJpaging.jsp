@@ -39,7 +39,7 @@ function moving(page){
 			begin="${pageInfo.pageNum lt pageInfo.pages-9 ? pageInfo.pageNum:pageInfo.pages-9}"
 			end="${pageInfo.pageNum+9 gt pageInfo.pages ? pageInfo.pages:pageInfo.pageNum+9}"
 			var="p">
-			<li class="pageNo" onclick="moving(${p })"<c:if test="${pageInfo.pageNum eq p }">style="color:red;"</c:if>>${p }</li>
+			<li class="pageNo" onclick="moving(${p })"<c:if test="${pageInfo.pageNum eq p }">style="color:red; font-weight: bold;"</c:if>>${p }</li>
 			</c:forEach>
 		</c:if>
 		<c:if test="${pageInfo.pages le 9 }">
@@ -47,7 +47,7 @@ function moving(page){
 			begin="${1 }"
 			end="${pageInfo.pages }"
 			var="p">
-			<li class="pageNo" onclick="moving(${p })"<c:if test="${pageInfo.pageNum eq p }">style="color:pink"</c:if>>${p }</li>			
+			<li class="pageNo" onclick="moving(${p })"<c:if test="${pageInfo.pageNum eq p }">style="color:red; font-weight: bold;"</c:if>>${p }</li>			
 			</c:forEach>
 		</c:if>
     <li class="pageNo page_btn" onclick="moving(${pageInfo.pageNum eq pageInfo.pages ? pageInfo.pageNum:pageInfo.pageNum+1 })"><i class="xi-step-forward xi-x"></i></li>
