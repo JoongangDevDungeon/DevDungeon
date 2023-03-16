@@ -271,7 +271,6 @@ function sendMessageTo(receiver){
 						</div>
 					</c:if>
 				</div>
-
 			</div>
 			<div class="add2">광고2</div>
 		</div>
