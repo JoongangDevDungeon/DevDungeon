@@ -43,7 +43,11 @@ dependencies {
     implementation 'com.jcraft:jsch:0.1.55'
     implementation 'org.apache.commons:commons-email:1.5'/*outlook email*/
     
-
+	//log 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+  	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+  	implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
 }
 	
 	tasks.named('test') { useJUnitPlatform() }
