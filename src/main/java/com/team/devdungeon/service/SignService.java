@@ -10,4 +10,10 @@ public interface SignService {
     SignDTO checkid(SignDTO signDTO);
 
     SignDTO mail_code(SignDTO signDTO);
+
+    SignDTO check_code(SignDTO signDTO);
+
+    SignDTO check_name(SignDTO signDTO);
+
+    SignDTO check_final(SignDTO signDTO);
 }

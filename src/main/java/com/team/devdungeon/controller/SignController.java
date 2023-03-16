@@ -26,11 +26,9 @@ public class SignController {
     @GetMapping("/index")
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("index");
-
         if(request.getParameter("error") != null) {
             mv.addObject("error_msg", request.getParameter("error"));
         }
-
         return mv;
     }
 
@@ -44,7 +42,6 @@ public class SignController {
         String agree1 = request.getParameter("agree1");
         String agree2 = request.getParameter("agree2");
         String agree3 = request.getParameter("agree3");
-
         if( (agree1 != null && agree1.equals("check")) && (agree2 != null && agree2.equals("check")) ) {
             agree.addAttribute("Service", agree1);
             agree.addAttribute("Privacy", agree2);
@@ -68,7 +65,32 @@ public class SignController {
         SignDTO signDTO = new SignDTO();
         signDTO.setMember_id((request.getParameter("member_id")));
         SignDTO result = signService.checkid(signDTO);
-        System.err.println("id 중복 체크"+result.getCount());
+        if (result.getCount() == 0){
+            return "0";/*중복 없음*/
+        }else{
+            return "1";/*중복 있음*/
+        }
+    }
+
+    @PostMapping("/check_final")/*아이디 중복 체크*/
+    @ResponseBody
+    public String check_final(HttpServletRequest request){
+        SignDTO signDTO = new SignDTO();
+        signDTO.setMember_id((request.getParameter("member_id")));
+        SignDTO result = signService.check_final(signDTO);
+        if (result.getCount() == 0){
+            return "0";/*중복 없음*/
+        }else{
+            return "1";/*중복 있음*/
+        }
+    }
+
+    @PostMapping("/check_name")/*아이디 중복 체크*/
+    @ResponseBody
+    public String check_name(HttpServletRequest request){
+        SignDTO signDTO = new SignDTO();
+        signDTO.setMember_name((request.getParameter("member_name")));
+        SignDTO result = signService.check_name(signDTO);
         if (result.getCount() == 0){
             return "0";/*중복 없음*/
         }else{
@@ -90,7 +112,6 @@ public class SignController {
         String title = "가지 회원가입 인증번호 입니다.";
         String msg = "회원 가입 인증번호<br><div style='color:red'>"+att_num+"</div>";
         Email.Mail(user_mail,"",title, msg);
-
         return "";
     }
 
@@ -98,15 +119,29 @@ public class SignController {
     @ResponseBody
     public  String check_mail_num(HttpServletRequest request){
         SignDTO signDTO = new SignDTO();
-        return "";
+        System.err.println("연결");
+        signDTO.setVerify_code(request.getParameter("mail_code"));
+        signDTO.setMember_email(request.getParameter("member_email"));
+        SignDTO result = signService.check_code(signDTO);
+        if (result.getCount() == 1){
+            return "0";/*인증 성공*/
+        }else{
+            return "1";/*인증 실패*/
+        }
     }
 
     @PostMapping("/signup")/*최종 회원가입*/
     public String signup(HttpServletRequest request) {
+        System.err.println(request.getParameter("member_id"));
         SignDTO signDTO = new SignDTO();
 
+        signDTO.setAgree_no1(request.getParameter("agree_no1"));
         signDTO.setAgree1(request.getParameter("agree1"));
+
+        signDTO.setAgree_no2(request.getParameter("agree_no2"));
         signDTO.setAgree2(request.getParameter("agree2"));
+
+        signDTO.setAgree_no3(request.getParameter("agree_no3"));
         signDTO.setAgree3(request.getParameter("agree3"));
 
         signDTO.setMember_id(request.getParameter("member_id"));

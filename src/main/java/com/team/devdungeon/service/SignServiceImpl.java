@@ -37,5 +37,21 @@ public class SignServiceImpl implements SignService {
         return signDTO;
     }
 
+    @Override
+    public SignDTO check_code(SignDTO signDTO) {
+
+        return signDAO.check_code(signDTO);
+    }
+
+    @Override
+    public SignDTO check_name(SignDTO signDTO) {
+        return signDAO.check_name(signDTO);
+    }
+
+    @Override
+    public SignDTO check_final(SignDTO signDTO) {
+        return signDAO.check_final(signDTO);
+    }
+
 
 }
