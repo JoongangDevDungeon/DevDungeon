@@ -30,6 +30,7 @@
 	cursor: pointer;
 /* 	margin: 0px 5px 5px 0px; */
 	margin:5px;
+	border-radius: 5px;
 }
 .eventBanner:hover{ background-color: #d3d3d3; }
 </style>
@@ -55,7 +56,7 @@
 									<img src="/img/logo.png" width="100%" height="270px">
 									</c:otherwise>
 								</c:choose>
-								${e.event_title }
+								<b>${e.event_title }</b>
 							</li>
 						</c:forEach>
 						</ul>

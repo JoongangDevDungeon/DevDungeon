@@ -156,17 +156,16 @@
 							<img src="data:image/png;base64,${imageDataString}" width="100%" />
 						</div>
 					</c:if>
-					${det.event_content }
+<%-- 					${det.event_content } --%>
 					</div>
 					
 					
 				<br>
 				<div class="detailBtnZone">
-					
 					<button class="btn btn-primary" onclick="location.href='/eventboard'">목록</button>
 					<button class="btn btn-Info"style="cursor:pointer;" onclick="window.scrollTo(0,0);">TOP</button>
 				</div>
-				
+				<br>
 				<div class="CommentAll">
 					<c:forEach items="${comment }" var="c">
 						<div id="commentZone"
@@ -193,6 +192,7 @@
 									<button class="commentShowBtn" value="${c.comment_no }">show</button>
 								</c:if>
 							</div>
+							</c:forEach>
 							<hr>
 							<c:if test="${c.comment_no eq c.comment_root }">
 								<div class="commentReplyEnter rep${c.comment_no }" style="background-color:gray;">
@@ -205,7 +205,7 @@
 								</div>
 							</c:if>
 						</div>
-					</c:forEach>
+					
 					<c:if test="${sessionScope.member_name ne null }">
 						<div id="commentEnter">
 							<form id="commentForm" action="csjCommentWrite" method="post">
@@ -215,8 +215,8 @@
 							</form>
 						</div>
 					</c:if>
+					
 				</div>
-
 			</div>
 			<div class="add2">광고2</div>
 		</div>
