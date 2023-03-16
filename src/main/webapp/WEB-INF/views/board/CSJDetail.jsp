@@ -86,7 +86,6 @@
 </script>
 <script>
 function sendMessageTo(receiver){
-	alert(receiver);
 	window.open("/message?receiver="+receiver,"쪽지",'width=510px,height=600px,scrollbars=yes');
 }
 </script>
@@ -156,7 +155,7 @@ function sendMessageTo(receiver){
 				<h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
 				<div class="detailBody">
 					<div class="detailTitle">제목 : ${det.board_title }</div>
-					<div class="detailInfo">글쓴이 ${det.member_name } <span onclick="sendMessageTo('${det.member_name }')">[쪽지]</span><input type="hidden" id="detailWriter" value="${det.member_name }"> 날짜
+					<div class="detailInfo">글쓴이 ${det.member_name } <span onclick="sendMessageTo('${det.member_name }')"><img src="/img/send.png" style="width:30px; height:30px;"></span><input type="hidden" id="detailWriter" value="${det.member_name }"> 날짜
 						${det.board_date } 조회수 ${det.board_read }</div>
 					<div class="detailContent">
 					<c:if test="${boardFile ne null }">
