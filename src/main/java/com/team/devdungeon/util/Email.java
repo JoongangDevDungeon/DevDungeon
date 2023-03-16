@@ -30,7 +30,6 @@ public class Email {
         mail.setStartTLSEnabled(true);//인증방법 = 고정
         mail.setFrom(emailAddr, name);//보내는 사람 email, 보내는 사람 이름 = 고정
 
-
         mail.addTo(email);// 받는 사람
         mail.setSubject(title);//제목
         mail.setMsg(msg);//본문내용

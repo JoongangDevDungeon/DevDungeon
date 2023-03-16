@@ -14,16 +14,6 @@ public class SignDAO {
     private SqlSession sqlSession;
 
     public void signup(SignDTO signDTO) {/*회원 가입*/
-        System.out.println(signDTO.getAgree_no1());
-        System.out.println(signDTO.getAgree1());
-
-        System.out.println(signDTO.getAgree_no2());
-        System.out.println(signDTO.getAgree2());
-
-        System.out.println(signDTO.getAgree_no3());
-        System.out.println(signDTO.getAgree3());
-
-
     sqlSession.insert("sign.signup",signDTO);/*회원 정보 insert*/
     sqlSession.insert("sign.signup_agree",signDTO);/*회원 약관 동의 insert*/
     sqlSession.insert("sign.point_new",signDTO);/*회원 포인트 생성*/

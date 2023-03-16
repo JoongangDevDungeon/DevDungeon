@@ -22,10 +22,10 @@
                         <th>레벨</th>
                         <th style="border-left: 1px solid black;">기준 포인트</th>
                      </thead>
-                     <c:forEach var="i" step="1" begin="1" end="25">
+                     <c:forEach items="${list}" var="level" step="1" begin="0" end="24">
                         <tbody>
-                           <td>${i}</td>
-                           <td style="border-left: 1px solid black;">1000</td>
+                           <td>${level.member_level}</td>
+                           <td style="border-left: 1px solid black;">${level.level_to_point}</td>
                         </tbody>
                      </c:forEach>
                   </table>
@@ -34,10 +34,10 @@
                      <th>레벨</th>
                      <th style="border-left: 1px solid black;">기준 포인트</th>
                      </thead>
-                     <c:forEach var="i" step="1" begin="26" end="50">
+                     <c:forEach items="${list}" var="level" step="1" begin="25">
                         <tbody>
-                           <td>${i}</td>
-                           <td style="border-left: 1px solid black;">1000</td>
+                           <td>${level.member_level}</td>
+                           <td style="border-left: 1px solid black;">${level.level_to_point}</td>
                         </tbody>
                      </c:forEach>
                   </table>

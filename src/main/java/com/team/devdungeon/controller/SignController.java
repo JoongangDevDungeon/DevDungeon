@@ -26,11 +26,9 @@ public class SignController {
     @GetMapping("/index")
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("index");
-
         if(request.getParameter("error") != null) {
             mv.addObject("error_msg", request.getParameter("error"));
         }
-
         return mv;
     }
 
@@ -44,7 +42,6 @@ public class SignController {
         String agree1 = request.getParameter("agree1");
         String agree2 = request.getParameter("agree2");
         String agree3 = request.getParameter("agree3");
-
         if( (agree1 != null && agree1.equals("check")) && (agree2 != null && agree2.equals("check")) ) {
             agree.addAttribute("Service", agree1);
             agree.addAttribute("Privacy", agree2);
@@ -60,7 +57,6 @@ public class SignController {
         agrees.addObject("agree1", agree1);
         agrees.addObject("agree2", agree2);
         agrees.addObject("agree3", agree3);
-
         return agrees;
     }
     @PostMapping("/checkid")/*아이디 중복 체크*/
@@ -95,15 +91,12 @@ public class SignController {
         SignDTO signDTO = new SignDTO();
         signDTO.setMember_name((request.getParameter("member_name")));
         SignDTO result = signService.check_name(signDTO);
-        System.err.println("닉네임 중복 체크"+result.getCount());
         if (result.getCount() == 0){
             return "0";/*중복 없음*/
         }else{
             return "1";/*중복 있음*/
         }
     }
-
-
 
     @PostMapping("/send_mail")/*인증 번호 전송하면서 임시 테이블에(id, email, code) 저장함*/
     @ResponseBody
@@ -119,7 +112,6 @@ public class SignController {
         String title = "가지 회원가입 인증번호 입니다.";
         String msg = "회원 가입 인증번호<br><div style='color:red'>"+att_num+"</div>";
         Email.Mail(user_mail,"",title, msg);
-
         return "";
     }
 
@@ -131,7 +123,6 @@ public class SignController {
         signDTO.setVerify_code(request.getParameter("mail_code"));
         signDTO.setMember_email(request.getParameter("member_email"));
         SignDTO result = signService.check_code(signDTO);
-
         if (result.getCount() == 1){
             return "0";/*인증 성공*/
         }else{
@@ -164,8 +155,6 @@ public class SignController {
         signDTO.setMember_email(request.getParameter("member_email"));
         signDTO.setMember_tel(request.getParameter("member_tel"));
         signDTO.setVerify_code((request.getParameter("verify_code")));
-
-
 
         signService.signup(signDTO);
 
