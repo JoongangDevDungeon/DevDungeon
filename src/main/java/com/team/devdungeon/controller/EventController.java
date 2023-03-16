@@ -42,11 +42,16 @@ public class EventController {
 
 		int pageSize = 6;
 		int category = 1; // 카테고리에 맞는 글만 불러오도록 쿼리 수정
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
 		CSJshowDTO dto = new CSJshowDTO();
 		dto.setPageNo(pageNo);
 		dto.setPageSize(pageSize);
 		dto.setCategory(category);
-
+		if(searchValue!=null) {
+			dto.setSearchType(searchType);
+			dto.setSearchValue(searchValue);
+		}
 		PageInfo<Map<String, Object>> pageList = csjService.eventList(dto);
 		for(Map<String,Object> m : pageList.getList()) {
 			if(m.get("event_file_no") != null) {
@@ -73,6 +78,8 @@ public class EventController {
 		}
 		mv.addObject("pageNo", pageNo);
 		mv.addObject("pageInfo", pageList);
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchValue", searchValue);
 		mv.addObject("list", pageList.getList());
 		return mv;
 	}
