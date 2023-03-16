@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,5 +38,9 @@ public class MyPageDAO {
         }
 
         return result;
+    }
+
+    public List<Map<String, Object>> icons(String memberId) {
+        return sqlSession.selectList("mypage.icons", memberId);
     }
 }

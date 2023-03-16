@@ -16,6 +16,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -102,20 +103,8 @@ public class MyPageServiceImpl implements MyPageService {
 
             if(result == 1) {
                 try {
-                    JSch jsch = new JSch();
-
-                    Session session = jsch.getSession(FTP_USER, FTP_HOST, FTP_PORT);
-                    session.setPassword(FTP_PASSWORD);
-                    session.setConfig("StrictHostKeyChecking", "no");
-                    session.connect();
-                    ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
-                    sftpChannel.connect();
-
                     InputStream inputStream = new ByteArrayInputStream(profile_img.getBytes());
-                    sftpChannel.put(inputStream, remotePath + pfp_name + "." + pfp_extension);
-
-                    sftpChannel.exit();
-                    session.disconnect();
+                    channelSftp.put(inputStream, remotePath + pfp_name + "." + pfp_extension);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -125,5 +114,10 @@ public class MyPageServiceImpl implements MyPageService {
         }
 
         return result;
+    }
+
+    @Override
+    public List<Map<String, Object>> icons(String memberId) {
+        return myPageDAO.icons(memberId);
     }
 }

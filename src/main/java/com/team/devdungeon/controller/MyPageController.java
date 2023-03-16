@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -38,36 +39,38 @@ public class MyPageController {
 
         int result = myPageService.checkPassword(memberInfo);
         if(result == 1) {
-            return "redirect:/profile";
+            return "redirect:/myPage";
         } else {
             return "redirect:/checkPassword?error=password_fail";
         }
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/myPage")
     public ModelAndView profile(HttpSession session) {
-        ModelAndView mv = new ModelAndView("mypage/profile");
+        ModelAndView mv = new ModelAndView("mypage/myPage");
+        List<Map<String, Object>> icons = myPageService.icons((String)session.getAttribute("member_id"));
+        System.out.println(icons);
         MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
         mv.addObject("profile", profile);
         return mv;
     }
 
-    @PostMapping("/profile")
+    @PostMapping("/myPage")
     public String profile(HttpSession session, @RequestParam Map<String, Object> map, MultipartFile profile_img) {
         map.put("member_id", (String)session.getAttribute("member_id"));
         int result = myPageService.memberIntro(map, profile_img);
-        return "redirect:/profile";
+        return "redirect:/myPage";
     }
 
-    @GetMapping("/profileEdit")
+    @GetMapping("/profile")
     public String profileEdit() {
-        return "mypage/profileEdit";
+        return "mypage/profile";
     }
 
-    @PostMapping("/profileEdit")
+    @PostMapping("/profile")
     public String profileEdit(@RequestParam Map<String, Objects> map) {
         System.out.println(map);
-        return "mypage/profileEdit";
+        return "mypage/profile";
     }
     @GetMapping("/myPageChangePassword")
     public String myPageChangePass() {
