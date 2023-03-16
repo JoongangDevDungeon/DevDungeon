@@ -32,10 +32,10 @@ public class StoreController {
 
         if(session.getAttribute("member_id") != null) {
             List<Map<String, Object>> iconList = storeService.iconList();
-//            MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
+            MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
 
             mv.addObject("iconList", iconList);
-//            mv.addObject("profile", profile);
+            mv.addObject("profile", profile);
             mv.setViewName("content/store");
         } else {
             mv.setViewName("redirect:/index?error=not_login");

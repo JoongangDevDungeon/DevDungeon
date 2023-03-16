@@ -1,5 +1,10 @@
 package com.team.devdungeon.controller;
 
+import static com.team.devdungeon.util.SFTPFileUtil.channelSftp;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,24 +42,37 @@ public class EventController {
 
 		int pageSize = 6;
 		int category = 1; // 카테고리에 맞는 글만 불러오도록 쿼리 수정
-		String searchType = request.getParameter("searchType");
-		String searchValue = request.getParameter("searchValue");
 		CSJshowDTO dto = new CSJshowDTO();
 		dto.setPageNo(pageNo);
 		dto.setPageSize(pageSize);
 		dto.setCategory(category);
 
-		if (searchType != null && searchValue != null) {
-			dto.setSearchType(searchType);
-			dto.setSearchValue(searchValue);
-		}
-
 		PageInfo<Map<String, Object>> pageList = csjService.eventList(dto);
-
+//		if(eventFile!=null) {
+//			String remotePath = "/home/woori/ftp/files/" + eventFile.get("event_file_name");
+//			mv.addObject("eventFile",eventFile);
+//
+//	        try {
+//	            // 원격 서버에서 이미지 파일 읽어오기
+//	            InputStream inputStream = channelSftp.get(remotePath);
+//	            // Inputstream -> byte[] 변환
+//	            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//	            byte[] buffer = new byte[1024];
+//	            int len;
+//	            while ((len = inputStream.read(buffer)) > -1 ) {
+//	                baos.write(buffer, 0, len);
+//	            }
+//	            baos.flush();
+//	            byte[] imageData = baos.toByteArray();
+//	            // byte[] -> Base64
+//	            String imageDataString = Base64.getEncoder().encodeToString(imageData);
+//	            mv.addObject("imageDataString", imageDataString);
+//	        } catch (Exception e) {
+//	            e.printStackTrace();
+//	        }
+//		}
 		mv.addObject("pageNo", pageNo);
 		mv.addObject("pageInfo", pageList);
-		mv.addObject("searchType", searchType);
-		mv.addObject("searchValue", searchValue);
 		mv.addObject("list", pageList.getList());
 		return mv;
 	}
@@ -69,11 +87,31 @@ public class EventController {
 			mv.setViewName("redirect:/eventboard");
 			return mv;
 		}
-		List<Map<String, Object>> comment = csjService.commentList(bno);
+		Map<String, Object> eventFile = csjService.callEventFile(bno);
+		if(eventFile!=null) {
+			String remotePath = "/home/woori/ftp/files/" + eventFile.get("event_file_name");
+			mv.addObject("eventFile",eventFile);
 
+	        try {
+	            // 원격 서버에서 이미지 파일 읽어오기
+	            InputStream inputStream = channelSftp.get(remotePath);
+	            // Inputstream -> byte[] 변환
+	            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	            byte[] buffer = new byte[1024];
+	            int len;
+	            while ((len = inputStream.read(buffer)) > -1 ) {
+	                baos.write(buffer, 0, len);
+	            }
+	            baos.flush();
+	            byte[] imageData = baos.toByteArray();
+	            // byte[] -> Base64
+	            String imageDataString = Base64.getEncoder().encodeToString(imageData);
+	            mv.addObject("imageDataString", imageDataString);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		}
 		mv.addObject("det", det);
-		mv.addObject("comment", comment);
-
 		return mv;
 	}
 

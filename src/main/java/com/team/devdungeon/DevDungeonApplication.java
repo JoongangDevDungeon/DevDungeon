@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DevDungeonApplication {
 
     public static void main(String[] args) throws JSchException {
-        SpringApplication.run(DevDungeonApplication.class, args);
         SFTPFileUtil sftpFileUtil = new SFTPFileUtil();
         sftpFileUtil.connect();
+        SpringApplication.run(DevDungeonApplication.class, args);
     }
 
 }

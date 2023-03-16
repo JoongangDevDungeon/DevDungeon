@@ -33,6 +33,8 @@ import com.team.devdungeon.util.SFTPFileUtil;
 
 import lombok.RequiredArgsConstructor;
 
+import static com.team.devdungeon.util.SFTPFileUtil.channelSftp;
+
 @RequiredArgsConstructor
 @Controller
 public class HJHBoardController {
@@ -83,20 +85,8 @@ public class HJHBoardController {
 			mv.addObject("boardFile",boardFile);
 
 	        try {
-	            JSch jsch = new JSch();
-
-	            Session session = jsch.getSession(sftpFileUtil.FTP_USER, sftpFileUtil.FTP_HOST, sftpFileUtil.FTP_PORT);
-	            session.setPassword(sftpFileUtil.FTP_PASSWORD);
-	            session.setConfig("StrictHostKeyChecking", "no");
-	            System.out.println("세션 전");
-	            session.connect();
-	            System.out.println("세션 후");
-	            ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
-	            System.out.println("채널 오픈");
-	            sftpChannel.connect();
-	            System.out.println("채널 연결");
 	            // 원격 서버에서 이미지 파일 읽어오기
-	            InputStream inputStream = sftpChannel.get(remotePath);
+	            InputStream inputStream = channelSftp.get(remotePath);
 
 	            // Inputstream -> byte[] 변환
 	            ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -113,8 +103,6 @@ public class HJHBoardController {
 	            String imageDataString = Base64.getEncoder().encodeToString(imageData);
 
 	            mv.addObject("imageDataString", imageDataString);
-	            sftpChannel.exit();
-	            session.disconnect();
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }

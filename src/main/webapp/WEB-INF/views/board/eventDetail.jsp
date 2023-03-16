@@ -150,8 +150,14 @@
 				<h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
 				<div class="detailBody">
 					<div class="detailTitle">제목 : ${det.event_title }</div>
-					
-					<div class="detailContent">${det.event_content }</div>
+					<div class="detailContent" style="text-align:center;">
+					<c:if test="${eventFile ne null }">
+						<div>
+							<img src="data:image/png;base64,${imageDataString}" />
+						</div>
+					</c:if>
+					${det.event_content }
+					</div>
 					
 					
 				<br>

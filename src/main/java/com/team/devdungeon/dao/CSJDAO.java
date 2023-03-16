@@ -128,6 +128,11 @@ public class CSJDAO {
 		return sqlSession.insert(namespace+"QuestionWrite",map);
 	}
 
+	public Map<String, Object> callEventFile(int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+"callEventFile",bno);
+	}
+
 
 
 }

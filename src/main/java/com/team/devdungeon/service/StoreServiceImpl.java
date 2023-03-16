@@ -4,7 +4,6 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import com.team.devdungeon.dao.StoreDAO;
-import com.team.devdungeon.util.SFTPFileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,6 @@ import static com.team.devdungeon.util.SFTPFileUtil.*;
 public class StoreServiceImpl implements StoreService {
 
     private final StoreDAO storeDAO;
-    private final SFTPFileUtil sftpFileUtil;
 
     @Override
     public List<Map<String, Object>> iconList() {
@@ -50,8 +48,6 @@ public class StoreServiceImpl implements StoreService {
 
                 String icon_image = Base64.getEncoder().encodeToString(imageData);
                 map.put("icon_image", icon_image);
-                channelSftp.exit();
-                session.disconnect();
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("아이콘 이미지 로딩중 에러 발생");

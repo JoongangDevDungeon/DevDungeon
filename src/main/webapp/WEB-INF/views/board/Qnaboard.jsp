@@ -125,11 +125,11 @@
 									aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
-								<div id="form">
-									<label for="title" class="form-label">질문 제목</label> <input
-										class="form-control" type="text" id="title" name="title">
+								<div id="form" class="mb-3">
+									<label for="title" class="form-label">질문 제목</label>
+									<input class="form-control" type="text" id="title" name="title">
 									<label for="content" class="form-label">질문 내용</label>
-									<textarea class="form-control" id="content" name="content"></textarea>
+									<textarea class="form-control" rows="20" id="content" name="content"></textarea>
 									<button type="button" id="modalWriteBtn"
 										class="btn btn-primary">질문하기</button>
 								</div>

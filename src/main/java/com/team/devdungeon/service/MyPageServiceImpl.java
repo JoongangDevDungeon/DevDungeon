@@ -35,22 +35,15 @@ public class MyPageServiceImpl implements MyPageService {
     @Override
     public MyPageDTO profile(String memberId) {
         MyPageDTO profile = myPageDAO.profile(memberId);
+
+        InputStream inputStream = null;
+        ByteArrayOutputStream baos = null;
+        byte[] buffer = null;
+        byte[] imageData = null;
+
         try {
-            JSch jsch = new JSch();
-            Session session = jsch.getSession(FTP_USER, FTP_HOST, FTP_PORT);
-            session.setPassword(FTP_PASSWORD);
-            session.setConfig("StrictHostKeyChecking", "no");
-            session.connect();
-            ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
-            sftpChannel.connect();
-
-            InputStream inputStream = null;
-            ByteArrayOutputStream baos = null;
-            byte[] buffer = null;
-            byte[] imageData = null;
-
             try {
-                inputStream = sftpChannel.get(remotePath + "/" + profile.getPfp_name() + "." + profile.getPfp_extension());
+                inputStream = channelSftp.get(remotePath + "/" + profile.getPfp_name() + "." + profile.getPfp_extension());
 
                 baos = new ByteArrayOutputStream();
                 buffer = new byte[1024];
@@ -69,7 +62,7 @@ public class MyPageServiceImpl implements MyPageService {
             }
 
             try {
-                inputStream = sftpChannel.get(remotePath + "/" + profile.getEmo_img_name() + "." + profile.getEmo_img_extension());
+                inputStream = channelSftp.get(remotePath + "/" + profile.getEmo_img_name() + "." + profile.getEmo_img_extension());
 
                 baos = new ByteArrayOutputStream();
                 buffer = new byte[1024];
@@ -86,9 +79,6 @@ public class MyPageServiceImpl implements MyPageService {
                 e.printStackTrace();
                 System.out.println("아이콘 이미지 로딩중 에러 발생");
             }
-            sftpChannel.exit();
-            session.disconnect();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
