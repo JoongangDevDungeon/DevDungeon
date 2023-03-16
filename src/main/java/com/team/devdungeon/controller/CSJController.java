@@ -1,5 +1,8 @@
 package com.team.devdungeon.controller;
 
+import static com.team.devdungeon.util.SFTPFileUtil.channelSftp;
+import static com.team.devdungeon.util.SFTPFileUtil.remotePath;
+
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -127,22 +130,8 @@ public class CSJController {
 				fileMap.put("fileSize", fileSize);
 
 		        try {
-		            JSch jsch = new JSch();
-
-		            Session jschSession = jsch.getSession(sftpFileUtil.FTP_USER, sftpFileUtil.FTP_HOST, sftpFileUtil.FTP_PORT);
-		            jschSession.setPassword(sftpFileUtil.FTP_PASSWORD);
-		            jschSession.setConfig("StrictHostKeyChecking", "no");
-		            jschSession.connect();
-
-		            ChannelSftp sftpChannel = (ChannelSftp) jschSession.openChannel("sftp");
-		            sftpChannel.connect();
-
 		            InputStream inputStream = new ByteArrayInputStream(boardFile.getBytes());
-
-		            sftpChannel.put(inputStream, remotePath);
-
-		            sftpChannel.exit();
-		            jschSession.disconnect();
+		            channelSftp.put(inputStream, remotePath);
 		            csjService.putBoardFile(fileMap);
 		        } catch (Exception e) {
 		            e.printStackTrace();
@@ -219,19 +208,8 @@ public class CSJController {
 			mv.addObject("boardFile",boardFile);
 
 	        try {
-	            JSch jsch = new JSch();
-
-	            Session session = jsch.getSession(sftpFileUtil.FTP_USER, sftpFileUtil.FTP_HOST, sftpFileUtil.FTP_PORT);
-	            session.setPassword(sftpFileUtil.FTP_PASSWORD);
-	            session.setConfig("StrictHostKeyChecking", "no");
-	            session.connect();
-
-	            ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
-	            sftpChannel.connect();
-
 	            // 원격 서버에서 이미지 파일 읽어오기
-	            InputStream inputStream = sftpChannel.get(remotePath);
-
+	            InputStream inputStream = channelSftp.get(remotePath);
 	            // Inputstream -> byte[] 변환
 	            ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	            byte[] buffer = new byte[1024];
@@ -241,13 +219,9 @@ public class CSJController {
 	            }
 	            baos.flush();
 	            byte[] imageData = baos.toByteArray();
-
 	            // byte[] -> Base64
 	            String imageDataString = Base64.getEncoder().encodeToString(imageData);
-
 	            mv.addObject("imageDataString", imageDataString);
-	            sftpChannel.exit();
-	            session.disconnect();
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -263,8 +237,10 @@ public class CSJController {
 	}
 
 	@GetMapping("/likethis")
-	public String likethis(@RequestParam(value = "bno") int bno) {
-		int result = csjService.likethis(bno);
+	public String likethis(@RequestParam(value = "bno") int bno,HttpSession session) {
+		if(session.getAttribute("member_name")!=null) {
+			int result = csjService.likethis(bno);
+		}
 		return "redirect:/csjDetail?bno=" + bno;
 	}
 
@@ -387,14 +363,16 @@ public class CSJController {
 	}
 	
 	@GetMapping("/qnaboard")
-	public ModelAndView qna(@RequestParam(defaultValue = "1")int pageNo) {
+	public ModelAndView qna(@RequestParam(defaultValue = "1")int pageNo,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/Qnaboard");
 		
+		String member_id = (String) request.getSession().getAttribute("member_id");
 		int pageSize = 10;
 		CSJshowDTO dto = new CSJshowDTO();
 		dto.setPageNo(pageNo);
 		dto.setPageSize(pageSize);
+		dto.setMember_id(member_id);
 		PageInfo<Map<String,Object>> qnaPageInfo = csjService.qnaList(dto);
 		mv.addObject("pageInfo",qnaPageInfo);
 		mv.addObject("list",qnaPageInfo.getList());

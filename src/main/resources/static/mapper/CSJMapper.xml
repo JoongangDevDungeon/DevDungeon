@@ -16,10 +16,10 @@
     </select>
 
     <select id="eventList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
-        SELECT *
-        FROM event
+        select e.event_no,e.tag_no ,e.event_title ,e.event_content ,e.event_date ,e.event_update ,e.status_no ,ef.event_file_no ,ef.event_file_name ,ef.event_file_extension ,ef.event_file_size from event e left join event_file ef ON e.event_no = ef.event_no 
+        WHERE (ef.event_file_type = 1 OR ef.event_file_no IS NULL)
         <if test="searchType != null">
-			WHERE
+			AND
 			<choose>
 				<when test="searchType == 'title'">event_title</when>
 			</choose>
@@ -115,7 +115,7 @@
     <select id="qnaList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
     	SELECT q.question_board_no ,q.member_no ,q.question_board_title ,q.question_board_date ,q.question_board_status ,q.question_board_content ,a.answer_board_no ,a.answer_board_title ,a.answer_board_date ,a.answer_board_update ,a.answer_board_content 
     	FROM question_board q LEFT JOIN answer_board a ON q.question_board_no = a.question_board_no
-    	WHERE answer_board_no = (SELECT max(answer_board_no) from answer_board WHERE question_board_no = a.question_board_no) or answer_board_no IS NULL  
+    	WHERE (answer_board_no = (SELECT max(answer_board_no) from answer_board WHERE question_board_no = a.question_board_no) or answer_board_no IS NULL) AND member_no = (SELECT member_no FROM member WHERE member_id=#{member_id})
     	ORDER BY question_board_no DESC
     </select>
     <insert id="QuestionWrite" parameterType="HashMap">
@@ -161,6 +161,11 @@
     	SELECT *
     	FROM board_file
     	WHERE board_no = #{bno}
+    </select>
+    <select id="callEventFile" parameterType="Integer" resultType="HashMap">
+    	SELECT *
+    	FROM event_file
+    	WHERE event_no = #{bno} AND event_file_type=2
     </select>
     
     <insert id="putBoardFile" parameterType="HashMap">
