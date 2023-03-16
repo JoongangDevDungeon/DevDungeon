@@ -41,12 +41,6 @@ public class HJHBoardController {
 	private final CSJService csjService;
 	private final MyPageService mypageService;
 	private final SFTPFileUtil sftpFileUtil;
-
-    public static final String FTP_USER = "woori";
-    public static final String FTP_PASSWORD = "0326655522";
-    public static final String FTP_HOST = "172.30.1.21";
-    public static final int FTP_PORT = 22;
-    public static final String remotePath = "/home/woori/ftp/files/";
 	
 	@GetMapping("/board/HJHBoard")
 	public ModelAndView boardList(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
@@ -94,11 +88,13 @@ public class HJHBoardController {
 	            Session session = jsch.getSession(sftpFileUtil.FTP_USER, sftpFileUtil.FTP_HOST, sftpFileUtil.FTP_PORT);
 	            session.setPassword(sftpFileUtil.FTP_PASSWORD);
 	            session.setConfig("StrictHostKeyChecking", "no");
+	            System.out.println("세션 전");
 	            session.connect();
-
+	            System.out.println("세션 후");
 	            ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
+	            System.out.println("채널 오픈");
 	            sftpChannel.connect();
-
+	            System.out.println("채널 연결");
 	            // 원격 서버에서 이미지 파일 읽어오기
 	            InputStream inputStream = sftpChannel.get(remotePath);
 
@@ -107,6 +103,7 @@ public class HJHBoardController {
 	            byte[] buffer = new byte[1024];
 	            int len;
 	            while ((len = inputStream.read(buffer)) > -1 ) {
+	            	System.out.println("ㅎㅎㅎ");
 	                baos.write(buffer, 0, len);
 	            }
 	            baos.flush();
