@@ -4,6 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <title>이벤트 페이지</title>
+<link type="text/css" rel="stylesheet" href="/css/HJHBoard.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link rel="icon" href="/img/Gazi_shortCut.png" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -18,6 +20,19 @@
 		location.href = "/eventDetail?bno=" + bno;
 	}
 </script>
+<style>
+.eventBanner{ 
+	width:390px;
+	height:310px;
+	float:left; 
+	border:2px solid black;
+	box-sizing: border-box;
+	cursor: pointer;
+/* 	margin: 0px 5px 5px 0px; */
+	margin:5px;
+}
+.eventBanner:hover{ background-color: #d3d3d3; }
+</style>
 </head>
 <body>
 	<%@include file="../top.jsp"%>
@@ -27,12 +42,11 @@
 			<div class="add1">광고1</div>
 			<div class="content">
 				<!-- 이 곳을 수정하여 사용해주세요. -->
-				<div>
-					<h1 onclick="location.href='eventboard'">이벤트 페이지</h1>
-					<div style="width:1300px; height:650px;">
-						<ul style="width:1300px;list-style:none;">
+					<h1 onclick="location.href='eventboard'">E v e n t</h1>
+					<div style="width:1200px; height:650px;">
+						<ul style="width:1200px;list-style:none; padding:0;">
 						<c:forEach items="${list }" var="e">
-							<li style="width:390px;height:300px;float:left;border:1px solid black;" onclick="detail(${e.event_no})">
+							<li class="eventBanner" onclick="detail(${e.event_no})">
 								<c:choose>
 									<c:when test="${e.imageDataString ne null }">
 									<img src="data:image/png;base64,${e.imageDataString}" style="width:100%;height:270px;" />
@@ -41,23 +55,23 @@
 									<img src="/img/logo.png" width="100%" height="270px">
 									</c:otherwise>
 								</c:choose>
-									${e.event_title }
+								${e.event_title }
 							</li>
 						</c:forEach>
 						</ul>
 					</div>
 					<%@ include file="CSJpaging.jsp"%>
+					<br>
 					<div class="searchForm" style="float:none;">
 						<form action="eventboard" method="get" id="searchForm">
 							<select name="searchType">
 								<option value="title">제목</option>
 							</select> <input type="text" name="searchValue" value="${searchValue }">
-							<button class="btn btn-primary">검색</button>
+							<button class="search_btn">검색</button>
 						</form>
 					</div>
 				</div>
-				<div class="add2">광고2</div>
-			</div>
+			<div class="add2">광고2</div>
 		</div>
 	</section>
 	<%@include file="../footer.jsp"%>
