@@ -121,15 +121,17 @@ function sendMessageTo(receiver){
 }
 
 .commentInput {
-	width: 1090px;
+/* 	width: 1090px; */
 	height: 100px;
 	box-sizing: border-box;
 }
 
 #commentEnterBtn {
-	width: 100px;
+/* 	width: 100px; */
+	width:100%;
 	height: 100px;
 	box-sizing: border-box;
+	background-color:#FFBCD1;
 }
 
 .commentZone {
@@ -220,6 +222,7 @@ function sendMessageTo(receiver){
 							onclick="location.href='/csjWrite'">글쓰기</button>
 					</c:if>
 				</div>
+				<hr>
 				<div class="CommentAll">
 					<c:forEach items="${comment }" var="c">
 						<div id="commentZone"
@@ -250,12 +253,16 @@ function sendMessageTo(receiver){
 							</div>
 							<hr>
 							<c:if test="${c.comment_no eq c.comment_root }">
-								<div class="commentReplyEnter rep${c.comment_no }" style="background-color:gray;">
-									<form action="csjReplyWrite" method="post">
+								<div class="commentReplyEnter rep${c.comment_no }">
+									<form action="csjReplyWrite" method="post" class="row g-3">
 										<input type="hidden" name="root" value=${c.comment_no }>
 										<input type="hidden" name="bno" value=${det.board_no }>
-										<input type="text" class="commentInput" name="commentContent">
-										<button id="commentEnterBtn">댓글 입력</button>
+										<div class="col-10">
+										<input type="text" class="commentInput form-control" name="commentContent" placeholder="${c.member_name } 에게 작성하는 답글입니다">
+										</div>
+										<div class="col-2">
+										<button id="commentEnterBtn" class="btn">댓글 입력</button>
+										</div>
 									</form>
 								</div>
 							</c:if>
@@ -263,10 +270,15 @@ function sendMessageTo(receiver){
 					</c:forEach>
 					<c:if test="${sessionScope.member_name ne null }">
 						<div id="commentEnter">
-							<form id="commentForm" action="csjCommentWrite" method="post">
+							<form id="commentForm" action="csjCommentWrite" method="post" class="row g-3">
 								<input type="hidden" name="bno" value="${det.board_no }">
-								<input type="text" class="commentInput" name="commentContent">
-								<button id="commentEnterBtn">댓글 입력</button>
+								<div class="col-10">
+<!-- 								<input type="text" class="commentInput form-control" name="commentContent" placeholder="명예훼손,개인정보 유출,분쟁 유발,허위사실 유포 등의 글은 이용약관에 의해&#13;&#10; 제재는 물론 법률에 의해 처벌 받을 수 있습니다. 건전한 커뮤니티를 위해 자제를 당부 드립니다."> -->
+								<textarea class="commentInput form-control" name="commentContent" placeholder="명예훼손,개인정보 유출,분쟁 유발,허위사실 유포 등의 글은 이용약관에 의해 제재는 물론 법률에&#13;&#10; 의해 처벌 받을 수 있습니다. 건전한 커뮤니티를 위해 자제를 당부 드립니다."></textarea>
+								</div>
+								<div class="col-2">
+								<button id="commentEnterBtn" class="btn">댓글 입력</button>
+								</div>
 							</form>
 						</div>
 					</c:if>
