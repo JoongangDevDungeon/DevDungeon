@@ -8,6 +8,10 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.team.devdungeon.dto.CSJshowDTO;
+
 @RequiredArgsConstructor
 @Repository
 public class MessageDAO {
@@ -23,8 +27,9 @@ public class MessageDAO {
 		return sqlSession.selectOne("mypage.messageIdCheck",member_name);
 	}
 
-	public List<Map<String, Object>> msgList(String member_id) {
-		return sqlSession.selectList("mypage.msgList",member_id);
+	public PageInfo<Map<String, Object>> msgList(CSJshowDTO dto) {
+		PageHelper.startPage(dto.getPageNo(),dto.getPageSize());
+		return PageInfo.of(sqlSession.selectList("mypage.msgList",dto));
 	}
 
 }

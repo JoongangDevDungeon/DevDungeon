@@ -1,6 +1,9 @@
 package com.team.devdungeon.service;
 
+import com.github.pagehelper.PageInfo;
 import com.team.devdungeon.dao.MessageDAO;
+import com.team.devdungeon.dto.CSJshowDTO;
+
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -26,8 +29,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<Map<String, Object>> msgList(String member_id) {
-		return messageDAO.msgList(member_id);
+	public PageInfo<Map<String, Object>> msgList(CSJshowDTO dto) {
+		return messageDAO.msgList(dto);
 	}
 
 }

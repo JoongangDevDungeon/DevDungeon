@@ -1,7 +1,9 @@
 package com.team.devdungeon.service;
 
-import java.util.List;
 import java.util.Map;
+
+import com.github.pagehelper.PageInfo;
+import com.team.devdungeon.dto.CSJshowDTO;
 
 public interface MessageService {
 
@@ -9,7 +11,7 @@ public interface MessageService {
 
 	int messageIdCheck(String member_name);
 
-	List<Map<String, Object>> msgList(String member_id);
+	PageInfo<Map<String, Object>> msgList(CSJshowDTO dto);
 
 
 

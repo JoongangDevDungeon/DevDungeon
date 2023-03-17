@@ -1,5 +1,7 @@
 package com.team.devdungeon.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.team.devdungeon.dto.CSJshowDTO;
 import com.team.devdungeon.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -58,13 +60,19 @@ public class MessageController {
     	return result+"";
     }
     @GetMapping("/msgBox")
-    public ModelAndView msgBox(HttpSession session) {
-    	String member_id = (String)session.getAttribute("member_id");
+    public ModelAndView msgBox(@RequestParam(defaultValue = "1")int pageNo,HttpSession session) {
     	ModelAndView mv = new ModelAndView("message/messageBox");
+    	String member_id = (String)session.getAttribute("member_id");
     	if(member_id != null) {
-    		List<Map<String,Object>> msgList = messageService.msgList(member_id);
-    		System.out.println(msgList);
-    		mv.addObject("msgList",msgList);
+    		int pageSize = 10;
+    		CSJshowDTO dto = new CSJshowDTO();
+    		dto.setPageNo(pageNo);
+    		dto.setPageSize(pageSize);
+    		dto.setMember_id(member_id);
+    		PageInfo<Map<String,Object>> msgPageInfo = messageService.msgList(dto);
+    		System.out.println(msgPageInfo);
+    		mv.addObject("pageInfo",msgPageInfo);
+    		mv.addObject("list",msgPageInfo.getList());
     		
     		return mv;
     	}else {

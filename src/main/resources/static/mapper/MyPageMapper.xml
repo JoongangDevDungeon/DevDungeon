@@ -139,7 +139,7 @@
     	SELECT COUNT(member_name) FROM member WHERE member_name = '${member_name}'
     </select>
     
-    <select id="msgList" parameterType="String" resultType="HashMap">
+    <select id="msgList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
     	SELECT msg.*,
     	(SELECT m.member_name FROM  member m WHERE m.member_no = msg.post_member_no) as member_name,
     	ROW_NUMBER() OVER() as msg_no
