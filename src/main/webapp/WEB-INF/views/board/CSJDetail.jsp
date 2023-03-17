@@ -40,14 +40,9 @@
 		});
 		$(".commentShowBtn").click(function() {
 			var no = $(this).val();
-			var txt = $(this).text();
 			var btn = $(this);
 			$(".sub" + no).toggle(0, function() {
-				if (txt == "show") {
-					btn.text("hide");
-				} else {
-					btn.text("show");
-				}
+
 			});
 		});
 		$(".commentReplyBtn").click(function() {
@@ -95,21 +90,25 @@ function sendMessageTo(receiver){
 }
 
 .detailTitle {
-	height: 30px;
-	font-size: 20px;
+	height: 40px;
+	font-size: 24px;
+	font-weight: bold;
 	text-align: left;
-	border: 1px solid black;
+/* 	border: 1px solid black; */
 }
 
 .detailInfo {
 	height: 30px;
-	border: 1px solid black;
+	border-bottom: 1px solid black;
+	border-top : 1px solid black;
 }
 
 .detailContent {
 	text-align: left;
-	border: 1px solid black;
+/* 	border: 1px solid black; */
 	min-height: 400px;
+	font-size : 16px;
+	padding:5px;
 }
 
 .detailUserProfile {
@@ -121,15 +120,17 @@ function sendMessageTo(receiver){
 }
 
 .commentInput {
-	width: 1090px;
+/* 	width: 1090px; */
 	height: 100px;
 	box-sizing: border-box;
 }
 
 #commentEnterBtn {
-	width: 100px;
+/* 	width: 100px; */
+	width:100%;
 	height: 100px;
 	box-sizing: border-box;
+	background-color:#FFBCD1;
 }
 
 .commentZone {
@@ -152,11 +153,14 @@ function sendMessageTo(receiver){
 		<div class="main">
 			<div class="add1">광고1</div>
 			<div class="content">
-				<h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
+				<h1 onclick="location.href='csjboard'">자 유 게 시 판 II</h1>
 				<div class="detailBody">
-					<div class="detailTitle">제목 : ${det.board_title }</div>
-					<div class="detailInfo">글쓴이 ${det.member_name } <span onclick="sendMessageTo('${det.member_name }')"><img src="/img/send.png" style="width:30px; height:30px;"></span><input type="hidden" id="detailWriter" value="${det.member_name }"> 날짜
-						${det.board_date } 조회수 ${det.board_read }</div>
+					<div class="detailTitle">${det.board_title }</div>
+					<div class="detailInfo d-flex justify-content-around">
+						<span>글쓴이 : ${det.member_name } <span onclick="sendMessageTo('${det.member_name }')"><img src="/img/send.png" style="width:30px; height:30px;"></span><input type="hidden" id="detailWriter" value="${det.member_name }"></span> 
+						<span>${det.board_date } </span>
+						<span>조회수 : ${det.board_read }</span>
+					</div>
 					<div class="detailContent">
 					<c:if test="${boardFile ne null }">
 						<div class="form-control">
@@ -211,7 +215,7 @@ function sendMessageTo(receiver){
 				<br>
 				<div class="detailBtnZone">
 					<c:if test="${sessionScope.member_name eq det.member_name }">
-						<button class="btn btn-primary" id="detailBtnDelete" value="${det.board_no }">삭제</button>
+						<button class="btn btn-warning" id="detailBtnDelete" value="${det.board_no }">삭제</button>
 						<button class="btn btn-primary" id="detailBtnUpdate" value="${det.board_no }">수정</button>
 					</c:if>
 					<button class="btn btn-primary" onclick="location.href='/csjboard'">목록</button>
@@ -220,6 +224,7 @@ function sendMessageTo(receiver){
 							onclick="location.href='/csjWrite'">글쓰기</button>
 					</c:if>
 				</div>
+				<hr>
 				<div class="CommentAll">
 					<c:forEach items="${comment }" var="c">
 						<div id="commentZone"
@@ -235,27 +240,32 @@ function sendMessageTo(receiver){
 							</div>
 							<div class="commentBtnZone">
 								<c:if test="${sessionScope.member_name ne null }">
-									<button class="commentBanBtn" value="${c.comment_no }">신고</button>
+									<button class="commentBanBtn btn btn-danger" value="${c.comment_no }">신고</button>
 								</c:if>
 								<c:if test="${sessionScope.member_name eq c.member_name  }">
-									<button class="commentDeleteBtn" value="${c.comment_no }">삭제</button>
+									<button class="commentDeleteBtn btn btn-warning" value="${c.comment_no }">삭제</button>
 								</c:if>
 								<c:if test="${c.comment_no eq c.comment_root }">
 									<c:if test="${sessionScope.member_name ne null }">
-										<button class="commentReplyBtn" value="${c.comment_no }">답글</button>
+										<button class="commentReplyBtn btn btn-Info" value="${c.comment_no }">답글</button>
 									</c:if>
-									<c:if test="${c.comment_cnt ne 0 }">${c.comment_cnt }</c:if>
-									<button class="commentShowBtn" value="${c.comment_no }">show</button>
+									<c:if test="${c.comment_cnt ne 0 }">
+									<button class="commentShowBtn btn btn-outline-dark" value="${c.comment_no }">답글 ${c.comment_cnt }개</button>
+									</c:if>
 								</c:if>
 							</div>
 							<hr>
 							<c:if test="${c.comment_no eq c.comment_root }">
-								<div class="commentReplyEnter rep${c.comment_no }" style="background-color:gray;">
-									<form action="csjReplyWrite" method="post">
+								<div class="commentReplyEnter rep${c.comment_no }">
+									<form action="csjReplyWrite" method="post" class="row g-3">
 										<input type="hidden" name="root" value=${c.comment_no }>
 										<input type="hidden" name="bno" value=${det.board_no }>
-										<input type="text" class="commentInput" name="commentContent">
-										<button id="commentEnterBtn">댓글 입력</button>
+										<div class="col-10">
+										<input type="text" class="commentInput form-control" name="commentContent" placeholder="${c.member_name } 에게 작성하는 답글입니다">
+										</div>
+										<div class="col-2">
+										<button id="commentEnterBtn" class="btn">댓글 입력</button>
+										</div>
 									</form>
 								</div>
 							</c:if>
@@ -263,10 +273,14 @@ function sendMessageTo(receiver){
 					</c:forEach>
 					<c:if test="${sessionScope.member_name ne null }">
 						<div id="commentEnter">
-							<form id="commentForm" action="csjCommentWrite" method="post">
+							<form id="commentForm" action="csjCommentWrite" method="post" class="row g-3">
 								<input type="hidden" name="bno" value="${det.board_no }">
-								<input type="text" class="commentInput" name="commentContent">
-								<button id="commentEnterBtn">댓글 입력</button>
+								<div class="col-10">
+								<textarea class="commentInput form-control" name="commentContent" placeholder="명예훼손, 개인정보 유출, 분쟁 유발, 허위사실 유포 등의 글은 이용약관에 의해 제재는 &#13;&#10;물론 법률에 의해 처벌 받을 수 있습니다. 건전한 커뮤니티를 위해 자제를 당부 드립니다."></textarea>
+								</div>
+								<div class="col-2">
+								<button id="commentEnterBtn" class="btn">댓글 입력</button>
+								</div>
 							</form>
 						</div>
 					</c:if>

@@ -144,19 +144,18 @@ a:hover{ color:#ccc; }
 	line-height: 40px;
 }
 .comments{	margin-top:10px; height:100%; font-size:20px; }
-.commentWrited{ height: 50px; border-bottom: 1px solid black; }
-.commentWrited_But{	height: 50px; }
+.commentWrited{ height: 60px; border-bottom: 1px solid black; line-height: 60px; }
+.commentWrited_But{	margin-top: 10px; height: 30px; line-height: 30px;}
 .commentDropdown{
+	height:50px;
 	float:right;
 	margin-right:20px;
 	border:none;
 	border-radius: 5px;
+	line-height: 50px;
 	background-color: white;
 }
-.subComment{
-	display: inline-block;
-	width:96%;
-}
+.subComment{ display: inline-block;	width:95%;}
 .c_commentBox{ display: inline-block; margin-top:10px;}
 .c_commentText {
 	width:1030px;

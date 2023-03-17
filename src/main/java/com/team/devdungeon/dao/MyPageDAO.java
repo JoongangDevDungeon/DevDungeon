@@ -43,4 +43,21 @@ public class MyPageDAO {
     public List<Map<String, Object>> icons(String memberId) {
         return sqlSession.selectList("mypage.icons", memberId);
     }
+
+    public int updateIcon(Map<String, Object> info) {
+        return sqlSession.update("mypage.updateIcon", info);
+    }
+
+    public MyPageDTO userProfile(String memberId) {
+        return sqlSession.selectOne("mypage.userProfile", memberId);
+    }
+
+    public int updateProfile(Map<String, Object> map) {
+        return sqlSession.update("mypage.updateProfile", map);
+    }
+
+    public List<Map<String, Object>> loginLog(String memberId) {
+        return sqlSession.selectList("mypage.loginLog", memberId);
+    }
+
 }

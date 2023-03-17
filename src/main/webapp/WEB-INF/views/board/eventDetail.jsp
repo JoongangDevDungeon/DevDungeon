@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${det.board_title}</title>
+<title>이벤트 게시판</title>
 <link rel="icon" href="/img/Gazi_shortCut.png" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -87,6 +87,24 @@
 						location.href = "/userCommentDelete?cno=" + no;
 					}
 				});
+				$(".eventJoinBtn").click(function() {
+					var no = $(this).val();
+					$.post({
+						url : "/eventJoin",
+						data : {
+							"event_no" : no
+						},
+						dataType : "json"
+					}).done(function(data) {
+						if (data.result == 1) {
+							alert("참여가 완료되었습니다");
+						} else {
+							alert("이미 참여한 이벤트입니다");
+						}
+					}).fail(function(xhr) {
+						alert("문제가 발생함");
+					});
+				});
 
 			});
 </script>
@@ -151,6 +169,10 @@
 .commentBtnZone {
 	text-align: right;
 }
+.eventJoinBtn{
+	width:100%;
+	height:100px;
+}
 </style>
 </head>
 <body>
@@ -169,10 +191,10 @@
 								<img src="data:image/png;base64,${imageDataString}" width="100%" />
 							</div>
 						</c:if>
-						<%-- 					${det.event_content } --%>
 					</div>
-
-
+					<div>
+						<button class="eventJoinBtn btn btn-warning" value="${det.event_no }">참여하기</button>
+					</div>
 					<br>
 					<div class="detailBtnZone">
 						<button class="btn btn-primary"

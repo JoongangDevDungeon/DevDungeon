@@ -134,15 +134,15 @@
                                     <span style="font-size: 18px; font-weight: bold;">${iconList.product_name}</span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                    <span style="display: block; width: 100px; height: 37.5px; float: left;"><span style="display: block; width: 40px; height: inherit; padding-left: 10px; box-sizing: border-box; float: left;">재고</span><span style="display: block; text-align: left; width: 60px; height: inherit; float: left;">:${iconList.product_sell_cnt}</span></span>
-                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">가격:<fmt:formatNumber value="${iconList.product_price }" pattern="#,###" /></span>
+                                    <span style="display: block; width: 100px; height: 37.5px; float: left;"><span style="display: block; width: 50px; height: inherit; padding-left: 10px; box-sizing: border-box; float: left;">재고</span><span style="display: block; text-align: left; width: 50px; height: inherit; float: left;">: ${iconList.product_sell_cnt}</span></span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">가격 : <fmt:formatNumber value="${iconList.product_price }" pattern="#,###" /></span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
                                     <span style="display: block; width: 228px; height: 37.5px; float: left; padding-right: 50px; box-sizing: border-box;">등록일&nbsp;&nbsp;:&nbsp;&nbsp;<fmt:formatDate value="${iconList.product_update}" pattern="yyyy-MM-dd" type="date"/></span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
                                     <span style="display: block; width: 100px; height: 37.5px; float: left;"><a href="">구매</a>&nbsp;|&nbsp;<a href="">선물</a></span>
-                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">신청:${iconList.member_name}</span>
+                                    <span style="display: block; width: 108px; height: 37.5px; float: left;">신청:<c:choose><c:when test="${iconList.member_name != null}">${iconList.member_name}</c:when><c:otherwise>탈퇴자</c:otherwise></c:choose></span>
                                  </div>
                               </div>
                            </div>

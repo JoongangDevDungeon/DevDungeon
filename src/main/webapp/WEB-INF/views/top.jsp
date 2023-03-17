@@ -6,36 +6,25 @@
       <li>
          <!-- 로그인 성공 시 -->
          <div class="dropdown" id="login_success" style="<c:choose><c:when test="${sessionScope.member_name != null || sessionScope.id == 'admin'}">display: block;</c:when><c:otherwise>display: none;</c:otherwise></c:choose>">
+               <span id="member_point" style="margin-right:20px;"></span>
+               <span id="member_level" style="margin-right:5px;"></span>
                <button type="button" class="btn dropdown-toggle" id="member_info" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                   <c:choose>
-                     <c:when test="${sessionScope.member_name != null}">${sessionScope.member_name} 님</c:when>
-                     <c:otherwise>${sessionScope.id}</c:otherwise>
+                     <c:when test="${sessionScope.member_name ne null}">${sessionScope.member_name} 님</c:when>
+                     <c:when test="${sessionScope.id eq 'admin'}">${sessionScope.id} 님</c:when>
                   </c:choose>
 
-               </button>
-               <div class="dropdown-menu">
-                  <ul>
-                     <li>
-                        레벨
-                     </li>
-                     <li>
-                        보유 포인트
-                     </li>
-                     <li>
-                        <a href="/checkPassword">마이 페이지</a>
-                     </li>
-                     <li>
-                        <a href="">쪽지함</a>
-                     </li>
-                     <li>
-                        <a href="">장바구니</a>
-                     </li>
-                     <li>
-                        <a href="/logout">로그아웃</a>
-                     </li>
-
-                  </ul>
-               </div>
+				</button>
+				<div class="dropdown-menu">
+					<ul>
+						<li><a href="/level">레벨현황표</a></li>
+<!--                	 <li>보유 포인트</li> -->
+						<li><a href="/checkPassword">마이 페이지</a></li>
+                   		<li><a href="">쪽지함</a></li>
+                   		<li><a href="">장바구니</a></li>
+                   		<li><a href="/logout">로그아웃</a></li>
+					</ul>
+				</div>
             </div>
             <!-- 미로그인 시 -->
             <div class="dropdown" id="guest" style="<c:choose><c:when test="${sessionScope.member_name == null}">display: block;</c:when><c:otherwise>display: none;</c:otherwise></c:choose>">

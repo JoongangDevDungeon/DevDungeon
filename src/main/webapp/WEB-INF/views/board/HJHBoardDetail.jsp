@@ -202,7 +202,7 @@ function subComment_check(){
 		<!-- 댓글창 -->
 		<c:forEach var="c" items="${ detailComments }">
 			<c:if test="${ c.comment_depth eq 1 }">
-				<div class="subArrow subArrow${c.comment_root }" style="display: inline-block; height:50px; line-height: 50px;"><i class="xi-subdirectory-arrow xi-2x"></i></div>
+				<div class="subArrow subArrow${c.comment_root }" style="display: inline-block; height:25px; line-height: 25px; box-sizing: border-box;"><i class="xi-subdirectory-arrow xi-2x"></i></div>
 			</c:if>
 				<div class="comments <c:if test="${ c.comment_depth eq 1 }"> subComment subComment${c.comment_root }</c:if>">
 					<div class="commentWrited ">${ c.member_name } <input type="hidden" id="commentWriter${c.comment_no }" value="${c.member_name }"> ${ c.comment_time } 

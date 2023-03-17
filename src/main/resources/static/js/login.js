@@ -1,4 +1,10 @@
 $(function() {
+	var level = localStorage.getItem("member_level");
+	var point = localStorage.getItem("member_point");
+ 	if (level) { 
+  		$("#member_level").text("Lv."+level+"  ");
+ 		$("#member_point").text("포인트 : "+point);
+  	}
 
     $("#member_id").on("keyup",function(key){
         if(key.keyCode==13) {
@@ -13,10 +19,18 @@ $(function() {
                 dataType : "json",
                 success : function (result) {
                     if(result.member_name != undefined) {
-                        var member_name = result.member_name;
+                        let member_name = result.member_name;
+                        let member_level = result.member_level;
+                        let member_point = result.member_point;
                         $("#member_info").text(member_name + " 님 ");
+                      	$("#member_level").text("Lv."+member_level);
+ 						$("#member_point").text("포인트 : "+member_point);
                         $("#guest").hide();
                         $("#login_success").show();
+                        
+                        //값을 유지하기 위함
+                        localStorage.setItem("member_level", member_level);
+                        localStorage.setItem("member_point", member_point);
                     } else {
                         location.href="/index?error=login_fail";
                     }
@@ -34,17 +48,26 @@ $(function() {
             const member_id = $("#member_id").val();
             const member_pw = $("#member_pw").val();
 
-            $.post({
+            $.ajax({
                 type : "post",
                 url : "/login",
+                async : false,
                 data : {"member_id" : member_id, "member_pw" : member_pw},
                 dataType : "json",
                 success : function (result) {
                     if(result.member_name != undefined) {
-                        var member_name = result.member_name;
+                        let member_name = result.member_name;
+                        let member_level = result.member_level;
+                        let member_point = result.member_point;
                         $("#member_info").text(member_name + " 님 ");
+                     	$("#member_level").text("Lv."+member_level);
+ 						$("#member_point").text("포인트 : "+member_point);
                         $("#guest").hide();
                         $("#login_success").show();
+                        
+                        //값을 유지하기 위함
+                        localStorage.setItem("member_level", member_level);
+                        localStorage.setItem("member_point", member_point);
                     } else {
                         location.href="/index?error=login_fail";
                     }
@@ -67,10 +90,16 @@ $(function() {
             dataType : "json",
             success : function (result) {
                 if(result.member_name != undefined) {
-                    var member_name = result.member_name;
+                    let member_name = result.member_name;
+                    let member_level = result.member_level;
+                    let member_point = result.member_point;
                     $("#member_info").text(member_name + " 님 ");
+                    $("#member_level").text("Lv."+member_level);
+ 					$("#member_point").text("포인트 : "+member_point);
                     $("#guest").hide();
                     $("#login_success").show();
+                    localStorage.setItem("member_level", member_level);
+                    localStorage.setItem("member_point", member_point);
                 } else {
                     location.href="/index?error=login_fail";
                 }

@@ -31,6 +31,27 @@
             };
             reader.readAsDataURL(profile_img);
         });
+
+        $(".icon_select").click(function() { // 아이콘 설정
+            const icon_no = $(this).attr("value");
+            $.post({
+                url : "/iconSelect",
+                data : {"icon_no" : icon_no},
+                dataType : "text",
+                success : function(result) {
+                    console.log(result);
+                    if(result == 1) {
+                        alert("대표 아이콘을 변경했습니다.");
+                    } else {
+                        alert("아이콘을 변경하는 도중 문제가 발생했습니다.\n잠시 후 다시 시도해주세요.");
+                    }
+                },
+                error : function() {
+                    alert("아이콘을 변경하는 도중 에러가 발생했습니다.\n잠시 후 다시 시도해주세요.");
+                }
+            });
+        });
+
     });
 </script>
 <body>
@@ -42,21 +63,29 @@
         <div class="content">
             <div>
                <div style="width: 640px; height: 360px; margin: 0 auto;">
-                   <!-- 이모티콘 목록 -->
-                   <c:forEach var="i" begin="1" end="6" step="1" >
-                       <div style="border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; margin: 10px; padding: 0; width: 300px; height: 100px; float: left;">
-                           <div style="width: 80px; height: 100px; padding-top: 24px; float: left;">
-                               <img src="/img/icon/icon${i}.png" style="display: inline-block; width: 45px; height: 45px;">
-                           </div>
-                           <div style="width: 214px; height: 100px; padding-left: 10px; box-sizing: border-box; float: left;">
-                               <label style="width: 214px; height: 33px; line-height: 50px; text-align: left; font-weight: bold; float: left;">이모티콘 이름</label>
-                               <div style="width: 214px; height: 33px; line-height: 50px; text-align: left; float: left;">
-                                   <label><u>대표설정</u></label>
-                                   <label>삭제</label>
+                   <c:choose>
+                       <c:when test="${!empty icons}">
+                           <!-- 이모티콘 목록 -->
+                           <c:forEach items="${icons}" var="icons">
+                               <div style="border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; margin: 10px; padding: 0; width: 300px; height: 100px; float: left;">
+                                   <div style="width: 80px; height: 100px; padding-top: 24px; float: left;">
+                                       <img src="data:image/png;base64,${icons.icon_image}" onerror="this.src='/img/Gazi_shortCut.png'" style="display: inline-block; width: 45px; height: 45px;">
+                                   </div>
+                                   <div style="width: 214px; height: 100px; padding-left: 10px; box-sizing: border-box; float: left;">
+                                       <label style="width: 214px; height: 33px; line-height: 50px; text-align: left; font-weight: bold; float: left;">${icons.product_name}</label>
+                                       <div style="width: 214px; height: 33px; line-height: 50px; text-align: left; float: left;">
+                                           <label class="icon_select" id="icon_select" value="${icons.product_no}"><u>대표설정</u></label>
+                                           <label>삭제</label>
+                                       </div>
+                                   </div>
                                </div>
-                           </div>
-                       </div>
-                   </c:forEach>
+                           </c:forEach>
+                       </c:when>
+                       <c:otherwise>
+                           <div style="line-height: 360px;">구매한 아이콘이 없습니다..</div>
+                       </c:otherwise>
+                   </c:choose>
+
                </div>
                 <div>
                     페이징
@@ -66,7 +95,7 @@
             <hr>
 
             <!-- 유저 프로필 미리보기 -->
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="/profileImage" method="post" enctype="multipart/form-data">
                 <div class="mt-3">
                     <!-- 파일 등록 -->
                     <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">

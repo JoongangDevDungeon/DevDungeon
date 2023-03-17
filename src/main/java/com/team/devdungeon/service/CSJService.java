@@ -58,4 +58,6 @@ public interface CSJService {
 
 	public Map<String, Object> callEventFile(int bno);
 
+	public int eventJoin(Map<String, Object> map);
+
 }
