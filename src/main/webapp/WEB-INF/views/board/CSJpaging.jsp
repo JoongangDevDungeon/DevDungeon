@@ -35,7 +35,7 @@ function moving(page){
 		<c:if test="${pageInfo.pages le 9 }">
 			<c:forEach
 			begin="${1 }"
-			end="${pageInfo.pages }"
+			end="${pageInfo.pages lt 1 ? 1 : pageInfo.pages }"
 			var="p">
 			<li class="pageNo" onclick="moving(${p })"<c:if test="${pageInfo.pageNum eq p }">style="color:red; font-weight: bold;"</c:if>>${p }</li>			
 			</c:forEach>
