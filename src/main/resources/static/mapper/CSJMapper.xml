@@ -126,8 +126,10 @@
 		member_no= (SELECT member_no FROM member WHERE member_name=#{member_name})
     </insert>
     <select id="faqList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
-    	SELECT *
-    	FROM question_board
+    	SELECT q.question_board_no ,q.member_no ,q.question_board_title ,q.question_board_date ,q.question_board_status ,q.question_board_content ,a.answer_board_no ,a.answer_board_title ,a.answer_board_date ,a.answer_board_update ,a.answer_board_content 
+    	FROM question_board q LEFT JOIN answer_board a ON q.question_board_no = a.question_board_no
+    	WHERE (answer_board_no = (SELECT max(answer_board_no) from answer_board WHERE question_board_no = a.question_board_no) or answer_board_no IS NULL)
+    	ORDER BY question_board_no DESC
     </select>
     
     <update id="updateBoard" parameterType="HashMap">
