@@ -94,6 +94,13 @@
             member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
     </update>
 
+    <select id="loginLog" parameterType="String" resultType="HashMap">
+        SELECT path, created_at, ip
+            FROM logs
+                WHERE
+                    params LIKE CONCAT('member_id=', #{memberId}, '&amp;', '%')
+    </select>
+
     <insert id="msgReceive" parameterType="HashMap">
         INSERT INTO message(post_member_no,get_member_no, message_title, message_content)
 		VALUES(

@@ -17,19 +17,19 @@
     <div class="main">
         <div class="add1">광고1</div>
         <div class="content">
-            <table class="table">
-                <thead>
+            <table class="table table-hover">
+                <thead style="text-align: center; background-color: #e2e2e2;">
                     <th>분류</th>
                     <th>아이피 주소</th>
                     <th>정보</th>
                     <th>날짜</th>
                 </thead>
-                <c:forEach var="i" step="1" begin="1" end="30">
-                    <tbody>
+                <c:forEach items="${logList}" var="log">
+                    <tbody style="text-align: center;">
                         <td>로그인</td>
-                        <td>192.168.0.${i}</td>
-                        <td>test</td>
-                        <td>2023-03-09 12:03:27.00</td>
+                        <td>${log.ip}</td>
+                        <td>${log.path}</td>
+                        <td>${log.created_at}</td>
                     </tbody>
                 </c:forEach>
             </table>

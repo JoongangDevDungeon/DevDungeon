@@ -15,4 +15,5 @@ public interface MyPageService {
     int updateIcon(int iconNo, HttpSession session);
     MyPageDTO userProfile(String memberId);
     int updateProfile(Map<String, Object> map, HttpSession session);
+    List<Map<String, Object>> loginLog(String memberId);
 }
