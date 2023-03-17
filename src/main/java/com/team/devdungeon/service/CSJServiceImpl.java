@@ -160,6 +160,12 @@ public class CSJServiceImpl implements CSJService {
 		return csjDAO.callEventFile(bno);
 	}
 
+	@Override
+	public int eventJoin(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return csjDAO.eventJoin(map);
+	}
+
 
 
 

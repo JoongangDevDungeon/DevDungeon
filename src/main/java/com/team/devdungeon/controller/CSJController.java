@@ -292,26 +292,20 @@ public class CSJController {
 		return "redirect:" + request.getHeader("Referer");
 	}
 
-	@GetMapping("/csjfaq")
-	public ModelAndView csjfaq(@RequestParam(defaultValue = "1") Integer pageNo, HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/board/CSJFAQ");
-		int pageSize = 10;
-		String searchType = request.getParameter("searchType");
-		String searchValue = request.getParameter("searchValue");
-		CSJshowDTO dto = new CSJshowDTO();
-		dto.setPageNo(pageNo);
-		dto.setPageSize(pageSize);
-
-		if (searchType != null && searchValue != null) {
-			dto.setSearchType(searchType);
-			dto.setSearchValue(searchValue);
-		}
-
-		PageInfo<Map<String, Object>> faqList = csjService.faqList(dto);
-		mv.addObject("faqList", faqList.getList());
-		mv.addObject("pageInfo", faqList);
-		return mv;
+	@ResponseBody
+	@PostMapping("/eventJoin")
+	public String eventJoin(HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
+		String event_no = request.getParameter("event_no");
+		map.put("event_no", event_no);
+		map.put("member_id", member_id);
+		int result = csjService.eventJoin(map);
+		
+		JSONObject json = new JSONObject();//json으로변환
+		json.put("result", result);
+		return json.toString(); //json타입을 String화
 	}
 
 	@GetMapping("/csjCloser")

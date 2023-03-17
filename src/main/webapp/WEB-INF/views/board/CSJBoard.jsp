@@ -33,6 +33,12 @@ h6{
 	border-radius: 5px;
 	font-weight: bold;
 }
+.noResult{
+	width:100%;
+	height:400px;
+	line-height:400px;
+	font-size:24px;
+}
 </style>
 <script>
 function detail(bno){
@@ -69,7 +75,11 @@ function detail(bno){
 									<td>${b.board_like }</td>
 								</tr>
 							</c:forEach>
-						</table><br><br><br>
+						</table>
+							<c:if test="${pageInfo.size lt 1 }">
+								<div class="noResult">데이터가 없습니다</div>
+							</c:if>
+					<br><br><br>
 					<%@ include file="CSJpaging.jsp"%>
 					<br>
 					<div class="searchForm">

@@ -133,6 +133,11 @@ public class CSJDAO {
 		return sqlSession.selectOne(namespace+"callEventFile",bno);
 	}
 
+	public int eventJoin(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+"eventJoin"+map);
+	}
+
 
 
 }
