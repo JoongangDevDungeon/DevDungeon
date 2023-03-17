@@ -82,7 +82,7 @@
 					}
 				});
 				$(".commentDeleteBtn").click(function() {
-					var no = $(this).val();
+					var event_no = $(this).val();
 					if (confirm("진짜 삭제하시겠습니까?")) {
 						location.href = "/userCommentDelete?cno=" + no;
 					}
