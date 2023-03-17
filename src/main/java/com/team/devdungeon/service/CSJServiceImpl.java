@@ -166,6 +166,12 @@ public class CSJServiceImpl implements CSJService {
 		return csjDAO.eventJoin(map);
 	}
 
+	@Override
+	public void addPoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		csjDAO.addPoint(map);
+	}
+
 
 
 

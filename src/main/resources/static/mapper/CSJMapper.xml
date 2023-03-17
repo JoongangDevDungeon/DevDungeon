@@ -181,4 +181,10 @@
     	,file_extension = #{extension}
     	,file_size = #{fileSize}
     </insert>
+    
+  	<update id="addPoint" parameterType="HashMap">
+  		UPDATE point SET
+  		member_point = member_point + (SELECT change_points FROM change_kind WHERE change_no = #{pointType})
+  		WHERE member_no = (SELECT member_no FROM member WHERE member_name = #{member_name})
+  	</update>
 </mapper>
