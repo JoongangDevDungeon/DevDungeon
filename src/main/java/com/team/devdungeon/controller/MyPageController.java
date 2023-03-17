@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +49,7 @@ public class MyPageController {
     }
 
     @GetMapping("/myPage")
-    public ModelAndView profile(HttpSession session) {
+    public ModelAndView myPage(HttpSession session) {
         ModelAndView mv = new ModelAndView("mypage/myPage");
         List<Map<String, Object>> icons = myPageService.icons((String)session.getAttribute("member_id"));
         MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
@@ -63,21 +65,28 @@ public class MyPageController {
     }
 
     @PostMapping("/profileImage")
-    public String profile(HttpSession session, @RequestParam Map<String, Object> map, MultipartFile profile_img) {
+    public String profileImageAndIntro(HttpSession session, @RequestParam Map<String, Object> map, MultipartFile profile_img) {
         map.put("member_id", (String)session.getAttribute("member_id"));
         int result = myPageService.memberIntro(map, profile_img);
         return "redirect:/myPage";
     }
 
     @GetMapping("/profile")
-    public String profileEdit() {
-        return "mypage/profile";
+    public ModelAndView profile(HttpSession session) {
+        ModelAndView mv = new ModelAndView("mypage/profile");
+        MyPageDTO member_info =  myPageService.userProfile((String)session.getAttribute("member_id"));
+
+        mv.addObject("member_info", member_info);
+        mv.addObject("year", member_info.getMember_birth().getYear());
+        mv.addObject("month", member_info.getMember_birth().getMonthValue());
+        mv.addObject("day", member_info.getMember_birth().getDayOfMonth());
+        return mv;
     }
 
     @PostMapping("/profile")
-    public String profileEdit(@RequestParam Map<String, Objects> map) {
-        System.out.println(map);
-        return "mypage/profile";
+    @ResponseBody
+    public int profile(@RequestParam Map<String, Object> map, HttpSession session) {
+        return myPageService.updateProfile(map, session);
     }
     @GetMapping("/myPageChangePassword")
     public String myPageChangePass() {

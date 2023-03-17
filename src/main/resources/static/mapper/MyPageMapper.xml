@@ -72,9 +72,28 @@
                 pfp_name = #{pfp_name},
                 pfp_extension = #{pfp_extension},
                 pfp_size = #{pfp_size}
-            WHERE
-                member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+        WHERE
+            member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
     </update>
+
+    <select id="userProfile" parameterType="String" resultType="MyPageDTO">
+        SELECT member_no, member_id, member_name, member_birth, member_email, member_tel
+            FROM member
+                WHERE
+                    member_id = #{memberId}
+    </select>
+
+    <update id="updateProfile">
+        UPDATE member
+            SET
+                member_name = #{member_name},
+                member_birth = #{member_birth},
+                member_email = #{member_email},
+                member_tel = #{member_tel}
+        WHERE
+            member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+    </update>
+
     <insert id="msgReceive" parameterType="HashMap">
         INSERT INTO message(post_member_no,get_member_no, message_title, message_content)
 		VALUES(
