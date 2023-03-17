@@ -152,4 +152,16 @@ public class MyPageServiceImpl implements MyPageService {
         info.put("member_id", session.getAttribute("member_id"));
         return myPageDAO.updateIcon(info);
     }
+
+    @Override
+    public MyPageDTO userProfile(String memberId) {
+        return myPageDAO.userProfile(memberId);
+    }
+
+    @Override
+    public int updateProfile(Map<String, Object> map, HttpSession session) {
+        map.put("member_birth", map.get("year") + "-" + map.get("month") + "-" + map.get("day"));
+        map.put("member_id", (String)session.getAttribute("member_id"));
+        return myPageDAO.updateProfile(map);
+    }
 }
