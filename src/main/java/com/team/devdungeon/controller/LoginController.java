@@ -1,7 +1,10 @@
 package com.team.devdungeon.controller;
 
 import com.team.devdungeon.dto.LoginDTO;
+import com.team.devdungeon.dto.MyPageDTO;
 import com.team.devdungeon.service.LoginService;
+import com.team.devdungeon.service.MyPageService;
+
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     private final LoginService loginService;
+    private final MyPageService myPageService;
 
     @PostMapping("/login")
     @ResponseBody
@@ -32,7 +36,10 @@ public class LoginController {
             HttpSession session = request.getSession();
             session.setAttribute("member_id", loginInfo.getMember_id());
             session.setAttribute("member_name", loginInfo.getMember_name());
+            MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
             json.put("member_name", loginInfo.getMember_name());
+            json.put("member_level", profile.getMember_level());
+            json.put("member_point", profile.getMember_point());
             return json.toString();
         } else {
             return json.toString();
