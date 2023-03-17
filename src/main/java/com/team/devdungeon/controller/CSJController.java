@@ -56,7 +56,7 @@ public class CSJController {
 		mv.setViewName("board/CSJBoard");
 
 		int pageSize = 10;
-		int category = 1; // 카테고리에 맞는 글만 불러오도록 쿼리 수정
+		int category = 2; // 카테고리에 맞는 글만 불러오도록 쿼리 수정
 		String searchType = request.getParameter("searchType");
 		String searchValue = request.getParameter("searchValue");
 		CSJshowDTO dto = new CSJshowDTO();

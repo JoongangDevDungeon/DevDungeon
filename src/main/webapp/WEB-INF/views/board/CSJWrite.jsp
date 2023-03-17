@@ -18,7 +18,7 @@
             <h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
 			<div class="writeForm">
 				<form action="csjWrite" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="category" value="1">
+					<input type="hidden" name="category" value="2">
 					<input type="hidden" name="tag" value="1">
 					<input type="text" name="title" class="form-control" placeholder="제목을 입력하세요">
 					<textarea name="content" class="form-control" rows="20"  placeholder="내용을 입력하세요"></textarea>

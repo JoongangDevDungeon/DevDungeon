@@ -54,29 +54,32 @@ function moveNext(pageNo){
 			<table class="table">
 				<tr class="table-header">
 					<th class="col-1">번호</th>
-					<th class="col-3">이벤트 제목</th>
-					<th class="col-2">글쓴이</th>
-					<th class="col-2">이벤트 기간</th>
-					<th class="col-1">추천수</th>
-					<th class="col-1">관리</th>
+					<th class="col-1">접근 경로</th>
+					<th class="col-2">접근 주소</th>
+					<th class="col-2">상태 코드</th>
+					<th class="col-2">로그 시간</th>
+					<th class="col-2">ip 주소</th>
+					<th class="col-3">파라미터값</th>
 				</tr>
 				<!-- 수정 하면댐 -->
-<%-- 				<c:forEach items="${list }" var="row"> --%>
-<!-- 				<tr> -->
-<%-- 					<td>${row.board_no }</td> --%>
-<%-- 					<td>${row.board_title }</td> --%>
-<%-- 					<td>${row.member_id }</td> --%>
-<%-- 					<td>${row.board_date }</td> --%>
-<!-- 					<td> -->
-<!-- 						<form action="/adminBoard" method="post"> -->
-<%-- 							<input type="hidden" name="board_no" value="${row.board_no }"> --%>
-<%-- 							<input type="hidden" name="status_no" value="${row.status_no }"> --%>
-<%-- 							<input type="hidden" name="pageNo" value="${pageNo }"> --%>
-<%-- 							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화' : '비활성화'}</button> --%>
-<!-- 						</form> -->
-<!-- 					</td> -->
-<!-- 				</tr> -->
-<%-- 				</c:forEach> --%>
+				<c:forEach items="${list }" var="row">
+				<tr>
+					<td>${row.id }</td>
+					<td>${row.method }</td>
+					<td>${row.path }</td>
+					<td>${row.status_code }</td>
+					<td>${row.created_at }</td>
+					<td>${row.ip }</td>
+					<td>${row.params }</td>
+					<td>
+						<form action="/adminBoard" method="post">
+							<input type="hidden" name="board_no" value="${row.board_no }">
+							<input type="hidden" name="status_no" value="${row.status_no }">
+							<input type="hidden" name="pageNo" value="${pageNo }">
+						</form>
+					</td>
+				</tr>
+				</c:forEach>
 				<!-- 수정 하면댐 -->
 			</table>
 			
@@ -99,8 +102,10 @@ function moveNext(pageNo){
 				<form action="/adminLog" method="get" onsubmit="return search()">
 					<select name="searchType" id="searchType">
 						<option value="none">선택</option>
-						<option value="title" <c:if test='${ pages.searchType eq "title"}'>selected</c:if>>제목</option>
-						<option value="writer" <c:if test='${ pages.searchType eq "writer"}'>selected</c:if>>내용</option>
+						<option value="status_code" <c:if test='${ pages.searchType eq "status_code"}'>selected</c:if>>상태코드</option>
+						<option value="path" <c:if test='${ pages.searchType eq "path"}'>selected</c:if>>접근경로</option>
+						<option value="ip" <c:if test='${ pages.searchType eq "ip"}'>selected</c:if>>ip주소</option>
+						<option value="params" <c:if test='${ pages.searchType eq "params"}'>selected</c:if>>파라미터</option>
 					</select>
 					<input type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
 					<button class="search_btn">검색</button>

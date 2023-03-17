@@ -33,15 +33,13 @@ public class AdminController {
 	private AdminService adminService;
 	
 	@GetMapping("/admin")
-	public String admin(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		//System.out.println("확인");
-		if(session.getAttribute("id") == null) {
-			return "admin/adminLogin";
-		}else {
-			return "admin/admin";
-		}
+	public ModelAndView admin() {
+		ModelAndView mv = new ModelAndView("./admin/admin");
 		
+		List<Map<String, Object>> today = adminService.adminToday();
+		mv.addObject("today", today);
+		
+		return mv;
 	}
 	
 	
@@ -67,7 +65,7 @@ public class AdminController {
 			
 			return "redirect:/admin";
 		} else {
-			return "redirect:/adminLogin?error="+ 0;
+			return "redirect:/adminLogin?error=login_fail";
 		}
 		
 	}
@@ -242,8 +240,13 @@ public class AdminController {
 		return mv;
 	}
 	@GetMapping("/adminCouponCreate")
-	public String adminCouponCreate() {
-		return "./admin/adminCouponCreate";
+	public ModelAndView adminCouponCreate() {
+		ModelAndView mv = new ModelAndView("/admin/adminCouponCreate");
+		List<Map<String, Object>> list = adminService.AdminCouponView();
+		
+		mv.addObject("list", list);
+		
+		return mv;
 	}
 	
 	@PostMapping("/adminCouponCreate")
@@ -252,7 +255,7 @@ public class AdminController {
 
 		couponDTO.setCoupon_name(request.getParameter("couponName"));
 		couponDTO.setCoupon_content(request.getParameter("couponContent"));
-		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("coupon")));
+		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("event_no")));
 		
 		adminService.adminCouponCreate(couponDTO);
 		return "redirect:/adminCoupon";

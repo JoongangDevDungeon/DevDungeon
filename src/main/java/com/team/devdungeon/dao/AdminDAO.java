@@ -84,6 +84,10 @@ public interface AdminDAO {
 
 	void adminEventWrite(EventDTO eventDTO);
 
+	List<Map<String, Object>> adminToday();
+
+	List<Map<String, Object>> AdminCouponView();
+
 
 
 

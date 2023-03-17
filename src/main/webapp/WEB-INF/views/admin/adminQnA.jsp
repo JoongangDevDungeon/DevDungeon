@@ -55,7 +55,7 @@ function moveNext(pageNo){
 			<table class="table">
 				<tr class="table-header">
 					<td class="col-1">보드 번호</td>
-					<td class="col-1">멤버 번호</td>
+					<td class="col-1">멤버 이름</td>
 					<td class="col-2">질문 제목</td>
 					<td class="col-3">질문 내용</td>
 					<td class="col-1">질문한 날짜</td>
@@ -64,7 +64,7 @@ function moveNext(pageNo){
 				<c:forEach items="${qna }" var="row">
 					<tr>
 						<td>${row.question_board_no}</td>
-						<td>${row.member_no }</td>
+						<td>${row.member_name }</td>
 						<td>${row.question_board_title }</td>
 						<td>${row.question_board_content }</td>
 						<td>${row.question_board_date }</td>

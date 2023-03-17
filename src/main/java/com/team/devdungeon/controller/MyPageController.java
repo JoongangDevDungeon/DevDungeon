@@ -4,6 +4,7 @@ import com.team.devdungeon.dto.MyPageDTO;
 import com.team.devdungeon.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,7 +95,9 @@ public class MyPageController {
     }
 
     @GetMapping("/loginLog")
-    public String loginLog() {
+    public String loginLog(HttpSession session, Model model) {
+        List<Map<String, Object>> loginLog = myPageService.loginLog((String)session.getAttribute("member_id"));
+        model.addAttribute("logList", loginLog);
         return "mypage/loginLog";
     }
 }

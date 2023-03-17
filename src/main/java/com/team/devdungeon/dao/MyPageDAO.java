@@ -55,4 +55,9 @@ public class MyPageDAO {
     public int updateProfile(Map<String, Object> map) {
         return sqlSession.update("mypage.updateProfile", map);
     }
+
+    public List<Map<String, Object>> loginLog(String memberId) {
+        return sqlSession.selectList("mypage.loginLog", memberId);
+    }
+
 }

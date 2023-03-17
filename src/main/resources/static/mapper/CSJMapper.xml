@@ -3,7 +3,7 @@
 <mapper namespace="com.team.devdungeon.dao.CSJDAO">
     <select id="boardList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
         SELECT *
-        FROM boardview
+        FROM board2view
         <if test="searchType != null">
 			WHERE
 			<choose>
@@ -30,7 +30,7 @@
  
     <select id="detail" parameterType="Integer" resultType="HashMap">
     	SELECT *
-    	FROM boardview
+    	FROM board2view
     	WHERE board_no=#{bno}
     </select>
     <select id="eventPageDetail" parameterType="Integer" resultType="HashMap">
@@ -38,11 +38,11 @@
     	FROM event
     	WHERE event_no=#{bno}
     </select>
-    <insert id="eventJoin" parameterType="HashMap">
-    	INSERT IGNORE INTO event_player
-    	SET
-    	member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
-    	,event_no = ${event_no}
+    <insert id="eventParticipate" parameterType="HashMap">
+    	INSERT INTO event_player (member_no,event_no)
+    	SELECT (SELECT member_no FROM member WHERE member_id = #{member_id}),#{event_no} FROM DUAL
+    	WHERE NOT EXISTS (SELECT * FROM event_player 
+    	WHERE member_no = (SELECT member_no FROM member WHERE member_id = #{member_id}) AND event_no=#{event_no})
     </insert>
     <select id="memberProfile" parameterType="Integer" resultType="HashMap">
     	SELECT *

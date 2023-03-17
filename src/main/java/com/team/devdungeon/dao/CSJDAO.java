@@ -135,7 +135,7 @@ public class CSJDAO {
 
 	public int eventJoin(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(namespace+"eventJoin"+map);
+		return sqlSession.insert(namespace+"eventParticipate",map);
 	}
 
 

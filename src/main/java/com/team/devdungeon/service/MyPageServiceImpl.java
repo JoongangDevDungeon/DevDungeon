@@ -164,4 +164,10 @@ public class MyPageServiceImpl implements MyPageService {
         map.put("member_id", (String)session.getAttribute("member_id"));
         return myPageDAO.updateProfile(map);
     }
+
+    @Override
+    public List<Map<String, Object>> loginLog(String memberId) {
+        return myPageDAO.loginLog(memberId);
+    }
+
 }
