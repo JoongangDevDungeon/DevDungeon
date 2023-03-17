@@ -57,7 +57,10 @@ public class MyPageController {
     }
 
     @PostMapping("/iconSelect")
-    public iconS
+    public String iconSelect() {
+        return "";
+    }
+
     @PostMapping("/profileImage")
     public String profile(HttpSession session, @RequestParam Map<String, Object> map, MultipartFile profile_img) {
         map.put("member_id", (String)session.getAttribute("member_id"));
