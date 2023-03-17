@@ -15,10 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static com.team.devdungeon.util.SFTPFileUtil.*;
 
@@ -118,6 +115,36 @@ public class MyPageServiceImpl implements MyPageService {
 
     @Override
     public List<Map<String, Object>> icons(String memberId) {
-        return myPageDAO.icons(memberId);
+        List<Map<String, Object>> resultIcons = myPageDAO.icons(memberId);
+
+        InputStream inputStream = null;
+        ByteArrayOutputStream baos = null;
+        byte[] buffer = null;
+        byte[] imageData = null;
+
+        for(Map<String, Object> mapIcons : resultIcons) {
+            try {
+                String emo_img_name = (String) mapIcons.get("emo_img_name");
+                String emo_img_extension = (String) mapIcons.get("emo_img_extension");
+
+                inputStream = channelSftp.get(remotePath + emo_img_name + "." + emo_img_extension);
+                baos = new ByteArrayOutputStream();
+                buffer = new byte[1024 * 8];
+                int len;
+                while ((len = inputStream.read(buffer)) > -1) {
+                    baos.write(buffer, 0, len);
+                }
+                baos.flush();
+                imageData = baos.toByteArray();
+
+                String icon_image = Base64.getEncoder().encodeToString(imageData);
+                mapIcons.put("icon_image", icon_image);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("아이콘 이미지 로딩중 에러 발생");
+            }
+        }
+
+        return resultIcons;
     }
 }

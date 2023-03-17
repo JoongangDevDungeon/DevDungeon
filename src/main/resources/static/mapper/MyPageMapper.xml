@@ -15,11 +15,12 @@
         SELECT product_no, product_name, emo_img_name, emo_img_extension
             FROM product p JOIN product_log pl ON p.product_no = pl.emo_no
                 WHERE
-                    pl.member_no = (SELECT member_no FROM member WHERE member_id = #{memberId});
+                    pl.member_no = (SELECT member_no FROM member WHERE member_id = #{memberId})
+            LIMIT 0, 6
     </select>
 
     <select id="profile" parameterType="String" resultType="MyPageDTO">
-        SELECT m.member_no, m.member_id, m.member_name, m.member_intro, m.icon_no, p.member_point, l.member_level, pif.pfp_name, pif.pfp_extension, emo.emo_img_name , emo.emo_img_extension
+        SELECT m.member_no, m.member_id, m.member_name, m.member_intro, m.icon_no, p.member_point, l.member_level, pif.pfp_name, pif.pfp_extension, emo.emo_img_name, emo.emo_img_extension
             FROM member m
                 JOIN point p ON m.member_no = p.member_no
                 JOIN level l ON p.member_point >= l.level_to_point

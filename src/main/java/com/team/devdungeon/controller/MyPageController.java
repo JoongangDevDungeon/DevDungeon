@@ -49,13 +49,16 @@ public class MyPageController {
     public ModelAndView profile(HttpSession session) {
         ModelAndView mv = new ModelAndView("mypage/myPage");
         List<Map<String, Object>> icons = myPageService.icons((String)session.getAttribute("member_id"));
-        System.out.println(icons);
         MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
         mv.addObject("profile", profile);
+        mv.addObject("icons", icons);
+        System.out.println(icons);
         return mv;
     }
 
-    @PostMapping("/myPage")
+    @PostMapping("/iconSelect")
+    public iconS
+    @PostMapping("/profileImage")
     public String profile(HttpSession session, @RequestParam Map<String, Object> map, MultipartFile profile_img) {
         map.put("member_id", (String)session.getAttribute("member_id"));
         int result = myPageService.memberIntro(map, profile_img);
