@@ -67,7 +67,7 @@
 </head>
 <body>
 	<%@include file="../top.jsp"%>
-	<%@include file="../menu.jsp"%>
+	<%@include file="../mypage/myPageMenu.jsp"%>
 	<section>
 		<div class="main">
 			<div class="add1">광고1</div>

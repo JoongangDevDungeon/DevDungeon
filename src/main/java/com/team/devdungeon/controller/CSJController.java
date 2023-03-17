@@ -391,7 +391,6 @@ public class CSJController {
 		PageInfo<Map<String,Object>> qnaPageInfo = csjService.qnaList(dto);
 		mv.addObject("pageInfo",qnaPageInfo);
 		mv.addObject("list",qnaPageInfo.getList());
-		
 		return mv;
 	}
 	
