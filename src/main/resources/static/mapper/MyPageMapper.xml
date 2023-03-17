@@ -114,5 +114,15 @@
     <select id="messageIdCheck" parameterType="String" resultType="Integer">
     	SELECT COUNT(member_name) FROM member WHERE member_name = '${member_name}'
     </select>
+    
+    <select id="msgList" parameterType="String" resultType="HashMap">
+    	SELECT msg.*,
+    	(SELECT m.member_name FROM  member m WHERE m.member_no = msg.post_member_no) as member_name,
+    	ROW_NUMBER() OVER() as msg_no
+    	FROM message msg JOIN member m ON m.member_no = msg.post_member_no
+    	WHERE msg.get_member_no = (SELECT m.member_no FROM member m WHERE m.member_id = '${member_id}')
+    	ORDER BY message_no DESC
+    </select>
+    
 
 </mapper>

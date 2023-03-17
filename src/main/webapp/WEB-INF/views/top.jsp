@@ -20,7 +20,7 @@
 						<li><a href="/level">레벨현황표</a></li>
 <!--                	 <li>보유 포인트</li> -->
 						<li><a href="/checkPassword">마이 페이지</a></li>
-                   		<li><a href="">쪽지함</a></li>
+                   		<li><a href="/msgBox">쪽지함</a></li>
                    		<li><a href="">장바구니</a></li>
                    		<li><a href="/logout">로그아웃</a></li>
 					</ul>

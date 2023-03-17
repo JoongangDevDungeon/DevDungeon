@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +57,21 @@ public class MessageController {
     	int result = messageService.messageIdCheck(member_name);
     	return result+"";
     }
+    @GetMapping("/msgBox")
+    public ModelAndView msgBox(HttpSession session) {
+    	String member_id = (String)session.getAttribute("member_id");
+    	ModelAndView mv = new ModelAndView("message/messageBox");
+    	if(member_id != null) {
+    		List<Map<String,Object>> msgList = messageService.msgList(member_id);
+    		System.out.println(msgList);
+    		mv.addObject("msgList",msgList);
+    		
+    		return mv;
+    	}else {
+    		
+    		return mv;
+    	}
+    }
 
     @GetMapping("/sendPoint")
     public String sendPoint() {
@@ -68,7 +84,8 @@ public class MessageController {
         System.out.println( request.getParameter("send_point") );
         System.out.println( request.getParameter("msg_content") );
 
-        return "message/sendPoint";
+        return "redirect:/csjCloser";
     }
+    
 
 }

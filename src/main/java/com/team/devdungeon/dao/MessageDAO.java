@@ -2,6 +2,7 @@ package com.team.devdungeon.dao;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,6 +21,10 @@ public class MessageDAO {
 
 	public int messageIdCheck(String member_name) {
 		return sqlSession.selectOne("mypage.messageIdCheck",member_name);
+	}
+
+	public List<Map<String, Object>> msgList(String member_id) {
+		return sqlSession.selectList("mypage.msgList",member_id);
 	}
 
 }

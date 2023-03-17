@@ -94,6 +94,12 @@ $(function(){ //제이쿼리 시작
 		
 		window.open("/message?receiver="+receiver, '쪽지', 'width=510px,height=450px,scrollbars=yes');
 	});
+	$("#point").click(function(){
+		let receiver = $("#detailWriter").val();
+		
+		window.open("/sendPoint?receiver="+receiver, '쪽지', 'width=510px,height=450px,scrollbars=yes');
+	});
+	
 	
 });//제이쿼리 끝
 
@@ -126,6 +132,7 @@ function subComment_check(){
 				<div class="detailTop_item"><input type="hidden" id="detailWriter" value="${boardDetail.member_name }">${boardDetail.member_name }</div>
 				<c:if test="${sessionScope.member_id ne null && sessionScope.member_id ne boardDetail.member_id }">
 					<div class="detailTop_item message"><span id="message"><img src="/img/send.png" style="width:30px; height:30px;"></span></div>
+					<div class="detailTop_item message"><span id="point"><img src="/img/point.png" style="width:30px; height:30px;"></span></div>
 				</c:if>
 				<div class="detailTop_item">${boardDetail.board_date }</div>
 			</div>

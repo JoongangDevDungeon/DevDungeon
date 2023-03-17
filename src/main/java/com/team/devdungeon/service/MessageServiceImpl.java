@@ -3,6 +3,7 @@ package com.team.devdungeon.service;
 import com.team.devdungeon.dao.MessageDAO;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +23,11 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public int messageIdCheck(String member_name) {
 		return messageDAO.messageIdCheck(member_name);
+	}
+
+	@Override
+	public List<Map<String, Object>> msgList(String member_id) {
+		return messageDAO.msgList(member_id);
 	}
 
 }
