@@ -3,21 +3,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>질문과 답변</title>
+<title>Q&A</title>
 <link rel="icon" href="/img/Gazi_shortCut.png" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/layout.css">
 <link type="text/css" rel="stylesheet" href="/css/HJHBoard.css">
 <script>
 	$(document).ready(function() {
 		$(".subContent").hide(0);
-		$(".subContent").css("background-color", "#FFBCD1");
 		$(".mainContent").click(function() {
 			var no = $(this).children("#QuestionNo").text();
 			if ($(".sub" + no).css("display") == "none") {
@@ -27,7 +22,7 @@
 				$(".sub" + no).hide(0);
 			}
 		});
-		$(".write").click(function() {
+		$(".write_btn").click(function() {
 			$("#writeModal").modal("show");
 		});
 		$("#modalWriteBtn").click(function() {
@@ -65,6 +60,10 @@
 	});
 </script>
 </head>
+<style>
+.subContent{ background-color: #fbe0db; }
+
+</style>
 <body>
 	<%@include file="../top.jsp"%>
 	<%@include file="../mypage/myPageMenu.jsp"%>
@@ -73,7 +72,7 @@
 			<div class="add1">광고1</div>
 			<div class="content">
 				<!-- 이 곳을 수정하여 사용해주세요. -->
-				<h1>Q N A B O A R D</h1>
+				<h1>Q & A</h1>
 				<table class="table">
 					<tr class="table-header">
 						<th class="col-1">번호</th>
@@ -81,8 +80,8 @@
 					</tr>
 					<c:forEach var="board" items="${list }">
 						<tr class="mainContent">
-							<td id="QuestionNo">${board.question_board_no }</td>
-							<td class="title">${board.question_board_title }</td>
+							<td id="QuestionNo" style="cursor: pointer; font-weight: bold;">${board.question_board_no }</td>
+							<td class="title" style="cursor: pointer; font-weight: bold;">${board.question_board_title }</td>
 						</tr>
 
 						<c:choose>
@@ -94,36 +93,36 @@
 							</c:when>
 							<c:when test="${board.answer_board_no ne null }">
 								<tr class="subContent sub${board.question_board_no }">
-									<td>질문 내용</td>
+									<td><b>질문</b></td>
 									<td class="title">${board.question_board_content }</td>
 								</tr>
+								
 								<tr class="subContent sub${board.question_board_no }">
-									<td>답변 제목</td>
-									<td class="title">${board.answer_board_title }</td>
-								</tr>
-								<tr class="subContent sub${board.question_board_no }">
-									<td>답변 내용</td>
+									<td><b>[답변]</b></td>
 									<td class="title">${board.answer_board_content }</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
 								<tr class="subContent sub${board.question_board_no }">
-									<td>질문 내용</td>
+									<td><b>질문</b></td>
 									<td class="title">${board.question_board_content }</td>
 								</tr>
 								<tr class="subContent sub${board.question_board_no }">
 									<td></td>
-									<td class="title">답변을 기다리고 있는 질문입니다</td>
+									<td class="title"><b>답변을 기다리고 있는 질문입니다.</b></td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
+					<c:if test="${board.question_board_no eq null }"><br><br><b style="font-size: 20px;">게시글이 없습니다.</b></c:if>
 					</c:forEach>
 				</table>
-
-				<%@ include file="CSJpaging.jsp"%>
+				<br><br><br>
 				<c:if test="${sessionScope.member_id ne null }">
-					<button class="btn btn-primary write">질문하기</button>
-				</c:if>
+					<div class="write" style="justify-content: start;">
+						<button class="write_btn" style="margin-left:35px;">질문하기</button>
+					</div>
+				</c:if><br>
+				<%@ include file="CSJpaging.jsp"%>
 				<!-- Write Modal -->
 				<div class="modal fade" id="writeModal" data-bs-backdrop="static"
 					tabindex="-1" aria-labelledby="exampleModalLabel"

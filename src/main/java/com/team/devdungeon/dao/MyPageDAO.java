@@ -60,4 +60,14 @@ public class MyPageDAO {
         return sqlSession.selectList("mypage.loginLog", memberId);
     }
 
+    public int nowPassCheck(Map<String, Object> map) {
+        System.out.println("변경 전 : " + map);
+        return sqlSession.selectOne("mypage.nowPassCheck", map);
+    }
+
+    public int modifyPassword(Map<String, Object> info) {
+        System.out.println("변경 후 : " + info);
+        return sqlSession.update("mypage.modifyPassword", info);
+    }
+
 }

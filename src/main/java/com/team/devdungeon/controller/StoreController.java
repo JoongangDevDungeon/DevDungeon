@@ -46,13 +46,14 @@ public class StoreController {
 
     @PostMapping("/shoppingBag")
     @ResponseBody
-    public String shoppingBag(HttpServletRequest request) {
+    public int shoppingBag(HttpServletRequest request) {
         HttpSession session = request.getSession();
+
         String userId = (String) session.getAttribute("member_id");
         String[] shoppingBag = request.getParameterValues("shoppingBag[]");
         String sellType = request.getParameter("sell_type");
-        Integer result = storeService.shoppingBagInsert(userId, shoppingBag, sellType);
-        return result.toString();
+
+        return storeService.shoppingBagInsert(userId, shoppingBag, sellType);
     }
 
 

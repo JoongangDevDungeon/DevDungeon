@@ -16,4 +16,6 @@ public interface MyPageService {
     MyPageDTO userProfile(String memberId);
     int updateProfile(Map<String, Object> map, HttpSession session);
     List<Map<String, Object>> loginLog(String memberId);
+    int nowPassCheck(Map<String, Object> map);
+    int modifyPassword(Map<String, Object> info);
 }

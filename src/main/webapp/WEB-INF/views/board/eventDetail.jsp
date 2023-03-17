@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이벤트 게시판</title>
+<title>이벤트</title>
 <link rel="icon" href="/img/Gazi_shortCut.png" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -82,7 +82,7 @@
 					}
 				});
 				$(".commentDeleteBtn").click(function() {
-					var no = $(this).val();
+					var event_no = $(this).val();
 					if (confirm("진짜 삭제하시겠습니까?")) {
 						location.href = "/userCommentDelete?cno=" + no;
 					}
@@ -112,12 +112,16 @@
 .commentAll {
 	text-align: left;
 }
-
+h1{
+	border-bottom: 2px solid black;
+}
 .detailTitle {
-	height: 30px;
-	font-size: 20px;
+	height: 40px;
+	font-size: 30px;
 	text-align: left;
-	border: 1px solid black;
+/* 	border-top: 1px solid black; */
+	margin: 10px 0px 20px 0px;
+
 }
 
 .detailInfo {
@@ -129,6 +133,7 @@
 	text-align: left;
 	border: 1px solid black;
 	min-height: 400px;
+	border-radius: 5px;
 }
 
 .detailUserProfile {
@@ -182,9 +187,9 @@
 		<div class="main">
 			<div class="add1">광고1</div>
 			<div class="content">
-				<h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
+				<h1 onclick="location.href='eventboard'">E V E N T</h1>
 				<div class="detailBody">
-					<div class="detailTitle">제목 : ${det.event_title }</div>
+					<div class="detailTitle">${det.event_title }</div>
 					<div class="detailContent" style="text-align: center;">
 						<c:if test="${eventFile ne null }">
 							<div>
@@ -192,7 +197,7 @@
 							</div>
 						</c:if>
 					</div>
-					<div>
+					<div style="margin-top:5px;">
 						<button class="eventJoinBtn btn btn-warning" value="${det.event_no }">참여하기</button>
 					</div>
 					<br>

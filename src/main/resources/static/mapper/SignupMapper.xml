@@ -16,6 +16,12 @@
         </selectKey>
     </insert>
 
+    <insert id="new_account" parameterType="SignDTO"><!--회원 계정 찾기 테이블에 이메일 삽입-->
+        INSERT INTO account
+            SET
+                member_email = #{member_email}
+    </insert>
+
     <insert id="signup_agree" parameterType="SignDTO"><!--회원 약관 동의 여부-->
         INSERT INTO tou_agree (member_no, tou_agree_no, agree)
             VALUES
@@ -60,4 +66,24 @@
                 member_email = #{member_email},
                 email_code = #{verify_code}
     </insert>
+
+    <update id="accountInquiry">
+        UPDATE account
+        SET email_code = #{verify_code}
+        WHERE member_email = #{member_email}
+    </update>
+
+    <select id="check_account" parameterType="SignDTO" resultType="SignDTO"><!--중복 검사 -->
+        SELECT COUNT(*) as COUNT, email_code
+            FROM account
+                WHERE member_email = #{member_email} AND email_code = #{verify_code}
+    </select>
+
+    <update id="change_pw">
+        UPDATE member
+        SET member_pw = #{member_pw}
+        WHERE member_email = #{member_email}
+    </update>
+
+
 </mapper>

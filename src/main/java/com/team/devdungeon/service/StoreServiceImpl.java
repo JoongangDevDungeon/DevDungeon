@@ -1,18 +1,15 @@
 package com.team.devdungeon.service;
 
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
 import com.team.devdungeon.dao.StoreDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.team.devdungeon.util.SFTPFileUtil.*;
+import static com.team.devdungeon.util.SFTPFileUtil.channelSftp;
+import static com.team.devdungeon.util.SFTPFileUtil.remotePath;
 
 @RequiredArgsConstructor
 @Service
@@ -69,6 +66,7 @@ public class StoreServiceImpl implements StoreService {
 
         cartInfo.put("member_id", userId);
         cartInfo.put("cart", cart);
+        cartInfo.put("sell_type", sellType);
 
         return storeDAO.shoppingBagInsert(cartInfo);
     }
