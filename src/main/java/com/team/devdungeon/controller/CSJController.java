@@ -362,6 +362,21 @@ public class CSJController {
 		}
 	}
 	
+	@GetMapping("/faqboard")
+	public ModelAndView faq(@RequestParam(defaultValue = "1")int pageNo,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/Faqboard");
+		
+		int pageSize = 10;
+		CSJshowDTO dto = new CSJshowDTO();
+		dto.setPageNo(pageNo);
+		dto.setPageSize(pageSize);
+		PageInfo<Map<String,Object>> faqPageInfo = csjService.faqList(dto);
+		mv.addObject("pageInfo",faqPageInfo);
+		mv.addObject("list",faqPageInfo.getList());
+		
+		return mv;
+	}
 	@GetMapping("/qnaboard")
 	public ModelAndView qna(@RequestParam(defaultValue = "1")int pageNo,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
