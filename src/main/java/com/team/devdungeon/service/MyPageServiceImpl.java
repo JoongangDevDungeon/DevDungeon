@@ -170,4 +170,14 @@ public class MyPageServiceImpl implements MyPageService {
         return myPageDAO.loginLog(memberId);
     }
 
+    @Override
+    public int nowPassCheck(Map<String, Object> map) {
+        return myPageDAO.nowPassCheck(map);
+    }
+
+    @Override
+    public int modifyPassword(Map<String, Object> info) {
+        return myPageDAO.modifyPassword(info);
+    }
+
 }
