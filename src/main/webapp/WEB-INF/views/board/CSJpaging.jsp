@@ -19,17 +19,6 @@ function moving(page){
 }
 </script>
 <nav>
-<!-- <div class="pagingBox"> -->
-<!-- 					<ul class="pagingList"> -->
-<!-- 						<li class="pageNo page_btn" onclick="moveBefore(1)"><i class="xi-backward xi-x"></i></li> -->
-<%-- 						<li class="pageNo page_btn" onclick="moveBefore(${pageNo})"><i class="xi-step-backward xi-x"></i></li> --%>
-<%-- 						<c:forEach var="i" begin="${Math.floor((pageNo-1)/10)*10+1 }" end="${Math.floor((pageNo-1)/10)*10 +10 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}"> --%>
-<%-- 							<li class="pageNo" onclick="move(${i })" <c:if test="${pageNo eq i }" >style="color:red; font-weight: bold;"</c:if>>${i }</li> --%>
-<%-- 						</c:forEach> --%>
-<%-- 						<li class="pageNo page_btn" onclick="moveNext(${pageNo})"><i class="xi-step-forward xi-x"></i></li> --%>
-<%-- 						<li class="pageNo page_btn" onclick="moveNext(${pages.lastPage })"><i class="xi-forward xi-x"></i></li> --%>
-<!-- 					</ul> -->
-<!-- 				</div> -->
 <div class="pagingBox">
   <ul class="pagingList">
     <li class="pageNo page_btn" onclick="moving(1)"><i class="xi-backward xi-x"></i></li>
