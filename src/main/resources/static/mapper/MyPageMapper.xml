@@ -34,6 +34,14 @@
                         LIMIT 1
     </select>
 
+    <update id="updateIcon" parameterType="HashMap">
+        UPDATE member
+            SET
+                icon_no = #{icon_no}
+            WHERE
+                member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+    </update>
+
     <update id="introUpdate" parameterType="HashMap">
         UPDATE member
             SET

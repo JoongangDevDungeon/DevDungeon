@@ -1,9 +1,5 @@
 package com.team.devdungeon.service;
 
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-import com.team.devdungeon.controller.IconController;
 import com.team.devdungeon.dao.MyPageDAO;
 import com.team.devdungeon.dto.MyPageDTO;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -146,5 +143,13 @@ public class MyPageServiceImpl implements MyPageService {
         }
 
         return resultIcons;
+    }
+
+    @Override
+    public int updateIcon(int iconNo, HttpSession session) {
+        Map<String, Object> info = new HashMap<>();
+        info.put("icon_no", iconNo);
+        info.put("member_id", session.getAttribute("member_id"));
+        return myPageDAO.updateIcon(info);
     }
 }

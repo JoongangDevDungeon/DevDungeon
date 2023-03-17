@@ -43,4 +43,9 @@ public class MyPageDAO {
     public List<Map<String, Object>> icons(String memberId) {
         return sqlSession.selectList("mypage.icons", memberId);
     }
+
+    public int updateIcon(Map<String, Object> info) {
+        return sqlSession.update("mypage.updateIcon", info);
+    }
+
 }

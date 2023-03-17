@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,13 +53,13 @@ public class MyPageController {
         MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
         mv.addObject("profile", profile);
         mv.addObject("icons", icons);
-        System.out.println(icons);
         return mv;
     }
 
     @PostMapping("/iconSelect")
-    public String iconSelect() {
-        return "";
+    @ResponseBody
+    public int iconSelect(@RequestParam int icon_no, HttpSession session) {
+        return myPageService.updateIcon(icon_no, session);
     }
 
     @PostMapping("/profileImage")

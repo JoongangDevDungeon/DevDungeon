@@ -39,7 +39,12 @@
                 data : {"icon_no" : icon_no},
                 dataType : "text",
                 success : function(result) {
-                    alert(result);
+                    console.log(result);
+                    if(result == 1) {
+                        alert("대표 아이콘을 변경했습니다.");
+                    } else {
+                        alert("아이콘을 변경하는 도중 문제가 발생했습니다.\n잠시 후 다시 시도해주세요.");
+                    }
                 },
                 error : function() {
                     alert("아이콘을 변경하는 도중 에러가 발생했습니다.\n잠시 후 다시 시도해주세요.");
