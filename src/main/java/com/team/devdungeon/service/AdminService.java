@@ -139,6 +139,16 @@ public class AdminService {
 		adminDAO.adminEventWrite(eventDTO);
 	}
 
+	public List<Map<String, Object>> adminToday() {
+		return adminDAO.adminToday();
+	}
+
+	public List<Map<String, Object>> AdminCouponView() {
+		return adminDAO.AdminCouponView();
+	}
+
+	
+
 
 
 

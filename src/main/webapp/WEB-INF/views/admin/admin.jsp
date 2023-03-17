@@ -23,23 +23,23 @@
 <!-- 		<img class="logo" src="./img/admin/adminGazi.png"> -->
 			<h1>관리자 페이지 메인 대쉬보드</h1>
 			<hr class="hr1">
-
+			${today }
 			<div class="mtoday">
 				<div class="mth">오늘의 할일</div>
 				<hr class="hr1">
 				<div class="mtc1">
 					<a class="mhov" href="/adminQnA">
-						답변대기문의 1
+						답변대기문의 : ${today[0].question_board_count }
 					</a>
 				</div>
 				<div class="mtc2">
 					<a class="mhov" href="/adminEvent">
-						이벤트 기간만료 1
+						가입한 유저 : ${today[0].join_today }
 					</a>
 				</div>
 				<div class="mtc3">
 					<a class="mhov" href="/adminCoupon">
-						쿠폰 만료 1
+						추가된 게시물 : ${today[0].board_today }
 					</a>
 				</div>
 			</div>

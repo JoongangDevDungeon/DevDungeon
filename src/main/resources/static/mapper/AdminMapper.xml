@@ -9,7 +9,14 @@
 	</select>
 	
 <!-- 메인 대쉬보드 -->
-
+	<select id="adminToday" resultType="HashMap">
+		SELECT 
+    (SELECT COUNT(*) FROM question_board WHERE question_board_status = 0) AS question_board_count,
+	 (SELECT COUNT(*) FROM member WHERE DATE_FORMAT(join_date, "%Y-%m-%d") = curdate()) AS join_today,
+	 (SELECT COUNT(*) FROM board WHERE DATE_FORMAT(board_date, "%Y-%m-%d") = curdate()) AS board_today,
+	 (SELECT COUNT(*) FROM product WHERE DATE_FORMAT(product_date, "%Y-%m-%d") = curdate()) AS new_product,
+	 (SELECT COUNT(*) FROM logs WHERE DATE_FORMAT(created_at, "%Y-%m-%d") = curdate() AND ip is not NULL ) AS today_user;
+	</select>
 
 
 
@@ -90,30 +97,34 @@
 		</if>
     </select>
     
-<!-- 로그 데이터(필요한 데이터 join해야함) -->
+<!-- 로그 데이터 -->
 	<select id="AdminLog" parameterType="Integer" resultType="HashMap">
 		SELECT *
-		FROM event
+		FROM logs
 		<if test="searchType != null">
 			WHERE
 			<choose>
-				<when test="searchType == 'title'">event_title</when>
-				<when test="searchType == 'writer'">event_content</when>
+				<when test="searchType == 'status_code'">status_code</when>
+				<when test="searchType == 'path'">path</when>
+				<when test="searchType == 'ip'">ip</when>
+				<when test="searchType == 'params'">params</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
 		</if>
-		ORDER BY event_no DESC
+		ORDER BY id DESC
 		LIMIT #{startPage}, 10
 	</select>
 	
 <!-- 페이징 서치바 카운트 -->
 	<select id="adminLogCount" parameterType="HashMap" resultType="Integer">
-		SELECT COUNT(*) FROM event
+		SELECT COUNT(*) FROM logs
 		<if test="searchType != null">
 			WHERE
 			<choose>
-				<when test="searchType == 'title'">event_title</when>
-				<when test="searchType == 'writer'">event_content</when>
+				<when test="searchType == 'status_code'">status_code</when>
+				<when test="searchType == 'path'">path</when>
+				<when test="searchType == 'ip'">ip</when>
+				<when test="searchType == 'params'">params</when>
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
 		</if>
@@ -146,6 +157,12 @@
 		ORDER BY coupon_type DESC
 		LIMIT #{startPage}, 10
 	</select>
+<!-- 쿠폰 생성의 위한 데이터 뷰에담기 -->
+	<select id="AdminCouponView" resultType="HashMap">
+		SELECT event_no, event_title
+		FROM event
+		WHERE status_no = 1;
+	</select>
 	
 <!-- 쿠폰 생성 -->
 	<insert id="adminCouponCreate" parameterType="CouponDTO">
@@ -177,8 +194,8 @@
     
 <!-- QnA -->
 	<select id="adminQnA" parameterType="Integer" resultType="HashMap">
-		SELECT *
-		FROM question_board
+		SELECT *, m.member_name
+		FROM question_board q JOIN member m ON q.member_no = m.member_no
 		<if test="searchType != null">
 		WHERE
 		<choose>

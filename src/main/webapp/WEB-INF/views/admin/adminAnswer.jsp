@@ -20,9 +20,11 @@
 	<!-- 메인 시작 -->
 	<div class="main">
 		<h1>QnA 댓글달기</h1>
-		board_status = 변경시키기 -> 테이블 board에 있음.
-		answer_board 에 값담아주기 를 동시에 수행해야함. 
+		<hr class="hr1">
+		<br><br>
+		
 		<form action="/adminAnswerComplete" method="post">
+			질문<br>
 			<input type="text" name="title" value="${qna.get(0).question_board_title }" readonly><br>
 			<textarea rows="10" name="content" cols="100" readonly>${qna.get(0).question_board_content }</textarea><br>
 			답변<br>
@@ -31,6 +33,7 @@
 			<textarea rows="10" cols="100" name="answerContent"></textarea><br>
 			<button type="submit">답변달기</button>
 		</form>
+		
 	</div>
 </div>
 </body>

@@ -18,7 +18,7 @@ function couponbtn() {
 	let couponName = document.getElementById("couponName").value;
 	let couponContent = document.getElementById("couponContent").value;
 	
-	if(couponKind === "쿠폰종류를 선택하세요" || couponName === "" || couponContent === ""){
+	if(couponKind === "이벤트 제목을 선택하세요" || couponName === "" || couponContent === ""){
 		alert("모든 항목을 입력해주세요");
 	} else{
 		document.getElementById("couponForm").submit();
@@ -40,12 +40,11 @@ function couponbtn() {
 			<br><br>
 			<div class="admincoupon">
 				<form action="/adminCouponCreate" method="post" id="couponForm">
-					<select class="form-select" name="coupon" id="couponKind">
-						<option selected="selected">쿠폰종류를 선택하세요</option>
-	    				<option value="1">쿠폰발급</option>
-	    				<option value="2">x</option>
-	    				<option value="3">x</option>
-	    				<option value="4">x</option>
+					<select class="form-select" name="event_no" id="couponKind">
+						<option selected="selected">이벤트 제목을 선택하세요</option>
+	    				<c:forEach items="${list }" var="row">
+	    					<option value="${row.event_no }">${row.event_title }</option>
+	    				</c:forEach>
 					</select><br>
 					<input type="text" class="form-control" name="couponName" id="couponName" placeholder="쿠폰이름 지정해주세요"><br>
 					<input type="text" class="form-control coupontxt" name="couponContent" id="couponContent" placeholder="쿠폰내용을 지정해주세요"><br>
