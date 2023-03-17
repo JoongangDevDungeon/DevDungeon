@@ -30,7 +30,7 @@ public class StoreController {
     public ModelAndView store(HttpSession session) {
         ModelAndView mv = new ModelAndView();
 
-        if(session.getAttribute("member_id") != null) {
+        if(session.getAttribute("member_id") != null || session.getAttribute("id") != null ) {
             List<Map<String, Object>> iconList = storeService.iconList();
             MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
 
