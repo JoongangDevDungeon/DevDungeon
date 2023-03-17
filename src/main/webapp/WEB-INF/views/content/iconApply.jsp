@@ -50,7 +50,7 @@
             <div class="content">
                <form class="icon-form" action="/iconApply" method="post" enctype="multipart/form-data">
                   <div style="padding-top: 100px;">
-                     <div style="margin: 0 auto; width: 700px; height: 530px; border: 1px solid #ccc; border-radius: 10px;">
+                     <div style="margin: 0 auto; width: 700px; height: 450px; border: 1px solid #ccc; border-radius: 10px;">
                         <div class="mt-4" style="width: 700px; height: 50px; font-size: 30px;">아이콘 신청</div>
                         <!-- 파일 등록 -->
                         <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
@@ -72,16 +72,6 @@
                         <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
                            <label class="badge bg-secondary" for="icon_count" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">수량</label>
                            <input class="form-control" type="number" id="icon_count" name="icon_count" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 수량을 입력해주세요.">
-                        </div>
-                        <!-- 유효기간 선택 -->
-                        <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
-                           <label class="badge bg-secondary" for="icon_expiration" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">유효기간</label>
-                           <select class="form-select" id="icon_expiration" name="icon_expiration" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 수량을 입력해주세요.">
-                              <option value="">선택</option>
-                              <option value="30">30일</option>
-                              <option value="60">60일</option>
-                              <option value="90">90일</option>
-                           </select>
                         </div>
                         <!-- 가격 -->
                         <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
