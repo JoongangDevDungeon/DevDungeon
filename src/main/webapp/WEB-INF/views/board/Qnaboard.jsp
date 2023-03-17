@@ -84,12 +84,19 @@
 							<td id="QuestionNo">${board.question_board_no }</td>
 							<td class="title">${board.question_board_title }</td>
 						</tr>
-						<tr class="subContent sub${board.question_board_no }">
-							<td>질문 내용</td>
-							<td class="title">${board.question_board_content }</td>
-						</tr>
+
 						<c:choose>
+							<c:when test="${sessionScope.member_name ne board.member_name }">
+								<tr class="subContent sub${board.question_board_no }">
+									<td></td>
+									<td class="title">작성자만 볼 수 있습니다</td>
+								</tr>
+							</c:when>
 							<c:when test="${board.answer_board_no ne null }">
+								<tr class="subContent sub${board.question_board_no }">
+									<td>질문 내용</td>
+									<td class="title">${board.question_board_content }</td>
+								</tr>
 								<tr class="subContent sub${board.question_board_no }">
 									<td>답변 제목</td>
 									<td class="title">${board.answer_board_title }</td>
@@ -101,8 +108,12 @@
 							</c:when>
 							<c:otherwise>
 								<tr class="subContent sub${board.question_board_no }">
-								<td></td>
-								<td class="title">답변을 기다리고 있는 질문입니다</td>
+									<td>질문 내용</td>
+									<td class="title">${board.question_board_content }</td>
+								</tr>
+								<tr class="subContent sub${board.question_board_no }">
+									<td></td>
+									<td class="title">답변을 기다리고 있는 질문입니다</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
@@ -126,10 +137,11 @@
 							</div>
 							<div class="modal-body">
 								<div id="form" class="mb-3">
-									<label for="title" class="form-label">질문 제목</label>
-									<input class="form-control" type="text" id="title" name="title">
+									<label for="title" class="form-label">질문 제목</label> <input
+										class="form-control" type="text" id="title" name="title">
 									<label for="content" class="form-label">질문 내용</label>
-									<textarea class="form-control" rows="20" id="content" name="content"></textarea>
+									<textarea class="form-control" rows="20" id="content"
+										name="content"></textarea>
 									<button type="button" id="modalWriteBtn"
 										class="btn btn-primary">질문하기</button>
 								</div>
