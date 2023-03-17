@@ -17,7 +17,6 @@
 <script>
 	$(document).ready(function() {
 		$(".subContent").hide(0);
-		$(".subContent").css("background-color", "#FFBCD1");
 		$(".mainContent").click(function() {
 			var no = $(this).children("#QuestionNo").text();
 			if ($(".sub" + no).css("display") == "none") {
@@ -27,7 +26,7 @@
 				$(".sub" + no).hide(0);
 			}
 		});
-		$(".write").click(function() {
+		$(".write_btn").click(function() {
 			$("#writeModal").modal("show");
 		});
 		$("#modalWriteBtn").click(function() {
@@ -65,6 +64,9 @@
 	});
 </script>
 </head>
+<style>
+.subContent{ background-color: #fbe0db; }
+</style>
 <body>
 	<%@include file="../top.jsp"%>
 	<%@include file="../menu.jsp"%>
@@ -81,48 +83,17 @@
 					</tr>
 					<c:forEach var="board" items="${list }">
 						<tr class="mainContent">
-							<td id="QuestionNo">${board.faq_no }</td>
-							<td class="title">${board.faq_question }</td>
+							<td id="QuestionNo" style="cursor: pointer; font-weight: bold;">${board.faq_no }</td>
+							<td class="title" style="cursor: pointer; font-weight: bold;">${board.faq_question }</td>
 						</tr>
 						<tr class="subContent sub${board.faq_no }">
-							<td>답변 내용</td>
+							<td><b>[답변]</b></td>
 							<td class="title">${board.faq_answer }</td>
 						</tr>
 					</c:forEach>
 				</table>
-
+				<br><br><br>
 				<%@ include file="CSJpaging.jsp"%>
-
-				<!-- 글쓰기 버튼 -->
-				<c:if test="${sessionScope.id ne null }">
-					<button class="btn btn-primary write">질문하기</button>
-				</c:if>
-
-				<!-- Write Modal -->
-				<div class="modal fade" id="writeModal" data-bs-backdrop="static"
-					tabindex="-1" aria-labelledby="exampleModalLabel"
-					aria-hidden="true">
-					<div class="modal-dialog modal-xl  modal-dialog-centered">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">질문하기</h5>
-								<button type="button" class="btn-close" data-bs-dismiss="modal"
-									aria-label="Close"></button>
-							</div>
-							<div class="modal-body">
-								<div id="form" class="mb-3">
-									<label for="title" class="form-label">질문 제목</label> <input
-										class="form-control" type="text" id="title" name="title">
-									<label for="content" class="form-label">질문 내용</label>
-									<textarea class="form-control" rows="20" id="content"
-										name="content"></textarea>
-									<button type="button" id="modalWriteBtn"
-										class="btn btn-primary">질문하기</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div class="add2">광고2</div>
 		</div>
