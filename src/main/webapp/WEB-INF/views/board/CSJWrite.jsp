@@ -15,7 +15,7 @@
          <div class="main">
             <div class="add1">광고1</div>
             <div class="content">
-            <h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
+            <h1 onclick="location.href='csjboard'">자 유 게 시 판 II</h1>
 			<div class="writeForm">
 				<form action="csjWrite" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="category" value="2">

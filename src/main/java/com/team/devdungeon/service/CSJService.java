@@ -60,4 +60,6 @@ public interface CSJService {
 
 	public int eventJoin(Map<String, Object> map);
 
+	public void addPoint(Map<String, Object> pointMap);
+
 }

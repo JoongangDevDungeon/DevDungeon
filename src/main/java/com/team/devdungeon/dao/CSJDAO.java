@@ -138,6 +138,11 @@ public class CSJDAO {
 		return sqlSession.insert(namespace+"eventParticipate",map);
 	}
 
+	public void addPoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+"addPoint",map);
+	}
+
 
 
 }

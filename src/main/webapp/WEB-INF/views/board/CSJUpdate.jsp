@@ -15,18 +15,20 @@
          <div class="main">
             <div class="add1">광고1</div>
             <div class="content">
-            <h1 onclick="location.href='csjboard'">BOARD NAME HERE</h1>
+            <h1 onclick="location.href='csjboard'">자 유 게 시 판 II</h1>
 			<div class="writeForm">
 				<form action="csjBoardUpdate" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="bno" value="${bno }">
-					<input type="hidden" name="category" value="1">
+					<input type="hidden" name="category" value="2">
 					<input type="hidden" name="tag" value="1">
 					<input type="text" name="title" class="form-control" value="${det.board_title }">
 					<textarea name="content" class="form-control" rows="20">${det.board_content }</textarea>
-					<input type="file" name="file" accept="image/*">
-					<button class="btn btn-primary">글쓰기</button>
+					<input type="file" class="form-control" name="board_file" accept="image/*">
+					<div class="d-flex justify-content-between">
+					<button type="button" class="btn btn-primary p-2" onclick="location.href='/csjboard'">목록</button>
+					<button class="btn btn-primary ml-auto p-2">글쓰기</button>
+					</div>
 				</form>
-				<button class="btn btn-primary">목록</button>
 			</div>
 			
             </div>
