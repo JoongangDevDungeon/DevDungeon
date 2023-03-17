@@ -101,6 +101,30 @@
                     params LIKE CONCAT('member_id=', #{memberId}, '&amp;', '%')
     </select>
 
+    <select id="nowPassCheck" parameterType="HashMap" resultType="Integer">
+        SELECT COUNT(*)
+            FROM member
+                WHERE
+                    member_id = #{member_id}
+                AND
+                    member_pw = #{member_pw}
+    </select>
+
+    <update id="modifyPassword" parameterType="HashMap">
+        UPDATE member
+            SET
+                member_pw = #{member_pw}
+            WHERE
+                <choose>
+                    <when test="member_id != null">
+                    member_id = #{member_id}
+                    </when>
+                    <when test="member_email != null">
+                    member_email = #{member_email}
+                    </when>
+                </choose>
+    </update>
+
     <insert id="msgReceive" parameterType="HashMap">
         INSERT INTO message(post_member_no,get_member_no, message_title, message_content)
 		VALUES(

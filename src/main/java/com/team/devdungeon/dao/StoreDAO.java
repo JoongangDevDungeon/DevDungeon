@@ -19,6 +19,7 @@ public class StoreDAO {
     }
 
     public int shoppingBagInsert(Map<String, Object> cartInfo) {
+        System.out.println(cartInfo);
         int result = 0;
         try {
             result = sqlSession.insert("store.shoppingBagInsert", cartInfo);

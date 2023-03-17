@@ -18,7 +18,7 @@ public class SignServiceImpl implements SignService {
         int month = signDTO.getMonth();
         int day = signDTO.getDay();
 
-        signDTO.setMember_birth(year+ "-"+ month + "-" + day);
+        signDTO.setMember_birth(year + "-" + month + "-" + day);
         signDAO.signup(signDTO);
 
         return signDTO;
@@ -51,6 +51,24 @@ public class SignServiceImpl implements SignService {
     @Override
     public SignDTO check_final(SignDTO signDTO) {
         return signDAO.check_final(signDTO);
+    }
+
+    @Override
+    public int accountInquiry(SignDTO signDTO) {
+
+        return signDAO.accountInquiry(signDTO);
+    }
+
+    @Override
+    public SignDTO find_account(SignDTO signDTO) {
+
+        return signDAO.find_account(signDTO);
+    }
+
+    @Override
+    public int change_pw(SignDTO signDTO) {
+
+        return signDAO.change_pw(signDTO);
     }
 
 

@@ -12,22 +12,23 @@
 <script>
     $(function() {
 
-        $("#chk_all").click(function(){
-           /*alert("누름");*/
+        $("#agree1, #agree2, #agree3").on("change", function() {
             if ($(this).is(":checked")) {
-
-                $("input[name=agree1],[name=agree2],[name=agree3]:checkbox").prop("checked", true);
-
-            } else if($("input[name=agree1]").is(":not(:checked)")) {
-
+            } else {
                 $("#chk_all").prop("checked", false);
+            }
 
-            }else{
-
-                $("input[name=agree1],[name=agree2],[name=agree3]:checkbox").prop("checked", false);
-
+            if ($("#agree1:checked, #agree2:checked, #agree3:checked").length === 3) {
+                $("#chk_all").prop("checked", true);
+            } else {
+                $("#chk_all").prop("checked", false);
             }
         });
+
+        $("#chk_all").on("change", function() {
+            $("#agree1, #agree2, #agree3").prop("checked", $(this).is(":checked"));
+        });
+
     });
 </script>
 <body>
@@ -39,7 +40,7 @@
     <div class="agree_fild">
         <form action="/agree" method="post">
             <div>
-                <input type="checkbox" id="chk_all">
+                <input type="checkbox" name="chk_all" id="chk_all">
                 <label for="chk_all">가지 이용약관, 개인정보 수집 및 이용, 프로모션 정보 수신(선택)에 모두 동의합니다.</label>
             </div>
 

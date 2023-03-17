@@ -259,6 +259,14 @@
 		LIMIT #{startPage}, 10
 	</select>
 	
+<!-- 스토어 페이지 상태변경 -->
+	<update id="amdinStoreChange" parameterType="HashMap">
+		UPDATE product 
+			SET emoticon_authority = if(#{emoticon_authority}=1,2,1)
+		WHERE product_no = #{product_no}
+	</update>
+	
+	
 <!-- 페이징 서치바 카운트 -->
 	<select id="adminStoreCount" parameterType="HashMap" resultType="Integer">
 		SELECT COUNT(*) FROM product

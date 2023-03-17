@@ -14,12 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 @Controller
@@ -99,5 +96,21 @@ public class MyPageController {
         List<Map<String, Object>> loginLog = myPageService.loginLog((String)session.getAttribute("member_id"));
         model.addAttribute("logList", loginLog);
         return "mypage/loginLog";
+    }
+
+    @PostMapping("/nowPassCheck")
+    @ResponseBody
+    public int nowPassCheck(HttpSession session, @RequestParam Map<String, Object> map) {
+        map.put("member_id", session.getAttribute("member_id"));
+        return myPageService.nowPassCheck(map);
+    }
+
+    @PostMapping("/modifyPassword")
+    @ResponseBody
+    public int modifyPassword(@RequestParam Map<String, Object> info, HttpSession session) {
+        if(session.getAttribute("member_id") != null) {
+            info.put("member_id", (String)session.getAttribute("member_id"));
+        }
+        return myPageService.modifyPassword(info);
     }
 }

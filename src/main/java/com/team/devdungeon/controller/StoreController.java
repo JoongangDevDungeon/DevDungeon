@@ -30,7 +30,7 @@ public class StoreController {
     public ModelAndView store(HttpSession session) {
         ModelAndView mv = new ModelAndView();
 
-        if(session.getAttribute("member_id") != null) {
+        if(session.getAttribute("member_id") != null || session.getAttribute("id") != null ) {
             List<Map<String, Object>> iconList = storeService.iconList();
             MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
 
@@ -46,13 +46,14 @@ public class StoreController {
 
     @PostMapping("/shoppingBag")
     @ResponseBody
-    public String shoppingBag(HttpServletRequest request) {
+    public int shoppingBag(HttpServletRequest request) {
         HttpSession session = request.getSession();
+
         String userId = (String) session.getAttribute("member_id");
         String[] shoppingBag = request.getParameterValues("shoppingBag[]");
         String sellType = request.getParameter("sell_type");
-        Integer result = storeService.shoppingBagInsert(userId, shoppingBag, sellType);
-        return result.toString();
+
+        return storeService.shoppingBagInsert(userId, shoppingBag, sellType);
     }
 
 

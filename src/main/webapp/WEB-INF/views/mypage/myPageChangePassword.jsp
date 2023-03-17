@@ -10,6 +10,50 @@
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/sign.css">
 </head>
+<script>
+    $(function() {
+        $("#change_pw").click(function() {
+            const now_pw = $("#now_pw").val();
+            $.post({
+                url : "/nowPassCheck",
+                data : { "member_pw" : now_pw },
+                dataType : "text",
+                success : function(result) {
+                    if(result == 1) {
+                        const pw1 = $("#member_pw1").val();
+                        const pw2 = $("#member_pw2").val();
+                        if(pw1 == pw2) {
+                            $.post({
+                                url : "/modifyPassword",
+                                data : { "member_pw" : pw1},
+                                dataType : "text",
+                                success : function(result) {
+                                    if(result == 1) {
+                                        alert("비밀번호가 변경됐습니다.");
+                                        location.href = "/myPageChangePassword";
+                                    } else {
+                                        alert("비밀번호 변경 중 문제가 발생했습니다.\n잠시후 다시 시도해주세요.");
+                                        return false;
+                                    }
+                                }
+                            });
+                        } else {
+                            alert("변경할 비밀번호가 다릅니다.\n확인 후 다시 시도해주세요.");
+                            return false;
+                        }
+                    } else {
+                        alert("현재 비밀번호가 틀렸습니다.\n확인 후 다시 시도해주세요.");
+                        return false;
+                    }
+                },
+                error : function() {
+                    alert("비밀번호 변경 중 문제가 발생했습니다.\n잠시후 다시 시도해주세요.");
+                    return false;
+                }
+            });
+        });
+    });
+</script>
 <body>
 <%@include file="../top.jsp"%>
 <%@include file="myPageMenu.jsp"%>
@@ -17,11 +61,11 @@
     <div class="main">
         <div class="add1">광고1</div>
         <div class="content">
-            <form action="/changePassword" method="post" style="width: 700px; padding-top: 100px; box-sizing: border-box; margin: 0 auto;">
+            <form class="change-pw-frm" method="post" style="width: 700px; padding-top: 100px; box-sizing: border-box; margin: 0 auto;">
                 <div class="form-control find-form">
-                    <label class="find-label mt-4" for="member_pw">현재 비밀번호</label>
+                    <label class="find-label mt-4" for="now_pw">현재 비밀번호</label>
                     <div class="find-info mb-3">
-                        <input class="form-control find-input mt-2" type="password" id="member_pw" name="member_pw" placeholder="비밀번호를 입력하세요."/>
+                        <input class="form-control find-input mt-2" type="password" id="now_pw" name="now_pw" placeholder="비밀번호를 입력하세요."/>
                     </div>
                     <label class="find-label mt-1" for="member_pw1">새 비밀번호</label>
                     <div class="find-info mb-3">
@@ -31,7 +75,7 @@
                     <div class="find-info mb-5">
                         <input class="form-control find-input mt-2" type="password" id="member_pw2" name="member_pw2" placeholder="비밀번호를 다시 입력하세요."/>
                         <button class="btn btn-secondary find-btn mt-3" type="button">취소</button>
-                        <button class="btn btn-primary find-btn mt-3" type="submit">확인</button>
+                        <button class="btn btn-primary find-btn mt-3" id="change_pw" type="button">확인</button>
                     </div>
                 </div>
             </form>
