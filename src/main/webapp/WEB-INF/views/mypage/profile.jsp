@@ -15,6 +15,32 @@
         width: 700px;
     }
 </style>
+<script>
+    $(function() {
+       $("#btn_sumbit").click(function(){
+           const pattern = /^\d{3}-\d{3,4}-\d{4}$/;
+           const member_tel = $("#member_tel").val();
+           if(!pattern.test(member_tel)) {
+               alert("올바르지 않은 형식입니다.\n다시 입력해주세요.\n(예시 : 010-1234-5678)");
+               return false;
+           }
+           $.post({
+               url : "/profile",
+               data : $(".profile-frm").serialize(),
+               dataType : "text",
+               success : function (result) {
+                   if(result == 1) {
+                       alert("프로필 변경 성공");
+                       location.href="/profile?event=update";
+                   } else alert("프로필 변경 중 문제가 발생했습니다.\n잠시 후 다시 시도해주세요.");
+               },
+               error : function () {
+                   alert("프로필 변경 중 문제가 발생했습니다.\n잠시 후 다시 시도해주세요.");
+               }
+           });
+       });
+    });
+</script>
 <body>
 <%@include file="../top.jsp"%>
 <%@include file="myPageMenu.jsp"%>
@@ -22,57 +48,38 @@
     <div class="main">
         <div class="add1">광고1</div>
         <div class="content">
-            <form action="/profileEdit" method="post" style="width: 700px; padding-top: 100px; box-sizing: border-box; margin: 0 auto;">
+            <form class="profile-frm" style="width: 700px; padding-top: 100px; box-sizing: border-box; margin: 0 auto;">
                 <div class="form-control profile-edit" style="line-height: 35px;">
                     <div style="padding-left: 75px; box-sizing: border-box;">
                         <div class="mt-3">
                             <label style="float: left; width: 100px;">아이디</label>
-                            <input class="form-control" style="border: 0; width: 400px; background-color: white;" value="wjdahr125" disabled>
+                            <input class="form-control" style="border: 0; width: 400px; background-color: white;" value="${member_info.member_id}" disabled>
                         </div>
                         <div class="mt-3">
                             <label style="float: left; width: 100px;">이름</label>
-                            <input class="form-control" style="width: 400px;" type="text" name="member_name" value="유정목" placeholder="이름을 입력하세요.">
+                            <input class="form-control" style="width: 400px;" type="text" name="member_name" value="${member_info.member_name}" placeholder="이름을 입력하세요.">
                         </div>
                         <div class="mt-3">
                             <label style="float: left; width: 100px;">생년월일</label>
                             <div>
-                                <input class="form-control"  style="width: 200px; float: left;" type="text" name="year" value="1998" placeholder="년(4자)">
+                                <input class="form-control"  style="width: 200px; float: left;" type="text" name="year" value="${year}" placeholder="년(4자)">
                                 <select class="form-select" name="month"  style="width: 100px; float: left;">
                                     <option>월</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8" selected>8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
+                                    <c:forEach var="mon" begin="1" end="12" step="1"><option value="${mon}" <c:if test="${month == mon}">selected</c:if> >${mon}</option></c:forEach>
                                 </select>
-                                <input class="form-control"  style="width: 100px;" type="text" name="day" value="3" placeholder="일">
+                                <input class="form-control"  style="width: 100px;" type="text" name="day" value="${day}" placeholder="일">
                             </div>
                         </div>
                         <div class="mt-3">
-                            <label style="float: left; width: 100px;">성별</label>
-                            <select class="form-control" style="width: 400px;" name="member_gender">
-                                <option>선택</option>
-                                <option selected>남자</option>
-                                <option>여자</option>
-                            </select>
-                        </div>
-                        <div class="mt-3">
                             <label style="float: left; width: 100px;">이메일</label>
-                            <input class="form-control" style="width: 400px;" type="email" name="member_email" value="wjdahr125@naver.com" placeholder="이메일을 입력하세요.">
+                            <input class="form-control" style="width: 400px;" type="email" name="member_email" value="${member_info.member_email}" placeholder="이메일을 입력하세요.">
                         </div>
                         <div class="mt-3">
                             <label style="float: left; width: 100px;">휴대전화</label>
-                            <input class="form-control" style="width: 400px;" type="text" name="member_tel" value="010-4825-9959" placeholder="전화번호를 입력하세요.">
+                            <input class="form-control" style="width: 400px;" type="text" name="member_tel" id="member_tel" value="${member_info.member_tel}" placeholder="전화번호를 입력하세요.">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3 mb-4" style="width: 600px;">수정</button>
+                    <button type="button" class="btn btn-primary mt-3 mb-4" id="btn_sumbit" style="width: 600px;">수정</button>
                 </div>
             </form>
         </div>

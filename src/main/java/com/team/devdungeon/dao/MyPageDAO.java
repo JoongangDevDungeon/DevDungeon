@@ -48,4 +48,11 @@ public class MyPageDAO {
         return sqlSession.update("mypage.updateIcon", info);
     }
 
+    public MyPageDTO userProfile(String memberId) {
+        return sqlSession.selectOne("mypage.userProfile", memberId);
+    }
+
+    public int updateProfile(Map<String, Object> map) {
+        return sqlSession.update("mypage.updateProfile", map);
+    }
 }

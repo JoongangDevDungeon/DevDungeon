@@ -63,21 +63,29 @@
         <div class="content">
             <div>
                <div style="width: 640px; height: 360px; margin: 0 auto;">
-                   <!-- 이모티콘 목록 -->
-                   <c:forEach items="${icons}" var="icons">
-                       <div style="border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; margin: 10px; padding: 0; width: 300px; height: 100px; float: left;">
-                            <div style="width: 80px; height: 100px; padding-top: 24px; float: left;">
-                               <img src="data:image/png;base64,${icons.icon_image}" onerror="this.src='/img/Gazi_shortCut.png'" style="display: inline-block; width: 45px; height: 45px;">
-                           </div>
-                           <div style="width: 214px; height: 100px; padding-left: 10px; box-sizing: border-box; float: left;">
-                               <label style="width: 214px; height: 33px; line-height: 50px; text-align: left; font-weight: bold; float: left;">${icons.product_name}</label>
-                               <div style="width: 214px; height: 33px; line-height: 50px; text-align: left; float: left;">
-                                   <label class="icon_select" id="icon_select" value="${icons.product_no}"><u>대표설정</u></label>
-                                   <label>삭제</label>
+                   <c:choose>
+                       <c:when test="${!empty icons}">
+                           <!-- 이모티콘 목록 -->
+                           <c:forEach items="${icons}" var="icons">
+                               <div style="border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; margin: 10px; padding: 0; width: 300px; height: 100px; float: left;">
+                                   <div style="width: 80px; height: 100px; padding-top: 24px; float: left;">
+                                       <img src="data:image/png;base64,${icons.icon_image}" onerror="this.src='/img/Gazi_shortCut.png'" style="display: inline-block; width: 45px; height: 45px;">
+                                   </div>
+                                   <div style="width: 214px; height: 100px; padding-left: 10px; box-sizing: border-box; float: left;">
+                                       <label style="width: 214px; height: 33px; line-height: 50px; text-align: left; font-weight: bold; float: left;">${icons.product_name}</label>
+                                       <div style="width: 214px; height: 33px; line-height: 50px; text-align: left; float: left;">
+                                           <label class="icon_select" id="icon_select" value="${icons.product_no}"><u>대표설정</u></label>
+                                           <label>삭제</label>
+                                       </div>
+                                   </div>
                                </div>
-                           </div>
-                       </div>
-                   </c:forEach>
+                           </c:forEach>
+                       </c:when>
+                       <c:otherwise>
+                           <div style="line-height: 360px;">구매한 아이콘이 없습니다..</div>
+                       </c:otherwise>
+                   </c:choose>
+
                </div>
                 <div>
                     페이징
