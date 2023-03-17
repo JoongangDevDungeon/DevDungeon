@@ -132,7 +132,6 @@ public class SignController {
 
     @PostMapping("/signup")/*최종 회원가입*/
     public String signup(HttpServletRequest request) {
-        System.err.println(request.getParameter("member_id"));
         SignDTO signDTO = new SignDTO();
 
         signDTO.setAgree_no1(request.getParameter("agree_no1"));
@@ -167,23 +166,83 @@ public class SignController {
     }
 
     @PostMapping("/accountInquiry")
-    public String accountInquiry(HttpServletRequest request) {
-        // 이메일 전송 로직 작성하기
+    @ResponseBody
+    public String accountInquiry(HttpServletRequest request) throws EmailException {
+        SignDTO signDTO = new SignDTO();
 
-        System.out.println("계정 찾기 이메일 입력 완료" + ", 입력한 이메일 : " + request.getParameter("member_email"));
-        return "redirect:/changePassword";
+        String att_num = Email.att_num();/*인증번호 가져옴*/
+        signDTO.setMember_email(request.getParameter("member_email"));/*입력한 이메일*/
+        String member_email = request.getParameter("member_email");
+        signDTO.setVerify_code(att_num);/*인증번호 dto에 넣음*/
+
+
+        int result = signService.accountInquiry(signDTO);
+
+       if (result == 1) {
+           /*String user_mail = signDTO.getMember_email();
+           String title = "가지 계정찾기 인증번호 입니다.";
+           String msg = "계정 찾기 인증번호<br><div style='color:red'>"+att_num+"</div>";
+           Email.Mail(user_mail,"",title, msg);*/
+           return "0";
+       }else{
+           return "1";
+       }
+    }
+
+    @GetMapping("/find_account")
+    public ModelAndView find_account(@RequestParam("member_email") String member_email) {
+        ModelAndView user_email = new ModelAndView("sign/find_account");
+        user_email.addObject("user_email", member_email);
+        return user_email;
+    }
+
+    @PostMapping("/find_account")
+    @ResponseBody
+    public String find_account(HttpServletRequest request) throws EmailException {
+        SignDTO signDTO = new SignDTO();
+
+        signDTO.setVerify_code(request.getParameter("find_code"));
+        signDTO.setMember_email(request.getParameter("user_email"));
+        String member_email = signDTO.getMember_email();
+
+
+        SignDTO result = signService.find_account(signDTO);
+        if (result.getCount() == 1){
+            return "0";
+        }else {
+
+            return "1";
+        }
+
+
     }
 
     @GetMapping("/changePassword")
-    public String changePassword() {
-        return "sign/changePassword";
+    public ModelAndView changePassword(@RequestParam("member_email") String member_email) {
+
+        ModelAndView user_email = new ModelAndView("sign/changePassword");
+        user_email.addObject("user_email", member_email);
+
+
+        return user_email;
     }
 
     @PostMapping("/changePassword")
+    @ResponseBody
     public String changePassword(HttpServletRequest request) {
-        String member_pw1 = request.getParameter("member_pw1");
-        String member_pw2 = request.getParameter("member_pw2");
-        System.out.println("1 : " + member_pw1 + " , "  + "2 : " + member_pw2);
-        return "redirect:/index";
+        SignDTO signDTO = new SignDTO();
+
+        String member_pw = request.getParameter("member_pw2");
+        signDTO.setMember_pw(member_pw);
+
+        String member_email = request.getParameter("user_email");
+        signDTO.setMember_email(member_email);
+
+        System.err.println(signDTO.getMember_email());
+        System.err.println(signDTO.getMember_pw());
+        signService.change_pw(signDTO);
+
+
+        return "";
     }
 }

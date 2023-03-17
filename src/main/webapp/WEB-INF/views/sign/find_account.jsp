@@ -12,31 +12,31 @@
 <script>
     $(function() {
 
-        $(document).on("keydown", "#member_email", function(event) {
+        $(document).on("keydown", "#find_code", function(event) {
             if (event.keyCode === 13) {
                 event.preventDefault();
-                $('#accountInquiry').click();
+                $('#find_account').click();
                 return false;
             }
         });
 
-        $('#accountInquiry').click(function (result) {
+        $('#find_account').click(function (result) {
 
-            if ($("#member_email").val().length == 0) {
-                alert("이메일을 입력 해주세요.");
+            if ($("#find_code").val().length == 0) {
+                alert("인증번호를 입력 해주세요.");
                 return false;
             }
 
             $.ajax({
-                url: 'accountInquiry',
+                url: 'find_account',
                 type: 'post',
-                data: {"member_email": $("#member_email").val()},
+                data: {"find_code": $("#find_code").val(),"user_email": $("#user_email").val()},
                 dataType: 'text',
                 success: function (result) {
                     if (result == 1) {
-                        alert("입력하신 이메일을 없는 이메일 입니다.");
+                        alert("인증코드를 올바르게 입력해주세요.");
                     }else{
-                        window.location.href = "/find_account?member_email=" + $("#member_email").val();
+                        window.location.href = "/changePassword?member_email=" + $("#user_email").val();
                     }
                 },
                 error: function () {
@@ -50,15 +50,15 @@
 <body>
     <div>
         <div class="banner"><img src="/img/banner.png"></div>
-        <form action="/accountInquiry" method="post">
+        <form action="/find_account" method="post">
             <div class="form-control find-form">
-                <label class="find-label mt-4" for="member_email">이메일 주소</label>
+                <label class="find-label mt-4">계정 찾기</label>
                 <div class="find-info mb-5">
-                    <input class="form-control find-input mt-2" type="email" id="member_email" name="member_email" placeholder="이메일을 입력하세요."/>
-                    <button class="btn btn-secondary find-btn mt-3" type="button">취소</button>
-                    <button class="btn btn-primary find-btn mt-3" id="accountInquiry" type="button">계정 찾기</button>
+                    <input class="form-control find-input mt-2" type="text" id="find_code" name="find_code" placeholder="인증번호를 입력하세요."/>
+                    <button class="btn btn-primary find-btn mt-3" id="find_account" type="button">인증하기</button>
                 </div>
             </div>
+            <input id="user_email" name="user_email" type="hidden" value="${user_email}">
         </form>
     </div>
 </body>
