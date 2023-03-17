@@ -88,6 +88,8 @@ public interface AdminDAO {
 
 	List<Map<String, Object>> AdminCouponView();
 
+	void amdinStoreChange(Map<String, Object> change);
+
 
 
 

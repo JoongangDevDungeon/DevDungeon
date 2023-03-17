@@ -147,6 +147,11 @@ public class AdminService {
 		return adminDAO.AdminCouponView();
 	}
 
+	public void amdinStoreChange(Map<String, Object> change) {
+		adminDAO.amdinStoreChange(change);
+		
+	}
+
 	
 
 

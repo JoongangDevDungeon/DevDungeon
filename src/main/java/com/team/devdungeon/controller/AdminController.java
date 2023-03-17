@@ -355,9 +355,20 @@ public class AdminController {
 	
 	//스토어 상태변경
   	@PostMapping("/adminStore")
-  	public String adminStoreDel(HttpServletRequest request) {
+  	public String adminStoreChange(HttpServletRequest request) {
   		System.out.println(request.getParameter("product_no"));
   		System.out.println(request.getParameter("emoticon_authority"));
+  		
+  		Map<String, Object> change = new HashMap<String, Object>();
+		
+		String product_no = request.getParameter("product_no");
+		String emoticon_authority = request.getParameter("emoticon_authority");
+		
+		change.put("product_no", product_no);
+		change.put("emoticon_authority", emoticon_authority);
+		
+		adminService.amdinStoreChange(change);
+		
   		
 
   		return "redirect:/adminStore";

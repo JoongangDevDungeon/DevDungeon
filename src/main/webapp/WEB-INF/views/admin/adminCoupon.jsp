@@ -78,7 +78,7 @@ function moveNext(pageNo){
 			<table class="table">
 				<tr class="table-header">
 					<th class="col-1">쿠폰 유형</th>
-					<th class="col-3">쿠폰 넘버</th>
+					<th class="col-3">이벤트 넘버</th>
 					<th class="col-2">쿠폰 이름</th>
 					<th class="col-2">쿠폰 내용</th>
 					<th class="col-1">시작일</th>

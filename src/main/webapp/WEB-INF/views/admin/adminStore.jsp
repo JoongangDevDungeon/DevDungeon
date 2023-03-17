@@ -57,7 +57,7 @@ function moveNext(pageNo){
 					<th class="col-3">스토어 제목</th>
 					<th class="col-2">가격</th>
 					<th class="col-2">판매 개시일</th>
-					<th class="col-1">삭제</th>
+					<th class="col-1">현재 상태</th>
 				</tr>
 				<!-- 수정 하면댐 -->
 				<c:forEach items="${list }" var="row">
@@ -71,7 +71,7 @@ function moveNext(pageNo){
 							<input type="hidden" name="product_no" value="${row.product_no }">
 							<input type="hidden" name="emoticon_authority" value="${row.emoticon_authority }">
 							<input type="hidden" name="pageNo" value="${pageNo }">
-							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화' : '비활성화'}</button>
+							<button type="submit" class="${row.emoticon_authority eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.emoticon_authority eq '1' ? '활성화' : '비활성화'}</button>
 						</form>
 					</td>
 				</tr>
