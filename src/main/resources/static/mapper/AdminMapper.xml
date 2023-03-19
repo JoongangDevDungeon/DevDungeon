@@ -170,7 +170,8 @@
  		SET
 			event_no = #{event_no},
 			coupon_name = #{coupon_name},
-			coupon_content = #{coupon_content}
+			coupon_content = #{coupon_content},
+			coupon_end = #{coupon_end}
 	</insert>
 	
 <!-- 쿠폰 삭제 -->

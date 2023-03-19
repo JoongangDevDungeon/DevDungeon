@@ -24,9 +24,9 @@ public class SFTPFileUtil {
         session.setPassword(FTP_PASSWORD);
         session.setConfig("StrictHostKeyChecking", "no");
         session.connect();
-        Channel channel = session.openChannel("sftp");
-        channel.connect();
-        channelSftp = (ChannelSftp) channel;
+//        Channel channel = session.openChannel("sftp");
+//        channel.connect();
+//        channelSftp = (ChannelSftp) channel;
         System.out.println("FTP 연결 완료");
     }
 

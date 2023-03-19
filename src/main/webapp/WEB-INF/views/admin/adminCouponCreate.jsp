@@ -17,8 +17,9 @@ function couponbtn() {
 	let couponKind = document.getElementById("couponKind").value;
 	let couponName = document.getElementById("couponName").value;
 	let couponContent = document.getElementById("couponContent").value;
+	let endDate = document.getElementById("endDate").value;
 	
-	if(couponKind === "이벤트 제목을 선택하세요" || couponName === "" || couponContent === ""){
+	if(couponKind === "이벤트 제목을 선택하세요" || couponName === "" || couponContent === "" || endDate === ""){
 		alert("모든 항목을 입력해주세요");
 	} else{
 		document.getElementById("couponForm").submit();
