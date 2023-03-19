@@ -223,26 +223,8 @@ public class SignController {
         ModelAndView user_email = new ModelAndView("sign/changePassword");
         user_email.addObject("user_email", member_email);
 
-
         return user_email;
     }
 
-    @PostMapping("/changePassword")
-    @ResponseBody
-    public String changePassword(HttpServletRequest request) {
-        SignDTO signDTO = new SignDTO();
 
-        String member_pw = request.getParameter("member_pw2");
-        signDTO.setMember_pw(member_pw);
-
-        String member_email = request.getParameter("user_email");
-        signDTO.setMember_email(member_email);
-
-        System.err.println(signDTO.getMember_email());
-        System.err.println(signDTO.getMember_pw());
-        signService.change_pw(signDTO);
-
-
-        return "";
-    }
 }

@@ -34,9 +34,9 @@
             }
 
             $.ajax({
-                url: 'changePassword',
+                url: '/modifyPassword',
                 type: 'post',
-                data: {"member_pw2": $("#member_pw2").val(),"user_email": $("#user_email").val()},
+                data: {"member_pw": $("#member_pw2").val(),"member_email": $("#user_email").val()},
                 dataType: 'text',
                 success: function () {
                     alert("비밀번호 변경완료")

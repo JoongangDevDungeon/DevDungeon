@@ -1,8 +1,12 @@
 package com.team.devdungeon.service;
 
+import com.github.pagehelper.PageInfo;
 import com.team.devdungeon.dao.MessageDAO;
+import com.team.devdungeon.dto.CSJshowDTO;
+
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +26,11 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public int messageIdCheck(String member_name) {
 		return messageDAO.messageIdCheck(member_name);
+	}
+
+	@Override
+	public PageInfo<Map<String, Object>> msgList(CSJshowDTO dto) {
+		return messageDAO.msgList(dto);
 	}
 
 }

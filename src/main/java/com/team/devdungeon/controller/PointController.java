@@ -21,7 +21,8 @@ public class PointController {
     public ModelAndView level() {
         ModelAndView level = new ModelAndView("content/level");
         List<Map<String, Objects>> list = pointService.levelList();
-        System.out.println(list);
+        level.addObject("list", list);
+
         return level;
     }
 }

@@ -1,5 +1,7 @@
 package com.team.devdungeon.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.team.devdungeon.dto.CSJshowDTO;
 import com.team.devdungeon.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +59,27 @@ public class MessageController {
     	int result = messageService.messageIdCheck(member_name);
     	return result+"";
     }
+    @GetMapping("/msgBox")
+    public ModelAndView msgBox(@RequestParam(defaultValue = "1")int pageNo,HttpSession session) {
+    	ModelAndView mv = new ModelAndView("message/messageBox");
+    	String member_id = (String)session.getAttribute("member_id");
+    	if(member_id != null) {
+    		int pageSize = 10;
+    		CSJshowDTO dto = new CSJshowDTO();
+    		dto.setPageNo(pageNo);
+    		dto.setPageSize(pageSize);
+    		dto.setMember_id(member_id);
+    		PageInfo<Map<String,Object>> msgPageInfo = messageService.msgList(dto);
+    		System.out.println(msgPageInfo);
+    		mv.addObject("pageInfo",msgPageInfo);
+    		mv.addObject("list",msgPageInfo.getList());
+    		
+    		return mv;
+    	}else {
+    		
+    		return mv;
+    	}
+    }
 
     @GetMapping("/sendPoint")
     public String sendPoint() {
@@ -68,7 +92,8 @@ public class MessageController {
         System.out.println( request.getParameter("send_point") );
         System.out.println( request.getParameter("msg_content") );
 
-        return "message/sendPoint";
+        return "redirect:/csjCloser";
     }
+    
 
 }
