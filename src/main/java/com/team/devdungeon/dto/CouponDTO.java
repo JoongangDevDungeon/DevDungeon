@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class CouponDTO {
-    private int coupon_type, event_no;
-    private String coupon_name, coupon_content, coupon_start, coupon_end;
+    private int coupon_type, event_no, coupon_content;
+    private String coupon_name, coupon_start, coupon_end;
 }

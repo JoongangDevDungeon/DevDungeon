@@ -48,6 +48,7 @@ function couponbtn() {
 					</select><br>
 					<input type="text" class="form-control" name="couponName" id="couponName" placeholder="쿠폰이름 지정해주세요"><br>
 					<input type="text" class="form-control coupontxt" name="couponContent" id="couponContent" placeholder="쿠폰내용을 지정해주세요"><br>
+					<input type="date" name="endDate" id="endDate">
 					<button class="btn btn-success" type="button" onclick="couponbtn()">쿠폰 생성하기</button>
 				</form>
 			</div>

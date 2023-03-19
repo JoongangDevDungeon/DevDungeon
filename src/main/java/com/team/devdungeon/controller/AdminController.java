@@ -254,8 +254,9 @@ public class AdminController {
 		CouponDTO couponDTO = new CouponDTO();
 
 		couponDTO.setCoupon_name(request.getParameter("couponName"));
-		couponDTO.setCoupon_content(request.getParameter("couponContent"));
+		couponDTO.setCoupon_content(Integer.parseInt(request.getParameter("couponContent")));
 		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("event_no")));
+		System.out.println(request.getParameter("endDate"));
 		
 		adminService.adminCouponCreate(couponDTO);
 		return "redirect:/adminCoupon";
