@@ -15,7 +15,7 @@
 	 (SELECT COUNT(*) FROM member WHERE DATE_FORMAT(join_date, "%Y-%m-%d") = curdate()) AS join_today,
 	 (SELECT COUNT(*) FROM board WHERE DATE_FORMAT(board_date, "%Y-%m-%d") = curdate()) AS board_today,
 	 (SELECT COUNT(*) FROM product WHERE DATE_FORMAT(product_date, "%Y-%m-%d") = curdate()) AS new_product,
-	 (SELECT COUNT(*) FROM logs WHERE DATE_FORMAT(created_at, "%Y-%m-%d") = curdate() AND ip is not NULL ) AS today_user;
+	 (SELECT COUNT(DISTINCT ip) FROM logs WHERE DATE_FORMAT(created_at, "%Y-%m-%d") = curdate() AND ip is not NULL ) AS today_user;
 	</select>
 
 
