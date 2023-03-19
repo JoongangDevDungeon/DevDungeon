@@ -19,4 +19,15 @@
                 </foreach>
     </insert>
 
+    <select id="selectPayShoppingBag" parameterType="String" resultType="HashMap">
+        SELECT product_name, product_price, (SELECT member_name FROM member WHERE member_id = (SELECT member_id FROM member WHERE member_no = p.member_no) ) as seller_name
+            FROM product p JOIN shopping_cart sc ON p.product_no = sc.product_no
+            WHERE
+                emoticon_authority = 1
+            AND
+                sc.sell_type = 'pay'
+            AND
+                sc.member_no = (SELECT member_no FROM member WHERE member_id = 'yjm')
+    </select>
+
 </mapper>

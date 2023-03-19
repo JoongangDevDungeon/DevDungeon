@@ -13,6 +13,11 @@
       border-right: 1px solid #ccc;
    }
 </style>
+<script>
+   function receiveCoupon(value) {
+      alert("쿠폰 : " + value);
+   }
+</script>
 <body>
    <%@include file="../top.jsp"%>
    <%@include file="../menu.jsp"%>
@@ -29,19 +34,19 @@
                         <th>가격</th>
                      </tr>
                   </thead>
-                  <c:forEach var="i" step="1" begin="1" end="6">
+                  <c:forEach items="${cart}" var="cart">
                      <tbody style="text-align: center;">
-                        <td style="width: 100px; height: 50px;">
-                           <img src="/img/icon/icon${i}.png">
+                        <td style="width: 120px; height: 50px;">
+                           <img src="/img/icon/icon${i}.png" onerror="this.src='/img/Gazi_shortcut.png'">
                         </td>
                         <td style="width: 100px; height: 50px;">
-                           <input class="form-control mt-1" type="number" value="1">
+                           <div style="line-height: 50px;">${cart.product_name}</div>
                         </td>
                         <td>
-                           <div style="line-height: 50px;">사용자</div>
+                           <div style="line-height: 50px;">${cart.seller_name}</div>
                         </td>
                         <td>
-                           <div style="line-height: 50px;">1,000</div>
+                           <div style="line-height: 50px;">${cart.product_price}</div>
                         </td>
                      </tbody>
                   </c:forEach>
@@ -49,8 +54,8 @@
 
                <div class="form-control mt-4" style="width: 700px; margin: 0 auto;">
                   <h5>쿠폰 할인</h5>
-                  <u class="form-control-plaintext">선택된 쿠폰이 없습니다.</u>
-                  <button class="btn btn-primary mt-2" onclick="location.href='/couponChoice'">쿠폰사용</button>
+                  <u class="form-control-plaintext" id="coupon_selected">선택된 쿠폰이 없습니다.</u>
+                  <button class="btn btn-primary mt-2" onclick="window.open('/couponChoice', 'popup', 'width=700, height=660')">쿠폰사용</button>
                </div>
 
                <div class="form-control mt-4" style="width: 700px; margin: 0 auto;">

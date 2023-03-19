@@ -47,9 +47,9 @@
                   </c:forEach>
                </table>
 
-               <div class="mt-4" style="width: 410px; height: 38px; margin: 0 auto;">
+               <div class="mt-4" style="width: 450px; height: 38px; margin: 0 auto;">
                   <input class="form-control" style="width: 300px; float: left;" type="text" placeholder="받을 사람을 넣으면 선물합니다.">
-                  <button class="btn btn-primary" style="float: left; margin-left: 10px;" type="button">아이디 확인</button>
+                  <button class="btn btn-primary" style="width: 120px; float: left; margin-left: 10px;" type="button">닉네임 확인</button>
                </div>
 
                <div class="form-control mt-4" style="width: 700px; margin: 0 auto;">

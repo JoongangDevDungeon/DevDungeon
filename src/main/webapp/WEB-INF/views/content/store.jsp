@@ -14,6 +14,14 @@
    $(function() {
       const shopping_bag = [];
 
+      $(".pay_one").click(function() {
+         alert("단일 구매" + " : " + $(this).attr("value"));
+      });
+
+      $(".gift_one").click(function(){
+         alert("단일 선물" + " : " + $(this).attr("value"));
+      });
+
       $(".icon_check").click(function() {
          var icon_checked = $(this).is(":checked");
          var icon_no = $(this).val();
@@ -44,7 +52,9 @@
                 dataType : "text",
                 success : function (result) {
                     if(result > 0) {
-                       alert("구매 장바구니에 담았습니다.");
+                       if(confirm("구매 장바구니에 담았습니다.\n구매 화면으로 이동하겠습니까?")) {
+                           location.href = "/payShoppingBag";
+                       }
                     } else {
                        alert("이미 구매 장바구니에 아이콘이 있습니다.\n다시 한번 확인해주세요.");
                     }
@@ -69,7 +79,9 @@
                dataType : "text",
                success : function (result) {
                   if(result > 0) {
-                     alert("선물 장바구니에 담았습니다.");
+                     if(confirm("선물 장바구니에 담았습니다.\n선물 화면으로 이동하겠습니까?")) {
+                        location.href = "/giftShoppingBag";
+                     }
                   } else {
                      alert("이미 선물 장바구니에 아이콘이 있습니다.\n다시 한번 확인해주세요.");
                   }
@@ -141,7 +153,7 @@
                                     <span style="display: block; width: 228px; height: 37.5px; float: left; padding-right: 50px; box-sizing: border-box;">등록일&nbsp;&nbsp;:&nbsp;&nbsp;<fmt:formatDate value="${iconList.product_update}" pattern="yyyy-MM-dd" type="date"/></span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                    <span style="display: block; width: 100px; height: 37.5px; float: left;"><a href="">구매</a>&nbsp;|&nbsp;<a href="">선물</a></span>
+                                    <span style="display: block; width: 100px; height: 37.5px; float: left;"><span class="pay_one" value="${iconList.product_no}">구매</span>&nbsp;|&nbsp;<span class="gift_one" value="${iconList.product_no}">선물</span></span>
                                     <span style="display: block; width: 108px; height: 37.5px; float: left;">신청:<c:choose><c:when test="${iconList.member_name != null}">${iconList.member_name}</c:when><c:otherwise>탈퇴자</c:otherwise></c:choose></span>
                                  </div>
                               </div>

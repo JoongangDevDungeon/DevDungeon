@@ -71,4 +71,9 @@ public class StoreServiceImpl implements StoreService {
         return storeDAO.shoppingBagInsert(cartInfo);
     }
 
+    @Override
+    public List<Map<String, Object>> selectPayShoppingBag(Object memberId) {
+        return storeDAO.selectPayShoppingBag(memberId);
+    }
+
 }
