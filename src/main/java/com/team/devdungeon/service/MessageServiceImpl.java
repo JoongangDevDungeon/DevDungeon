@@ -33,4 +33,19 @@ public class MessageServiceImpl implements MessageService {
 		return messageDAO.msgList(dto);
 	}
 
+	@Override
+	public int msgRead(String msgNo) {
+		return messageDAO.msgRead(msgNo);
+	}
+
+	@Override
+	public int msgDel(String msgNo) {
+		return messageDAO.msgDel(msgNo);
+	}
+
+	@Override
+	public int newMsgCnt(String memberName) {
+		return messageDAO.newMsgCnt(memberName);
+	}
+
 }

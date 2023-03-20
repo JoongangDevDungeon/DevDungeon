@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="/js/login.js"></script>
 <header class="top">
    <ul class="top_ul">
@@ -13,14 +14,13 @@
                      <c:when test="${sessionScope.member_name ne null}">${sessionScope.member_name} 님</c:when>
                      <c:when test="${sessionScope.id eq 'admin'}">${sessionScope.id} 님</c:when>
                   </c:choose>
-
 				</button>
 				<div class="dropdown-menu">
 					<ul>
 						<li><a href="/level">레벨현황표</a></li>
 <!--                	 <li>보유 포인트</li> -->
 						<li><a href="/checkPassword">마이 페이지</a></li>
-                   		<li><a href="/msgBox">쪽지함</a></li>
+                   		<li><a href="/msgBox">쪽지함</a><span class="msg_Cnt"></span></li>
                    		<li><a href="/payShoppingBag">장바구니</a></li>
                    		<li><a href="/logout">로그아웃</a></li>
 					</ul>

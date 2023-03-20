@@ -32,4 +32,15 @@ public class MessageDAO {
 		return PageInfo.of(sqlSession.selectList("mypage.msgList",dto));
 	}
 
+    public int msgRead(String msgNo) {
+		return sqlSession.update("mypage.msgRead",msgNo);
+    }
+
+	public int msgDel(String msgNo) {
+		return sqlSession.delete("mypage.msgDel",msgNo);
+	}
+
+	public int newMsgCnt(String memberName) {
+		return sqlSession.selectOne("mypage.newMsgCnt",memberName);
+	}
 }

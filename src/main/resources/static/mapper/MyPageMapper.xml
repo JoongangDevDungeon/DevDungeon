@@ -145,8 +145,25 @@
     	ROW_NUMBER() OVER() as msg_no
     	FROM message msg JOIN member m ON m.member_no = msg.post_member_no
     	WHERE msg.get_member_no = (SELECT m.member_no FROM member m WHERE m.member_id = '${member_id}')
-    	ORDER BY message_no DESC
+        <if test="searchType != null">
+            AND
+            <choose>
+                <when test="searchType == 'title'">msg.message_title</when>
+                <when test="searchType == 'writer'">m.member_name</when>
+            </choose>
+            LIKE CONCAT('%', #{searchValue }, '%')
+        </if>
+    	ORDER BY msg.message_no DESC
     </select>
-    
 
+    <update id="msgRead" parameterType="String">
+        UPDATE message SET read_or_not = 1 WHERE message_no = '${msgNo}'
+    </update>
+    <delete id="msgDel" parameterType="String">
+        DELETE FROM message WHERE message_no = '${msgNo}'
+    </delete>
+    <select id="newMsgCnt" parameterType="String" resultType="Integer">
+        SELECT COUNT(read_or_not) FROM message
+        WHERE get_member_no = (SELECT member_no FROM member WHERE member_name = '${memberName}') AND read_or_not = 0
+    </select>
 </mapper>

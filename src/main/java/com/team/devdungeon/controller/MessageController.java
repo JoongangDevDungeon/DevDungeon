@@ -5,14 +5,10 @@ import com.team.devdungeon.dto.CSJshowDTO;
 import com.team.devdungeon.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,17 +56,26 @@ public class MessageController {
     	return result+"";
     }
     @GetMapping("/msgBox")
-    public ModelAndView msgBox(@RequestParam(defaultValue = "1")int pageNo,HttpSession session) {
+    public ModelAndView msgBox(@RequestParam(defaultValue = "1")int pageNo,HttpSession session, HttpServletRequest request) {
     	ModelAndView mv = new ModelAndView("message/messageBox");
     	String member_id = (String)session.getAttribute("member_id");
+        String searchType = request.getParameter("searchType");
+        String searchValue = request.getParameter("searchValue");
     	if(member_id != null) {
     		int pageSize = 10;
     		CSJshowDTO dto = new CSJshowDTO();
     		dto.setPageNo(pageNo);
     		dto.setPageSize(pageSize);
     		dto.setMember_id(member_id);
+            if (searchType != null && searchValue != null) {
+                dto.setSearchType(searchType);
+                dto.setSearchValue(searchValue);
+            }
     		PageInfo<Map<String,Object>> msgPageInfo = messageService.msgList(dto);
     		System.out.println(msgPageInfo);
+            mv.addObject("pageNo", pageNo);
+            mv.addObject("searchType", searchType);
+            mv.addObject("searchValue", searchValue);
     		mv.addObject("pageInfo",msgPageInfo);
     		mv.addObject("list",msgPageInfo.getList());
     		
@@ -80,20 +85,18 @@ public class MessageController {
     		return mv;
     	}
     }
-
-    @GetMapping("/sendPoint")
-    public String sendPoint() {
-        return "message/sendPoint";
+    @ResponseBody
+    @PostMapping("/msgRead")
+    public String msgRead(@RequestParam String msgNo){
+        int result = messageService.msgRead(msgNo);
+        return result+"";
+    }
+    @ResponseBody
+    @PostMapping("/msgDel")
+    public String msgDel(@RequestParam String msgNo){
+        int result = messageService.msgDel(msgNo);
+        return result+"";
     }
 
-    @PostMapping("/sendPoint")
-    public String sendPoint(HttpServletRequest request) {
-        System.out.println( request.getParameter("member_name") );
-        System.out.println( request.getParameter("send_point") );
-        System.out.println( request.getParameter("msg_content") );
-
-        return "redirect:/csjCloser";
-    }
-    
 
 }

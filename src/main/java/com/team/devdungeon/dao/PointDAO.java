@@ -1,5 +1,7 @@
 package com.team.devdungeon.dao;
 
+import com.team.devdungeon.dto.PointDTO;
+
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -17,5 +19,27 @@ public class PointDAO {
     public List<Map<String, Objects>> levelList() {
 
         return sqlSession.selectList("level.list");
+    }
+
+    public PointDTO name_check(PointDTO pointDTO) {
+
+        return sqlSession.selectOne("point.name_check",pointDTO);
+    }
+
+    public int send_point(PointDTO pointDTO) {
+
+        System.err.println("보내는 사람 :" + pointDTO.getSend_member_name());
+        System.err.println("받는 사람 :" + pointDTO.getReceive_member_name());
+        System.err.println("보낼 포인트 :" + pointDTO.getPoint());
+
+        int receive_member_no = sqlSession.selectOne("point.receive_member_no",pointDTO);
+        int send_member_no = sqlSession.selectOne("point.send_member_no",pointDTO);
+
+        pointDTO.setSend_member_no(send_member_no);
+        pointDTO.setReceive_member_no(receive_member_no);
+
+        sqlSession.update("point.send_point", pointDTO);
+
+        return sqlSession.update("point.receive_point", pointDTO);
     }
 }

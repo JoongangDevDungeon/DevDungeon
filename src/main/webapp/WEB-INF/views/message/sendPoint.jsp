@@ -10,30 +10,42 @@
     <link rel="stylesheet" href="/css/message.css">
 </head>
 <script>
-
     $(function(){
 
-
-
-
-// 		$("#member_name").change(function(){
-        $("#id_check").click(function() {
+        $("#name_check").click(function() {
             $.ajax({
-                url : "/messageIdCheck", //데이터를 전송할 url
+                url : "/name_check",
                 type : "POST",
-                data : {
-                    'member_name' : $("#member_name").val()
-                }, //서버에 전송할 데이터, key/value형태의 객체
+                data : {'member_name' : $("#member_name").val()},
                 dataType : "json",
-                success : function(data) {
-                    if(data==1){
-                        alert("확인되었습니다.");
-                        $("#id_check").attr("disabled","disabled");
-                        $("#member_name").attr("readonly","readonly");
-                        $("#member_name").css("background-color", "#e2e2e2");
+                success : function(result) {
+                    if(result==0){
+                        if (confirm("포인트를 보내시려는 닉네임이 "+'"'+$("#member_name").val()+'"'+" 맞습니까?")==true){
+                            $("#name_check").attr("disabled","disabled");
+                            $("#member_name").attr("readonly","readonly");
+                            $("#member_name").css("background-color", "#ccc");
+                        }
                     }else{
                         alert("닉네임을 확인해주세요");
                     }
+                },
+                error : function(xhr, status, error) {
+                    alert("실패");
+                }
+            });
+        });
+
+        $("#send_point").click(function(result) {
+            $.ajax({
+                url : "/send_point",
+                type : "POST",
+                data : {'point' : $("#point").val(), 'member_name' : $("#member_name").val()},
+                dataType : "json",
+                success : function(result) {
+                    alert(result);
+                    if (confirm('"'+$("#member_name").val()+'"'+" 님 에게"+$("#point").val()+ " Point 보내시겠습니까?")==true){
+                        alert('"'+$("#member_name").val()+'"'+" 님 에게"+$("#point").val()+ " Point 보냈습니다.")
+                        }
                 },
                 error : function(xhr, status, error) {
                     alert("실패");
@@ -58,29 +70,67 @@
 
     }
 </script>
+<style>
+    .space{
+        margin: 0 auto;
+        width: 650px;
+        height: 500px;
+    }
+
+    label{
+        line-height: 40px;
+        margin-right: 5px;
+    }
+
+    .text_space{
+        width: 450px;
+        height: 40px;
+    }
+    .point_space{
+        float: left;
+        width: 650px;
+        height: 40px;
+    }
+
+    .point_btn{
+        width: 90px;
+        height: 40px;
+        border-radius: 8px;
+        border: none;
+        background-color: #ff8080;
+        color: white;
+    }
+
+    .banner{
+        text-align: center;
+    }
+
+    h1{
+        text-align: center;
+    }
+</style>
 <body>
-<div class="banner" style="text-align: center;">
+<div class="banner">
     <img src="/img/banner.png">
 </div>
 <form action="/message" method="post" onsubmit="return null_ck()">
-    <div style="width: 700px; margin: 0 auto;">
-        <div style="width: 680px; line-height: 40px; margin: 0 auto;">
+    <div class="space">
             <h1>포인트 보내기</h1>
-            <div class="mt-4">
-                <label for="member_name" style="float: left;">받는 사람</label>
-                <input class="form-control" style="float: left; width: 490px; height: 40px; margin: 0px 0px 10px 10px;" type="text" id="member_name" name="member_name" onchange="ck()"placeholder="받는 사람 입력" value="${receiver }">
-                <button class="btn btn-primary" style="float: left; width: 100px; height: 40px; margin-left: 10px;" id="id_check" type="button">ID 확인</button>
+            <div class="point_space">
+                <label>받는 사람</label>
+                <input class="text_space" type="text" id="member_name" name="member_name" onchange="ck()"placeholder="받는 사람 닉네임 입력">
+                <button class="point_btn" id="name_check" type="button">ID 확인</button>
             </div>
-            <div class="mt-3">
-                <input class="form-control" style=" height: 40px; margin-bottom: 10px;" type="text" id="" name="" placeholder="보낼 포인트를 입력해주세요.">
-                <input class="form-control" style="height: 40px; margin-bottom: 10px;" type="text" id="msg_title" name="msg_title" placeholder="제목">
-                <textarea class="form-control" id="msg_content" name="msg_content" placeholder="쪽지 내용을 입력하세요." rows="10"></textarea>
+        <br><br><br>
+            <div class="point_space">
+                <label style="margin-right: 7px; margin-left: 20px;">포인트</label>
+                <input class="text_space" type="text" id="point" name="point" onchange="ck()"placeholder="보낼 포인트를 입력">
+                <button class="point_btn" id="send_point" type="button">보내기</button>
+
             </div>
-            <div class="mt-3">
-                <button class="btn btn-primary" style="width: 100px; height: 40px; float: right;" type="submit">전송</button>
-                <div class="btn btn-primary" style="width: 200px; height: 40px; float: left;" >My Point : 10,000</div>
-            </div>
-        </div>
+        <br><br><br>
+                <div class="btn btn-primary" style="width: 200px; height: 40px; float: left;" id="my_point" >My Point : 10,000</div>
+
     </div>
 </form>
 </body>
