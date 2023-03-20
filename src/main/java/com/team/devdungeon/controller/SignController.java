@@ -107,11 +107,11 @@ public class SignController {
         signDTO.setMember_id(request.getParameter("member_id"));
         signDTO.setVerify_code(att_num);
         SignDTO result = signService.mail_code(signDTO);
-
+/*
         String user_mail = signDTO.getMember_email();
         String title = "가지 회원가입 인증번호 입니다.";
         String msg = "회원 가입 인증번호<br><div style='color:red'>"+att_num+"</div>";
-        Email.Mail(user_mail,"",title, msg);
+        Email.Mail(user_mail,"",title, msg);*/
         return "";
     }
 

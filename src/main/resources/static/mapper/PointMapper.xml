@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="point">
+
+    <select id="name_check" parameterType="PointDTO" resultType="PointDTO"><!--닉네임 중복 검사-->
+        SELECT COUNT(*) as COUNT, member_name
+            FROM member
+                WHERE member_name = #{member_name}
+    </select>
+
+    <select id="receive_member_no" parameterType="PointDTO" resultType="PointDTO">
+        SELECT member_no
+        FROM member
+        WHERE member_name = #{receive_member_name};
+    </select>
+
+    <select id="send_member_no" parameterType="PointDTO" resultType="PointDTO">
+        SELECT member_no
+        FROM member
+        WHERE member_name = #{send_member_name};
+    </select>
+
+    <update id="send_point" parameterType="PointDTO"><!--보내는 사람 감소-->
+        UPDATE point
+        SET
+        member_point = (member_point - #{point})
+        WHERE
+        member_no = #{send_member_no }
+    </update>
+
+    <update id="receive_point" parameterType="PointDTO"><!--받는 사람 증가-->
+        UPDATE point
+        SET
+        member_point = (member_point + #{point})
+        WHERE
+        member_no = #{receive_member_no }
+    </update>
+
+
+
+</mapper>

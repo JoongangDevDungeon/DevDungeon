@@ -81,19 +81,6 @@ public class MessageController {
     	}
     }
 
-    @GetMapping("/sendPoint")
-    public String sendPoint() {
-        return "message/sendPoint";
-    }
 
-    @PostMapping("/sendPoint")
-    public String sendPoint(HttpServletRequest request) {
-        System.out.println( request.getParameter("member_name") );
-        System.out.println( request.getParameter("send_point") );
-        System.out.println( request.getParameter("msg_content") );
-
-        return "redirect:/csjCloser";
-    }
-    
 
 }
