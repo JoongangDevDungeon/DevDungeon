@@ -58,12 +58,28 @@ public class StoreController {
 
 
     @GetMapping("/payShoppingBag")
-    public String payShoppingBag() {
-        return "content/payShoppingBag";
+    public ModelAndView payShoppingBag(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        if(session.getAttribute("member_id") != null) {
+            mv.setViewName("content/payShoppingBag");
+            List<Map<String, Object>> cart = storeService.selectPayShoppingBag(session.getAttribute("member_id"));
+            mv.addObject("cart", cart);
+            System.out.println(cart);
+        } else {
+            mv.setViewName("redirect:/index?error=not_login");
+        }
+        return mv;
     }
     @GetMapping("/giftShoppingBag")
-    public String giftShoppingBag() {
-        return "content/giftShoppingBag";
+    public ModelAndView giftShoppingBag(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        if(session.getAttribute("member_id") != null) {
+            mv.setViewName("content/giftShoppingBag");
+
+        } else {
+            mv.setViewName("redirect:/index?error=not_login");
+        }
+        return mv;
     }
 
     @GetMapping("/couponChoice")

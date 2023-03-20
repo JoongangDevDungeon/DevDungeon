@@ -263,6 +263,7 @@ public class AdminController {
 		couponDTO.setCoupon_content(Integer.parseInt(request.getParameter("couponContent")));
 		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("event_no")));
 		couponDTO.setCoupon_end(request.getParameter("endDate"));
+		System.out.println(couponDTO);
 		
 		adminService.adminCouponCreate(couponDTO);
 		return "redirect:/adminCoupon";
@@ -423,7 +424,7 @@ public class AdminController {
 		eventDTO.setEvent_content(request.getParameter("eventContent"));
 		eventDTO.setEvent_title(request.getParameter("eventTitle"));
 		eventDTO.setTag_no(Integer.parseInt(request.getParameter("eventTag")));
-		
+		eventDTO.setEvent_end(request.getParameter("EventEndDate"));
 		adminService.adminEventWrite(eventDTO);
 		
 		return "redirect:/adminEvent";

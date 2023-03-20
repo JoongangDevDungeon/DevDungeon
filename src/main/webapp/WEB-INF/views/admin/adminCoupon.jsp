@@ -99,7 +99,12 @@ function moveNext(pageNo){
 				</tr>
 				</c:forEach>
 			</table>
+			
+			<!-- 쿠폰 생성 버튼 -->
+			<div class="CC-btn">
 			<button class="btn btn-primary" type="button" onclick="location.href='/adminCouponCreate';">쿠폰생성</button>
+			</div><br><br>
+			
 			<!-- 페이징 -->
 			<div class="pagingBox">
 				<ul class="pagingList">

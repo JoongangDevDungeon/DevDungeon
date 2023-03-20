@@ -149,6 +149,18 @@ th, tr{
 	color: white;
 }
 
+/* 쿠폰 생성버튼 */
+.CC-btn{
+	float: right;
+	margin: 5px 13px 0 0 ;
+}
+
+/* 이벤트 글쓰기 버튼 */
+.ED-btn{
+	float: right;
+	margin: 5px 55px 0 0 ;
+}
+
 /* admin main css */
 .mboard{
 	width: 1200px;
@@ -235,13 +247,22 @@ canvas{
 */
 
 
-/* 쿠폰 */
+/* 쿠폰 생성 */
 .admincoupon{
 	margin-left: 320px;
 	width: 500px;
 	text-align: center;
 }
 .coupontxt{
-	
+	height: 200px;
+}
+
+/* 이벤트 작성 */
+.adminEvent{
+	margin-left: 320px;
+	width: 500px;
+	text-align: center;
+}
+.EventTxt{
 	height: 200px;
 }

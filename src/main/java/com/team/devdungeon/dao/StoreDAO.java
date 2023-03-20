@@ -29,4 +29,8 @@ public class StoreDAO {
 
         return result;
     }
+
+    public List<Map<String, Object>> selectPayShoppingBag(Object memberId) {
+        return sqlSession.selectList("store.selectPayShoppingBag", memberId);
+    }
 }
