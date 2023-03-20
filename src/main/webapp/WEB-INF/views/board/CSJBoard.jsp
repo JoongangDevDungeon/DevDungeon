@@ -39,13 +39,64 @@ h6{
 	line-height:400px;
 	font-size:24px;
 }
+.LayerList{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+.LayerListItem{
+list-style:none;
+height:33px;
+line-height:33px;
+}
+.LayerListItem:hover{
+background-color: #c0c0c0;
+} 
+.boardWriter:hover{
+cursor: pointer;
+}
 </style>
 <script>
 function detail(bno){
 	location.href="/csjRead?bno="+bno;
 }
-
+function sendMessageTo(receiver){
+	window.open("/message?receiver="+receiver,'쪽지', 'width=510px,height=450px,scrollbars=yes');
+}
+function sendPointTo(receiver){
+	window.open("/sendPoint?receiver="+receiver, '쪽지', 'width=510px,height=450px,scrollbars=yes');
+}
+function nickNameClick(name,event){
+	var layer =  document.getElementById("nickNameLayer");
+	if(layer.style.display == "none") {
+		layer.style.display = "block";
+	}
+	var y = event.clientY;
+	var x = event.clientX;
+	layer.style.color = "black";
+	layer.style.width = "125px";
+	layer.style.height = "100px";
+	layer.style.border = "1px solid black";
+	layer.style.backgroundColor = "white";
+	layer.style.position = "absolute";
+	layer.style.top = window.scrollY+y;
+	layer.style.left = window.scrollX+x;
+	layer.style.zIndex = 9999;
+	
+	layer.innerHTML = "<ul class='LayerList'>";
+	layer.innerHTML += "<li class='LayerListItem' onclick='sendMessageTo(\""+name+"\")'>쪽지보내기</li>";
+	layer.innerHTML += "<li class='LayerListItem' onclick='sendPointTo(\""+name+"\")'>포인트보내기</li>";
+	layer.innerHTML += "<li class='LayerListItem' onclick='closeLayer()'>닫기</li>";
+	layer.innerHTML += "</ul>";
+}
+function closeLayer(){
+	var layer = document.getElementById("nickNameLayer");
+	if(layer.style.display != "none"){
+		layer.style.display = "none";
+	}
+}
 </script>
+
 <div id="nickNameLayer"></div>
 <body>
 	<%@include file="../top.jsp"%>
@@ -71,7 +122,7 @@ function detail(bno){
 									<td>${b.bno }</td>
 									<td onclick="detail(${b.board_no})" class="text-truncate title" style="max-width:1px;">${b.board_title }
 									<c:if test="${b.comment_cnt ne 0 }"><h6>${b.comment_cnt}</h6></c:if></td>
-									<td><span class="text-truncate" style="max-width:1px;" onclick="nickNameClick('${b.member_name }')">${b.member_name }</span></td>
+									<td><span class="text-truncate boardWriter" style="max-width:1px;" onclick="nickNameClick('${b.member_name }',event)">${b.member_name }</span></td>
 									<td>${b.board_date }</td>
 									<td>${b.board_read }</td>
 									<td>${b.board_like }</td>
