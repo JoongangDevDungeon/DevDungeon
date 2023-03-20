@@ -1,9 +1,8 @@
 package com.team.devdungeon.service;
 
 import com.team.devdungeon.dao.PointDAO;
-import com.team.devdungeon.dao.SignDAO;
+import com.team.devdungeon.dto.PointDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,4 +20,16 @@ public class PointServiceImpl implements PointService {
     public List<Map<String, Objects>> levelList() {
         return pointDAO.levelList();
     }
+
+    @Override
+    public PointDTO name_check(PointDTO pointDTO) {
+        return pointDAO.name_check(pointDTO);
+    }
+
+    @Override
+    public int send_point(PointDTO pointDTO) {
+        return pointDAO.send_point(pointDTO);
+    }
+
+
 }

@@ -62,7 +62,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 					<th class="col-1">날짜</th>
 					<th class="col-1">조회수</th>
 					<th class="col-1">좋아요</th>
-					<th class="col-1">관리</th>
+					<th class="col-1">상태</th>
 				</tr>
 				<c:forEach items="${list }" var="row">
 				<tr>

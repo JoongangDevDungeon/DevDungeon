@@ -12,13 +12,17 @@
 </head>
 <script>
     $(function() {
-        let coupon = "";
+        let coupon_type = "";
+        let coupon_content = "";
+
         $(".coupon-radio").click(function(){
-            coupon = $(this).val();
+            coupon_type = $(this).val();
+            coupon_content = $(this).attr("content");
         });
 
         $("#coupon_btn").click(function(){
-            opener.$("#coupon_selected").text(coupon);
+            opener.couponInfo(coupon_type, coupon_content);
+            opener.$("#coupon_selected").html(coupon_content + "% 할인");
             window.close();
         });
     });
@@ -31,18 +35,18 @@
             <div class="form-control find-form">
                 <label class="find-label mt-4">쿠폰 선택</label>
                 <!-- 발급 쿠폰 -->
-                <c:forEach begin="1" end="6" step="1" var="test">
+                <c:forEach items="${couponList}" var="couponList">
                 <label class="form-control mt-4 mb-4" style="width: 675px; height: 80px; margin: 0 auto;">
                     <div style="width: 100px; height: 70px; float: left; padding-top: 25px; text-align: center; box-sizing: border-box;">
-                        <input class="coupon-radio" type="radio" style="width: 20px; height: 20px;" name="coupon_radio" value="${test}">
+                        <input class="coupon-radio" type="radio" style="width: 20px; height: 20px;" name="coupon_radio" value="${couponList.coupon_type}" content="${couponList.coupon_content}">
                     </div>
                     <div class="mt-2">
                         <div style="width: 540px; height: 28px; float: left;">
                             <h5 style="float: left; ">쿠폰 할인</h5>
-                            <span style="float: left; margin-left: 10px;  color: #ccc;">유효기간</span>
+                            <span style="float: left; margin-left: 10px;  color: #ccc;">${couponList.coupon_end}</span>
                         </div>
                         <div style="width: 540px; height: 28px; float: left;">
-                            <span style="float: left;">유효기간</span>
+                            <span style="float: left;">${couponList.coupon_content}% 할인</span>
                         </div>
                     </div>
                 </label>

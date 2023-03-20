@@ -220,6 +220,15 @@ public class AdminController {
 	@GetMapping("/adminStatistics")
 	public ModelAndView adminStatistics() {
 		ModelAndView mv = new ModelAndView("./admin/adminStatistics");
+		
+		List<Map<String, Object>> time = adminService.LogTime();
+		List<Map<String, Object>> day = adminService.LogDay();
+		List<Map<String, Object>> month = adminService.LogMonth();
+		
+		mv.addObject("time", time);
+		mv.addObject("day" ,day);
+		mv.addObject("month", month);
+		
 		return mv;
 	}
 	
@@ -269,9 +278,9 @@ public class AdminController {
 		CouponDTO couponDTO = new CouponDTO();
 
 		couponDTO.setCoupon_name(request.getParameter("couponName"));
-		couponDTO.setCoupon_content(Integer.parseInt(request.getParameter("couponContent")));
 		couponDTO.setEvent_no(Integer.parseInt(request.getParameter("event_no")));
 		couponDTO.setCoupon_end(request.getParameter("endDate"));
+		couponDTO.setCoupon_content(Integer.parseInt(request.getParameter("couponContent")));
 		System.out.println(couponDTO);
 		
 		adminService.adminCouponCreate(couponDTO);

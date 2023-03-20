@@ -13,6 +13,9 @@ public interface MessageService {
 
 	PageInfo<Map<String, Object>> msgList(CSJshowDTO dto);
 
+    int msgRead(String msgNo);
 
+	int msgDel(String msgNo);
 
+	int newMsgCnt(String memberName);
 }

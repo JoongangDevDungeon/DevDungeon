@@ -13,7 +13,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-
+<!-- 팝업창 닫으려고 만들었음 -->
 <body>
 
 </body>
