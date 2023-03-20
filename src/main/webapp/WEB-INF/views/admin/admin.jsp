@@ -7,6 +7,7 @@
 <!-- Favicon-->
 <link rel="icon" href="/img/admin/adminGazi.png" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <title>admin</title>
 <link rel="stylesheet" href="/css/admin.css">
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
@@ -20,29 +21,49 @@
 	<!-- 메인 시작 -->
 	<div class="main">
 		<div class="container">
-<!-- 		<img class="logo" src="./img/admin/adminGazi.png"> -->
 			<h1>관리자 페이지 메인 대쉬보드</h1>
 			<hr class="hr1">
-			${today }<br>
-			${date }<br>
-			${visitor }
+			
+
 			<div class="mtoday">
 				<div class="mth">오늘의 할일</div>
 				<hr class="hr1">
-				<div class="mtc1">
-					<a class="mhov" href="/adminQnA">
-						답변대기문의 : ${today[0].question_board_count }
-					</a>
-				</div>
-				<div class="mtc2">
-					<a class="mhov" href="/adminEvent">
-						가입한 유저 : ${today[0].join_today }
-					</a>
-				</div>
-				<div class="mtc3">
-					<a class="mhov" href="/adminCoupon">
-						추가된 게시물 : ${today[0].board_today }
-					</a>
+				<div class="mtc">
+					<div class="mtc1">
+						<a class="mhov">
+							오늘의 방문객 : 
+							<span class="mhov hr">${today[0].today_user }</span>
+						</a>
+						
+					</div>
+					<div class="mtc2">
+						<a class="mhov" href="/adminMember">
+							오늘의 신규회원 : 
+							<span class="mhov hr">${today[0].join_today }</span>
+						</a>
+					</div>
+					<div class="mtc3">
+						<a class="mhov" href="/adminBoard">
+							게시판 신규글 : 
+							<span class="mhov hr">${today[0].board_today }</span>
+						</a>
+					</div>
+					<div class="mtc4">
+						<a class="mhov" href="/adminQnA">
+							답변대기문의 : 
+							<span class="mhov hr">${today[0].question_board_count }</span>
+						</a>
+					</div>
+					<div class="mtc5">
+						<a class="mhov" href="/adminStore">
+							스토어 새상품 : 
+							<span class="mhov hr">${today[0].new_product }</span>
+						</a>
+					</div>
+					
+					
+					
+					
 				</div>
 			</div>
 
@@ -67,14 +88,14 @@
 										<th class="col-1">가입</th>
 										
 									</tr>
-									<tr>
-										<td>(날짜)</td>
-										<td>count(Log방문자)</td>
-										<td>count(question_board_status)</td>
-										<td>count(Log가입)</td>
-										
-									</tr>
-									
+									<c:forEach items="${date }" var="row" end="6">
+										<tr>
+											<td>${row.date }</td>
+											<td>${row.visitors }</td>
+											<td>${row.questions }</td>
+											<td>${row.new_members }</td>
+										</tr>
+									</c:forEach>
 								</table>
 							</div>
 						</div>
@@ -82,6 +103,7 @@
 				
 					<!-- 막대 그래프 -->
 					<div class="mbar">
+<%-- 					${visitor } = visitor --%>
 					
 						<div class="col-xl-6 mbar">
 							<div class="card mb-4">
