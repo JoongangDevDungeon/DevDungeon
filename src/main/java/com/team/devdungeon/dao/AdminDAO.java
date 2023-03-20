@@ -94,6 +94,12 @@ public interface AdminDAO {
 
 	List<Map<String, Object>> adminVisitor();
 
+	List<Map<String, Object>> LogDay();
+
+	List<Map<String, Object>> LogTime();
+
+	List<Map<String, Object>> LogMonth();
+
 
 
 

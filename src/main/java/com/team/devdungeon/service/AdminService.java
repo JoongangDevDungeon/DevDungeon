@@ -160,6 +160,18 @@ public class AdminService {
 		return adminDAO.adminVisitor();
 	}
 
+	public List<Map<String, Object>> LogDay() {
+		return adminDAO.LogDay();
+	}
+
+	public List<Map<String, Object>> LogTime() {
+		return adminDAO.LogTime();
+	}
+
+	public List<Map<String, Object>> LogMonth() {
+		return adminDAO.LogMonth();
+	}
+
 	
 
 

@@ -16,11 +16,10 @@
 function couponbtn() {
 	let couponKind = document.getElementById("couponKind").value;
 	let couponName = document.getElementById("couponName").value;
-	let couponContent = document.getElementById("couponContent").value;
 	let couponRat = document.getElementById("couponRat").value;
 	let endDate = document.getElementById("endDate").value;
 	
-	if(couponKind === "이벤트 제목을 선택하세요" || couponName === "" || couponContent === "" || endDate === "" || couponRat === "쿠폰 할인율 선택"){
+	if(couponKind === "이벤트 제목을 선택하세요" || couponName === "" || endDate === "" || couponRat === "쿠폰 할인율 선택"){
 		alert("모든 항목을 입력해주세요");
 	} else{
 		document.getElementById("couponForm").submit();
@@ -50,15 +49,13 @@ function couponbtn() {
 					</select><br>
 					<input type="text" class="form-control" name="couponName" id="couponName" placeholder="쿠폰이름 지정해주세요"><br>
 					
-					<select class="form-select" id="couponRat">
+					<select class="form-select" id="couponRat" name="couponContent">
 						<option selected="selected">쿠폰 할인율 선택</option>
-						<c:forEach items="${list }" var="row">
-	    					<option value="${row.event_no }">${row.coupon_name }</option>
-	    				</c:forEach>
+	    					<option value="5">5%</option>
+	    					<option value="10">10%</option>
+	    					<option value="15">15%</option>
+	    					<option value="20">20%</option>
 					</select><br>
-					
-					<input type="text" class="form-control coupontxt" name="couponContent" id="couponContent" placeholder="쿠폰내용을 지정해주세요"><br>
-					
 					
 					만료일 : <input type="date" name="endDate" id="endDate"><br><br>
 					<button class="btn btn-success" type="button" onclick="couponbtn()">쿠폰 생성하기</button>

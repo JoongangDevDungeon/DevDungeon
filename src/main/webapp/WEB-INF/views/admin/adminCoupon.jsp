@@ -80,7 +80,7 @@ function moveNext(pageNo){
 					<th class="col-1">쿠폰 유형</th>
 					<th class="col-3">이벤트 넘버</th>
 					<th class="col-2">쿠폰 이름</th>
-					<th class="col-2">쿠폰 내용</th>
+					<th class="col-2">쿠폰 할인율</th>
 					<th class="col-1">시작일</th>
 					<th class="col-1">종료일</th>
 					<th class="col-1">쿠폰 삭제</th>
@@ -90,7 +90,7 @@ function moveNext(pageNo){
 					<td>${row.coupon_type }</td>
 					<td>${row.event_no }</td>
 					<td>${row.coupon_name }</td>
-					<td>${row.coupon_content }</td>
+					<td>${row.coupon_content }%</td>
 					<td>${row.coupon_start }</td>
 					<td>${row.coupon_end }</td>
 					<td>

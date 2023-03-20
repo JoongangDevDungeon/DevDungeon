@@ -59,7 +59,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 						<td class="col-2">멤버 번호</td>
 						<td class="col-1">멤버 이메일</td>
 						<td class="col-1">생일</td>
-						<td class="col-2">멤버상태변경</td>								
+						<td class="col-2">멤버 상태</td>								
 					</tr><c:forEach items="${list }" var="row">
 					<form action="/adminMember" method="post">
 					<input type="hidden" name="member_no" value="${row.member_no }">
@@ -74,10 +74,10 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 						<input type="hidden" name="pageNo" value="${pageNo }">
 						<c:choose>
 							<c:when test="${row.member_grade eq 0}">
-								<button class="btn btn-primary" type="submit" value="1" name="member_grade">활성화</button>
+								<button class="btn btn-danger" type="submit" value="1" name="member_grade">비활성화</button>
 							</c:when>
 							<c:otherwise>
-								<button class="btn btn-danger" type="submit" value="0" name="member_grade">비활성화</button>
+								<button class="btn btn-primary" type="submit" value="0" name="member_grade">활성화</button>
 							</c:otherwise>
 						</c:choose>
 						</td>

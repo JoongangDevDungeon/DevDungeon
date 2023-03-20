@@ -21,6 +21,9 @@
 	<div class="main">
 		<div class="container">
 			<h1>관리자 통계 페이지</h1>
+			${day }<br>
+			${time }<br>
+			${month }
 			<hr class="hr1">
 			<div class="mboard">
 				<div class="row">
