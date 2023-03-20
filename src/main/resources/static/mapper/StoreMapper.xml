@@ -54,6 +54,13 @@
             FROM coupon
     </select>
 
+    <select id="checkPoint" parameterType="String" resultType="Integer">
+        SELECT member_point
+            FROM point
+                WHERE
+                    member_no = (SELECT member_no FROM member WHERE member_id = #{memberId})
+    </select>
+
     <update id="updatePoint" parameterType="HashMap">
         UPDATE point
             SET

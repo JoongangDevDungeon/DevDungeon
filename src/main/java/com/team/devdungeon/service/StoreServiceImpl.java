@@ -46,7 +46,6 @@ public class StoreServiceImpl implements StoreService {
                 String icon_image = Base64.getEncoder().encodeToString(imageData);
                 map.put("icon_image", icon_image);
             } catch (Exception e) {
-                e.printStackTrace();
                 System.out.println("아이콘 이미지 로딩중 에러 발생");
             }
             resutList.add(map);
@@ -115,7 +114,6 @@ public class StoreServiceImpl implements StoreService {
                 String icon_image = Base64.getEncoder().encodeToString(imageData);
                 map.put("icon_image", icon_image);
             } catch (Exception e) {
-                e.printStackTrace();
                 System.out.println("아이콘 이미지 로딩중 에러 발생");
             }
             result.add(map);
@@ -132,6 +130,11 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public List<Map<String, Object>> couponList() {
         return storeDAO.couponList();
+    }
+
+    @Override
+    public int checkPoint(Object memberId) {
+        return storeDAO.checkPoint(memberId);
     }
 
     @Override

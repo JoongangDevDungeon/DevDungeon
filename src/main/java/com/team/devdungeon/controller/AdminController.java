@@ -1,5 +1,6 @@
 package com.team.devdungeon.controller;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,16 +40,24 @@ public class AdminController {
 		
 		List<Map<String, Object>> today = adminService.adminToday();
 		List<Map<String, Object>> date = adminService.adminDate();
-		List<Map<String, Object>> visitor = adminService.adminVisitor();
 		
 		mv.addObject("today", today);
 		mv.addObject("date", date);
-		mv.addObject("visitor", visitor);
 		
 		
 		return mv;
 	}
 	
+	//admin 막대그래프
+	@GetMapping("/admin/visitor")
+	@ResponseBody
+	public List<Map<String, Object>> adminVisitor() {
+		
+		List<Map<String, Object>> visitor = adminService.adminVisitor();
+		
+	    return visitor;
+	}
+
 	
 	//로그인
 	@GetMapping("/adminLogin")

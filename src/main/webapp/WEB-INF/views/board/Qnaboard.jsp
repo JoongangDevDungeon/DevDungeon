@@ -31,7 +31,7 @@
 			$("#title").val("");
 			$("#content").val("");//초기화
 			if (title.length < 1) {
-				alert("제목은 4글자 이상");
+				alert("제목을 작성해주세요");
 				$("#title").focus();
 				return false;
 			}
@@ -118,7 +118,7 @@
 				</table>
 				<br><br><br>
 				<c:if test="${sessionScope.member_id ne null }">
-					<div class="write" style="justify-content: start;">
+					<div class="write" style="justify-content: end;">
 						<button class="write_btn" style="margin-left:35px;">질문하기</button>
 					</div>
 				</c:if><br>
@@ -127,7 +127,7 @@
 				<div class="modal fade" id="writeModal" data-bs-backdrop="static"
 					tabindex="-1" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
-					<div class="modal-dialog modal-xl  modal-dialog-centered">
+					<div class="modal-dialog modal-xl">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">질문하기</h5>
@@ -135,14 +135,14 @@
 									aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
-								<div id="form" class="mb-3">
-									<label for="title" class="form-label">질문 제목</label> <input
-										class="form-control" type="text" id="title" name="title">
-									<label for="content" class="form-label">질문 내용</label>
+								<div id="form" class="mb-3 was-validated">
+									<label for="title" class="form-label d-flex justify-content-start">질문 제목</label> <input
+										class="form-control" type="text" id="title" name="title" required>
+									<label for="content" class="form-label d-flex justify-content-start">질문 내용</label>
 									<textarea class="form-control" rows="20" id="content"
-										name="content"></textarea>
+										name="content"  required></textarea>
 									<button type="button" id="modalWriteBtn"
-										class="btn btn-primary">질문하기</button>
+										class="btn btn-primary justify-content-end">질문하기</button>
 								</div>
 							</div>
 						</div>

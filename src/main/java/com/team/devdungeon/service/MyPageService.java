@@ -18,4 +18,5 @@ public interface MyPageService {
     List<Map<String, Object>> loginLog(String memberId);
     int nowPassCheck(Map<String, Object> map);
     int modifyPassword(Map<String, Object> info);
+    Map<String, Object> loginPoint(String memberName);
 }

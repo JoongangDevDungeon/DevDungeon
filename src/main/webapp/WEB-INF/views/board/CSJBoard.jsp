@@ -44,7 +44,9 @@ h6{
 function detail(bno){
 	location.href="/csjRead?bno="+bno;
 }
+
 </script>
+<div id="nickNameLayer"></div>
 <body>
 	<%@include file="../top.jsp"%>
 	<%@include file="../menu.jsp"%>
@@ -69,7 +71,7 @@ function detail(bno){
 									<td>${b.bno }</td>
 									<td onclick="detail(${b.board_no})" class="text-truncate title" style="max-width:1px;">${b.board_title }
 									<c:if test="${b.comment_cnt ne 0 }"><h6>${b.comment_cnt}</h6></c:if></td>
-									<td class="text-truncate" style="max-width:1px;">${b.member_name }</td>
+									<td><span class="text-truncate" style="max-width:1px;" onclick="nickNameClick('${b.member_name }')">${b.member_name }</span></td>
 									<td>${b.board_date }</td>
 									<td>${b.board_read }</td>
 									<td>${b.board_like }</td>

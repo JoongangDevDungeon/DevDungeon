@@ -41,6 +41,9 @@
 			$("#banComment").attr("value", banNumber);
 		}
 		$("#formbanType").attr("value", banType);
+		if($("#banChoice6").checked != false){
+			$("#banWrite").attr("required",true);
+		}
 		$("#btnBan").click(function() {
 			opener.name = "detail";
 			$("#formBan").action = "csjBan";
@@ -50,11 +53,10 @@
 				banWhy = $("#banWrite").val();
 				$("#banChoice6").val(banWhy);
 			}
-			if (banWhy == null) {
+			if (banWhy == null || banWhy == "") {
 				alert("신고사유를 선택하세요");
 			} else {
 				$("#formBan").submit();
-				$("#banChoice6").val("기타");
 				alert("신고가 완료되었습니다");
 			}
 		});
@@ -112,23 +114,23 @@ input{
 	</div>
 	<div style="width:100%; height: 100%;">
 		<div class="singo_top" style="">신고사유</div>
-		<form action="csjBan" id="formBan" method="post">
+		<form action="csjBan" id="formBan" method="post" class="was-validated">
 		<div class="singo_mid">
 			<input type="hidden" name="banMember" id="banMem"> 
 			<input type="hidden" name="formbanType" id="formbanType">
 			<input type="hidden" name="banBoard" id="banBoard">
 			<input type="hidden" name="banComment" id="banComment">
-			<input type="radio" id="banChoice1" name="banWhy" value="스팸홍보/도배글입니다.">
+			<input type="radio" id="banChoice1" name="banWhy" value="스팸홍보/도배글입니다." class="form-check-input" required>
 			<label for="banChoice1">스팸홍보/도배글입니다.</label><br>
-			<input type="radio" id="banChoice2" name="banWhy" value="음란물입니다.">
+			<input type="radio" id="banChoice2" name="banWhy" value="음란물입니다."  class="form-check-input" required>
 			<label for="banChoice2">음란물입니다.</label><br>
-			<input type="radio"	id="banChoice3" name="banWhy" value="불법정보를 포함하고 있습니다.">
+			<input type="radio"	id="banChoice3" name="banWhy" value="불법정보를 포함하고 있습니다."  class="form-check-input" required>
 			<label for="banChoice3">불법정보를 포함하고 있습니다.</label><br>
-			<input type="radio" id="banChoice4" name="banWhy" value="청소년에게 유해한 내용입니다.">
+			<input type="radio" id="banChoice4" name="banWhy" value="청소년에게 유해한 내용입니다."  class="form-check-input" required>
 			<label for="banChoice4">청소년에게 유해한 내용입니다.</label><br>
-			<input type="radio" id="banChoice5" name="banWhy" value="욕설/혐오/차별적 표현입니다.">
+			<input type="radio" id="banChoice5" name="banWhy" value="욕설/혐오/차별적 표현입니다."  class="form-check-input" required>
 			<label for="banChoice5">욕설/혐오/차별적 표현입니다.</label><br>
-			<input type="radio" id="banChoice6" name="banWhy" value="기타"> 
+			<input type="radio" id="banChoice6" name="banWhy" value="기타"  class="form-check-input" required> 
 			<label for="banChoice6">기타</label><br>
 			<input type="text" style="width: 97%; height:40px; border-radius: 5px;" id="banWrite" name="banWrite" placeholder="신고 사유를 직접 입력하세요">
 		</div>

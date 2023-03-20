@@ -166,4 +166,13 @@
         SELECT COUNT(read_or_not) FROM message
         WHERE get_member_no = (SELECT member_no FROM member WHERE member_name = '${memberName}') AND read_or_not = 0
     </select>
+    <select id="loginPoint" parameterType="String" resultType="HashMap">
+        SELECT p.member_point, l.member_level
+        FROM point p JOIN level l ON p.member_point >= l.level_to_point
+        WHERE
+        p.member_no = (SELECT m.member_no FROM member m WHERE m.member_name = '${memberName}')
+        AND p.member_point >= l.level_to_point
+        ORDER BY l.member_level DESC
+        LIMIT 1
+    </select>
 </mapper>

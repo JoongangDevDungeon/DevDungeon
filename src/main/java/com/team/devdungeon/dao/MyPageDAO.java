@@ -70,4 +70,7 @@ public class MyPageDAO {
         return sqlSession.update("mypage.modifyPassword", info);
     }
 
+    public Map<String, Object> loginPoint(String memberName) {
+        return sqlSession.selectOne("mypage.loginPoint",memberName);
+    }
 }
