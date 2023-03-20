@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -60,6 +61,17 @@ public class LoginController {
         }
 
         return "redirect:/index";
+    }
+    @ResponseBody
+    @GetMapping("/loginPoint")
+    public String loginPoint(HttpSession session){
+        JSONObject json = new JSONObject();
+        String member_name = (String)session.getAttribute("member_name");
+
+        Map<String,Object> map =  myPageService.loginPoint(member_name);
+        json.put("member_level",map.get("member_level"));
+        json.put("member_point",map.get("member_point"));
+        return json.toString();
     }
 
 }

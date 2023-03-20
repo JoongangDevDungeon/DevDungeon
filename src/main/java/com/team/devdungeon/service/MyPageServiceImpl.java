@@ -180,4 +180,9 @@ public class MyPageServiceImpl implements MyPageService {
         return myPageDAO.modifyPassword(info);
     }
 
+    @Override
+    public Map<String, Object> loginPoint(String memberName) {
+        return myPageDAO.loginPoint(memberName);
+    }
+
 }
