@@ -1,24 +1,33 @@
 $(function() {
-
 	let level = localStorage.getItem("member_level");
 	let point = localStorage.getItem("member_point");
  	if (level) { 
   		$("#member_level").text("Lv."+level+"  ");
  		$("#member_point").text("포인트 : "+point);
   	}
+    $("#member_point").click(function(){
+        // $.ajax({
+        //     type : "post",
+        //     url : "/login",
+        //     dataType : "json",
+        //     data : {"member_id" : member_id, "member_pw" : member_pw},
+        //     success : function (result) {
+        //         localStorage.setItem("member_level", result.member_level);
+        //         localStorage.setItem("member_point", result.member_point);
+        //         // level = result.member_level;
+        //         // point = result.member_point;
+        //         $("#member_level").text("Lv."+level+"  ");
+        //         $("#member_point").text("포인트 : "+point);
+        //     },
+        //     error : function(xhr){
+        //         alert("오류 발생");
+        //     }
+        // });
 
-         $.ajax({
-             type : "post",
-             url : "/login",
-             data : {"member_id" : member_id, "member_pw" : member_pw},
-             dataType : "json",
-             success : function (result) {
-                 level = result.member_level;
-                 point = result.member_point;
-                 $("#member_level").text("Lv."+level+"  ");
-                 $("#member_point").text("포인트 : "+point);
-             }
-         });
+
+    });
+
+
 
     $("#member_id").on("keyup",function(key){
         if(key.keyCode==13) {
