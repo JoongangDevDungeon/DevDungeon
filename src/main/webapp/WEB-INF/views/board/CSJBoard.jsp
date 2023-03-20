@@ -88,11 +88,14 @@ function nickNameClick(name,event){
 	layer.innerHTML += "<li class='LayerListItem' onclick='sendPointTo(\""+name+"\")'>포인트보내기</li>";
 	layer.innerHTML += "<li class='LayerListItem' onclick='closeLayer()'>닫기</li>";
 	layer.innerHTML += "</ul>";
+	
+	
 }
 function closeLayer(){
 	var layer = document.getElementById("nickNameLayer");
 	if(layer.style.display != "none"){
 		layer.style.display = "none";
+		document.body.onclick = "";
 	}
 }
 </script>
@@ -122,7 +125,11 @@ function closeLayer(){
 									<td>${b.bno }</td>
 									<td onclick="detail(${b.board_no})" class="text-truncate title" style="max-width:1px;">${b.board_title }
 									<c:if test="${b.comment_cnt ne 0 }"><h6>${b.comment_cnt}</h6></c:if></td>
-									<td><span class="text-truncate boardWriter" style="max-width:1px;" onclick="nickNameClick('${b.member_name }',event)">${b.member_name }</span></td>
+									<td><span class="text-truncate boardWriter" style="max-width:1px;" 
+										<c:if test="${sessionScope.member_name ne null }">
+										onclick="nickNameClick('${b.member_name }',event)"
+										</c:if>
+										>${b.member_name }</span></td>
 									<td>${b.board_date }</td>
 									<td>${b.board_read }</td>
 									<td>${b.board_like }</td>
