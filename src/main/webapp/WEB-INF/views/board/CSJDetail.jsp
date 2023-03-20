@@ -261,7 +261,7 @@ function sendMessageTo(receiver){
 										<input type="hidden" name="root" value=${c.comment_no }>
 										<input type="hidden" name="bno" value=${det.board_no }>
 										<div class="col-10">
-										<input type="text" class="commentInput form-control" name="commentContent" placeholder="${c.member_name } 에게 작성하는 답글입니다">
+										<input type="text" class="commentInput form-control" name="commentContent" placeholder="${c.member_name } 에게 작성하는 답글입니다" required>
 										</div>
 										<div class="col-2">
 										<button id="commentEnterBtn" class="btn">댓글 입력</button>
@@ -276,7 +276,7 @@ function sendMessageTo(receiver){
 							<form id="commentForm" action="csjCommentWrite" method="post" class="row g-3">
 								<input type="hidden" name="bno" value="${det.board_no }">
 								<div class="col-10">
-								<textarea class="commentInput form-control" name="commentContent" placeholder="명예훼손, 개인정보 유출, 분쟁 유발, 허위사실 유포 등의 글은 이용약관에 의해 제재는 &#13;&#10;물론 법률에 의해 처벌 받을 수 있습니다. 건전한 커뮤니티를 위해 자제를 당부 드립니다."></textarea>
+								<textarea class="commentInput form-control" name="commentContent" placeholder="명예훼손, 개인정보 유출, 분쟁 유발, 허위사실 유포 등의 글은 이용약관에 의해 제재는 &#13;&#10;물론 법률에 의해 처벌 받을 수 있습니다. 건전한 커뮤니티를 위해 자제를 당부 드립니다." required></textarea>
 								</div>
 								<div class="col-2">
 								<button id="commentEnterBtn" class="btn">댓글 입력</button>

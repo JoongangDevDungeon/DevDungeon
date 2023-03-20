@@ -197,9 +197,11 @@ h1{
 							</div>
 						</c:if>
 					</div>
+					<c:if test="${sessionScope.member_name ne null }">
 					<div style="margin-top:5px;">
 						<button class="eventJoinBtn btn btn-warning" value="${det.event_no }">참여하기</button>
 					</div>
+					</c:if>
 					<br>
 					<div class="detailBtnZone">
 						<button class="btn btn-primary"

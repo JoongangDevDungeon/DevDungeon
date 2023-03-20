@@ -264,7 +264,8 @@ public class CSJController {
 		comment.put("writer", writer);
 		comment.put("content", content);
 		int result = csjService.commentWrite(comment);
-		if(result==1) {
+		System.out.println("댓글 result:"+result);
+		if(result>0) {
 			Map<String, Object> pointMap = new HashMap<String, Object>();
 			pointMap.put("member_name", writer);
 			pointMap.put("pointType", 3);
