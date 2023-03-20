@@ -59,6 +59,7 @@ public class EventController {
 		        try {
 		            // 원격 서버에서 이미지 파일 읽어오기
 		            InputStream inputStream = channelSftp.get(remotePath);
+
 		            // Inputstream -> byte[] 변환
 		            ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		            byte[] buffer = new byte[1024];

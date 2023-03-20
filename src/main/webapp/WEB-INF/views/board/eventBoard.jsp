@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -24,15 +25,27 @@
 .eventBanner{ 
 	width:390px;
 	height:310px;
-	float:left; 
-	border:2px solid black;
+	float:left;
+	border:2px solid black;  
 	box-sizing: border-box;
 	cursor: pointer;
 /* 	margin: 0px 5px 5px 0px; */
 	margin:5px;
 	border-radius: 5px;
+	overflow: hidden;
 }
-.eventBanner:hover{ background-color: #d3d3d3; }
+.eventBanner:hover{ 
+	background-color: #d3d3d3; 	
+}
+.eventBanner:hover .eventBannerImage img{ 
+	transform:scale(1.1);
+	transition-duration:1s;
+	overflow:hidden; 	
+}
+.eventBannerImage{
+	border-radius: 5px;
+	overflow:hidden;
+}
 </style>
 </head>
 <body>
@@ -48,15 +61,20 @@
 						<ul style="width:1200px;list-style:none; padding:0;">
 						<c:forEach items="${list }" var="e">
 							<li class="eventBanner" onclick="detail(${e.event_no})">
+								<div class="eventBannerImage">
 								<c:choose>
 									<c:when test="${e.imageDataString ne null }">
-									<img src="data:image/png;base64,${e.imageDataString}" style="width:100%;height:270px;" />
+									<img src="data:image/png;base64,${e.imageDataString}" style="width:100%;height:240px;" />
 									</c:when>
 									<c:otherwise>
-									<img src="/img/logo.png" width="100%" height="270px">
+									<img src="/img/logo.png" width="100%" height="240px">
 									</c:otherwise>
 								</c:choose>
-								<b>${e.event_title }</b>
+								</div>
+								<div>
+									<div style="height:35px; line-height:35px; border-bottom:1px solid black;"><b>${e.event_title }</b></div>
+									<div style="height:35px; line-height:35px;"><fmt:formatDate value="${e.event_date }" pattern="y-MM-d HH:mm" type="date"/> ~ <fmt:formatDate value="${e.event_end }" pattern="y-MM-d HH:mm" type="date"/></div>
+								</div>
 							</li>
 						</c:forEach>
 						</ul>
