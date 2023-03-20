@@ -16,7 +16,7 @@
 <script>
    let error = "${error}";
    if(error == "empty_payBag") {
-      alert("장바구니 비었습니다.");
+      alert("장바구니가 비었습니다.\n스토어로 이동합니다.");
       location.href = "/store";
    }
 
@@ -44,7 +44,11 @@
             data : { "result_price" : result_price },
             dataType : "text",
             success : function (result) {
-               console.log("구매 완료");
+               if(result == 1) {
+                  alert("아이콘 구매 완료!");
+               } else {
+                  alert("포인트가 부족합니다.");
+               }
             },
             error : function() {
                alert("상품 구매중 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.");

@@ -26,7 +26,7 @@ public class StoreDAO {
     }
 
     public int shoppingBagInsert(Map<String, Object> cartInfo) {
-        System.out.println(cartInfo);
+        System.out.println("StoreDAO : " + cartInfo);
         int result = 0;
         try {
             result = sqlSession.insert("store.shoppingBagInsert", cartInfo);
@@ -49,6 +49,10 @@ public class StoreDAO {
         return sqlSession.selectList("store.couponList");
     }
 
+    public int checkPoint(Object memberId) {
+        return sqlSession.selectOne("store.checkPoint", memberId);
+    }
+
     public int payProduct(Map<String, Object> payInfo) {
         int result = sqlSession.update("store.updatePoint", payInfo);
         if(result == 1) {
@@ -60,6 +64,10 @@ public class StoreDAO {
             payInfo.put("icons", icons);
             result = sqlSession.insert("store.insertProductNo", payInfo);
             result = sqlSession.delete("store.deleteCart", payInfo);
+        }
+
+        if(result != 0) {
+            result = 1;
         }
 
         return result;

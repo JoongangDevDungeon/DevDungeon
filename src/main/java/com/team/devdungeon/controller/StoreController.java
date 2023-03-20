@@ -55,8 +55,13 @@ public class StoreController {
         String sellType = request.getParameter("sell_type");
 
         int result = storeService.selectProductLog(userId, shoppingBag);
-        if(result < 1) {
+        if(result < 1) {    // 구매한 아이콘이 없을 때
             result = storeService.shoppingBagInsert(userId, shoppingBag, sellType);
+            if(result != 0) {
+                result = 1;
+            } else {
+                result = 3;
+            }
         } else {
             result = 2;
         }
@@ -71,6 +76,7 @@ public class StoreController {
 
         if(session.getAttribute("member_id") != null) {
             List<Map<String, Object>> cart = storeService.selectPayShoppingBag(session.getAttribute("member_id"));
+            System.out.println("cart : " + cart);
             if(cart.size() == 0) {
                 mv.addObject("error", "empty_payBag");
                 mv.setViewName("content/payShoppingBag");
@@ -101,14 +107,22 @@ public class StoreController {
         ModelAndView mv = new ModelAndView("content/couponChoice");
         List<Map<String, Object>> couponList = storeService.couponList();
         mv.addObject("couponList", couponList);
-        System.out.println(couponList);
         return mv;
     }
 
     @PostMapping("/payProduct")
     @ResponseBody
     public int payProduct(@RequestParam int result_price, HttpSession session) {
-        return storeService.payProduct(result_price, session.getAttribute("member_id"));
+        int member_point = storeService.checkPoint(session.getAttribute("member_id"));
+        int result = 0;
+        System.out.println(member_point);
+        System.out.println(result_price);
+        System.out.println(member_point >= result_price);
+        if(member_point >= result_price) {
+            result = storeService.payProduct(result_price, session.getAttribute("member_id"));
+        }
+        System.out.println(result);
+        return result;
     }
 
 }

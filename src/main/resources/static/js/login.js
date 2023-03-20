@@ -1,4 +1,5 @@
 $(function() {
+
 	let level = localStorage.getItem("member_level");
 	let point = localStorage.getItem("member_point");
  	if (level) { 

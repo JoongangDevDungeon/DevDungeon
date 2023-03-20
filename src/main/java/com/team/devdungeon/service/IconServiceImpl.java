@@ -54,7 +54,7 @@ public class IconServiceImpl implements IconService{
                 sftpChannel.exit();
                 sftp.disconnect();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("아이콘 신청 중 오류 발생");
             }
         }
 

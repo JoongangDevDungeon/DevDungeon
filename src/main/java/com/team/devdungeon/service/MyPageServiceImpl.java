@@ -100,7 +100,7 @@ public class MyPageServiceImpl implements MyPageService {
                     InputStream inputStream = new ByteArrayInputStream(profile_img.getBytes());
                     channelSftp.put(inputStream, remotePath + pfp_name + "." + pfp_extension);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println("프로필 로딩중 에러 발생");
                 }
             }
         } else {
@@ -137,7 +137,6 @@ public class MyPageServiceImpl implements MyPageService {
                 String icon_image = Base64.getEncoder().encodeToString(imageData);
                 mapIcons.put("icon_image", icon_image);
             } catch (Exception e) {
-                e.printStackTrace();
                 System.out.println("아이콘 이미지 로딩중 에러 발생");
             }
         }
