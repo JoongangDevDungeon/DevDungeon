@@ -69,6 +69,7 @@
                <div class="mt-3" style="width: 700px; height: 100px; margin: 0 auto;">
                   <div style="width: 700px;">
                      <button class="btn btn-primary" style="float: left; width: 700px;" type="button">선물</button>
+                     <button class="btn btn-secondary mt-2" style="float: left; width: 700px; background-color: white; border: 1px solid #ccc; color: black;" onclick="location.href='/payShoppingBag'" type="button">구매 장바구니</button>
                   </div>
                </div>
             </div>

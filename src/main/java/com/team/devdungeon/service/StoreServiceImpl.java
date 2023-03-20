@@ -73,7 +73,58 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public List<Map<String, Object>> selectPayShoppingBag(Object memberId) {
-        return storeDAO.selectPayShoppingBag(memberId);
+        List<Map<String, Object>> cart = storeDAO.selectPayShoppingBag(memberId);
+
+        InputStream inputStream = null;
+        ByteArrayOutputStream baos = null;
+        byte[] buffer = null;
+        byte[] imageData = null;
+
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        for(Map<String, Object> map : cart) {
+            try {
+                String emo_img_name = (String) map.get("emo_img_name");
+                String emo_img_extension = (String) map.get("emo_img_extension");
+
+                inputStream = channelSftp.get(remotePath + emo_img_name + "." + emo_img_extension);
+                baos = new ByteArrayOutputStream();
+                buffer = new byte[1024 * 8];
+                int len;
+                while ((len = inputStream.read(buffer)) > -1) {
+                    baos.write(buffer, 0, len);
+                }
+                baos.flush();
+                imageData = baos.toByteArray();
+
+                String icon_image = Base64.getEncoder().encodeToString(imageData);
+                map.put("icon_image", icon_image);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("아이콘 이미지 로딩중 에러 발생");
+            }
+            result.add(map);
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectGiftShoppingBag(Object memberId) {
+        return storeDAO.selectGiftShoppingBag(memberId);
+    }
+
+    @Override
+    public List<Map<String, Object>> couponList() {
+        return storeDAO.couponList();
+    }
+
+    @Override
+    public int payProduct(int resultPrice, Object memberId) {
+        Map<String, Object> payInfo = new HashMap<>();
+        payInfo.put("pay_price", resultPrice);
+        payInfo.put("member_id", memberId);
+        return storeDAO.payProduct(payInfo);
     }
 
 }

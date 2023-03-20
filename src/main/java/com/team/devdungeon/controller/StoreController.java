@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -60,11 +61,16 @@ public class StoreController {
     @GetMapping("/payShoppingBag")
     public ModelAndView payShoppingBag(HttpSession session) {
         ModelAndView mv = new ModelAndView();
+
         if(session.getAttribute("member_id") != null) {
-            mv.setViewName("content/payShoppingBag");
             List<Map<String, Object>> cart = storeService.selectPayShoppingBag(session.getAttribute("member_id"));
-            mv.addObject("cart", cart);
-            System.out.println(cart);
+            if(cart.size() == 0) {
+                mv.addObject("error", "empty_payBag");
+                mv.setViewName("content/payShoppingBag");
+            } else {
+                mv.addObject("cart", cart);
+                mv.setViewName("content/payShoppingBag");
+            }
         } else {
             mv.setViewName("redirect:/index?error=not_login");
         }
@@ -75,7 +81,8 @@ public class StoreController {
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("member_id") != null) {
             mv.setViewName("content/giftShoppingBag");
-
+            List<Map<String, Object>> cart = storeService.selectGiftShoppingBag(session.getAttribute("member_id"));
+            mv.addObject("cart", cart);
         } else {
             mv.setViewName("redirect:/index?error=not_login");
         }
@@ -83,8 +90,18 @@ public class StoreController {
     }
 
     @GetMapping("/couponChoice")
-    public String couponChoice() {
-        return "content/couponChoice";
+    public ModelAndView couponChoice() {
+        ModelAndView mv = new ModelAndView("content/couponChoice");
+        List<Map<String, Object>> couponList = storeService.couponList();
+        mv.addObject("couponList", couponList);
+        System.out.println(couponList);
+        return mv;
+    }
+
+    @PostMapping("/payProduct")
+    @ResponseBody
+    public int payProduct(@RequestParam int result_price, HttpSession session) {
+        return storeService.payProduct(result_price, session.getAttribute("member_id"));
     }
 
 }

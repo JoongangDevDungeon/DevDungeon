@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,5 +34,29 @@ public class StoreDAO {
 
     public List<Map<String, Object>> selectPayShoppingBag(Object memberId) {
         return sqlSession.selectList("store.selectPayShoppingBag", memberId);
+    }
+
+    public List<Map<String, Object>> selectGiftShoppingBag(Object memberId) {
+        return sqlSession.selectList("store.selectGiftShoppingBag", memberId);
+    }
+
+    public List<Map<String, Object>> couponList() {
+        return sqlSession.selectList("store.couponList");
+    }
+
+    public int payProduct(Map<String, Object> payInfo) {
+        int result = sqlSession.update("store.updatePoint", payInfo);
+        if(result == 1) {
+            List<Map<String, Object>> cart = sqlSession.selectList("store.selectPayShoppingBag", payInfo.get("member_id"));
+            List<Object> icons = new ArrayList<>();
+            for(Map<String, Object> map : cart) {
+                icons.add(map.get("product_no"));
+            }
+            payInfo.put("icons", icons);
+            result = sqlSession.insert("store.insertProductNo", payInfo);
+            result = sqlSession.delete("store.deleteCart", payInfo);
+        }
+
+        return result;
     }
 }
