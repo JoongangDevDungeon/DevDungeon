@@ -90,6 +90,10 @@ public interface AdminDAO {
 
 	void amdinStoreChange(Map<String, Object> change);
 
+	List<Map<String, Object>> adminDate();
+
+	List<Map<String, Object>> adminVisitor();
+
 
 
 

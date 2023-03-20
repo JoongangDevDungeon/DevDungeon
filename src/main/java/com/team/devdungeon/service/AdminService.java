@@ -152,6 +152,14 @@ public class AdminService {
 		
 	}
 
+	public List<Map<String, Object>> adminDate() {
+		return adminDAO.adminDate();
+	}
+
+	public List<Map<String, Object>> adminVisitor() {
+		return adminDAO.adminVisitor();
+	}
+
 	
 
 

@@ -8,7 +8,7 @@
 		where admin_id = #{admin_id} AND admin_pw = #{admin_pw}
 	</select>
 	
-<!-- 메인 대쉬보드 -->
+<!-- 대쉬보드 today -->
 	<select id="adminToday" resultType="HashMap">
 		SELECT 
     (SELECT COUNT(*) FROM question_board WHERE question_board_status = 0) AS question_board_count,
@@ -18,13 +18,35 @@
 	 (SELECT COUNT(DISTINCT ip) FROM logs WHERE DATE_FORMAT(created_at, "%Y-%m-%d") = curdate() AND ip is not NULL ) AS today_user;
 	</select>
 
+<!-- 대쉬보드 일자별 요약 -->
+	<select id="adminDate" resultType="HashMap">
+	SELECT 
+		DATE(logs.created_at) AS date, 
+		COUNT(DISTINCT logs.ip) AS visitors, 
+		COUNT(DISTINCT question_board.question_board_no) AS questions,
+		COUNT(DISTINCT member.member_id) AS new_members
+	FROM logs
+		LEFT JOIN member ON DATE(member.join_date) = DATE(logs.created_at)
+		LEFT JOIN question_board ON DATE(question_board.question_board_date) = DATE(logs.created_at)
+		GROUP BY DATE(logs.created_at)
+		ORDER BY DATE(logs.created_at) DESC;
+	</select>
 
-
-
-
-
-
-
+<!-- 대쉬보드 일별 방문자 -->
+	<select id="adminVisitor" resultType="HashMap">
+	SELECT 
+		DATE_FORMAT(created_at, '%Y-%m-%d') AS date, 
+		COUNT(DISTINCT ip) AS visitor_count
+	FROM 
+		logs
+	WHERE 
+		ip IS NOT NULL
+	GROUP BY 
+		DATE_FORMAT(created_at, '%Y-%m-%d')
+	ORDER BY 
+		date ASC;
+	</select>
+	
 <!-- 사용자 관리 -->
 	<select id="adminMember" resultType="MemberDTO">
     	SELECT * 

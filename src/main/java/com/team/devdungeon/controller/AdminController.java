@@ -37,7 +37,13 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("./admin/admin");
 		
 		List<Map<String, Object>> today = adminService.adminToday();
+		List<Map<String, Object>> date = adminService.adminDate();
+		List<Map<String, Object>> visitor = adminService.adminVisitor();
+		
 		mv.addObject("today", today);
+		mv.addObject("date", date);
+		mv.addObject("visitor", visitor);
+		
 		
 		return mv;
 	}
