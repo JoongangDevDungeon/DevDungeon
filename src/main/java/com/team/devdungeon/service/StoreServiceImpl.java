@@ -56,6 +56,21 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    public int selectProductLog(String userId, String[] shoppingBag) {
+        Map<String, Object> cartInfo = new HashMap<>();
+        List<String> cart = new ArrayList<>();
+
+        for(String ele : shoppingBag) {
+            cart.add(ele);
+        }
+
+        cartInfo.put("member_id", userId);
+        cartInfo.put("cart", cart);
+
+        return storeDAO.selectProductLog(cartInfo);
+    }
+
+    @Override
     public int shoppingBagInsert(String userId, String[] shoppingBag, String sellType) {
         Map<String, Object> cartInfo = new HashMap<>();
         List<String> cart = new ArrayList<>();
@@ -126,5 +141,6 @@ public class StoreServiceImpl implements StoreService {
         payInfo.put("member_id", memberId);
         return storeDAO.payProduct(payInfo);
     }
+
 
 }

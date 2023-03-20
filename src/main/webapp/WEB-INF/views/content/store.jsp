@@ -51,10 +51,12 @@
                 data : {"shoppingBag" : shopping_bag, "sell_type" : "pay" },
                 dataType : "text",
                 success : function (result) {
-                    if(result > 0) {
+                    if(result == 1) {
                        if(confirm("구매 장바구니에 담았습니다.\n구매 화면으로 이동하겠습니까?")) {
                            location.href = "/payShoppingBag";
                        }
+                    } else if(result == 2) {
+                       alert("이미 구매한 아이콘이 있습니다.\n다시 한번 확인해주세요.");
                     } else {
                        alert("이미 구매 장바구니에 아이콘이 있습니다.\n다시 한번 확인해주세요.");
                     }

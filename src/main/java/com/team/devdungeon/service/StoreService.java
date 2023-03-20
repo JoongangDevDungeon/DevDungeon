@@ -10,4 +10,5 @@ public interface StoreService {
     List<Map<String, Object>> selectGiftShoppingBag(Object memberId);
     List<Map<String, Object>> couponList();
     int payProduct(int resultPrice, Object memberId);
+    int selectProductLog(String userId, String[] shoppingBag);
 }

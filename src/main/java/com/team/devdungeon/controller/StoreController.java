@@ -54,7 +54,14 @@ public class StoreController {
         String[] shoppingBag = request.getParameterValues("shoppingBag[]");
         String sellType = request.getParameter("sell_type");
 
-        return storeService.shoppingBagInsert(userId, shoppingBag, sellType);
+        int result = storeService.selectProductLog(userId, shoppingBag);
+        if(result < 1) {
+            result = storeService.shoppingBagInsert(userId, shoppingBag, sellType);
+        } else {
+            result = 2;
+        }
+
+        return result;
     }
 
 

@@ -20,6 +20,11 @@ public class StoreDAO {
         return sqlSession.selectList("store.iconList");
     }
 
+    public int selectProductLog(Map<String, Object> cartInfo) {
+        System.out.println(cartInfo);
+        return sqlSession.selectOne("store.selectProductLog", cartInfo);
+    }
+
     public int shoppingBagInsert(Map<String, Object> cartInfo) {
         System.out.println(cartInfo);
         int result = 0;
@@ -59,4 +64,5 @@ public class StoreDAO {
 
         return result;
     }
+
 }

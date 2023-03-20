@@ -11,6 +11,14 @@
             LIMIT 0, 8
     </select>
 
+    <select id="selectProductLog" parameterType="HashMap" resultType="Integer">
+        SELECT COUNT(*) FROM product_log
+            WHERE
+                emo_no IN <foreach open="(" close=")" separator="," collection="cart" item="cart">#{cart}</foreach>
+            AND
+                member_no = (SELECT member_no FROM member WHERE member_id = #{member_id});
+    </select>
+
     <insert id="shoppingBagInsert" parameterType="HashMap">
         INSERT INTO shopping_cart  (member_no, product_no, sell_type)
             VALUES
