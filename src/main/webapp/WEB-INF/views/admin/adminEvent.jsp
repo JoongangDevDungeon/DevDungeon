@@ -63,7 +63,7 @@ function moveNext(pageNo){
 				<tr>
 					<td>${row.event_no }</td>
 					<td>${row.event_title }</td>
-					<td>${row.event_date } - ${row.event_update }</td>
+					<td>${row.event_date } ~ ${row.event_end }</td>
 					<td>
 						<form action="/adminEvent" method="post">
 							<input type="hidden" name="event_no" value="${row.event_no }">
@@ -78,7 +78,9 @@ function moveNext(pageNo){
 			</table>
 			
 			<!-- 이벤트 글쓰기 버튼 -->
-			<div><button class="btn btn-primary" onclick="location.href='/adminEventWrite'">이벤트 글쓰기</button></div>
+			<div class="ED-btn">
+			<button class="btn btn-primary" onclick="location.href='/adminEventWrite'">이벤트 글쓰기</button>
+			</div><br><br>
 			
 			<!-- 페이징 -->
 			<div class="pagingBox">

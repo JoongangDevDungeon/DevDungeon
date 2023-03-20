@@ -11,11 +11,11 @@
 <!-- 메인 대쉬보드 -->
 	<select id="adminToday" resultType="HashMap">
 		SELECT 
-    (SELECT COUNT(*) FROM question_board WHERE question_board_status = 0) AS question_board_count,
-	 (SELECT COUNT(*) FROM member WHERE DATE_FORMAT(join_date, "%Y-%m-%d") = curdate()) AS join_today,
-	 (SELECT COUNT(*) FROM board WHERE DATE_FORMAT(board_date, "%Y-%m-%d") = curdate()) AS board_today,
-	 (SELECT COUNT(*) FROM product WHERE DATE_FORMAT(product_date, "%Y-%m-%d") = curdate()) AS new_product,
-	 (SELECT COUNT(DISTINCT ip) FROM logs WHERE DATE_FORMAT(created_at, "%Y-%m-%d") = curdate() AND ip is not NULL ) AS today_user;
+			(SELECT COUNT(*) FROM question_board WHERE question_board_status = 0) AS question_board_count,
+			(SELECT COUNT(*) FROM member WHERE DATE_FORMAT(join_date, "%Y-%m-%d") = curdate()) AS join_today,
+			(SELECT COUNT(*) FROM board WHERE DATE_FORMAT(board_date, "%Y-%m-%d") = curdate()) AS board_today,
+			(SELECT COUNT(*) FROM product WHERE DATE_FORMAT(product_date, "%Y-%m-%d") = curdate()) AS new_product,
+			(SELECT COUNT(DISTINCT ip) FROM logs WHERE DATE_FORMAT(created_at, "%Y-%m-%d") = curdate() AND ip is not NULL ) AS today_user;
 	</select>
 
 
@@ -37,7 +37,7 @@
 			</choose>
 			LIKE CONCAT('%', #{searchValue }, '%')
 		</if>
-		ORDER BY member_no ASC
+		ORDER BY member_no DESC
 		LIMIT #{startPage}, 10
     </select>
     
@@ -159,8 +159,9 @@
 	</select>
 <!-- 쿠폰 생성의 위한 데이터 뷰에담기 -->
 	<select id="AdminCouponView" resultType="HashMap">
-		SELECT event_no, event_title
-		FROM event
+		SELECT e.event_no, e.event_title, c.coupon_name
+		FROM event AS e
+		JOIN coupon AS c ON e.event_no = c.event_no
 		WHERE status_no = 1;
 	</select>
 	
@@ -305,7 +306,8 @@
 		insert into event
 		set tag_no = #{tag_no},
 			event_title = #{event_title},
-			event_content = #{event_content}
+			event_content = #{event_content},
+			event_end = #{event_end}
 	</insert>
 	
 <!-- 이벤트Del -->
@@ -331,6 +333,9 @@
 
 
 
+
+
+<!-- 수정 해야댐 -->
 <!-- 포인트 정산 -->
 	<select id="AdminPoint" parameterType="Integer" resultType="HashMap">
 		SELECT *
