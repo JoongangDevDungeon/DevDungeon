@@ -50,7 +50,7 @@
 function null_ck(){
 	let member_name = document.getElementById("member_name");
 	let msg_title = document.getElementById("msg_title");
-	let msg_content = document.getElementById("msg_content");정
+	let msg_content = document.getElementById("msg_content");
 	
 	if(member_name.value == ""){ alert("닉네임을 확인해주세요"); return false; }
 	if(msg_title.value == ""){ alert("제목을 입력해주세요"); return false; }

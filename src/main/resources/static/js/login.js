@@ -1,10 +1,24 @@
 $(function() {
-	var level = localStorage.getItem("member_level");
-	var point = localStorage.getItem("member_point");
+
+	let level = localStorage.getItem("member_level");
+	let point = localStorage.getItem("member_point");
  	if (level) { 
   		$("#member_level").text("Lv."+level+"  ");
  		$("#member_point").text("포인트 : "+point);
   	}
+
+         $.ajax({
+             type : "post",
+             url : "/login",
+             data : {"member_id" : member_id, "member_pw" : member_pw},
+             dataType : "json",
+             success : function (result) {
+                 level = result.member_level;
+                 point = result.member_point;
+                 $("#member_level").text("Lv."+level+"  ");
+                 $("#member_point").text("포인트 : "+point);
+             }
+         });
 
     $("#member_id").on("keyup",function(key){
         if(key.keyCode==13) {
@@ -27,7 +41,6 @@ $(function() {
  						$("#member_point").text("포인트 : "+member_point);
                         $("#guest").hide();
                         $("#login_success").show();
-                        
                         //값을 유지하기 위함
                         localStorage.setItem("member_level", member_level);
                         localStorage.setItem("member_point", member_point);
@@ -51,7 +64,6 @@ $(function() {
             $.ajax({
                 type : "post",
                 url : "/login",
-                async : false,
                 data : {"member_id" : member_id, "member_pw" : member_pw},
                 dataType : "json",
                 success : function (result) {
@@ -64,7 +76,6 @@ $(function() {
  						$("#member_point").text("포인트 : "+member_point);
                         $("#guest").hide();
                         $("#login_success").show();
-                        
                         //값을 유지하기 위함
                         localStorage.setItem("member_level", member_level);
                         localStorage.setItem("member_point", member_point);

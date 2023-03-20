@@ -3,6 +3,7 @@ package com.team.devdungeon.controller;
 import com.team.devdungeon.dto.LoginDTO;
 import com.team.devdungeon.dto.MyPageDTO;
 import com.team.devdungeon.service.LoginService;
+import com.team.devdungeon.service.MessageService;
 import com.team.devdungeon.service.MyPageService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class LoginController {
 
     private final LoginService loginService;
     private final MyPageService myPageService;
+    private final MessageService messageService;
 
     @PostMapping("/login")
     @ResponseBody
@@ -36,7 +38,10 @@ public class LoginController {
             HttpSession session = request.getSession();
             session.setAttribute("member_id", loginInfo.getMember_id());
             session.setAttribute("member_name", loginInfo.getMember_name());
+            int msgCnt = messageService.newMsgCnt(loginInfo.getMember_name());
             MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
+            System.out.println(msgCnt);
+            json.put("msgCnt", msgCnt);
             json.put("member_name", loginInfo.getMember_name());
             json.put("member_level", profile.getMember_level());
             json.put("member_point", profile.getMember_point());

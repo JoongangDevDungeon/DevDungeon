@@ -3,7 +3,7 @@
 <html>
 <head>
    <meta charset="UTF-8">
-   <title>메인 화면</title>
+   <title>쪽지함</title>
    <link rel="icon" href="/img/Gazi_shortCut.png" />
    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -24,22 +24,20 @@
 .msgBox_detail{
 	display: inline-block;
 	width:600px;
-	height:538px;
-	box-sizing: border-box;	
+	height:600px;
+	box-sizing: border-box;
 }
 
 .msg_detail{ 
 	display:inline-block;
 	width:600px;
-	height:37px;
-	line-height: 37px;
+	height:36px;
+	line-height: 36px;
 	background-color: #d3d3d3;
 	font-size: 20px;
 	font-weight: bold;
-	border-left: 2px solid black;
+	border-left: 1px solid black;
 	box-sizing: border-box;
-	
- 	
 }
 
 .msg_content{
@@ -51,7 +49,7 @@
 	font-weight: bold;	
 }
 .pagingBox{	width:600px; }
-
+.write_btn{ width:30px;  background-color: #ff3d3d; height:30px;}
 
 </style>
 <script>
@@ -62,14 +60,39 @@ $(function(){
 	$(".message").click(function(){
 		let msgNo = $(this).attr("value");
 		console.log($(".msg_content"+msgNo).val());
-		msgBox_detail
 		$("#msgBox_detail").val($(".msg_content"+msgNo).val());
 		$("#msg_content").val($(".msg_content"+msgNo).val());
 		if(msgNo == prev){ $("#msgBox_detail").toggle(); }
 		else{ $("#msgBox_detail").show(); }
 		prev = msgNo;
-	});
+		$.ajax({
+			type:"POST",
+			url: "/msgRead",
+			data: { 'msgNo' : msgNo },
+			dataType:"json",
+			success: function (data){
+				if(data==1){
+				// document.location.reload();
+					$(".msgread"+msgNo).load(location.href+" .msgread"+msgNo);
+				}
+			},
+			error: function(xhr,status,error){ alert("실패") }
+		});
 
+	});
+	$(".del").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			let del = $(this).val();
+			$.post({
+				url: "msgDel",
+				data:{'msgNo': del }
+			}).done(function(data){
+				document.location.reload();
+			}).fail(function(xhr,status,error){
+				alert("실패");
+			});
+		}
+	});
 });
 </script>
 <body>
@@ -90,6 +113,7 @@ $(function(){
 								<th class="col-3">제목</th>
 								<th class="col-3">날짜</th>
 								<th class="col-1">읽음</th>
+								<th class="col-1">삭제</th>
 							</tr>
 							<c:forEach var="msg" items="${list }">
 								<tr style="cursor: pointer;" class="message" value="${msg.message_no }">
@@ -99,19 +123,31 @@ $(function(){
 									<td>${msg.message_time }</td>
 									<td>
 									<c:choose>
-										<c:when test="${msg.read_or_not eq  'false' }"><b style="color:red;">x</b></c:when>
-										<c:otherwise><b style="color:blue;">o</b></c:otherwise>
+										<c:when test="${msg.read_or_not eq  'false' }"><b class="msgread${msg.message_no }" style="color:red;">x</b></c:when>
+										<c:otherwise><b class="msgread${msg.message_no }" style="color:blue; text-align: center;">o</b></c:otherwise>
 									</c:choose>
 									</td>
+									<td><button class="write_btn del" value="${msg.message_no }"><i class="xi-trash-o xi-x"></i></button></td>
 									<input type="hidden" class="msg_content${msg.message_no }" value="${msg.message_content }" >
 								</tr>
 							</c:forEach>
 						</table><br><br>
 					<%@ include file="../board/CSJpaging.jsp" %>
+						<br>
+						<div class="searchForm">
+							<form action="msgBox" method="get" id="searchForm">
+								<select name="searchType">
+									<option value="title">제목</option>
+									<option value="writer"
+										<c:if test='${searchType eq "writer"}'>selected</c:if>>글쓴이</option>
+								</select> <input type="text" name="searchValue" value="${searchValue }">
+								<button class="search_btn">검색</button>
+							</form>
+						</div>
 					</div>
 					<div class="msgBox_detail" id="msgBox_detail">
-						<span class="msg_detail">내용</span>
-						<textarea readonly="readonly" class="msg_content" id="msg_content"></textarea>
+						<span class="msg_detail">쪽지 내용</span>
+						<textarea style="border-radius: 0px 0px 20px 20px;" readonly="readonly" class="msg_content" id="msg_content"></textarea><br><br>
 					</div>
 				</div><!-- container -->
 				
