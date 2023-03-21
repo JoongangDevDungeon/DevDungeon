@@ -126,14 +126,15 @@ public class AdminService {
 	public int adminEventCount(Map<String, Object> pages) {
 		return adminDAO.adminEventCount(pages);
 	}
+	
+	public int adminLogCount(Map<String, Object> pages) {
+		return adminDAO.adminLogCount(pages);
+	}
 	//포인트 페이징 카운트(필요없을시 삭제)
 	public int adminPointCount(Map<String, Object> pages) {
 		return adminDAO.adminPointCount(pages);
 	}
 
-	public int adminLogCount(Map<String, Object> pages) {
-		return adminDAO.adminLogCount(pages);
-	}
 
 	public void adminEventWrite(EventDTO eventDTO) {
 		adminDAO.adminEventWrite(eventDTO);
