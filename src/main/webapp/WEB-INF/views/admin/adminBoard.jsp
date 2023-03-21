@@ -50,7 +50,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 	<div class="main">
 		<div class="container">
 			<h1>관리자 게시글 관리
-			<button class="btn btn-primary" onclick="location.href='/csjboard'">최보드</button>  
+			<button class="btn btn-primary" onclick="location.href='/csjboard'">최보드</button>
 			<button class="btn btn-primary" onclick="location.href='/board/HJHBoard'">홍보드</button>
 			</h1>
 			<hr class="hr1">

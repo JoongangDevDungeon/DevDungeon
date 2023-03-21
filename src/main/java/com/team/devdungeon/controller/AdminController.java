@@ -49,7 +49,7 @@ public class AdminController {
 	}
 	
 	//admin 막대그래프
-	@GetMapping("/admin/visitor")
+	@GetMapping("/admin/AdminMainStatistics")
 	@ResponseBody
 	public List<Map<String, Object>> adminVisitor() {
 		
@@ -223,15 +223,38 @@ public class AdminController {
 	public ModelAndView adminStatistics() {
 		ModelAndView mv = new ModelAndView("./admin/adminStatistics");
 		
-		List<Map<String, Object>> time = adminService.LogTime();
-		List<Map<String, Object>> day = adminService.LogDay();
+		return mv;
+	}
+	
+	//StatisticsMonth 막대그래프
+	@GetMapping("/admin/StatisticsMonth")
+	@ResponseBody
+	public List<Map<String, Object>> StatisticsMonth() {
+		
 		List<Map<String, Object>> month = adminService.LogMonth();
 		
-		mv.addObject("time", time);
-		mv.addObject("day" ,day);
-		mv.addObject("month", month);
+	    return month;
+	}
+	
+	//StatisticsDay 막대그래프
+	@GetMapping("/admin/StatisticsDay")
+	@ResponseBody
+	public List<Map<String, Object>> StatisticsDay() {
 		
-		return mv;
+		List<Map<String, Object>> day = adminService.LogDay();
+		
+		return day;
+	}
+	
+	
+	//StatisticsTime 막대그래프
+	@GetMapping("/admin/StatisticsTime")
+	@ResponseBody
+	public List<Map<String, Object>> StatisticsTime() {
+		
+		List<Map<String, Object>> time = adminService.LogTime();
+		
+	    return time;
 	}
 	
 	//쿠폰발급(페이징 서치바 추가)
