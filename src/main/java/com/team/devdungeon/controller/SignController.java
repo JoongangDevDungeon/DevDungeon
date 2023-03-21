@@ -189,21 +189,24 @@ public class SignController {
        }
     }
 
-    @GetMapping("/find_account")
+    @PostMapping("/find_account")
     public ModelAndView find_account(@RequestParam("member_email") String member_email) {
         ModelAndView user_email = new ModelAndView("sign/find_account");
         user_email.addObject("user_email", member_email);
         return user_email;
     }
 
-    @PostMapping("/find_account")
+    @PostMapping("/find_account_email")
     @ResponseBody
     public String find_account(HttpServletRequest request) throws EmailException {
+
         SignDTO signDTO = new SignDTO();
 
         signDTO.setVerify_code(request.getParameter("find_code"));
-        signDTO.setMember_email(request.getParameter("user_email"));
+        signDTO.setMember_email(request.getParameter("member_email"));
         String member_email = signDTO.getMember_email();
+
+        System.err.println(member_email);
 
 
         SignDTO result = signService.find_account(signDTO);
@@ -217,8 +220,8 @@ public class SignController {
 
     }
 
-    @GetMapping("/changePassword")
-    public ModelAndView changePassword(@RequestParam("member_email") String member_email) {
+    @PostMapping("/changePassword")
+    public ModelAndView changePassword(@RequestParam("user_email") String member_email) {
 
         ModelAndView user_email = new ModelAndView("sign/changePassword");
         user_email.addObject("user_email", member_email);
