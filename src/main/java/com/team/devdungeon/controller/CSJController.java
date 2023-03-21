@@ -39,6 +39,7 @@ import com.team.devdungeon.dto.MyPageDTO;
 import com.team.devdungeon.service.CSJService;
 import com.team.devdungeon.service.MyPageService;
 import com.team.devdungeon.util.SFTPFileUtil;
+import com.team.devdungeon.util.TextChangeUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -49,6 +50,7 @@ public class CSJController {
 	private final CSJService csjService;
 	private final MyPageService mypageService;
 	private final SFTPFileUtil sftpFileUtil;
+	private final TextChangeUtil textChangeUtil;
 
 	@GetMapping("/csjboard")
 	public ModelAndView csjboard(@RequestParam(defaultValue = "1") Integer pageNo, HttpServletRequest request) {
@@ -101,7 +103,9 @@ public class CSJController {
 		} else {
 			String writer = (String) session.getAttribute("member_name");
 			String title = request.getParameter("title");
+			title = textChangeUtil.changeText(title);
 			String content = request.getParameter("content");
+			content = textChangeUtil.changeText(content);
 			String category = request.getParameter("category");
 			String tag = request.getParameter("tag");
 			Map<String, Object> writemap = new HashMap<String, Object>();
