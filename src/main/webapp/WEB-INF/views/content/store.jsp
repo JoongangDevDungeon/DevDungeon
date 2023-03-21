@@ -157,7 +157,7 @@
                                     <span style="display: block; width: 228px; height: 37.5px; float: left; padding-right: 50px; box-sizing: border-box;">등록일&nbsp;&nbsp;:&nbsp;&nbsp;<fmt:formatDate value="${iconList.product_update}" pattern="yyyy-MM-dd" type="date"/></span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                    <span style="display: block; width: 100px; height: 37.5px; float: left;"><span class="pay_one" value="${iconList.product_no}">구매</span>&nbsp;|&nbsp;<span class="gift_one" value="${iconList.product_no}">선물</span></span>
+                                    <span style="display: block; width: 100px; height: 37.5px; float: left;"><span class="pay_one" value="${iconList.product_no}">구매</span><!--&nbsp;|&nbsp;<span class="gift_one" value="${iconList.product_no}">선물</span>--></span>
                                     <span style="display: block; width: 108px; height: 37.5px; float: left;">신청:<c:choose><c:when test="${iconList.member_name != null}">${iconList.member_name}</c:when><c:otherwise>탈퇴자</c:otherwise></c:choose></span>
                                  </div>
                               </div>
@@ -169,9 +169,10 @@
                      </div>
                      <div class="mt-3" style="width: 660px; float: left; position: relative;">
                         <button class="btn btn-primary" style="position: absolute; left: 0;" onclick="location.href='/iconApply'">아이콘 신청</button>
+                        <button class="btn btn-primary" style="position: absolute; left: 0;" onclick="location.href='/payShoppingBag'">장바구니</button>
                         <div style="position: absolute; right: 0;">
                            <button class="btn btn-primary" id="pay_shopping_bag">구매</button>
-                           <button class="btn btn-primary" id="gift_shopping_bag">선물</button>
+                           <!--<button class="btn btn-primary" id="gift_shopping_bag">선물</button>-->
                         </div>
                      </div>
                   </div>
