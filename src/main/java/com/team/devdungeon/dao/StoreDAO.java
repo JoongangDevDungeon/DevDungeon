@@ -6,7 +6,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +15,8 @@ public class StoreDAO {
 
     private final SqlSession sqlSession;
 
-    public List<Map<String, Object>> iconList() {
-        return sqlSession.selectList("store.iconList");
+    public List<Map<String, Object>> iconList(Map<String, Object> pages) {
+        return sqlSession.selectList("store.iconList", pages);
     }
 
     public int selectProductLog(Map<String, Object> cartInfo) {
@@ -75,4 +74,7 @@ public class StoreDAO {
         return result;
     }
 
+    public int iconListCount(Map<String, Object> pages) {
+        return sqlSession.selectOne("store.iconListCount", pages);
+    }
 }

@@ -28,15 +28,40 @@ public class StoreController {
     private final SFTPFileUtil sftpFileUtil;
 
     @GetMapping("/store")
-    public ModelAndView store(HttpSession session) {
+    public ModelAndView store(HttpServletRequest request, HttpSession session, @RequestParam(value="pageNo", defaultValue = "1") int pageNo) {
         ModelAndView mv = new ModelAndView();
 
         if(session.getAttribute("member_id") != null || session.getAttribute("id") != null ) {
-            List<Map<String, Object>> iconList = storeService.iconList();
             MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
 
+            Map<String, Object> pages = new HashMap<String, Object>();
+
+            String searchValue = request.getParameter("searchValue");
+            pages.put("searchValue", searchValue);
+
+            int startPage = (pageNo*8)-8;
+            int totalCount = storeService.iconListCount(pages);
+            int lastPage = (int)Math.ceil((double)totalCount/8);
+
+            pages.put("startPage", startPage);
+            pages.put("lastPage", lastPage);
+
+            List<Map<String, Object>> iconList = storeService.iconList(pages);
+
+            mv.addObject("pages", pages);
             mv.addObject("iconList", iconList);
             mv.addObject("profile", profile);
+            mv.addObject("pageNo", pageNo);
+
+            System.out.println(totalCount);
+            System.out.println(startPage);
+            System.out.println(lastPage);
+
+            System.out.println("pages : " + pages);
+            System.out.println("iconList : " + iconList);
+            System.out.println("profile : " + profile);
+            System.out.println("pageNo : " + pageNo);
+
             mv.setViewName("content/store");
         } else {
             mv.setViewName("redirect:/index?error=not_login");

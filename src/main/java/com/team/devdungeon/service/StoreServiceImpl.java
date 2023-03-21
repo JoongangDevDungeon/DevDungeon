@@ -18,8 +18,8 @@ public class StoreServiceImpl implements StoreService {
     private final StoreDAO storeDAO;
 
     @Override
-    public List<Map<String, Object>> iconList() {
-        List<Map<String, Object>> result = storeDAO.iconList();
+    public List<Map<String, Object>> iconList(Map<String, Object> pages) {
+        List<Map<String, Object>> result = storeDAO.iconList(pages);
 
         InputStream inputStream = null;
         ByteArrayOutputStream baos = null;
@@ -52,6 +52,11 @@ public class StoreServiceImpl implements StoreService {
         }
 
         return result;
+    }
+
+    @Override
+    public int iconListCount(Map<String, Object> pages) {
+        return storeDAO.iconListCount(pages);
     }
 
     @Override
