@@ -39,6 +39,7 @@ import com.team.devdungeon.dto.MyPageDTO;
 import com.team.devdungeon.service.CSJService;
 import com.team.devdungeon.service.MyPageService;
 import com.team.devdungeon.util.SFTPFileUtil;
+import com.team.devdungeon.util.TextChangeUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -49,6 +50,7 @@ public class CSJController {
 	private final CSJService csjService;
 	private final MyPageService mypageService;
 	private final SFTPFileUtil sftpFileUtil;
+	private final TextChangeUtil textChangeUtil;
 
 	@GetMapping("/csjboard")
 	public ModelAndView csjboard(@RequestParam(defaultValue = "1") Integer pageNo, HttpServletRequest request) {
@@ -101,7 +103,9 @@ public class CSJController {
 		} else {
 			String writer = (String) session.getAttribute("member_name");
 			String title = request.getParameter("title");
+			title = textChangeUtil.changeText(title);
 			String content = request.getParameter("content");
+			content = textChangeUtil.changeText(content);
 			String category = request.getParameter("category");
 			String tag = request.getParameter("tag");
 			Map<String, Object> writemap = new HashMap<String, Object>();
@@ -176,7 +180,9 @@ public class CSJController {
 			return mv;
 		} else {
 			String title = request.getParameter("title");
+			title = textChangeUtil.changeText(title);
 			String content = request.getParameter("content");
+			content = textChangeUtil.changeText(content);
 			String tag = request.getParameter("tag");
 			String bno = request.getParameter("bno");
 			Map<String, Object> updatemap = new HashMap<String, Object>();
@@ -259,6 +265,7 @@ public class CSJController {
 		String writer = (String) session.getAttribute("member_name");
 
 		String content = request.getParameter("commentContent");
+		content = textChangeUtil.changeText(content);
 		Map<String, Object> comment = new HashMap<String, Object>();
 		comment.put("board_no", bno);
 		comment.put("writer", writer);
@@ -279,6 +286,7 @@ public class CSJController {
 		HttpSession session = request.getSession();
 		String writer = (String) session.getAttribute("member_name");
 		String content = request.getParameter("commentContent");
+		content = textChangeUtil.changeText(content);
 		String root = request.getParameter("root");
 		Map<String, Object> comment = new HashMap<String, Object>();
 		comment.put("board_no", bno);
@@ -359,6 +367,7 @@ public class CSJController {
 				String banBoard = request.getParameter("banBoard");
 				String banMember = request.getParameter("banMember");
 				String banWhy = request.getParameter("banWhy");
+				banWhy = textChangeUtil.changeText(banWhy);
 				String singoman = (String) request.getSession().getAttribute("member_name");
 				Map<String, Object> banMap = new HashMap<String, Object>();
 				banMap.put("banComment", banComment);
@@ -411,8 +420,8 @@ public class CSJController {
 	@PostMapping("/qnaWrite")
 	public String qnaWrite(HttpServletRequest request,HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("title", request.getParameter("title"));
-		map.put("content", request.getParameter("content"));
+		map.put("title", textChangeUtil.changeText(request.getParameter("title")));
+		map.put("content", textChangeUtil.changeText(request.getParameter("content")));
 		map.put("member_name", session.getAttribute("member_name"));
 		int result = (int)csjService.qnaWrite(map);
 		//json형태로 내보내기

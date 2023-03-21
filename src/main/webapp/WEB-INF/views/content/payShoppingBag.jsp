@@ -38,6 +38,7 @@
          if(result_price == "" || result_price == null) {
             result_price = total_price;
          }
+
          console.log("최종 결제 금액 : " + result_price);
          $.post({
             url : "/payProduct",
@@ -62,7 +63,7 @@
       coupon_type = type;
       coupon_content = content;
       sale_price = total_price * (coupon_content / 100);
-      result_price = total_price - sale_price;
+      result_price = Math.floor(total_price - sale_price);
 
       document.getElementById("result_price").innerHTML = result_price;
 

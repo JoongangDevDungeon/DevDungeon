@@ -28,15 +28,17 @@
             }
 
             $.ajax({
-                url: 'find_account',
+                url: 'find_account_email',
                 type: 'post',
-                data: {"find_code": $("#find_code").val(),"user_email": $("#user_email").val()},
+                data: {"find_code": $("#find_code").val(),"member_email": $("#user_email").val()},
                 dataType: 'text',
                 success: function (result) {
                     if (result == 1) {
                         alert("인증코드를 올바르게 입력해주세요.");
                     }else{
-                        window.location.href = "/changePassword?member_email=" + $("#user_email").val();
+                        $(".change").attr("action", "/changePassword");
+                        $(".change").attr("method", "post")
+                        $(".change").submit();
                     }
                 },
                 error: function () {
@@ -50,7 +52,7 @@
 <body>
     <div>
         <div class="banner"><img src="/img/banner.png"></div>
-        <form action="/find_account" method="post">
+        <form class="change">
             <div class="form-control find-form">
                 <label class="find-label mt-4">계정 찾기</label>
                 <div class="find-info mb-5">
@@ -58,7 +60,7 @@
                     <button class="btn btn-primary find-btn mt-3" id="find_account" type="button">인증하기</button>
                 </div>
             </div>
-            <input id="user_email" name="user_email" type="hidden" value="${user_email}">
+            <input id="user_email" name="user_email" type="text" value="${user_email}">
         </form>
     </div>
 </body>

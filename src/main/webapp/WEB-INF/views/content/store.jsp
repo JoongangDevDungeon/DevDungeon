@@ -10,7 +10,6 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
    <link rel="stylesheet" href="/css/layout.css">
-   <script type="text/javascript" src="/js/BoardSearch.js"></script>
 </head>
 <style>
    /* adminPaging*/
@@ -56,18 +55,26 @@
    }
 </style>
 <script>
+   function search(){	//검색 체크
+      let searchValue = document.getElementById("searchValue");
+      if(searchValue.value=="") {
+         alert("검색어를 입력해주세요");
+         return false;
+      }
+   }
+
    function moveBefore(pageNo){	//페이징 시작
       let searchValue = document.getElementById("searchValue");
       let url =  document.location.href.split("?",1);
       if(pageNo < 1) { return false; }
       else if (pageNo != 1){
-         if(searchValue.value != "" || searchValue.value != null){
+         if(searchValue.value != ""){
             location.href=url+"?searchValue="+searchValue.value+"&pageNo="+(pageNo-1);
          }else{
             location.href="/store?pageNo="+(pageNo-1);
          }
       }else{
-         if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+         if(searchValue.value != ""){
             location.href=url+"?searchValue="+searchValue.value+"&pageNo="+1;
          }else{
             location.href="/store?pageNo="+1;
@@ -82,7 +89,7 @@
       if(pageNo > ${pages.lastPage } ) { return false; }
       else if (pageNo != ${pages.lastPage } ){
 
-         if(searchValue.value != "" || searchValue.value != null){
+         if(searchValue.value != ""){
             location.href=url+"?searchValue="+searchValue.value+"&pageNo="+(pageNo+1);
          }else{
             location.href="/store?pageNo="+(pageNo+1);
@@ -90,13 +97,23 @@
 
       }else if(pageNo == ${pages.lastPage }){
 
-         if(searchValue.value != "" || searchValue.value != null){
+         if(searchValue.value != ""){
             location.href=url+"?searchValue="+searchValue.value+"&pageNo="+pageNo;
          }else{
             location.href="/store?pageNo="+pageNo;
          }
       }
    }
+   function move(pageNo){
+      let searchValue = document.getElementById("searchValue");
+      let url =  document.location.href.split("?");
+      if(searchValue.value != ""){
+         location.href=url[0]+"?searchValue="+searchValue.value+"&pageNo="+pageNo;
+      }else{
+         location.href="/store?pageNo="+pageNo;
+      }
+
+   }//페이징 끝
 
 
    $(function() {
@@ -140,9 +157,7 @@
                 dataType : "text",
                 success : function (result) {
                     if(result == 1) {
-                       if(confirm("구매 장바구니에 담았습니다.\n구매 화면으로 이동하겠습니까?")) {
-                           location.href = "/payShoppingBag";
-                       }
+                       alert("구매 장바구니에 담았습니다.");
                     } else if(result == 2) {
                        alert("이미 구매한 아이콘이 있습니다.\n다시 한번 확인해주세요.");
                     } else {
@@ -219,9 +234,6 @@
                      </form>
                   </div>
 
-                  <div class="mt-3 list-group" style="width: 200px; height: 65px;">
-                     <button class="btn btn-primary" style="width: 200px; height: 30px; margin-top: 5px;" onclick="location.href='/payShoppingBag'">장바구니</button>
-                  </div>
                </div>
                <!-- 아이콘 목록 화면 전체 -->
                <div style="width: 950px; height: 800px; margin-left: 50px; float: left;">
@@ -274,7 +286,8 @@
                         <button class="btn btn-primary" style="position: absolute; left: 0;" onclick="location.href='/iconApply'">아이콘 신청</button>
 
                         <div style="position: absolute; right: 0;">
-                           <button class="btn btn-primary" id="pay_shopping_bag">구매</button>
+                           <button class="btn btn-primary" id="pay_shopping_bag">장바구니 추가</button>
+                           <button class="btn btn-primary" onclick="location.href='/payShoppingBag'">결제하기</button>
                            <!--<button class="btn btn-primary" id="gift_shopping_bag">선물</button>-->
                         </div>
                      </div>

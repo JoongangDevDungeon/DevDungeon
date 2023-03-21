@@ -120,8 +120,12 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 						<button class="search_btn">검색</button>
 					</form>
 				</div>
-				<!-- 글쓰기 -->
+				<!-- 관리자 페이지 이동 -->
 				<div class="write">
+					<c:if test="${sessionScope.id eq 'admin' }">
+						<button class="write_btn" style="background-color: #ff3d3d; margin-right: 10px;" onclick="location.href='/admin'">관리자</button>
+					</c:if>
+				<!-- 글쓰기 -->
 					<c:if test="${sessionScope.id eq 'admin' }">
 						<button class="write_btn" onclick="location.href='/noticeWrite'">글쓰기</button>
 					</c:if>
