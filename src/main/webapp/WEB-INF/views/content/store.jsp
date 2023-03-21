@@ -58,7 +58,9 @@
                     } else if(result == 2) {
                        alert("이미 구매한 아이콘이 있습니다.\n다시 한번 확인해주세요.");
                     } else {
-                       alert("이미 구매 장바구니에 아이콘이 있습니다.\n다시 한번 확인해주세요.");
+                       if(confirm("이미 구매 장바구니에 아이콘이 있습니다.\n구매 화면으로 이동하겠습니까?.")) {
+                           location.href = "/payShoppingBag";
+                       }
                     }
                 },
                 error : function () {
@@ -126,6 +128,10 @@
                      <input class="form-control" type="text" style="width: 200px; height: 30px;" placeholder="아이콘 이름을 입력하세요.">
                      <button class="btn btn-primary" type="text" style="width: 200px; height: 30px; margin-top: 5px;">검색</button>
                   </div>
+
+                  <div class="mt-3 list-group" style="width: 200px; height: 65px;">
+                     <button class="btn btn-primary" style="width: 200px; height: 30px; margin-top: 5px;" onclick="location.href='/payShoppingBag'">장바구니</button>
+                  </div>
                </div>
                <!-- 아이콘 목록 화면 전체 -->
                <div style="width: 950px; height: 800px; margin-left: 50px; float: left;">
@@ -155,7 +161,7 @@
                                     <span style="display: block; width: 228px; height: 37.5px; float: left; padding-right: 50px; box-sizing: border-box;">등록일&nbsp;&nbsp;:&nbsp;&nbsp;<fmt:formatDate value="${iconList.product_update}" pattern="yyyy-MM-dd" type="date"/></span>
                                  </div>
                                  <div style="width: inherit; height: 37.5px; line-height: 37px;">
-                                    <span style="display: block; width: 100px; height: 37.5px; float: left;"><span class="pay_one" value="${iconList.product_no}">구매</span>&nbsp;|&nbsp;<span class="gift_one" value="${iconList.product_no}">선물</span></span>
+                                    <span style="display: block; width: 100px; height: 37.5px; float: left;"><span class="pay_one" value="${iconList.product_no}">구매</span><!--&nbsp;|&nbsp;<span class="gift_one" value="${iconList.product_no}">선물</span>--></span>
                                     <span style="display: block; width: 108px; height: 37.5px; float: left;">신청:<c:choose><c:when test="${iconList.member_name != null}">${iconList.member_name}</c:when><c:otherwise>탈퇴자</c:otherwise></c:choose></span>
                                  </div>
                               </div>
@@ -167,9 +173,10 @@
                      </div>
                      <div class="mt-3" style="width: 660px; float: left; position: relative;">
                         <button class="btn btn-primary" style="position: absolute; left: 0;" onclick="location.href='/iconApply'">아이콘 신청</button>
+
                         <div style="position: absolute; right: 0;">
                            <button class="btn btn-primary" id="pay_shopping_bag">구매</button>
-                           <button class="btn btn-primary" id="gift_shopping_bag">선물</button>
+                           <!--<button class="btn btn-primary" id="gift_shopping_bag">선물</button>-->
                         </div>
                      </div>
                   </div>

@@ -62,7 +62,9 @@ public class StoreDAO {
                 icons.add(map.get("product_no"));
             }
             payInfo.put("icons", icons);
-            result = sqlSession.insert("store.insertProductNo", payInfo);
+
+            sqlSession.insert("store.insertProductNo", payInfo);
+            sqlSession.update("store.productSellCountDown", payInfo);
             result = sqlSession.delete("store.deleteCart", payInfo);
         }
 

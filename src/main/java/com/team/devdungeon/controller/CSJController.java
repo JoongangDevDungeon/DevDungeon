@@ -313,6 +313,9 @@ public class CSJController {
 	public String eventJoin(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		HttpSession session = request.getSession();
+		if(session.getAttribute("member_id")==null) {
+			return "redirect:" + request.getHeader("Referer");
+		}
 		String member_id = (String) session.getAttribute("member_id");
 		String event_no = request.getParameter("event_no");
 		map.put("event_no", event_no);

@@ -83,6 +83,9 @@
 function sendMessageTo(receiver){
 	window.open("/message?receiver="+receiver,'쪽지', 'width=510px,height=450px,scrollbars=yes');
 }
+function sendPointTo(receiver){
+	window.open("/sendPoint?receiver="+receiver,'쪽지', 'width=510px,height=450px,scrollbars=yes');
+}
 </script>
 <style>
 .commentAll {
@@ -98,7 +101,8 @@ function sendMessageTo(receiver){
 }
 
 .detailInfo {
-	height: 30px;
+	height: 40px;
+	line-height: 40px;
 	border-bottom: 1px solid black;
 	border-top : 1px solid black;
 }
@@ -157,7 +161,7 @@ function sendMessageTo(receiver){
 				<div class="detailBody">
 					<div class="detailTitle">${det.board_title }</div>
 					<div class="detailInfo d-flex justify-content-around">
-						<span>글쓴이 : ${det.member_name } <span onclick="sendMessageTo('${det.member_name }')"><img src="/img/send.png" style="width:30px; height:30px;"></span><input type="hidden" id="detailWriter" value="${det.member_name }"></span> 
+						<span>글쓴이 : ${det.member_name } <span onclick="sendMessageTo('${det.member_name }')"><img src="/img/send.png" style="width:30px; height:30px;"><span onclick="sendPointTo'${det.member_name }')"><img src="/img/point.png" style="width:30px; height:30px;"></span></span><input type="hidden" id="detailWriter" value="${det.member_name }"></span> 
 						<span>${det.board_date } </span>
 						<span>조회수 : ${det.board_read }</span>
 					</div>
