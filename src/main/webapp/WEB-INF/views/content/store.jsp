@@ -10,7 +10,6 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
    <link rel="stylesheet" href="/css/layout.css">
-   <script type="text/javascript" src="/js/BoardSearch.js"></script>
 </head>
 <style>
    /* adminPaging*/
@@ -56,18 +55,26 @@
    }
 </style>
 <script>
+   function search(){	//검색 체크
+      let searchValue = document.getElementById("searchValue");
+      if(searchValue.value=="") {
+         alert("검색어를 입력해주세요");
+         return false;
+      }
+   }
+
    function moveBefore(pageNo){	//페이징 시작
       let searchValue = document.getElementById("searchValue");
       let url =  document.location.href.split("?",1);
       if(pageNo < 1) { return false; }
       else if (pageNo != 1){
-         if(searchValue.value != "" || searchValue.value != null){
+         if(searchValue.value != ""){
             location.href=url+"?searchValue="+searchValue.value+"&pageNo="+(pageNo-1);
          }else{
             location.href="/store?pageNo="+(pageNo-1);
          }
       }else{
-         if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+         if(searchValue.value != ""){
             location.href=url+"?searchValue="+searchValue.value+"&pageNo="+1;
          }else{
             location.href="/store?pageNo="+1;
@@ -82,7 +89,7 @@
       if(pageNo > ${pages.lastPage } ) { return false; }
       else if (pageNo != ${pages.lastPage } ){
 
-         if(searchValue.value != "" || searchValue.value != null){
+         if(searchValue.value != ""){
             location.href=url+"?searchValue="+searchValue.value+"&pageNo="+(pageNo+1);
          }else{
             location.href="/store?pageNo="+(pageNo+1);
@@ -90,13 +97,23 @@
 
       }else if(pageNo == ${pages.lastPage }){
 
-         if(searchValue.value != "" || searchValue.value != null){
+         if(searchValue.value != ""){
             location.href=url+"?searchValue="+searchValue.value+"&pageNo="+pageNo;
          }else{
             location.href="/store?pageNo="+pageNo;
          }
       }
    }
+   function move(pageNo){
+      let searchValue = document.getElementById("searchValue");
+      let url =  document.location.href.split("?");
+      if(searchValue.value != ""){
+         location.href=url[0]+"?searchValue="+searchValue.value+"&pageNo="+pageNo;
+      }else{
+         location.href="/store?pageNo="+pageNo;
+      }
+
+   }//페이징 끝
 
 
    $(function() {
