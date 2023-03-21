@@ -2,13 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="store">
 
-    <select id="iconList" resultType="HashMap">
+    <select id="iconListCount" parameterType="HashMap" resultType="Integer">
+        SELECT COUNT(*) FROM product
+        <if test="searchValue != null">
+            WHERE
+            product_name LIKE CONCAT('%', #{searchValue }, '%')
+        </if>
+    </select>
+
+    <select id="iconList" parameterType="HashMap" resultType="HashMap">
         SELECT product_no, product_name, product_price, product_update, product_sell_cnt, emo_img_name, emo_img_extension, (SELECT member_name FROM member m WHERE m.member_no = p.member_no) as member_name
             FROM product p
                 WHERE
                     emoticon_authority = 1
+                AND
+                    product_sell_cnt > 0
+            <if test="searchValue != null">
+                AND
+                product_name LIKE CONCAT('%', #{searchValue }, '%')
+            </if>
                 ORDER BY product_no DESC
-            LIMIT 0, 8
+        LIMIT #{startPage}, 8
     </select>
 
     <select id="selectProductLog" parameterType="HashMap" resultType="Integer">
@@ -74,6 +88,17 @@
             VALUES
                 ((SELECT member_no FROM member WHERE member_id = #{member_id}), 4, -#{pay_price})
     </insert>
+
+    <update id="productSellCountDown" parameterType="HashMap">
+
+        UPDATE product
+            SET
+                product_sell_cnt = product_sell_cnt - 1
+            WHERE
+
+                product_no IN<foreach collection="icons" item="icons" open="(" close=")" separator=",">#{icons}</foreach>
+
+    </update>
 
     <insert id="insertProductNo" parameterType="HashMap">
         INSERT INTO product_log (emo_no, member_no)

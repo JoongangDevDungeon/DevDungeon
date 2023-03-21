@@ -46,6 +46,7 @@
             success : function (result) {
                if(result == 1) {
                   alert("아이콘 구매 완료!");
+                  location.href = "/store";
                } else {
                   alert("포인트가 부족합니다.");
                }
@@ -125,7 +126,7 @@
                <div class="mt-3" style="width: 700px; height: 100px; margin: 0 auto;">
                   <div style="width: 700px;">
                      <button class="btn btn-primary" style="float: left; width: 700px;" id="pay_btn" type="button">구매</button>
-                     <button class="btn btn-secondary mt-2" style="float: left; width: 700px; background-color: white; border: 1px solid #ccc; color: black;" onclick="location.href='/gifctShoppingBag'" type="button">선물 장바구니</button>
+<%--                     <button class="btn btn-secondary mt-2" style="float: left; width: 700px; background-color: white; border: 1px solid #ccc; color: black;" onclick="location.href='/gifctShoppingBag'" type="button">선물 장바구니</button>--%>
                   </div>
                </div>
             </div>
