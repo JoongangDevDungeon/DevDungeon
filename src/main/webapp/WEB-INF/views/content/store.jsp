@@ -8,9 +8,97 @@
    <link rel="icon" href="/img/Gazi_shortCut.png" />
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
    <link rel="stylesheet" href="/css/layout.css">
+   <script type="text/javascript" src="/js/BoardSearch.js"></script>
 </head>
+<style>
+   /* adminPaging*/
+   .pagingBox{	width:700px; margin:0 auto; }
+   .pagingList{
+      margin:0;
+      padding:0;
+      list-style: none;
+      display: flex;
+      justify-content: start;
+      justify-content: center;
+      font-size: 13px;
+   }
+   .pageNo{
+      cursor: pointer;
+      width:30px;
+      height:30px;
+      text-align: center;
+      line-height: 30px;
+      border-radius: 5px;
+   }
+   .pageNo:hover{ background-color: #d3d3d3; }
+   .page_btn{
+      background-color: #6867AC;
+      margin:0 2px;
+      color:white;
+      font-weight: bold;
+      font-size: 14px;
+   }
+   .page_btn:hover{ background-color: #8887cc; }
+
+   /* adminSearch bar */
+   .searchForm{ display: flex; justify-content: center; }
+   .search_btn{
+      background-color: #6867AC;
+      border:none;
+      border-radius: 5px;
+      font-size: 15px;
+      width:60px;
+      height:30px;
+      color:white;
+      font-weight: bold;
+   }
+</style>
 <script>
+   function moveBefore(pageNo){	//페이징 시작
+      let searchValue = document.getElementById("searchValue");
+      let url =  document.location.href.split("?",1);
+      if(pageNo < 1) { return false; }
+      else if (pageNo != 1){
+         if(searchValue.value != "" || searchValue.value != null){
+            location.href=url+"?searchValue="+searchValue.value+"&pageNo="+(pageNo-1);
+         }else{
+            location.href="/store?pageNo="+(pageNo-1);
+         }
+      }else{
+         if((searchType.value != null && searchType.value != "none") && searchValue.value != null){
+            location.href=url+"?searchValue="+searchValue.value+"&pageNo="+1;
+         }else{
+            location.href="/store?pageNo="+1;
+         }
+      }
+   }
+
+   function moveNext(pageNo){	//페이지 뒤쪽 버튼
+      let searchValue = document.getElementById("searchValue");
+      let url =  document.location.href.split("?",1);
+
+      if(pageNo > ${pages.lastPage } ) { return false; }
+      else if (pageNo != ${pages.lastPage } ){
+
+         if(searchValue.value != "" || searchValue.value != null){
+            location.href=url+"?searchValue="+searchValue.value+"&pageNo="+(pageNo+1);
+         }else{
+            location.href="/store?pageNo="+(pageNo+1);
+         }
+
+      }else if(pageNo == ${pages.lastPage }){
+
+         if(searchValue.value != "" || searchValue.value != null){
+            location.href=url+"?searchValue="+searchValue.value+"&pageNo="+pageNo;
+         }else{
+            location.href="/store?pageNo="+pageNo;
+         }
+      }
+   }
+
+
    $(function() {
       const shopping_bag = [];
 
@@ -125,8 +213,10 @@
 
                   <!-- 아이콘 검색 -->
                   <div class="mt-3 list-group" style="width: 200px; height: 65px;">
-                     <input class="form-control" type="text" style="width: 200px; height: 30px;" placeholder="아이콘 이름을 입력하세요.">
-                     <button class="btn btn-primary" type="text" style="width: 200px; height: 30px; margin-top: 5px;">검색</button>
+                     <form action="/store" method="get" onsubmit="return search()">
+                        <input type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
+                        <button class="search_btn">검색</button>
+                     </form>
                   </div>
 
                   <div class="mt-3 list-group" style="width: 200px; height: 65px;">
@@ -169,7 +259,16 @@
                         </div>
                      </c:forEach>
                      <div class="mt-5 mb-4" style="width: 660px; float: left;">
-                        <span>페이징</span>
+                        <!-- 페이징 -->
+                        <div class="pagingBox">
+                           <ul class="pagingList">
+                              <li class="pageNo page_btn" onclick="moveBefore(${pageNo})"><i class="xi-step-backward xi-x"></i></li>
+                              <c:forEach var="i" begin="${Math.floor((pageNo-1)/8)*8+1 }" end="${Math.floor((pageNo-1)/8)*8+8 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}">
+                                 <li class="pageNo" onclick="move(${i })" <c:if test="${pageNo eq i }" >style="color:red; font-weight: bold;"</c:if>>${i }</li>
+                              </c:forEach>
+                              <li class="pageNo page_btn" onclick="moveNext(${pageNo})"><i class="xi-step-forward xi-x"></i></li>
+                           </ul>
+                        </div>
                      </div>
                      <div class="mt-3" style="width: 660px; float: left; position: relative;">
                         <button class="btn btn-primary" style="position: absolute; left: 0;" onclick="location.href='/iconApply'">아이콘 신청</button>
