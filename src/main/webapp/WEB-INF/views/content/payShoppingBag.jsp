@@ -46,6 +46,7 @@
             success : function (result) {
                if(result == 1) {
                   alert("아이콘 구매 완료!");
+                  location.href = "/store";
                } else {
                   alert("포인트가 부족합니다.");
                }

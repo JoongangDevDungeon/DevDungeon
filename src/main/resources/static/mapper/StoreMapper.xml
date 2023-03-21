@@ -7,6 +7,8 @@
             FROM product p
                 WHERE
                     emoticon_authority = 1
+                AND
+                    product_sell_cnt > 0
                 ORDER BY product_no DESC
             LIMIT 0, 8
     </select>
@@ -74,6 +76,17 @@
             VALUES
                 ((SELECT member_no FROM member WHERE member_id = #{member_id}), 4, -#{pay_price})
     </insert>
+
+    <update id="productSellCountDown" parameterType="HashMap">
+
+        UPDATE product
+            SET
+                product_sell_cnt = product_sell_cnt - 1
+            WHERE
+
+                product_no IN<foreach collection="icons" item="icons" open="(" close=")" separator=",">#{icons}</foreach>
+
+    </update>
 
     <insert id="insertProductNo" parameterType="HashMap">
         INSERT INTO product_log (emo_no, member_no)

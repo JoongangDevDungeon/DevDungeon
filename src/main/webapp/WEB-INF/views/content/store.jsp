@@ -58,7 +58,9 @@
                     } else if(result == 2) {
                        alert("이미 구매한 아이콘이 있습니다.\n다시 한번 확인해주세요.");
                     } else {
-                       alert("이미 구매 장바구니에 아이콘이 있습니다.\n다시 한번 확인해주세요.");
+                       if(confirm("이미 구매 장바구니에 아이콘이 있습니다.\n구매 화면으로 이동하겠습니까?.")) {
+                           location.href = "/payShoppingBag";
+                       }
                     }
                 },
                 error : function () {
