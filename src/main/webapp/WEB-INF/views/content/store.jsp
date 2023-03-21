@@ -128,6 +128,10 @@
                      <input class="form-control" type="text" style="width: 200px; height: 30px;" placeholder="아이콘 이름을 입력하세요.">
                      <button class="btn btn-primary" type="text" style="width: 200px; height: 30px; margin-top: 5px;">검색</button>
                   </div>
+
+                  <div class="mt-3 list-group" style="width: 200px; height: 65px;">
+                     <button class="btn btn-primary" style="width: 200px; height: 30px; margin-top: 5px;" onclick="location.href='/payShoppingBag'">장바구니</button>
+                  </div>
                </div>
                <!-- 아이콘 목록 화면 전체 -->
                <div style="width: 950px; height: 800px; margin-left: 50px; float: left;">
@@ -169,7 +173,7 @@
                      </div>
                      <div class="mt-3" style="width: 660px; float: left; position: relative;">
                         <button class="btn btn-primary" style="position: absolute; left: 0;" onclick="location.href='/iconApply'">아이콘 신청</button>
-                        <button class="btn btn-primary" style="position: absolute; left: 0;" onclick="location.href='/payShoppingBag'">장바구니</button>
+
                         <div style="position: absolute; right: 0;">
                            <button class="btn btn-primary" id="pay_shopping_bag">구매</button>
                            <!--<button class="btn btn-primary" id="gift_shopping_bag">선물</button>-->
