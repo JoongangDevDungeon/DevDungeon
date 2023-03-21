@@ -47,7 +47,7 @@ function couponbtn() {
 	    					<option value="${row.event_no }">${row.event_title }</option>
 	    				</c:forEach>
 					</select><br>
-					<input type="text" class="form-control" name="couponName" id="couponName" placeholder="쿠폰이름 지정해주세요"><br>
+					<input type="text" class="form-control coupontxt" name="couponName" id="couponName" placeholder="쿠폰이름 지정해주세요"><br>
 					
 					<select class="form-select" id="couponRat" name="couponContent">
 						<option selected="selected">쿠폰 할인율 선택</option>

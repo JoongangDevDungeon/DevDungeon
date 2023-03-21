@@ -49,10 +49,6 @@ function Event_btn() {
 					<button class="btn btn-success" type="button" onclick="Event_btn()">게시글 올리기</button>
 				</form>
 			</div>
-	    
-			
-		
-		
 		</div>
 	</div>
 </div>

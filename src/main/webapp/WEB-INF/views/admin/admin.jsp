@@ -103,7 +103,6 @@
 				
 					<!-- 막대 그래프 -->
 					<div class="mbar">
-<%-- 					${visitor } = visitor --%>
 					
 						<div class="col-xl-6 mbar">
 							<div class="card mb-4">
@@ -124,6 +123,6 @@
 	</div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="/js/admin/AdminStatistics.js"></script>
+<script src="/js/admin/AdminMainStatistics.js"></script>
 </body>
 </html>

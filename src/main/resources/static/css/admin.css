@@ -226,19 +226,11 @@ th, tr{
 	height: 30px;
 }
 
-
-/* 아직안한것들 */
-.mtable{
-	width: 600px;
-	float: left;
-}
 .mbar{
 	width: 550px;
 	float: left;
 	margin-left: 20px;
 }
-
-
 
 /* 통계css */
 
@@ -251,16 +243,7 @@ canvas{
 
 
 
-/*
-.graph1 {
-	width: 350px;
-	height: 350px;
-	position: absolute;
-	border: 1px solid black;
-	line-height: inherit;
-	text-align: center;
-}
-*/
+
 
 
 /* 쿠폰 생성 */
@@ -269,8 +252,9 @@ canvas{
 	width: 500px;
 	text-align: center;
 }
+
 .coupontxt{
-	height: 200px;
+	height: 100px;
 }
 
 /* 이벤트 작성 */
@@ -279,6 +263,21 @@ canvas{
 	width: 500px;
 	text-align: center;
 }
+
 .EventTxt{
 	height: 200px;
+}
+
+
+/* QnA 답 */
+.adminAnswer{
+	margin-left: 320px;
+	width: 500px;
+	text-align: center;
+}
+.AnswerTxt{
+	width: 700px;
+}
+.AnswerBtn{
+	margin-left: 190px;
 }
