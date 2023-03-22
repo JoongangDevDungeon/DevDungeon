@@ -49,7 +49,7 @@
 						<div class="col-md">
 							<div class="form-floating">
 								<input type="hidden" name="questionNo" value="${qna.get(0).question_board_no }">
-								<input type="text" class="form-control AnswerTxt" id="floatingInputGrid" name="answerTitle">
+								<input type="text" class="form-control AnswerTxt" id="floatingInputGrid" name="answerTitle" maxlength="50">
 								<label for="floatingInputGrid">답변 제목</label>
 							</div>
 						</div>
@@ -58,7 +58,7 @@
 					<br>
 					
 					<div class="form-floating">
-						<textarea class="form-control" name="answerContent" id="floatingTextarea2" style="height: 200px; width: 700px;""></textarea>
+						<textarea class="form-control" name="answerContent" id="floatingTextarea2" style="height: 200px; width: 700px;"" maxlength="1000"></textarea>
 					</div>
 					
 					<br>
