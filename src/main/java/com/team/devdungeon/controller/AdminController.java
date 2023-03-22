@@ -169,6 +169,11 @@ public class AdminController {
 
 		return mv;
 	}
+	//게시글 Detail
+	/*@PostMapping("/adminBoardDetail")
+	String
+	
+	*/
 	
 	//게시글 삭제
 	@PostMapping("/adminBoard")

@@ -36,7 +36,9 @@
                     if (result == 1) {
                         alert("입력하신 이메일을 없는 이메일 입니다.");
                     }else{
-                        window.location.href = "/find_account?member_email=" + $("#member_email").val();
+                        $(".account").attr("action", "/find_account");
+                        $(".account").attr("method", "post")
+                        $(".account").submit();
                     }
                 },
                 error: function () {
@@ -50,7 +52,7 @@
 <body>
     <div>
         <div class="banner"><img src="/img/banner.png"></div>
-        <form action="/accountInquiry" method="post">
+        <form class="account" method="post">
             <div class="form-control find-form">
                 <label class="find-label mt-4" for="member_email">이메일 주소</label>
                 <div class="find-info mb-5">

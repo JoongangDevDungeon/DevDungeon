@@ -60,8 +60,8 @@ public class PointController {
         pointDTO.setReceive_member_name(request.getParameter("member_name"));
         pointDTO.setPoint(Integer.parseInt(request.getParameter("point")));
 
-        pointService.send_point(pointDTO);
-
+        int result = pointService.send_point(pointDTO);
+        System.err.println("성공의 1 : "+ result);
 
         return 1;
     }
