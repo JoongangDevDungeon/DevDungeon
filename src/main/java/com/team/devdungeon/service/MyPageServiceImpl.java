@@ -52,7 +52,6 @@ public class MyPageServiceImpl implements MyPageService {
                 String profile_image = Base64.getEncoder().encodeToString(imageData);
                 profile.setProfile_image(profile_image);
             } catch (Exception e) {
-                e.printStackTrace();
                 System.out.println("프로필 이미지 로딩중 에러 발생");
             }
 
@@ -71,11 +70,10 @@ public class MyPageServiceImpl implements MyPageService {
                 String icon_image = Base64.getEncoder().encodeToString(imageData);
                 profile.setIcon_image(icon_image);
             } catch (Exception e) {
-                e.printStackTrace();
                 System.out.println("아이콘 이미지 로딩중 에러 발생");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("SFTP 연결 오류 발생");
         }
         return profile;
     }

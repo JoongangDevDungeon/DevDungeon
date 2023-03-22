@@ -115,6 +115,8 @@ a:hover{ color:black; }
     width: 300px;
     min-height: 800px;
     float: left;
+    background-color: #ff8080;
+    opacity:0.3;
 }
 
 .add2 {
@@ -125,6 +127,8 @@ a:hover{ color:black; }
     position: absolute;
     top: 0;
     right: 0;
+    background-color: #ff8080;
+    opacity:0.3;
 }
 .content {
     width: 1200px;

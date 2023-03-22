@@ -20,12 +20,11 @@ public class StoreDAO {
     }
 
     public int selectProductLog(Map<String, Object> cartInfo) {
-        System.out.println(cartInfo);
         return sqlSession.selectOne("store.selectProductLog", cartInfo);
     }
 
     public int shoppingBagInsert(Map<String, Object> cartInfo) {
-        System.out.println("StoreDAO : " + cartInfo);
+        System.out.println(cartInfo);
         int result = 0;
         try {
             result = sqlSession.insert("store.shoppingBagInsert", cartInfo);
@@ -36,8 +35,9 @@ public class StoreDAO {
         return result;
     }
 
-    public List<Map<String, Object>> selectPayShoppingBag(Object memberId) {
-        return sqlSession.selectList("store.selectPayShoppingBag", memberId);
+    public List<Map<String, Object>> selectPayShoppingBag(Map<String, Object> cartInfo) {
+        System.out.println("장바구니 : " + cartInfo);
+        return sqlSession.selectList("store.selectPayShoppingBag", cartInfo);
     }
 
     public List<Map<String, Object>> selectGiftShoppingBag(Object memberId) {
@@ -76,5 +76,13 @@ public class StoreDAO {
 
     public int iconListCount(Map<String, Object> pages) {
         return sqlSession.selectOne("store.iconListCount", pages);
+    }
+
+    public List<Map<String, Object>> checkProductCount(Object memberId) {
+        return sqlSession.selectList("store.checkProductCount", memberId);
+    }
+
+    public void deleteCart(Map<String, Object> info) {
+        sqlSession.delete("store.deleteCartList", info);
     }
 }

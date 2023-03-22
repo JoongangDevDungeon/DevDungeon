@@ -42,14 +42,17 @@
          console.log("최종 결제 금액 : " + result_price);
          $.post({
             url : "/payProduct",
-            data : { "result_price" : result_price },
+            data : { "result_price" : result_price, "pay_type" : "cart_pay" },
             dataType : "text",
             success : function (result) {
-               if(result == 1) {
+               if(result == 0) {
+                  alert("포인트가 부족합니다.");
+               } else if(result == 1) {
                   alert("아이콘 구매 완료!");
                   location.href = "/store";
-               } else {
-                  alert("포인트가 부족합니다.");
+               } else if(result == 2) {
+                  alert("재고가 모두 소진 됐습니다.");
+                  location.href = "/store";
                }
             },
             error : function() {

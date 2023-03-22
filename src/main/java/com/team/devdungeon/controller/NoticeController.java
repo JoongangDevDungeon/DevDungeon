@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.team.devdungeon.util.TextChangeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 public class NoticeController {
 	
 	private final NoticeService noticeService;
-	private final TextChangeUtil textChangeUtil;
 	
 	
 	@GetMapping("/notice")
@@ -66,8 +64,8 @@ public class NoticeController {
 	}
 	@PostMapping("/noticeWrite")
 	public String noticeWrite(HttpServletRequest request, HttpSession session) {
-		String notice_title = textChangeUtil.changeText((String)request.getParameter("writeTitle"));
-		String notice_content = textChangeUtil.changeText((String)request.getParameter("writeContent"));
+		String notice_title = request.getParameter("writeTitle");
+		String notice_content = request.getParameter("writeContent");
 		String notice_no = request.getParameter("notice_no");
 		String admin_id = (String)session.getAttribute("id");
 		if(notice_no==null) {

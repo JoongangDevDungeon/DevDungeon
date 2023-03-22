@@ -91,8 +91,11 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public List<Map<String, Object>> selectPayShoppingBag(Object memberId) {
-        List<Map<String, Object>> cart = storeDAO.selectPayShoppingBag(memberId);
+    public List<Map<String, Object>> selectPayShoppingBag(Object memberId, String view_type) {
+        Map<String, Object> cartInfo = new HashMap<>();
+        cartInfo.put("member_id", memberId);
+        cartInfo.put("view_type", view_type);
+        List<Map<String, Object>> cart = storeDAO.selectPayShoppingBag(cartInfo);
 
         InputStream inputStream = null;
         ByteArrayOutputStream baos = null;
@@ -143,10 +146,24 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public int payProduct(int resultPrice, Object memberId) {
+    public List<Map<String, Object>> checkProductCount(Object memberId) {
+        return storeDAO.checkProductCount(memberId);
+    }
+
+    @Override
+    public void deleteCart(Map<String, Object> deleteCartList, Object memberId) {
+        Map<String, Object> info = new HashMap<>();
+        info.put("product_no", deleteCartList);
+        info.put("member_id", memberId);
+        storeDAO.deleteCart(info);
+    }
+
+    @Override
+    public int payProduct(int resultPrice, Object memberId, String pay_type) {
         Map<String, Object> payInfo = new HashMap<>();
         payInfo.put("pay_price", resultPrice);
         payInfo.put("member_id", memberId);
+        payInfo.put("pay_type", pay_type);
         return storeDAO.payProduct(payInfo);
     }
 
