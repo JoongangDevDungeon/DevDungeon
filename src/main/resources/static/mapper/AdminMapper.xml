@@ -85,7 +85,7 @@
 	
 <!-- 게시글 관리 -->
 	<select id="adminBoard"  parameterType="Integer"  resultType="HashMap">
-		SELECT b.*, m.member_id
+		SELECT b.*, m.member_id, DATE_FORMAT(b.board_date, '%Y-%m-%d %H:%i:%s') AS formatted_date
 		FROM board AS b
 		JOIN member AS m ON b.member_no = m.member_no
 		<if test="searchType != null">
@@ -190,15 +190,16 @@
 
 <!-- 쿠폰발급 -->
 	<select id="adminCoupon" parameterType="Integer" resultType="HashMap">
-		SELECT * 
+		SELECT coupon.*, event.event_title, DATE_FORMAT(coupon.coupon_start, '%Y-%m-%d %H:%i:%s') AS formatted_start
 		FROM coupon
+		JOIN event ON coupon.event_no = event.event_no
 		<if test="searchType != null">
-			WHERE
-			<choose>
-				<when test="searchType == 'title'">coupon_name</when>
-				<when test="searchType == 'writer'">coupon_content</when>
-			</choose>
-			LIKE CONCAT('%', #{searchValue }, '%')
+  		WHERE
+  		<choose>
+    		<when test="searchType == 'title'">coupon_name</when>
+    		<when test="searchType == 'writer'">coupon_content</when>
+  		</choose>
+  		LIKE CONCAT('%', #{searchValue }, '%')
 		</if>
 		ORDER BY coupon_type DESC
 		LIMIT #{startPage}, 10
@@ -243,7 +244,7 @@
     
 <!-- QnA -->
 	<select id="adminQnA" parameterType="Integer" resultType="HashMap">
-		SELECT *, m.member_name
+		SELECT *, m.member_name, DATE_FORMAT(q.question_board_date, '%Y-%m-%d %H:%i:%s') AS formatted_date
 		FROM question_board q JOIN member m ON q.member_no = m.member_no
 		<if test="searchType != null">
 		WHERE

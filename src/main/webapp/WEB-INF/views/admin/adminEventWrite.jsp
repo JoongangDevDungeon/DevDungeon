@@ -43,7 +43,7 @@ function Event_btn() {
 			<div class="adminEvent">
 				<form action="/adminEventWrite" method="post" id="EventForm">
 					<input type="hidden" name="eventTag" value="4" id="EventTag">
-					<input type="text" class="form-control" name="eventTitle" id="EventTitle" placeholder="이벤트 제목입력"><br>
+					<input type="text" class="form-control" name="eventTitle" id="EventTitle" placeholder="이벤트 제목입력" maxlength="50"><br>
 					<input type="textarea" class="form-control EventTxt" name="eventContent" id="EventContent" placeholder="이벤트 내용입력"><br>
 					이벤트 만료일 : <input type="date" name="EventEndDate" id="EventEndDate"><br><br>
 					<button class="btn btn-success" type="button" onclick="Event_btn()">게시글 올리기</button>
@@ -52,5 +52,9 @@ function Event_btn() {
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+const today = new Date().toISOString().split('T')[0];
+document.getElementById("EventEndDate").min = today;
+</script>
 </body>
 </html>

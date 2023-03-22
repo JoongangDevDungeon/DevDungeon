@@ -69,7 +69,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 					<td>${row.board_no }</td>
 					<td><a href="/adminBoardDetail?board_no=${row.board_no }">${row.board_title }</a></td>
 					<td>${row.member_id }</td>
-					<td>${row.board_date }</td>
+					<td>${row.formatted_date }</td>
 					<td>${row.board_read }</td>
 					<td>${row.board_like }</td>
 					<td>
