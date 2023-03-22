@@ -41,15 +41,15 @@
                 </foreach>
     </insert>
 
-    <select id="selectPayShoppingBag" parameterType="String" resultType="HashMap">
+    <select id="selectPayShoppingBag" parameterType="HashMap" resultType="HashMap">
         SELECT emo_img_name, emo_img_extension, sc.product_no, product_name, product_price, (SELECT member_name FROM member WHERE member_id = (SELECT member_id FROM member WHERE member_no = p.member_no) ) as seller_name
             FROM product p JOIN shopping_cart sc ON p.product_no = sc.product_no
                 WHERE
                     emoticon_authority = 1
                 AND
-                    sc.sell_type = 'pay'
+                    sc.sell_type = #{view_type}
                 AND
-                    sc.member_no = (SELECT member_no FROM member WHERE member_id = #{memberId})
+                    sc.member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
     </select>
 
     <select id="selectGiftShoppingBag" parameterType="String" resultType="HashMap">
@@ -68,6 +68,21 @@
             FROM coupon
     </select>
 
+    <select id="checkProductCount" parameterType="String" resultType="HashMap">
+        SELECT p.product_no, p.product_sell_cnt
+            FROM product p JOIN shopping_cart sc ON p.product_no = sc.product_no
+                WHERE
+                    sc.member_no = (SELECT m.member_no FROM member m WHERE member_id = #{memberId})
+    </select>
+
+    <delete id="deleteCartList" parameterType="HashMap">
+        DELETE FROM shopping_cart
+            WHERE
+                product_no IN <foreach collection="product_no" separator="," open="(" close=")" item="product_no">#{product_no}</foreach>
+            AND
+                member_no = (SELECT m.member_no FROM member m WHERE member_id = #{member_id})
+    </delete>
+    
     <select id="checkPoint" parameterType="String" resultType="Integer">
         SELECT member_point
             FROM point

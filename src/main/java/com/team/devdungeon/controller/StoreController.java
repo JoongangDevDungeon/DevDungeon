@@ -53,15 +53,6 @@ public class StoreController {
             mv.addObject("profile", profile);
             mv.addObject("pageNo", pageNo);
 
-            System.out.println(totalCount);
-            System.out.println(startPage);
-            System.out.println(lastPage);
-
-            System.out.println("pages : " + pages);
-            System.out.println("iconList : " + iconList);
-            System.out.println("profile : " + profile);
-            System.out.println("pageNo : " + pageNo);
-
             mv.setViewName("content/store");
         } else {
             mv.setViewName("redirect:/index?error=not_login");
@@ -96,12 +87,11 @@ public class StoreController {
 
 
     @GetMapping("/payShoppingBag")
-    public ModelAndView payShoppingBag(HttpSession session) {
+    public ModelAndView payShoppingBag(HttpSession session, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-
+        String view_type = request.getParameter("type");
         if(session.getAttribute("member_id") != null) {
-            List<Map<String, Object>> cart = storeService.selectPayShoppingBag(session.getAttribute("member_id"));
-            System.out.println("cart : " + cart);
+            List<Map<String, Object>> cart = storeService.selectPayShoppingBag(session.getAttribute("member_id"), view_type);
             if(cart.size() == 0) {
                 mv.addObject("error", "empty_payBag");
                 mv.setViewName("content/payShoppingBag");
@@ -137,16 +127,31 @@ public class StoreController {
 
     @PostMapping("/payProduct")
     @ResponseBody
-    public int payProduct(@RequestParam int result_price, HttpSession session) {
-        int member_point = storeService.checkPoint(session.getAttribute("member_id"));
+    public int payProduct(HttpSession session, @RequestParam int result_price, @RequestParam String pay_type) {
         int result = 0;
-        System.out.println(member_point);
-        System.out.println(result_price);
-        System.out.println(member_point >= result_price);
-        if(member_point >= result_price) {
-            result = storeService.payProduct(result_price, session.getAttribute("member_id"));
+
+        List<Map<String, Object>> productInfo = storeService.checkProductCount(session.getAttribute("member_id"));
+
+        int count_check = 0;
+
+        Map<String, Object> deleteCartList = new HashMap<>();
+        for(Map<String, Object> product : productInfo) {
+            int product_cnt = (int) product.get("product_sell_cnt");
+            int product_no = (int) product.get("product_no");
+
+            if(product_cnt < 1) {
+                deleteCartList.put("product_no", product_no);
+            }
         }
-        System.out.println(result);
+
+        if(!deleteCartList.isEmpty()) {
+            storeService.deleteCart(deleteCartList, session.getAttribute("member_id"));
+            result = 2;
+        } else {
+            int member_point = storeService.checkPoint(session.getAttribute("member_id"));
+            if(member_point >= result_price) result = storeService.payProduct(result_price, session.getAttribute("member_id"), pay_type);
+        }
+
         return result;
     }
 
