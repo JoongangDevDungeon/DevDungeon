@@ -59,6 +59,9 @@ public class NoticeController {
 		noticeDetail.put("notice_content",textChangeUtil.changeText((String)noticeDetail.get("notice_content")));
 		noticeDetail.put("notice_content",textChangeUtil.changeEnter((String)noticeDetail.get("notice_content")));
 		List<Map<String,Object>> detailComments = noticeService.detailComment(notice_no);
+		for(Map<String,Object> m : detailComments) {
+			m.put("comment_content", textChangeUtil.changeText((String)m.get("comment_content")));
+		}
 		mv.addObject("noticeDetail",noticeDetail);
 		mv.addObject("detailComments",detailComments);
 		return mv;
