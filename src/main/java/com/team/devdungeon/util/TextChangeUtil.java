@@ -10,4 +10,8 @@ public class TextChangeUtil {
 		txt = txt.replaceAll(">", "&gt;");
 		return txt;
 	}
+	public String changeEnter(String txt) {
+		txt = txt.replaceAll("\n", "<br>");
+		return txt;
+	}
 }

@@ -26,6 +26,7 @@ function couponbtn() {
 	}
 }
 
+
 </script>
 <body>
 <div id="container">
@@ -67,5 +68,9 @@ function couponbtn() {
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+const today = new Date().toISOString().split('T')[0];
+document.getElementById("endDate").min = today;
+</script>
 </body>
 </html>

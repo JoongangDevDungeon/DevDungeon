@@ -72,8 +72,8 @@
 								</c:choose>
 								</div>
 								<div>
-									<div style="height:35px; line-height:35px; border-bottom:1px solid black;"><b>${e.event_title }</b></div>
-									<div style="height:35px; line-height:35px;"><fmt:formatDate value="${e.event_date }" pattern="y-MM-d HH:mm" type="date"/> ~ <fmt:formatDate value="${e.event_end }" pattern="y-MM-d HH:mm" type="date"/></div>
+									<div style="height:35px; line-height:35px; border-bottom:1px solid black; overflow:hidden;"><b>${e.event_title }</b></div>
+									<div style="height:35px; line-height:35px;  overflow:hidden;"><fmt:formatDate value="${e.event_date }" pattern="y-MM-d HH:mm" type="date"/> ~ <fmt:formatDate value="${e.event_end }" pattern="y-MM-d HH:mm" type="date"/></div>
 								</div>
 							</li>
 						</c:forEach>

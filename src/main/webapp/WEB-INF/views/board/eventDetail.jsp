@@ -190,12 +190,13 @@ h1{
 				<h1 onclick="location.href='eventboard'">E V E N T</h1>
 				<div class="detailBody">
 					<div class="detailTitle">${det.event_title }</div>
-					<div class="detailContent" style="text-align: center;">
+					<div class="detailContent" style="text-align: center; overflow:hidden;">
 						<c:if test="${eventFile ne null }">
 							<div>
 								<img src="data:image/png;base64,${imageDataString}" width="100%" />
 							</div>
 						</c:if>
+						${det.event_content }
 					</div>
 					<c:if test="${sessionScope.member_name ne null }">
 					<div style="margin-top:5px;">

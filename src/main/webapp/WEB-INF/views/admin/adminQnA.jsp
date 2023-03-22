@@ -67,7 +67,7 @@ function moveNext(pageNo){
 						<td>${row.member_name }</td>
 						<td>${row.question_board_title }</td>
 						<td>${row.question_board_content }</td>
-						<td>${row.question_board_date }</td>
+						<td>${row.formatted_date }</td>
 						<td>
 							<c:choose>
 								<c:when test="${row.question_board_status eq 0}">

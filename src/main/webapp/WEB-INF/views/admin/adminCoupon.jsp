@@ -78,7 +78,7 @@ function moveNext(pageNo){
 			<table class="table">
 				<tr class="table-header">
 					<th class="col-1">쿠폰 유형</th>
-					<th class="col-3">이벤트 넘버</th>
+					<th class="col-3">이벤트 제목</th>
 					<th class="col-2">쿠폰 이름</th>
 					<th class="col-2">쿠폰 할인율</th>
 					<th class="col-1">시작일</th>
@@ -88,10 +88,10 @@ function moveNext(pageNo){
 				<c:forEach items="${list }" var="row">
 				<tr>
 					<td>${row.coupon_type }</td>
-					<td>${row.event_no }</td>
+					<td>${row.event_title }</td>
 					<td>${row.coupon_name }</td>
 					<td>${row.coupon_content }%</td>
-					<td>${row.coupon_start }</td>
+					<td>${row.formatted_start }</td>
 					<td>${row.coupon_end }</td>
 					<td>
 						<button class="btn btn-danger coupon_type" value="${row.coupon_type }">쿠폰삭제</button>

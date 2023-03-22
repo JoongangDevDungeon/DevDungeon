@@ -72,7 +72,9 @@ public class CSJController {
 		}
 
 		PageInfo<Map<String, Object>> pageList = csjService.pageList(dto);
-
+		for(Map<String,Object> m : pageList.getList()) {
+			m.put("board_title", textChangeUtil.changeText((String)m.get("board_title")));
+		}
 		mv.addObject("pageNo", pageNo);
 		mv.addObject("pageInfo", pageList);
 		mv.addObject("searchType", searchType);
@@ -162,6 +164,8 @@ public class CSJController {
 		} else {
 			Map<String, Object> det = csjService.detail(bno);
 			if (session.getAttribute("member_name").equals(det.get("member_name"))) {
+				det.put("board_title",textChangeUtil.changeText((String)det.get("board_title")));
+				det.put("board_content",textChangeUtil.changeText((String)det.get("board_content")));
 				mv.addObject("det", det);
 				mv.addObject("bno", bno);
 			} else {
@@ -180,7 +184,9 @@ public class CSJController {
 			return mv;
 		} else {
 			String title = request.getParameter("title");
+			title = textChangeUtil.changeText(title);
 			String content = request.getParameter("content");
+			content = textChangeUtil.changeText(content);
 			String tag = request.getParameter("tag");
 			String bno = request.getParameter("bno");
 			Map<String, Object> updatemap = new HashMap<String, Object>();
@@ -204,10 +210,16 @@ public class CSJController {
 			mv.setViewName("redirect:/csjboard");
 			return mv;
 		}
+		det.put("board_title", textChangeUtil.changeText((String)det.get("board_title")));
+		det.put("board_content", textChangeUtil.changeText((String)det.get("board_content")));
+		det.put("board_content", textChangeUtil.changeEnter((String)det.get("board_content")));
 		int member_no = (int) det.get("member_no");
 		Map<String, Object> mem = csjService.memberProfile(member_no);
 
 		List<Map<String, Object>> comment = csjService.commentList(bno);
+		for(Map<String,Object> m : comment) {
+			m.put("comment_content", textChangeUtil.changeText((String)m.get("comment_content")));
+		}
 		
 		Map<String,Object> boardFile = csjService.callBoardFile(bno);
 		if(boardFile != null) {
@@ -235,6 +247,7 @@ public class CSJController {
 			
 		}
 		MyPageDTO mydto = mypageService.profile((String)mem.get("member_id"));
+		mydto.setMember_intro(textChangeUtil.changeText(mydto.getMember_intro()));
 		mv.addObject("det", det);
 		mv.addObject("mem", mem);
 		mv.addObject("comment", comment);
@@ -263,6 +276,7 @@ public class CSJController {
 		String writer = (String) session.getAttribute("member_name");
 
 		String content = request.getParameter("commentContent");
+		content = textChangeUtil.changeText(content);
 		Map<String, Object> comment = new HashMap<String, Object>();
 		comment.put("board_no", bno);
 		comment.put("writer", writer);
@@ -283,6 +297,7 @@ public class CSJController {
 		HttpSession session = request.getSession();
 		String writer = (String) session.getAttribute("member_name");
 		String content = request.getParameter("commentContent");
+		content = textChangeUtil.changeText(content);
 		String root = request.getParameter("root");
 		Map<String, Object> comment = new HashMap<String, Object>();
 		comment.put("board_no", bno);
@@ -350,6 +365,7 @@ public class CSJController {
 				String banBoard = request.getParameter("banBoard");
 				String banMember = request.getParameter("banMember");
 				String banWhy = request.getParameter("banWhy");
+				banWhy = textChangeUtil.changeText(banWhy);
 				String singoman = (String) request.getSession().getAttribute("member_name");
 				Map<String, Object> banMap = new HashMap<String, Object>();
 				banMap.put("banBoard", banBoard);
@@ -363,6 +379,7 @@ public class CSJController {
 				String banBoard = request.getParameter("banBoard");
 				String banMember = request.getParameter("banMember");
 				String banWhy = request.getParameter("banWhy");
+				banWhy = textChangeUtil.changeText(banWhy);
 				String singoman = (String) request.getSession().getAttribute("member_name");
 				Map<String, Object> banMap = new HashMap<String, Object>();
 				banMap.put("banComment", banComment);
@@ -389,6 +406,10 @@ public class CSJController {
 		dto.setPageNo(pageNo);
 		dto.setPageSize(pageSize);
 		PageInfo<Map<String,Object>> faqPageInfo = csjService.faqList(dto);
+		for(Map<String,Object> m : faqPageInfo.getList()) {
+			m.put("faq_question", textChangeUtil.changeText((String)m.get("faq_question")));
+			m.put("faq_answer", textChangeUtil.changeText((String)m.get("faq_answer")));
+		}
 		mv.addObject("pageInfo",faqPageInfo);
 		mv.addObject("list",faqPageInfo.getList());
 		
@@ -406,6 +427,10 @@ public class CSJController {
 		dto.setPageSize(pageSize);
 		dto.setMember_id(member_id);
 		PageInfo<Map<String,Object>> qnaPageInfo = csjService.qnaList(dto);
+		for(Map<String,Object> m : qnaPageInfo.getList()) {
+			m.put("question_board_title", textChangeUtil.changeText((String)m.get("question_board_title")));
+			m.put("question_board_content", textChangeUtil.changeText((String)m.get("question_board_content")));
+		}
 		mv.addObject("pageInfo",qnaPageInfo);
 		mv.addObject("list",qnaPageInfo.getList());
 		return mv;
@@ -415,8 +440,8 @@ public class CSJController {
 	@PostMapping("/qnaWrite")
 	public String qnaWrite(HttpServletRequest request,HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("title", request.getParameter("title"));
-		map.put("content", request.getParameter("content"));
+		map.put("title", textChangeUtil.changeText(request.getParameter("title")));
+		map.put("content", textChangeUtil.changeText(request.getParameter("content")));
 		map.put("member_name", session.getAttribute("member_name"));
 		int result = (int)csjService.qnaWrite(map);
 		//json형태로 내보내기
