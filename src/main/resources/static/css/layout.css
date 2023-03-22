@@ -7,7 +7,7 @@ a:hover{ color:black; }
     width: 1920px;
     height: 40px;
     margin: 0 auto;
-    background: #6867AC;
+    background-color: #6867AC;
 }
 
 .top_ul {
@@ -46,6 +46,7 @@ a:hover{ color:black; }
     height: 100px;
     margin: 0 auto;
     text-align: center;
+
 }
 
 .menu_ul {
@@ -65,15 +66,6 @@ a:hover{ color:black; }
     font-weight: bold;
     font-size: 20px;
 }
-
-.menu_ul > li > a{/*메뉴바 글씨*/
-    color: #7C78B8;
-}
-
-.menu_ul > li > div > a{/*메뉴바 글씨*/
-    color: #7C78B8;
-}
-
 .menu_ul > li:nth-child(1) > img {
     width: 170px;
     height: 100px;
@@ -123,6 +115,8 @@ a:hover{ color:black; }
     width: 300px;
     min-height: 800px;
     float: left;
+    background-color: #ff8080;
+    opacity:0.3;
 }
 
 .add2 {
@@ -133,6 +127,8 @@ a:hover{ color:black; }
     position: absolute;
     top: 0;
     right: 0;
+    background-color: #ff8080;
+    opacity:0.3;
 }
 .content {
     width: 1200px;
