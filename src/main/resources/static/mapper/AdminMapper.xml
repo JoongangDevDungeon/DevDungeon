@@ -203,13 +203,14 @@
 		ORDER BY coupon_type DESC
 		LIMIT #{startPage}, 10
 	</select>
-<!-- 쿠폰 생성의 위한 데이터 뷰에담기 -->
-	<select id="AdminCouponView" resultType="HashMap">
+<!-- 쿠폰 생성 뷰 -->
+ 	<select id="AdminCouponView" resultType="HashMap">
 		SELECT e.event_no, e.event_title, c.coupon_name, c.coupon_content
 		FROM event AS e
 		JOIN coupon AS c ON e.event_no = c.event_no
 		WHERE status_no = 1;
 	</select>
+
 	
 <!-- 쿠폰 생성 -->
 	<insert id="adminCouponCreate" parameterType="CouponDTO">
