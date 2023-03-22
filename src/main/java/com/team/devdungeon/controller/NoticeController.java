@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.service.NoticeService;
+import com.team.devdungeon.util.TextChangeUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class NoticeController {
 	
 	private final NoticeService noticeService;
+	private final TextChangeUtil textChangeUtil;
 	
 	
 	@GetMapping("/notice")
@@ -39,6 +41,9 @@ public class NoticeController {
 		pages.put("startPage", startPage);
 		pages.put("lastPage", lastPage);
 		List<Map<String, Object>> list = noticeService.noticeList(pages);
+		for(Map<String, Object> m : list) {
+			m.put("notice_title", textChangeUtil.changeText((String)m.get("notice_title")));
+		}
 		mv.addObject("pages",pages);
 		mv.addObject("list",list);
 		mv.addObject("pageNo", pageNo);
@@ -50,6 +55,9 @@ public class NoticeController {
 		String notice_no = request.getParameter("notice_no");
 		noticeService.noticeRead(notice_no);
 		Map<String, Object> noticeDetail = noticeService.noticeDetail(notice_no);
+		noticeDetail.put("notice_title",textChangeUtil.changeText((String)noticeDetail.get("notice_title")));
+		noticeDetail.put("notice_content",textChangeUtil.changeText((String)noticeDetail.get("notice_content")));
+		noticeDetail.put("notice_content",textChangeUtil.changeEnter((String)noticeDetail.get("notice_content")));
 		List<Map<String,Object>> detailComments = noticeService.detailComment(notice_no);
 		mv.addObject("noticeDetail",noticeDetail);
 		mv.addObject("detailComments",detailComments);
@@ -65,7 +73,9 @@ public class NoticeController {
 	@PostMapping("/noticeWrite")
 	public String noticeWrite(HttpServletRequest request, HttpSession session) {
 		String notice_title = request.getParameter("writeTitle");
+		notice_title = textChangeUtil.changeText(notice_title);
 		String notice_content = request.getParameter("writeContent");
+		notice_content = textChangeUtil.changeText(notice_content);
 		String notice_no = request.getParameter("notice_no");
 		String admin_id = (String)session.getAttribute("id");
 		if(notice_no==null) {
@@ -108,6 +118,7 @@ public class NoticeController {
 	public String noticeComment(HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		String comment_content = request.getParameter("commentText");
+		comment_content = textChangeUtil.changeText(comment_content);
 		String notice_no = request.getParameter("notice_no");
 		String member_name = (String)session.getAttribute("member_name");
 		map.put("comment_content", comment_content);
@@ -121,6 +132,7 @@ public class NoticeController {
 	public String noticeSubComment(HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		String subComment_content = request.getParameter("c_commentText");
+		subComment_content = textChangeUtil.changeText(subComment_content);
 		String comment_root = request.getParameter("comment_root");
 		String notice_no = request.getParameter("notice_no");
 		String member_name = (String)session.getAttribute("member_name");
