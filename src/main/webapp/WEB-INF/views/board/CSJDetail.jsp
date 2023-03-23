@@ -112,6 +112,7 @@ function sendPointTo(receiver){
 /* 	border: 1px solid black; */
 	min-height: 400px;
 	font-size : 16px;
+	white-space:normal;
 	padding:5px;
 }
 
@@ -165,7 +166,7 @@ function sendPointTo(receiver){
 						<span>${det.board_date } </span>
 						<span>조회수 : ${det.board_read }</span>
 					</div>
-					<div class="detailContent">
+					<div class="detailContent" style="word-wrap: break-word;">
 					<c:if test="${boardFile ne null }">
 						<div class="form-control">
 							<span>
@@ -176,7 +177,8 @@ function sendPointTo(receiver){
 							<img src="data:image/png;base64,${imageDataString}" />
 						</div>
 					</c:if>
-					${det.board_content }</div>
+					${det.board_content }
+					</div>
 					<button id="boardBtnLike" class="btn btn-success"
 						value="${det.board_no }">추천 ${det.board_like }</button>
 						<c:if test="${sessionScope.member_name ne null }">

@@ -90,7 +90,6 @@ public class EventController {
 			s = textChangeUtil.changeText(s);
 			m.put("event_content", s);
 		}
-		System.out.println(pageList.getList());
 		mv.addObject("list", pageList.getList());
 		return mv;
 	}
