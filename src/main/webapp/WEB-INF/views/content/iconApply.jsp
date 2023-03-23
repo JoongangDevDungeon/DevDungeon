@@ -39,6 +39,27 @@
          reader.readAsDataURL(icon_file);
       });
 
+      $("#icon_count").change(function() {
+         let sell_cnt = $(this).val();
+         if(sell_cnt > 999) {
+            alert("최대 판매 수량은 999개 입니다.");
+            $(this).val(999);
+         }
+      });
+
+      $("#icon_price").change(function() {
+         let price = $(this).val();
+         if(price > 100000) {
+            alert("가격은 최대 100,000 입니다.");
+            $(this).val(100000);
+         }
+      });
+
+      $("#btn-submit").click(function() {
+
+         $(".icon-form").submit();
+      });
+
    });
 </script>
 <body>
@@ -66,7 +87,7 @@
                         <!-- 아이콘 이름 -->
                         <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
                            <label class="badge bg-secondary" for="icon_name" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">아이콘 이름</label>
-                           <input class="form-control" type="text" id="icon_name" name="icon_name" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 이름을 입력해주세요.">
+                           <input class="form-control" type="text" id="icon_name" name="icon_name" style="width: 500px; margin-left: 10px; height: 50px; float: left;" maxlength="10" placeholder="아이콘 이름을 입력해주세요.">
                         </div>
                         <!-- 수량 -->
                         <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
@@ -78,7 +99,7 @@
                            <label class="badge bg-secondary" for="icon_price" style="width: 100px; height: 50px; line-height: 40px; font-size: 16px; float: left;">가격</label>
                            <input class="form-control" type="number" id="icon_price" name="icon_price" style="width: 500px; margin-left: 10px; height: 50px; float: left;" placeholder="아이콘 가격을 입력해주세요.">
                         </div>
-                        <button class="mt-4 btn btn-primary" type="submit" id="btn-submit" style="width: 610px; height: 50px; line-height: 40px;">등록 신청</button>
+                        <button class="mt-4 btn btn-primary" type="button" id="btn-submit" style="width: 610px; height: 50px; line-height: 40px;">등록 신청</button>
                      </div>
                   </div>
                </form>
