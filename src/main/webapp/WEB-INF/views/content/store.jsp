@@ -120,7 +120,18 @@
       const shopping_bag = [];
 
       $(".pay_one").click(function() {
-         alert("단일 구매" + " : " + $(this).attr("value"));
+         let icon_no = $(this).attr("value")
+         $.post({
+            url : "/shoppingBag",
+            data : {"shoppingBag" : [icon_no], "sell_type" : "pay" },
+            dataType : "text",
+            success : function (result) {
+               location.href = "/payShoppingBag?type=pay";
+            },
+            error : function () {
+               console.log("구매 중 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.");
+            }
+         });
       });
 
       $(".gift_one").click(function(){
@@ -153,7 +164,7 @@
              console.log("구매 목록 : " + shopping_bag);
              $.post({
                 url : "/shoppingBag",
-                data : {"shoppingBag" : shopping_bag, "sell_type" : "pay" },
+                data : {"shoppingBag" : shopping_bag, "sell_type" : "cart_pay" },
                 dataType : "text",
                 success : function (result) {
                     if(result == 1) {
@@ -162,7 +173,7 @@
                        alert("이미 구매한 아이콘이 있습니다.\n다시 한번 확인해주세요.");
                     } else {
                        if(confirm("이미 구매 장바구니에 아이콘이 있습니다.\n구매 화면으로 이동하겠습니까?.")) {
-                           location.href = "/payShoppingBag";
+                           location.href = "/payShoppingBag?type=cart_pay";
                        }
                     }
                 },
@@ -275,7 +286,7 @@
                         <div class="pagingBox">
                            <ul class="pagingList">
                               <li class="pageNo page_btn" onclick="moveBefore(${pageNo})"><i class="xi-step-backward xi-x"></i></li>
-                              <c:forEach var="i" begin="${Math.floor((pageNo-1)/8)*8+1 }" end="${Math.floor((pageNo-1)/8)*8+8 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}">
+                              <c:forEach var="i" begin="${Math.floor((pageNo-1)/8)*8+1 }" end="${Math.floor((pageNo-1)/8)*8+8 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/8)*8+8}">
                                  <li class="pageNo" onclick="move(${i })" <c:if test="${pageNo eq i }" >style="color:red; font-weight: bold;"</c:if>>${i }</li>
                               </c:forEach>
                               <li class="pageNo page_btn" onclick="moveNext(${pageNo})"><i class="xi-step-forward xi-x"></i></li>
@@ -287,7 +298,7 @@
 
                         <div style="position: absolute; right: 0;">
                            <button class="btn btn-primary" id="pay_shopping_bag">장바구니 추가</button>
-                           <button class="btn btn-primary" onclick="location.href='/payShoppingBag'">결제하기</button>
+                           <button class="btn btn-primary" onclick="location.href='/payShoppingBag?type=cart_pay'">결제하기</button>
                            <!--<button class="btn btn-primary" id="gift_shopping_bag">선물</button>-->
                         </div>
                      </div>

@@ -112,6 +112,7 @@ function sendPointTo(receiver){
 /* 	border: 1px solid black; */
 	min-height: 400px;
 	font-size : 16px;
+	white-space:normal;
 	padding:5px;
 }
 
@@ -139,6 +140,8 @@ function sendPointTo(receiver){
 
 .commentZone {
 	min-height: 100px;
+	white-space: normal;
+	word-wrap:break-word;
 }
 
 .commentSub {
@@ -165,18 +168,21 @@ function sendPointTo(receiver){
 						<span>${det.board_date } </span>
 						<span>조회수 : ${det.board_read }</span>
 					</div>
-					<div class="detailContent">
+					<div class="detailContent" style="word-wrap: break-word;">
 					<c:if test="${boardFile ne null }">
 						<div class="form-control">
 							<span>
-							<label class="col-form-label"><a href = "data:image/png;base64,${imageDataString}" download = "${boardFile.file_name }.${boardFile.file_extension}">${boardFile.file_name }</a></label>
+							<label class="col-form-label"><a href = "data:image/png;base64,${imageDataString}" download = "${boardFile.file_name }">${boardFile.file_name }</a></label>
 							</span>
 						</div>
-						<div>
-							<img src="data:image/png;base64,${imageDataString}" />
-						</div>
+						<c:if test="${noticeFile.file_extension eq jpg||noticeFile.file_extension eq png||noticeFile.file_extension eq jpeg}">
+							<div>
+								<img src="data:image/png;base64,${imageDataString}" />
+							</div>
+						</c:if>
 					</c:if>
-					${det.board_content }</div>
+					${det.board_content }
+					</div>
 					<button id="boardBtnLike" class="btn btn-success"
 						value="${det.board_no }">추천 ${det.board_like }</button>
 						<c:if test="${sessionScope.member_name ne null }">
@@ -231,7 +237,7 @@ function sendPointTo(receiver){
 				<hr>
 				<div class="CommentAll">
 					<c:forEach items="${comment }" var="c">
-						<div id="commentZone"
+						<div id="commentZone" style="white-space: normal;word-wrap:break-word;"
 							<c:if test="${c.comment_depth ne 0}">class="commentSub sub${c.comment_root }"</c:if>>
 							<c:if test="${c.comment_depth ne 0 }">
 								<div style="width: 20px; min-height:100px; float: left;">
@@ -265,7 +271,7 @@ function sendPointTo(receiver){
 										<input type="hidden" name="root" value=${c.comment_no }>
 										<input type="hidden" name="bno" value=${det.board_no }>
 										<div class="col-10">
-										<input type="text" class="commentInput form-control" name="commentContent" placeholder="${c.member_name } 에게 작성하는 답글입니다" required>
+										<input type="text" class="commentInput form-control" name="commentContent" placeholder="${c.member_name } 에게 작성하는 답글입니다" maxlength="200" required>
 										</div>
 										<div class="col-2">
 										<button id="commentEnterBtn" class="btn">댓글 입력</button>
@@ -280,7 +286,7 @@ function sendPointTo(receiver){
 							<form id="commentForm" action="csjCommentWrite" method="post" class="row g-3">
 								<input type="hidden" name="bno" value="${det.board_no }">
 								<div class="col-10">
-								<textarea class="commentInput form-control" name="commentContent" placeholder="명예훼손, 개인정보 유출, 분쟁 유발, 허위사실 유포 등의 글은 이용약관에 의해 제재는 &#13;&#10;물론 법률에 의해 처벌 받을 수 있습니다. 건전한 커뮤니티를 위해 자제를 당부 드립니다." required></textarea>
+								<textarea class="commentInput form-control" name="commentContent" placeholder="명예훼손, 개인정보 유출, 분쟁 유발, 허위사실 유포 등의 글은 이용약관에 의해 제재는 &#13;&#10;물론 법률에 의해 처벌 받을 수 있습니다. 건전한 커뮤니티를 위해 자제를 당부 드립니다." required  maxlength="200"></textarea>
 								</div>
 								<div class="col-2">
 								<button id="commentEnterBtn" class="btn">댓글 입력</button>

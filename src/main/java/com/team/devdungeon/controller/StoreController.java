@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,15 +52,6 @@ public class StoreController {
             mv.addObject("profile", profile);
             mv.addObject("pageNo", pageNo);
 
-            System.out.println(totalCount);
-            System.out.println(startPage);
-            System.out.println(lastPage);
-
-            System.out.println("pages : " + pages);
-            System.out.println("iconList : " + iconList);
-            System.out.println("profile : " + profile);
-            System.out.println("pageNo : " + pageNo);
-
             mv.setViewName("content/store");
         } else {
             mv.setViewName("redirect:/index?error=not_login");
@@ -74,38 +64,53 @@ public class StoreController {
     @ResponseBody
     public int shoppingBag(HttpServletRequest request) {
         HttpSession session = request.getSession();
+        int result = 0;
 
         String userId = (String) session.getAttribute("member_id");
         String[] shoppingBag = request.getParameterValues("shoppingBag[]");
         String sellType = request.getParameter("sell_type");
 
-        int result = storeService.selectProductLog(userId, shoppingBag);
-        if(result < 1) {    // 구매한 아이콘이 없을 때
-            result = storeService.shoppingBagInsert(userId, shoppingBag, sellType);
-            if(result != 0) {
-                result = 1;
+        if(sellType.equals("pay")) {
+            storeService.deleteCartOne(userId, null, sellType);
+        }
+
+        int productLogCount = storeService.selectProductLog(userId, shoppingBag);
+
+        if(productLogCount < 1) {    // 구매한 아이콘이 없을 경우
+            int productInsert = storeService.shoppingBagInsert(userId, shoppingBag, sellType);
+            if(productInsert != 0) {
+                result = 1; // 장바구니 정상 등록
             } else {
-                result = 3;
+                result = 3; // 이미 구매 장바구니에 있을 경우
             }
         } else {
-            result = 2;
+            result = 2; // 이미 구매한 아이콘이 있을 경우
         }
 
         return result;
     }
 
+    @PostMapping("/deleteCartOne")
+    @ResponseBody
+    public void deleteCartOne(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String member_id = (String) session.getAttribute("member_id");
+        int product_no = Integer.parseInt(request.getParameter("product_no"));
+        String sell_type = request.getParameter("sell_type");
+        storeService.deleteCartOne(member_id, product_no, sell_type);
+    }
 
     @GetMapping("/payShoppingBag")
-    public ModelAndView payShoppingBag(HttpSession session) {
+    public ModelAndView payShoppingBag(HttpSession session, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-
+        String view_type = request.getParameter("type");
         if(session.getAttribute("member_id") != null) {
-            List<Map<String, Object>> cart = storeService.selectPayShoppingBag(session.getAttribute("member_id"));
-            System.out.println("cart : " + cart);
+            List<Map<String, Object>> cart = storeService.selectPayShoppingBag(session.getAttribute("member_id"), view_type);
             if(cart.size() == 0) {
                 mv.addObject("error", "empty_payBag");
                 mv.setViewName("content/payShoppingBag");
             } else {
+                mv.addObject("type", view_type);
                 mv.addObject("cart", cart);
                 mv.setViewName("content/payShoppingBag");
             }
@@ -128,25 +133,39 @@ public class StoreController {
     }
 
     @GetMapping("/couponChoice")
-    public ModelAndView couponChoice() {
+    public ModelAndView couponChoice(HttpSession session) {
         ModelAndView mv = new ModelAndView("content/couponChoice");
-        List<Map<String, Object>> couponList = storeService.couponList();
+        String member_id = (String) session.getAttribute("member_id");
+        List<Map<String, Object>> couponList = storeService.couponList(member_id);
         mv.addObject("couponList", couponList);
         return mv;
     }
 
     @PostMapping("/payProduct")
     @ResponseBody
-    public int payProduct(@RequestParam int result_price, HttpSession session) {
-        int member_point = storeService.checkPoint(session.getAttribute("member_id"));
+    public int payProduct(HttpSession session, @RequestParam int result_price, @RequestParam String pay_type) {
         int result = 0;
-        System.out.println(member_point);
-        System.out.println(result_price);
-        System.out.println(member_point >= result_price);
-        if(member_point >= result_price) {
-            result = storeService.payProduct(result_price, session.getAttribute("member_id"));
+
+        List<Map<String, Object>> productInfo = storeService.checkProductCount(session.getAttribute("member_id"));
+
+        Map<String, Object> deleteCartList = new HashMap<>();
+        for(Map<String, Object> product : productInfo) {
+            int product_cnt = (int) product.get("product_sell_cnt");
+            int product_no = (int) product.get("product_no");
+
+            if(product_cnt < 1) {
+                deleteCartList.put("product_no", product_no);
+            }
         }
-        System.out.println(result);
+
+        if(!deleteCartList.isEmpty()) {
+            storeService.deleteCart(deleteCartList, session.getAttribute("member_id"));
+            result = 2;
+        } else {
+            int member_point = storeService.checkPoint(session.getAttribute("member_id"));
+            if(member_point >= result_price) result = storeService.payProduct(result_price, session.getAttribute("member_id"), pay_type);
+        }
+
         return result;
     }
 

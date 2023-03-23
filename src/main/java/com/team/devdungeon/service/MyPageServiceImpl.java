@@ -52,7 +52,6 @@ public class MyPageServiceImpl implements MyPageService {
                 String profile_image = Base64.getEncoder().encodeToString(imageData);
                 profile.setProfile_image(profile_image);
             } catch (Exception e) {
-                e.printStackTrace();
                 System.out.println("프로필 이미지 로딩중 에러 발생");
             }
 
@@ -71,11 +70,10 @@ public class MyPageServiceImpl implements MyPageService {
                 String icon_image = Base64.getEncoder().encodeToString(imageData);
                 profile.setIcon_image(icon_image);
             } catch (Exception e) {
-                e.printStackTrace();
                 System.out.println("아이콘 이미지 로딩중 에러 발생");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("SFTP 연결 오류 발생");
         }
         return profile;
     }
@@ -111,8 +109,13 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
-    public List<Map<String, Object>> icons(String memberId) {
-        List<Map<String, Object>> resultIcons = myPageDAO.icons(memberId);
+    public int myIconListCount(String memberId) {
+        return myPageDAO.myIconListCount(memberId);
+    }
+
+    @Override
+    public List<Map<String, Object>> icons(Map<String, Object> pages) {
+        List<Map<String, Object>> resultIcons = myPageDAO.icons(pages);
 
         InputStream inputStream = null;
         ByteArrayOutputStream baos = null;
@@ -145,11 +148,25 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
-    public int updateIcon(int iconNo, HttpSession session) {
+    public int updateIcon(Integer iconNo, HttpSession session) {
         Map<String, Object> info = new HashMap<>();
         info.put("icon_no", iconNo);
         info.put("member_id", session.getAttribute("member_id"));
         return myPageDAO.updateIcon(info);
+    }
+
+    @Override
+    public Integer selectUseIcon(HttpSession session) {
+        String member_id = (String) session.getAttribute("member_id");
+        return myPageDAO.selectUseIcon(member_id);
+    }
+
+    @Override
+    public int deleteIcon(int iconNo, HttpSession session) {
+        Map<String, Object> info = new HashMap<>();
+        info.put("icon_no", iconNo);
+        info.put("member_id", session.getAttribute("member_id"));
+        return myPageDAO.deleteIcon(info);
     }
 
     @Override

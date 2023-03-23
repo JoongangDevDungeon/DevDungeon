@@ -7,10 +7,79 @@
     <link rel="icon" href="/img/Gazi_shortCut.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/sign.css">
 </head>
+<style>
+    /* adminPaging*/
+    .pagingBox{	width:700px; margin:0 auto; }
+    .pagingList{
+        margin:0;
+        padding:0;
+        list-style: none;
+        display: flex;
+        justify-content: start;
+        justify-content: center;
+        font-size: 13px;
+    }
+    .pageNo{
+        cursor: pointer;
+        width:30px;
+        height:30px;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 5px;
+    }
+    .pageNo:hover{ background-color: #d3d3d3; }
+    .page_btn{
+        background-color: #6867AC;
+        margin:0 2px;
+        color:white;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .page_btn:hover{ background-color: #8887cc; }
+
+    /* adminSearch bar */
+    .searchForm{ display: flex; justify-content: center; }
+    .search_btn{
+        background-color: #6867AC;
+        border:none;
+        border-radius: 5px;
+        font-size: 15px;
+        width:60px;
+        height:30px;
+        color:white;
+        font-weight: bold;
+    }
+</style>
 <script>
+    function moveBefore(pageNo){	//페이징 시작
+        let url =  document.location.href.split("?",1);
+        if(pageNo < 1) { return false; }
+        else if (pageNo != 1){
+            location.href="/myPage?pageNo="+(pageNo-1);
+        }else{
+            location.href="/myPage?pageNo="+1;
+        }
+    }
+
+    function moveNext(pageNo){	//페이지 뒤쪽 버튼
+        let url =  document.location.href.split("?",1);
+        if(pageNo > ${pages.lastPage } ) { return false; }
+        else if (pageNo != ${pages.lastPage } ){
+            location.href="/myPage?pageNo="+(pageNo+1);
+        }else if(pageNo == ${pages.lastPage }){
+            location.href="/myPage?pageNo="+pageNo;
+        }
+    }
+    function move(pageNo){
+        let url =  document.location.href.split("?");
+        location.href="/myPage?pageNo="+pageNo;
+
+    }//페이징 끝
+
     $(function() {
         $("#profile_img").change(function() { // 이미지 미리보기
             const profile_img = this.files[0];
@@ -42,6 +111,9 @@
                     console.log(result);
                     if(result == 1) {
                         alert("대표 아이콘을 변경했습니다.");
+                        location.reload();
+                    } else if (result == 2) {
+                        alert("이미 대표설정된 아이콘 입니다.");
                     } else {
                         alert("아이콘을 변경하는 도중 문제가 발생했습니다.\n잠시 후 다시 시도해주세요.");
                     }
@@ -50,6 +122,29 @@
                     alert("아이콘을 변경하는 도중 에러가 발생했습니다.\n잠시 후 다시 시도해주세요.");
                 }
             });
+        });
+
+        $(".icon_delete").click(function() {
+           const icon_no = $(this).attr("value");
+
+           if(confirm("아이콘을 삭제하겠습니까?\n대표설정된 아이콘일 경우 해제됩니다.")) {
+                $.post({
+                    url : "/iconDelete",
+                    data : {"icon_no" : icon_no },
+                    dataType : "text",
+                    success : function(result) {
+                        if(result == 1) {
+                            alert("아이콘을 삭제 했습니다.");
+                            location.reload();
+                        } else {
+                            alert("아이콘을 변경하는 도중 문제가 발생했습니다.\n잠시 후 다시 시도해주세요.");
+                        }
+                    },
+                    error : function() {
+                        alert("아이콘을 삭제하는 도중 문제가 발생했습니다.\n잠시 후 다시 시도해주세요.");
+                    }
+                });
+            }
         });
 
     });
@@ -75,7 +170,7 @@
                                        <label style="width: 214px; height: 33px; line-height: 50px; text-align: left; font-weight: bold; float: left;">${icons.product_name}</label>
                                        <div style="width: 214px; height: 33px; line-height: 50px; text-align: left; float: left;">
                                            <label class="icon_select" id="icon_select" value="${icons.product_no}"><u>대표설정</u></label>
-                                           <label>삭제</label>
+                                           <label class="icon_delete" id="icon_delete" value="${icons.product_no}">삭제</label>
                                        </div>
                                    </div>
                                </div>
@@ -88,7 +183,16 @@
 
                </div>
                 <div>
-                    페이징
+                    <!-- 페이징 -->
+                    <div class="pagingBox">
+                        <ul class="pagingList">
+                            <li class="pageNo page_btn" onclick="moveBefore(${pageNo})"><i class="xi-step-backward xi-x"></i></li>
+                            <c:forEach var="i" begin="${Math.floor((pageNo-1)/6)*6+1 }" end="${Math.floor((pageNo-1)/6)*6+6 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/6)*6+6}">
+                                <li class="pageNo" onclick="move(${i })" <c:if test="${pageNo eq i }" >style="color:red; font-weight: bold;"</c:if>>${i }</li>
+                            </c:forEach>
+                            <li class="pageNo page_btn" onclick="moveNext(${pageNo})"><i class="xi-step-forward xi-x"></i></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 

@@ -3,12 +3,15 @@ package com.team.devdungeon.controller;
 import com.github.pagehelper.PageInfo;
 import com.team.devdungeon.dto.CSJshowDTO;
 import com.team.devdungeon.service.MessageService;
+import com.team.devdungeon.util.TextChangeUtil;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpSession;
 public class MessageController {
 
     private final MessageService messageService;
+    private final TextChangeUtil textChangeUtil;
 
     @GetMapping("/message")
     public ModelAndView message(HttpServletRequest request) {
@@ -37,7 +41,9 @@ public class MessageController {
         String post_member_no = (String) session.getAttribute("member_name");
         String get_member_no = request.getParameter("member_name");
         String message_title = request.getParameter("msg_title");
+        message_title = textChangeUtil.changeText(message_title);
         String message_content = request.getParameter("msg_content");
+        message_content = textChangeUtil.changeText(message_content);
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("post_member_no", post_member_no);
         map.put("get_member_no", get_member_no);
@@ -72,6 +78,11 @@ public class MessageController {
                 dto.setSearchValue(searchValue);
             }
     		PageInfo<Map<String,Object>> msgPageInfo = messageService.msgList(dto);
+    		List<Map<String,Object>> list = msgPageInfo.getList();
+    		for(Map<String,Object> m : list) {
+    			m.put("message_title", textChangeUtil.changeText((String)m.get("message_title")));
+    			m.put("message_content", textChangeUtil.changeText((String)m.get("message_content")));
+    		}
     		System.out.println(msgPageInfo);
             mv.addObject("pageNo", pageNo);
             mv.addObject("searchType", searchType);

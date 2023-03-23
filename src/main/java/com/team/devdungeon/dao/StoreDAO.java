@@ -20,12 +20,10 @@ public class StoreDAO {
     }
 
     public int selectProductLog(Map<String, Object> cartInfo) {
-        System.out.println(cartInfo);
         return sqlSession.selectOne("store.selectProductLog", cartInfo);
     }
 
     public int shoppingBagInsert(Map<String, Object> cartInfo) {
-        System.out.println("StoreDAO : " + cartInfo);
         int result = 0;
         try {
             result = sqlSession.insert("store.shoppingBagInsert", cartInfo);
@@ -36,16 +34,16 @@ public class StoreDAO {
         return result;
     }
 
-    public List<Map<String, Object>> selectPayShoppingBag(Object memberId) {
-        return sqlSession.selectList("store.selectPayShoppingBag", memberId);
+    public List<Map<String, Object>> selectPayShoppingBag(Map<String, Object> cartInfo) {
+        return sqlSession.selectList("store.selectPayShoppingBag", cartInfo);
     }
 
     public List<Map<String, Object>> selectGiftShoppingBag(Object memberId) {
         return sqlSession.selectList("store.selectGiftShoppingBag", memberId);
     }
 
-    public List<Map<String, Object>> couponList() {
-        return sqlSession.selectList("store.couponList");
+    public List<Map<String, Object>> couponList(String member_id) {
+        return sqlSession.selectList("store.couponList", member_id);
     }
 
     public int checkPoint(Object memberId) {
@@ -55,12 +53,19 @@ public class StoreDAO {
     public int payProduct(Map<String, Object> payInfo) {
         int result = sqlSession.update("store.updatePoint", payInfo);
         if(result == 1) {
-            List<Map<String, Object>> cart = sqlSession.selectList("store.selectPayShoppingBag", payInfo.get("member_id"));
+            System.out.println(payInfo);
+
+            List<Map<String, Object>> cart = sqlSession.selectList("store.selectPayShoppingBag", payInfo);
+
+            System.out.println("장바구니 구매 목록 아이콘 : " + cart);
+
             List<Object> icons = new ArrayList<>();
             for(Map<String, Object> map : cart) {
                 icons.add(map.get("product_no"));
             }
             payInfo.put("icons", icons);
+
+            System.out.println("장바구니 구매 목록 정보 : " + payInfo);
 
             sqlSession.insert("store.insertProductNo", payInfo);
             sqlSession.update("store.productSellCountDown", payInfo);
@@ -76,5 +81,17 @@ public class StoreDAO {
 
     public int iconListCount(Map<String, Object> pages) {
         return sqlSession.selectOne("store.iconListCount", pages);
+    }
+
+    public List<Map<String, Object>> checkProductCount(Object memberId) {
+        return sqlSession.selectList("store.checkProductCount", memberId);
+    }
+
+    public void deleteCart(Map<String, Object> info) {
+        sqlSession.delete("store.deleteCartList", info);
+    }
+
+    public void deleteCartOne(Map<String, Object> cartInfo) {
+        sqlSession.delete("store.deleteCartOne", cartInfo);
     }
 }

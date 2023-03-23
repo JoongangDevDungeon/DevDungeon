@@ -12,6 +12,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.team.devdungeon.util.TextChangeUtil;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,7 @@ public class HJHBoardController {
 	private final CSJService csjService;
 	private final MyPageService mypageService;
 	private final SFTPFileUtil sftpFileUtil;
+	private final TextChangeUtil textChangeUtil;
 	
 	@GetMapping("/board/HJHBoard")
 	public ModelAndView boardList(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
@@ -58,6 +60,9 @@ public class HJHBoardController {
 		pages.put("startPage", startPage);
 		pages.put("lastPage", lastPage);
 		List<Map<String, Object>> list = HJHboardService.boardList(pages);
+		for(Map<String, Object> m : list) {
+			m.put("board_title", textChangeUtil.changeText((String)m.get("board_title")));
+		}
 		mv.addObject("pages",pages);
 		mv.addObject("list",list);
 		mv.addObject("pageNo", pageNo);
@@ -69,7 +74,13 @@ public class HJHBoardController {
 		String board_no = request.getParameter("board_no");
 		HJHboardService.boardRead(board_no);
 		Map<String, Object> boardDetail = HJHboardService.boardDetail(board_no);
+		boardDetail.put("board_title", textChangeUtil.changeText((String)boardDetail.get("board_title")));
+		boardDetail.put("board_content", textChangeUtil.changeText((String)boardDetail.get("board_content")));
+		boardDetail.put("board_content", textChangeUtil.changeEnter((String)boardDetail.get("board_content")));
 		List<Map<String,Object>> detailComments = HJHboardService.detailComment(board_no);
+		for(Map<String, Object> m : detailComments) {
+			m.put("comment_content", textChangeUtil.changeText((String)m.get("comment_content")));
+		}
 		mv.addObject("boardDetail",boardDetail);
 		mv.addObject("detailComments",detailComments);
 		
@@ -108,6 +119,7 @@ public class HJHBoardController {
 	        }
 		}
 		MyPageDTO mydto = mypageService.profile((String)mem.get("member_id"));
+		mydto.setMember_intro(textChangeUtil.changeText(mydto.getMember_intro()));
 		mv.addObject("profile",mydto);
 		
 		//
@@ -115,8 +127,8 @@ public class HJHBoardController {
 	}
 	@PostMapping("/board/HJHBoardWrite")
 	public String boardWrite(HttpServletRequest request, HttpSession session,MultipartHttpServletRequest fileReq) {
-		String board_title = request.getParameter("writeTitle");
-		String board_content = request.getParameter("writeContent");
+		String board_title = textChangeUtil.changeText((String)request.getParameter("writeTitle"));
+		String board_content = textChangeUtil.changeText((String)request.getParameter("writeContent"));
 		String board_no = request.getParameter("board_no");
 		String member_id = (String)session.getAttribute("member_id");
 		if(board_no==null) {
@@ -182,6 +194,7 @@ public class HJHBoardController {
 	public String boardComment(HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		String comment_content = request.getParameter("commentText");
+		comment_content = textChangeUtil.changeText(comment_content);
 		String board_no = request.getParameter("board_no");
 		String member_name = (String)session.getAttribute("member_name");
 		map.put("comment_content", comment_content);
@@ -195,6 +208,7 @@ public class HJHBoardController {
 	public String boardSubComment(HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		String subComment_content = request.getParameter("c_commentText");
+		subComment_content = textChangeUtil.changeText(subComment_content);
 		String comment_root = request.getParameter("comment_root");
 		String board_no = request.getParameter("board_no");
 		String member_name = (String)session.getAttribute("member_name");

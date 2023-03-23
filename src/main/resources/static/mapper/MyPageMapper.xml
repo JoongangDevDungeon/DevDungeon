@@ -11,12 +11,18 @@
                     member_pw = #{member_pw}
     </select>
 
-    <select id="icons" parameterType="String" resultType="HashMap">
+    <select id="myIconListCount" parameterType="String" resultType="Integer">
+        SELECT COUNT(*) FROM product_log
+            WHERE
+                member_no = (SELECT member_no FROM member WHERE member_id = #{memberId})
+    </select>
+
+    <select id="icons" parameterType="HashMap" resultType="HashMap">
         SELECT product_no, product_name, emo_img_name, emo_img_extension
             FROM product p JOIN product_log pl ON p.product_no = pl.emo_no
                 WHERE
-                    pl.member_no = (SELECT member_no FROM member WHERE member_id = #{memberId})
-            LIMIT 0, 6
+                    pl.member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+        LIMIT #{startPage}, 6
     </select>
 
     <select id="profile" parameterType="String" resultType="MyPageDTO">
@@ -41,6 +47,21 @@
             WHERE
                 member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
     </update>
+
+    <select id="selectUseIcon" parameterType="String" resultType="Integer">
+        SELECT icon_no
+            FROM member
+        WHERE
+            member_id = #{memberId}
+    </select>
+
+    <delete id="deleteIcon" parameterType="HashMap">
+        DELETE FROM product_log
+            WHERE
+                member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+            AND
+                emo_no = #{icon_no}
+    </delete>
 
     <update id="introUpdate" parameterType="HashMap">
         UPDATE member

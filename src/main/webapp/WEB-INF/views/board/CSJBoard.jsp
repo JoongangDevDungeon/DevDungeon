@@ -124,6 +124,7 @@ function closeLayer(){
 									<td><span class="board_tag">${b.tag_name }</span></td>
 									<td>${b.bno }</td>
 									<td onclick="detail(${b.board_no})" class="text-truncate title" style="max-width:1px;">${b.board_title }
+									<c:if test="${b.isFile ne 0 }">[fileiconplz]</c:if>
 									<c:if test="${b.comment_cnt ne 0 }"><h6>${b.comment_cnt}</h6></c:if></td>
 									<td><span class="text-truncate boardWriter" style="max-width:1px;" 
 										<c:if test="${sessionScope.member_name ne null }">

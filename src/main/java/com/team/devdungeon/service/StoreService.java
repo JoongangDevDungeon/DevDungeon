@@ -7,11 +7,13 @@ public interface StoreService {
     List<Map<String, Object>> iconList(Map<String, Object> pages);
     int iconListCount(Map<String, Object> pages);
     int shoppingBagInsert(String userId, String[] shoppingBag, String sellType);
-    List<Map<String, Object>> selectPayShoppingBag(Object memberId);
+    List<Map<String, Object>> selectPayShoppingBag(Object memberId, String view_type);
     List<Map<String, Object>> selectGiftShoppingBag(Object memberId);
-    List<Map<String, Object>> couponList();
-    int payProduct(int resultPrice, Object memberId);
+    List<Map<String, Object>> couponList(String member_id);
+    int payProduct(int resultPrice, Object memberId, String pay_type);
     int selectProductLog(String userId, String[] shoppingBag);
     int checkPoint(Object memberId);
-
+    List<Map<String, Object>> checkProductCount(Object memberId);
+    void deleteCart(Map<String, Object> deleteCartList, Object memberId);
+    void deleteCartOne(String userId, Integer product_no, String sellType);
 }

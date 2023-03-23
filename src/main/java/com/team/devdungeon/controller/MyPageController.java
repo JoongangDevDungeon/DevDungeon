@@ -47,19 +47,51 @@ public class MyPageController {
     }
 
     @GetMapping("/myPage")
-    public ModelAndView myPage(HttpSession session) {
+    public ModelAndView myPage(HttpSession session, HttpServletRequest request, @RequestParam(value="pageNo", defaultValue = "1") int pageNo) {
         ModelAndView mv = new ModelAndView("mypage/myPage");
-        List<Map<String, Object>> icons = myPageService.icons((String)session.getAttribute("member_id"));
         MyPageDTO profile = myPageService.profile((String)session.getAttribute("member_id"));
-        mv.addObject("profile", profile);
+
+        Map<String, Object> pages = new HashMap<String, Object>();
+
+        int startPage = (pageNo*6)-6;
+        int totalCount = myPageService.myIconListCount((String)session.getAttribute("member_id"));
+        int lastPage = (int)Math.ceil((double)totalCount/6);
+
+        pages.put("member_id", (String) session.getAttribute("member_id"));
+        pages.put("startPage", startPage);
+        pages.put("lastPage", lastPage);
+
+        List<Map<String, Object>> icons = myPageService.icons(pages);
+
+        mv.addObject("pages", pages);
         mv.addObject("icons", icons);
+        mv.addObject("pageNo", pageNo);
+        mv.addObject("profile", profile);
+
         return mv;
     }
 
     @PostMapping("/iconSelect")
     @ResponseBody
-    public int iconSelect(@RequestParam int icon_no, HttpSession session) {
-        return myPageService.updateIcon(icon_no, session);
+    public int iconSelect(@RequestParam Integer icon_no, HttpSession session) {
+        Integer useIcon = myPageService.selectUseIcon(session);
+        if(useIcon == null) {
+            return myPageService.updateIcon(icon_no, session);
+        } else {
+            if(useIcon == icon_no) {
+                return 2;
+            } else {
+                return myPageService.updateIcon(icon_no, session);
+            }
+        }
+    }
+
+    @PostMapping("/iconDelete")
+    @ResponseBody
+    public int iconDelete(@RequestParam Integer icon_no, HttpSession session) {
+        int useIcon = myPageService.selectUseIcon(session);
+        if(useIcon == icon_no) myPageService.updateIcon(null, session);
+        return myPageService.deleteIcon(icon_no, session);
     }
 
     @PostMapping("/profileImage")

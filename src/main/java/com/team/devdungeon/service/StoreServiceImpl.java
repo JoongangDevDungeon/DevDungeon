@@ -91,8 +91,11 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public List<Map<String, Object>> selectPayShoppingBag(Object memberId) {
-        List<Map<String, Object>> cart = storeDAO.selectPayShoppingBag(memberId);
+    public List<Map<String, Object>> selectPayShoppingBag(Object memberId, String view_type) {
+        Map<String, Object> cartInfo = new HashMap<>();
+        cartInfo.put("member_id", memberId);
+        cartInfo.put("view_type", view_type);
+        List<Map<String, Object>> cart = storeDAO.selectPayShoppingBag(cartInfo);
 
         InputStream inputStream = null;
         ByteArrayOutputStream baos = null;
@@ -133,8 +136,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public List<Map<String, Object>> couponList() {
-        return storeDAO.couponList();
+    public List<Map<String, Object>> couponList(String member_id) {
+        return storeDAO.couponList(member_id);
     }
 
     @Override
@@ -143,10 +146,36 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public int payProduct(int resultPrice, Object memberId) {
+    public List<Map<String, Object>> checkProductCount(Object memberId) {
+        return storeDAO.checkProductCount(memberId);
+    }
+
+    @Override
+    public void deleteCart(Map<String, Object> deleteCartList, Object memberId) {
+        Map<String, Object> info = new HashMap<>();
+        info.put("product_no", deleteCartList);
+        info.put("member_id", memberId);
+        storeDAO.deleteCart(info);
+    }
+
+    @Override
+    public void deleteCartOne(String userId, Integer product_no, String sellType) {
+        Map<String, Object> cartInfo = new HashMap<>();
+        cartInfo.put("member_id", userId);
+        cartInfo.put("product_no", product_no);
+        cartInfo.put("type", sellType);
+
+        System.out.println(cartInfo);
+
+        storeDAO.deleteCartOne(cartInfo);
+    }
+
+    @Override
+    public int payProduct(int resultPrice, Object memberId, String pay_type) {
         Map<String, Object> payInfo = new HashMap<>();
         payInfo.put("pay_price", resultPrice);
         payInfo.put("member_id", memberId);
+        payInfo.put("view_type", pay_type);
         return storeDAO.payProduct(payInfo);
     }
 

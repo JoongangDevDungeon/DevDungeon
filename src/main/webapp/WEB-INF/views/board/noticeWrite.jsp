@@ -155,7 +155,7 @@ a:hover {
 						<select class="notice_tag" name="notice_tag" id="notice_tag">
 							<option value="1">공지</option>
 						</select>
-						<input type="text" name="writeTitle" id="writeTitle" class="writeTitle" placeholder="제목을 입력하세요" <c:if test="${noticeDetail.notice_title ne null }">value="${ noticeDetail.notice_title }"</c:if>>
+						<input type="text" name="writeTitle" id="writeTitle" class="writeTitle" placeholder="제목을 입력하세요" maxlength="40" <c:if test="${noticeDetail.notice_title ne null }">value="${ noticeDetail.notice_title }"</c:if>>
 						<textarea name="writeContent" id="writeContent"	class="writeContent" placeholder="내용을 입력하세요"><c:if test="${noticeDetail.notice_content ne null }">${ noticeDetail.notice_content }</c:if></textarea>
 						<input type="file" class="fileUpload">
 						<div class="btnBox">

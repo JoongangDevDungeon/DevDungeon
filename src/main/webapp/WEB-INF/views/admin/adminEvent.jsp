@@ -10,6 +10,7 @@
 <title>admin event</title>
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script type="text/javascript">function url(link){location.href="/"+link;}</script>
 <script type="text/javascript" src="/js/admin/AdminEventPaging.js"></script>
 <script type="text/javascript" src="/js/admin/AdminEventSearch.js"></script>
@@ -39,6 +40,33 @@ function moveNext(pageNo){
 		}
 	}
 }
+/* 모달 */
+/*
+const myModal = document.getElementById('staticBackdrop');
+
+myModal.addEventListener('show.bs.modal', event => {
+	// Button that triggered the modal
+	const button = event.relatedTarget;
+	// Extract info from data-bs-* attributes
+	const recipient = button.getAttribute('data-bs-whatever');
+	// If necessary, you could initiate an AJAX request here
+	// and then do the updating in a callback.
+	//
+	// Update the modal's content.
+	const modalTitle = myModal.querySelector('.modal-title');
+	const modalBodyInput = myModal.querySelector('.modal-body input');
+	
+	modalTitle.textContent = `New message to ${recipient}`
+	modalBodyInput.value = recipient
+});
+*/
+
+/*
+*/
+$().ready(function(){
+	$("#staticBackdrop").modal("show");
+	
+});
 </script>
 <body>
 <div id="container">
@@ -58,7 +86,7 @@ function moveNext(pageNo){
 					<th class="col-2">이벤트 기간</th>
 					<th class="col-1">관리</th>
 				</tr>
-				<!-- 수정 하면댐 -->
+				
 				<c:forEach items="${list }" var="row">
 				<tr>
 					<td>${row.event_no }</td>
@@ -71,10 +99,32 @@ function moveNext(pageNo){
 							<input type="hidden" name="pageNo" value="${pageNo }">
 							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화' : '비활성화'}</button>
 						</form>
+						
+						<form>
+							<!-- 모달 시작 -->
+							<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">당첨자 뽑기</button>
+							
+							<!-- Modal -->
+							<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h1 class="modal-title fs-5" id="staticBackdropLabel">Modal	title</h1>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">당첨자 뽑기 본문</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-primary">Save changes</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</form>
 					</td>
 				</tr>
 				</c:forEach>
-				<!-- 수정 하면댐 -->
 			</table>
 			
 			<!-- 이벤트 글쓰기 버튼 -->

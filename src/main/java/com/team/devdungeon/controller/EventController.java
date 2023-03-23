@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 import com.team.devdungeon.dto.CSJshowDTO;
 import com.team.devdungeon.service.CSJService;
+import com.team.devdungeon.util.TextChangeUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class EventController {
 
 	private final CSJService csjService;
-
+	private final TextChangeUtil textChangeUtil;
 	private final ServletContext context;
 	
 	@GetMapping("/eventboard")
@@ -81,6 +82,14 @@ public class EventController {
 		mv.addObject("pageInfo", pageList);
 		mv.addObject("searchType", searchType);
 		mv.addObject("searchValue", searchValue);
+		for(Map<String,Object> m : pageList.getList()) {
+			String s = (String) m.get("event_title");
+			s = textChangeUtil.changeText(s);
+			m.put("event_title", s);
+			s = (String) m.get("event_content");
+			s = textChangeUtil.changeText(s);
+			m.put("event_content", s);
+		}
 		mv.addObject("list", pageList.getList());
 		return mv;
 	}
@@ -95,6 +104,9 @@ public class EventController {
 			mv.setViewName("redirect:/eventboard");
 			return mv;
 		}
+		det.put("event_title", textChangeUtil.changeText((String)det.get("event_title")));
+		det.put("event_content", textChangeUtil.changeText((String)det.get("event_content")));
+		det.put("event_content", textChangeUtil.changeEnter((String)det.get("event_content")));
 		Map<String, Object> eventFile = csjService.callEventFile(bno);
 		if(eventFile!=null) {
 			String remotePath = "/home/woori/ftp/files/" + eventFile.get("event_file_name");

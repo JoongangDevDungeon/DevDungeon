@@ -114,6 +114,18 @@ function subComment_check(){
 				<div class="detailTop_item">${noticeDetail.notice_date }</div>
 			</div>
 			<div class="detailMid">
+				<c:if test="${noticeFile ne null }">
+					<div class="form-control">
+						<span>
+							<label class="col-form-label"><a href = "data:image/png;base64,${imageDataString}" download = "${noticeFile.file_name }">${noticeFile.file_name }</a></label>
+						</span>
+						</div>
+						<c:if test="${noticeFile.file_extension eq jpg||noticeFile.file_extension eq png||noticeFile.file_extension eq jpeg}">
+							<div>
+								<img src="data:image/png;base64,${imageDataString}" />
+							</div>
+						</c:if>
+				</c:if>
 				<div class="detailMid_item">${noticeDetail.notice_content }</div>
 			</div>
 			<div class="btnBox">
