@@ -58,7 +58,7 @@
         $(".icon_delete").click(function() {
            const icon_no = $(this).attr("value");
 
-           if(confirm("아이콘을 삭제하겠습니까?")) {
+           if(confirm("아이콘을 삭제하겠습니까?\n대표설정된 아이콘일 경우 해제됩니다.")) {
                 $.post({
                     url : "/iconDelete",
                     data : {"icon_no" : icon_no },

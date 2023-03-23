@@ -12,7 +12,7 @@ public interface MyPageService {
     MyPageDTO profile(String memberId);
     int memberIntro(Map<String, Object> map, MultipartFile profile_img);
     List<Map<String, Object>> icons(String memberId);
-    int updateIcon(int iconNo, HttpSession session);
+    int updateIcon(Integer iconNo, HttpSession session);
     MyPageDTO userProfile(String memberId);
     int updateProfile(Map<String, Object> map, HttpSession session);
     List<Map<String, Object>> loginLog(String memberId);

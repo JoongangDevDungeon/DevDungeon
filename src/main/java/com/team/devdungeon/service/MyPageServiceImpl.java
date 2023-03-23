@@ -143,7 +143,7 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
-    public int updateIcon(int iconNo, HttpSession session) {
+    public int updateIcon(Integer iconNo, HttpSession session) {
         Map<String, Object> info = new HashMap<>();
         info.put("icon_no", iconNo);
         info.put("member_id", session.getAttribute("member_id"));

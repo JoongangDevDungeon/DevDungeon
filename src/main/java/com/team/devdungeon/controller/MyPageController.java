@@ -58,9 +58,8 @@ public class MyPageController {
 
     @PostMapping("/iconSelect")
     @ResponseBody
-    public int iconSelect(@RequestParam int icon_no, HttpSession session) {
+    public int iconSelect(@RequestParam Integer icon_no, HttpSession session) {
         int useIcon = myPageService.selectUseIcon(session);
-        System.out.println("(변경) 대표 아이콘 : " + useIcon);
         if(useIcon == icon_no) {
             return 2;
         } else {
@@ -71,12 +70,11 @@ public class MyPageController {
 
     @PostMapping("/iconDelete")
     @ResponseBody
-    public int iconDelete(@RequestParam int icon_no, HttpSession session) {
+    public int iconDelete(@RequestParam Integer icon_no, HttpSession session) {
         int useIcon = myPageService.selectUseIcon(session);
-        System.out.println("(삭제) 대표 아이콘 : " + useIcon);
-        if(useIcon == icon_no) System.out.println();
+        if(useIcon == icon_no) myPageService.updateIcon(null, session);
         return myPageService.deleteIcon(icon_no, session);
-    }
+    }업
 
     @PostMapping("/profileImage")
     public String profileImageAndIntro(HttpSession session, @RequestParam Map<String, Object> map, MultipartFile profile_img) {
