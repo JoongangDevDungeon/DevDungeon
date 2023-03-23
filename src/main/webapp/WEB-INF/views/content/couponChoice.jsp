@@ -35,23 +35,31 @@
             <div class="form-control find-form">
                 <label class="find-label mt-4">쿠폰 선택</label>
                 <!-- 발급 쿠폰 -->
-                <c:forEach items="${couponList}" var="couponList">
-                <label class="form-control mt-4 mb-4" style="width: 675px; height: 80px; margin: 0 auto;">
-                    <div style="width: 100px; height: 70px; float: left; padding-top: 25px; text-align: center; box-sizing: border-box;">
-                        <input class="coupon-radio" type="radio" style="width: 20px; height: 20px;" name="coupon_radio" value="${couponList.coupon_type}" content="${couponList.coupon_content}">
-                    </div>
-                    <div class="mt-2">
-                        <div style="width: 540px; height: 28px; float: left;">
-                            <h5 style="float: left; ">쿠폰 할인</h5>
-                            <span style="float: left; margin-left: 10px;  color: #ccc;">${couponList.coupon_end}</span>
-                        </div>
-                        <div style="width: 540px; height: 28px; float: left;">
-                            <span style="float: left;">${couponList.coupon_content}% 할인</span>
-                        </div>
-                    </div>
-                </label>
-                </c:forEach>
-                <button class="btn btn-primary mt-2 mb-3" style="width: 675px;" id="coupon_btn">쿠폰 선택</button>
+                <c:choose>
+                    <c:when test="${!empty couponList}">
+                        <c:forEach items="${couponList}" var="couponList">
+                            <label class="form-control mt-4 mb-4" style="width: 675px; height: 80px; margin: 0 auto;">
+                                <div style="width: 100px; height: 70px; float: left; padding-top: 25px; text-align: center; box-sizing: border-box;">
+                                    <input class="coupon-radio" type="radio" style="width: 20px; height: 20px;" name="coupon_radio" value="${couponList.coupon_type}" content="${couponList.coupon_content}">
+                                </div>
+                                <div class="mt-2">
+                                    <div style="width: 540px; height: 28px; float: left;">
+                                        <h5 style="float: left; ">쿠폰 할인</h5>
+                                        <span style="float: left; margin-left: 10px;  color: #ccc;">${couponList.coupon_end}</span>
+                                    </div>
+                                    <div style="width: 540px; height: 28px; float: left;">
+                                        <span style="float: left;">${couponList.coupon_content}% 할인</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </c:forEach>
+                            <button class="btn btn-primary mt-2 mb-3" style="width: 675px;" id="coupon_btn">쿠폰 선택</button>
+                    </c:when>
+                    <c:otherwise>
+                            <div class="form-control mt-4 mb-4" style="width: 675px; height: 80px; line-height: 70px; text-align: center; margin: 0 auto;">보유중인 쿠폰이 없습니다..</div>
+                        <button class="btn btn-primary mt-2 mb-3" style="width: 675px;" onclick="window.close();">닫기</button>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
     </div>

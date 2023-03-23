@@ -63,9 +63,12 @@
                     sc.member_no = (SELECT member_no FROM member WHERE member_id = #{memberId})
     </select>
 
-    <select id="couponList" resultType="HashMap">
+    <select id="couponList" parameterType="String" resultType="HashMap">
         SELECT coupon_type, coupon_name, coupon_content, coupon_end
-            FROM coupon
+            FROM couponBag cb JOIN coupon c ON cb.coupon_no = c.coupon_type
+        WHERE
+            cb.member_no = (SELECT member_no FROM member WHERE member_id = #{member_id});
+
     </select>
 
     <select id="checkProductCount" parameterType="String" resultType="HashMap">

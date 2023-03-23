@@ -42,8 +42,8 @@ public class StoreDAO {
         return sqlSession.selectList("store.selectGiftShoppingBag", memberId);
     }
 
-    public List<Map<String, Object>> couponList() {
-        return sqlSession.selectList("store.couponList");
+    public List<Map<String, Object>> couponList(String member_id) {
+        return sqlSession.selectList("store.couponList", member_id);
     }
 
     public int checkPoint(Object memberId) {

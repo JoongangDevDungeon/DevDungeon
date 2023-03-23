@@ -133,9 +133,10 @@ public class StoreController {
     }
 
     @GetMapping("/couponChoice")
-    public ModelAndView couponChoice() {
+    public ModelAndView couponChoice(HttpSession session) {
         ModelAndView mv = new ModelAndView("content/couponChoice");
-        List<Map<String, Object>> couponList = storeService.couponList();
+        String member_id = (String) session.getAttribute("member_id");
+        List<Map<String, Object>> couponList = storeService.couponList(member_id);
         mv.addObject("couponList", couponList);
         return mv;
     }

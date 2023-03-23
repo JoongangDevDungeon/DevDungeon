@@ -136,8 +136,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public List<Map<String, Object>> couponList() {
-        return storeDAO.couponList();
+    public List<Map<String, Object>> couponList(String member_id) {
+        return storeDAO.couponList(member_id);
     }
 
     @Override
