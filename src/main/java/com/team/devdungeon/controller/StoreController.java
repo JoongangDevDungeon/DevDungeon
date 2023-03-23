@@ -73,13 +73,6 @@ public class StoreController {
         int result = storeService.selectProductLog(userId, shoppingBag);
         if(result < 1) {    // 구매한 아이콘이 없을 때
             result = storeService.shoppingBagInsert(userId, shoppingBag, sellType);
-            if(result != 0) {
-                result = 1;
-            } else {
-                result = 3;
-            }
-        } else {
-            result = 2;
         }
 
         return result;
