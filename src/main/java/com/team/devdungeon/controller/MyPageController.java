@@ -74,7 +74,7 @@ public class MyPageController {
         int useIcon = myPageService.selectUseIcon(session);
         if(useIcon == icon_no) myPageService.updateIcon(null, session);
         return myPageService.deleteIcon(icon_no, session);
-    }업
+    }
 
     @PostMapping("/profileImage")
     public String profileImageAndIntro(HttpSession session, @RequestParam Map<String, Object> map, MultipartFile profile_img) {
