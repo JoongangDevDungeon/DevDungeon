@@ -7,6 +7,7 @@
 <!-- Favicon-->
 <link rel="icon" href="/img/admin/adminGazi.png" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <title>admin event</title>
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
@@ -40,33 +41,19 @@ function moveNext(pageNo){
 		}
 	}
 }
+
 /* 모달 */
-/*
-const myModal = document.getElementById('staticBackdrop');
+const myModal = document.getElementById('modal')
 
-myModal.addEventListener('show.bs.modal', event => {
-	// Button that triggered the modal
-	const button = event.relatedTarget;
-	// Extract info from data-bs-* attributes
-	const recipient = button.getAttribute('data-bs-whatever');
-	// If necessary, you could initiate an AJAX request here
-	// and then do the updating in a callback.
-	//
-	// Update the modal's content.
-	const modalTitle = myModal.querySelector('.modal-title');
-	const modalBodyInput = myModal.querySelector('.modal-body input');
-	
-	modalTitle.textContent = `New message to ${recipient}`
-	modalBodyInput.value = recipient
-});
-*/
 
-/*
-*/
-$().ready(function(){
-	$("#staticBackdrop").modal("show");
+myModal.addEventListener('shown.bs.modal', () => {
+	const winner = document.getElementById('winner')
+	function eWinE()
+	document.getElementById("eModalForm").submit();
 	
-});
+})
+
+
 </script>
 <body>
 <div id="container">
@@ -93,43 +80,46 @@ $().ready(function(){
 					<td>${row.event_title }</td>
 					<td>${row.event_date } ~ ${row.event_end }</td>
 					<td>
-						<form action="/adminEvent" method="post">
+						<form action="/adminEvent" method="post" class="exentf1">
 							<input type="hidden" name="event_no" value="${row.event_no }">
 							<input type="hidden" name="status_no" value="${row.status_no }">
 							<input type="hidden" name="pageNo" value="${pageNo }">
-							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화' : '비활성화'}</button>
+							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? 'ON' : 'OFF'}</button>
 						</form>
 						
-						<form>
-							<!-- 모달 시작 -->
-							<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">당첨자 뽑기</button>
-							
+						<!-- 모달 시작 -->
+						<form action="" method="post" class="exentf2" id="eModalForm">
+							<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop${row.event_no }">뽑기</button>
 							<!-- Modal -->
-							<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-								<div class="modal-dialog">
+							<div class="modal" id="staticBackdrop${row.event_no }" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h1 class="modal-title fs-5" id="staticBackdropLabel">Modal	title</h1>
+											<div class="modal-title fs-5" id="staticBackdropLabel">${row.event_no }번 이벤트</div>
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
-										<div class="modal-body">당첨자 뽑기 본문</div>
+										<div class="modal-body">
+										총 당첨자수 : <input type="number" id="winner">
+										
+										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Save changes</button>
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+											<button type="button" class="btn btn-primary" id="eWinE" onclick="eWinE()">완료(저장)</button>
 										</div>
 									</div>
 								</div>
 							</div>
-							
 						</form>
+						
 					</td>
 				</tr>
 				</c:forEach>
 			</table>
 			
+			
 			<!-- 이벤트 글쓰기 버튼 -->
 			<div class="ED-btn">
-			<button class="btn btn-primary" onclick="location.href='/adminEventWrite'">이벤트 글쓰기</button>
+				<button class="btn btn-primary" onclick="location.href='/adminEventWrite'">이벤트 글쓰기</button>
 			</div><br><br>
 			
 			<!-- 페이징 -->
