@@ -72,8 +72,10 @@
 						</div>
 					</div>
 					
-					
-					
+					<button type="button" onclick="location.href='/adminStatistics/time'">시간별방문자 엑셀</button>
+					<button type="button" onclick="location.href='/adminStatistics/day'">요일별방문자 엑셀</button>
+					<button type="button" onclick="location.href='/adminStatistics/month'">월별방문자 엑셀</button>
+
 				</div>
 			</div>
 		</div>

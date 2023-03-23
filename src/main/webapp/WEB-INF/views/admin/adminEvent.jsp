@@ -78,7 +78,7 @@ myModal.addEventListener('shown.bs.modal', () => {
 				<tr>
 					<td>${row.event_no }</td>
 					<td>${row.event_title }</td>
-					<td>${row.event_date } ~ ${row.event_end }</td>
+					<td>${row.formatted_start } ~ ${row.event_end }</td>
 					<td>
 						<form action="/adminEvent" method="post" class="exentf1">
 							<input type="hidden" name="event_no" value="${row.event_no }">

@@ -53,6 +53,82 @@
       opacity:0.8;
       background-color: #FFBCD1;
    }
+/*===================슬라이드===================*/
+
+   .slider{/* 슬라이드 이미지 크기*/
+      width: 1000px;
+      height: 500px;
+      position: relative;
+      margin: 0 auto;
+      background-color: #D4D3E8;
+      overflow: hidden; /* 현재 슬라이드 오른쪽에 위치한 나머지 슬라이드 들이 보이지 않도록 가림 */
+   }
+   .radio{
+      display: none;
+   }
+   ul.imgs{
+      padding: 0;
+      list-style: none;
+   }
+   ul.imgs li{
+      position: absolute;
+      left: 640px;
+      transition-delay: 1s; /* 새 슬라이드가 이동해 오는 동안 이전 슬라이드 이미지가 배경이 보이도록 지연 */
+
+      padding: 0;
+      margin: 0;
+   }
+   .bullets{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 20px;
+      z-index: 2;
+   }
+   .bullets label{
+      display: inline-block;
+      border-radius: 50%;
+      background-color: rgba(0,0,0, 0.6);
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+   }
+   /* 현재 선택된 불릿 배경 흰색으로 구분 표시 */
+   .slider input[type=radio]:nth-child(1):checked~.bullets>label:nth-child(1){
+      background-color: #6867AC;
+   }
+   .slider input[type=radio]:nth-child(2):checked~.bullets>label:nth-child(2){
+      background-color: #6867AC;
+   }
+   .slider input[type=radio]:nth-child(3):checked~.bullets>label:nth-child(3){
+      background-color: #6867AC;
+   }
+   .slider input[type=radio]:nth-child(4):checked~.bullets>label:nth-child(4){
+      background-color: #6867AC;
+   }
+
+   .slider input[type=radio]:nth-child(1):checked~ul.imgs>li:nth-child(1){/*slider 클래스 안에 1번째 라디오가 체크가 된다면 이미지 ul에 있는 이미지를 */
+      left: 0;
+      transition: 0.5s;
+      z-index:1;
+   }
+   .slider input[type=radio]:nth-child(2):checked~ul.imgs>li:nth-child(2){
+      left: 0;
+      transition: 0.5s;
+      z-index:1;
+   }
+   .slider input[type=radio]:nth-child(3):checked~ul.imgs>li:nth-child(3){
+      left: 0;
+      transition: 0.5s;
+      z-index:1;
+   }
+   .slider input[type=radio]:nth-child(4):checked~ul.imgs>li:nth-child(4){
+      left: 0;
+      transition: 0.5s;
+      z-index:1;
+   }
+
+/*===================슬라이드===================*/
 
 </style>
 <body>
@@ -60,7 +136,30 @@
    <%@include file="menu.jsp"%>
    <section>
          <div class="main">
-            <div class="main_img_place"><img alt="index..." src="/img/index.jpg" style="width:1000px; height:400px; margin-top:50px;"></div>
+            <div class="main_img_place">
+               <%--<img alt="index..." src="/img/index.jpg" style="width:1000px; height:400px; margin-top:20px;">--%>
+
+                  <div class="slider">
+                     <input class="radio" type="radio" name="slide" id="slide1" checked>
+                     <input class="radio" type="radio" name="slide" id="slide2">
+
+                     <ul id="imgholder" class="imgs">
+                        <li><img src="/img/slider_img_1.png"></li>
+                        <li><img src="/img/slider_img_2.png"></li>
+
+                     </ul>
+                     <div class="bullets">
+                        <label for="slide1">&nbsp;</label>
+                        <label for="slide2">&nbsp;</label>
+
+                     </div>
+                  </div>
+
+
+
+            </div><%--메인 이미지 슬라이드 공간 끝--%>
+
+
             <div class="add1">광고1</div>
             <div class="add2">광고2</div>
             <div class="content" style="background-color: antiquewhite">
