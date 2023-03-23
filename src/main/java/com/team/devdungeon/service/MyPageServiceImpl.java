@@ -109,8 +109,13 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
-    public List<Map<String, Object>> icons(String memberId) {
-        List<Map<String, Object>> resultIcons = myPageDAO.icons(memberId);
+    public int myIconListCount(String memberId) {
+        return myPageDAO.myIconListCount(memberId);
+    }
+
+    @Override
+    public List<Map<String, Object>> icons(Map<String, Object> pages) {
+        List<Map<String, Object>> resultIcons = myPageDAO.icons(pages);
 
         InputStream inputStream = null;
         ByteArrayOutputStream baos = null;
