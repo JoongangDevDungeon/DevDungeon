@@ -60,6 +60,9 @@ public class HJHBoardController {
 		pages.put("startPage", startPage);
 		pages.put("lastPage", lastPage);
 		List<Map<String, Object>> list = HJHboardService.boardList(pages);
+		for(Map<String, Object> m : list) {
+			m.put("board_title", textChangeUtil.changeText((String)m.get("board_title")));
+		}
 		mv.addObject("pages",pages);
 		mv.addObject("list",list);
 		mv.addObject("pageNo", pageNo);
@@ -71,7 +74,13 @@ public class HJHBoardController {
 		String board_no = request.getParameter("board_no");
 		HJHboardService.boardRead(board_no);
 		Map<String, Object> boardDetail = HJHboardService.boardDetail(board_no);
+		boardDetail.put("board_title", textChangeUtil.changeText((String)boardDetail.get("board_title")));
+		boardDetail.put("board_content", textChangeUtil.changeText((String)boardDetail.get("board_content")));
+		boardDetail.put("board_content", textChangeUtil.changeEnter((String)boardDetail.get("board_content")));
 		List<Map<String,Object>> detailComments = HJHboardService.detailComment(board_no);
+		for(Map<String, Object> m : detailComments) {
+			m.put("comment_content", textChangeUtil.changeText((String)m.get("comment_content")));
+		}
 		mv.addObject("boardDetail",boardDetail);
 		mv.addObject("detailComments",detailComments);
 		
@@ -110,6 +119,7 @@ public class HJHBoardController {
 	        }
 		}
 		MyPageDTO mydto = mypageService.profile((String)mem.get("member_id"));
+		mydto.setMember_intro(textChangeUtil.changeText(mydto.getMember_intro()));
 		mv.addObject("profile",mydto);
 		
 		//
@@ -184,6 +194,7 @@ public class HJHBoardController {
 	public String boardComment(HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		String comment_content = request.getParameter("commentText");
+		comment_content = textChangeUtil.changeText(comment_content);
 		String board_no = request.getParameter("board_no");
 		String member_name = (String)session.getAttribute("member_name");
 		map.put("comment_content", comment_content);
@@ -197,6 +208,7 @@ public class HJHBoardController {
 	public String boardSubComment(HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		String subComment_content = request.getParameter("c_commentText");
+		subComment_content = textChangeUtil.changeText(subComment_content);
 		String comment_root = request.getParameter("comment_root");
 		String board_no = request.getParameter("board_no");
 		String member_name = (String)session.getAttribute("member_name");
