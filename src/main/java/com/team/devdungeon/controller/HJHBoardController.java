@@ -12,6 +12,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.team.devdungeon.util.TextChangeUtil;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,7 @@ public class HJHBoardController {
 	private final CSJService csjService;
 	private final MyPageService mypageService;
 	private final SFTPFileUtil sftpFileUtil;
+	private final TextChangeUtil textChangeUtil;
 	
 	@GetMapping("/board/HJHBoard")
 	public ModelAndView boardList(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
@@ -115,8 +117,8 @@ public class HJHBoardController {
 	}
 	@PostMapping("/board/HJHBoardWrite")
 	public String boardWrite(HttpServletRequest request, HttpSession session,MultipartHttpServletRequest fileReq) {
-		String board_title = request.getParameter("writeTitle");
-		String board_content = request.getParameter("writeContent");
+		String board_title = textChangeUtil.changeText((String)request.getParameter("writeTitle"));
+		String board_content = textChangeUtil.changeText((String)request.getParameter("writeContent"));
 		String board_no = request.getParameter("board_no");
 		String member_id = (String)session.getAttribute("member_id");
 		if(board_no==null) {
