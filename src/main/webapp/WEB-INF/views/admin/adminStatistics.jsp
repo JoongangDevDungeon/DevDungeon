@@ -72,10 +72,10 @@
 						</div>
 					</div>
 					
-					<button type="button" value="${time }" onclick="location.href='/adminStatistics?value=1'">시간별방문자 엑셀</button>
-					<button type="button" value="${day } onclick="location.href='/adminStatistics?value=2'">요일별방문자 엑셀</button>
-					<button type="button" value="${month } onclick="location.href='/adminStatistics?value=3'">월별방문자 엑셀</button>
-					
+					<button type="button" onclick="location.href='/adminStatistics/time'">시간별방문자 엑셀</button>
+					<button type="button" onclick="location.href='/adminStatistics/day'">요일별방문자 엑셀</button>
+					<button type="button" onclick="location.href='/adminStatistics/month'">월별방문자 엑셀</button>
+
 				</div>
 			</div>
 		</div>

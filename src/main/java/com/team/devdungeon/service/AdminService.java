@@ -173,6 +173,20 @@ public class AdminService {
 		return adminDAO.LogMonth();
 	}
 
+	public List<Map<String, Object>> excelTime() {
+		return adminDAO.LogTime();
+	}
+
+	public List<Map<String, Object>> excelDay() {
+		return adminDAO.LogDay();
+	}
+
+	public List<Map<String, Object>> excelMonth() {
+		return adminDAO.LogMonth();
+	}
+
+
+
 	
 
 

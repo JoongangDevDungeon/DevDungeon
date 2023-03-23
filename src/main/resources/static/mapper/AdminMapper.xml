@@ -179,7 +179,7 @@
 	</select>
 
 	<select id="LogMonth" resultType="HashMap">
-		SELECT 
+		SELECT
   			MONTHNAME(created_at) AS month, 
   			COUNT(DISTINCT ip) AS visitors
 		FROM logs
