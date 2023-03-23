@@ -53,12 +53,19 @@ public class StoreDAO {
     public int payProduct(Map<String, Object> payInfo) {
         int result = sqlSession.update("store.updatePoint", payInfo);
         if(result == 1) {
-            List<Map<String, Object>> cart = sqlSession.selectList("store.selectPayShoppingBag", payInfo.get("member_id"));
+            System.out.println(payInfo);
+
+            List<Map<String, Object>> cart = sqlSession.selectList("store.selectPayShoppingBag", payInfo);
+
+            System.out.println("장바구니 구매 목록 아이콘 : " + cart);
+
             List<Object> icons = new ArrayList<>();
             for(Map<String, Object> map : cart) {
                 icons.add(map.get("product_no"));
             }
             payInfo.put("icons", icons);
+
+            System.out.println("장바구니 구매 목록 정보 : " + payInfo);
 
             sqlSession.insert("store.insertProductNo", payInfo);
             sqlSession.update("store.productSellCountDown", payInfo);

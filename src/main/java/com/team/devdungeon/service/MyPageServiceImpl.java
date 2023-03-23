@@ -151,6 +151,20 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
+    public int selectUseIcon(HttpSession session) {
+        String member_id = (String) session.getAttribute("member_id");
+        return myPageDAO.selectUseIcon(member_id);
+    }
+
+    @Override
+    public int deleteIcon(int iconNo, HttpSession session) {
+        Map<String, Object> info = new HashMap<>();
+        info.put("icon_no", iconNo);
+        info.put("member_id", session.getAttribute("member_id"));
+        return myPageDAO.deleteIcon(info);
+    }
+
+    @Override
     public MyPageDTO userProfile(String memberId) {
         return myPageDAO.userProfile(memberId);
     }

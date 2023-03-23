@@ -55,11 +55,11 @@
          if(result_price == "" || result_price == null) {
             result_price = total_price;
          }
-
+         let sell_type = "${type}";
          console.log("최종 결제 금액 : " + result_price);
          $.post({
             url : "/payProduct",
-            data : { "result_price" : result_price, "pay_type" : "cart_pay" },
+            data : { "result_price" : result_price, "pay_type" : sell_type },
             dataType : "text",
             success : function (result) {
                if(result == 0) {

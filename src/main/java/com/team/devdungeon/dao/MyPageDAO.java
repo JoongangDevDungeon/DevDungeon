@@ -48,6 +48,14 @@ public class MyPageDAO {
         return sqlSession.update("mypage.updateIcon", info);
     }
 
+    public int selectUseIcon(String memberId) {
+        return sqlSession.selectOne("mypage.selectUseIcon", memberId);
+    }
+
+    public int deleteIcon(Map<String, Object> info) {
+        return sqlSession.delete("mypage.deleteIcon", info);
+    }
+
     public MyPageDTO userProfile(String memberId) {
         return sqlSession.selectOne("mypage.userProfile", memberId);
     }
@@ -73,4 +81,5 @@ public class MyPageDAO {
     public Map<String, Object> loginPoint(String memberName) {
         return sqlSession.selectOne("mypage.loginPoint",memberName);
     }
+
 }

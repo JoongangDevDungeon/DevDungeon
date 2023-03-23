@@ -42,6 +42,21 @@
                 member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
     </update>
 
+    <select id="selectUseIcon" parameterType="String" resultType="Integer">
+        SELECT icon_no
+            FROM member
+        WHERE
+            member_id = #{memberId}
+    </select>
+
+    <delete id="deleteIcon" parameterType="HashMap">
+        DELETE FROM product_log
+            WHERE
+                member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+            AND
+                emo_no = #{icon_no}
+    </delete>
+
     <update id="introUpdate" parameterType="HashMap">
         UPDATE member
             SET

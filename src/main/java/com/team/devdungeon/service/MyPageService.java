@@ -19,4 +19,6 @@ public interface MyPageService {
     int nowPassCheck(Map<String, Object> map);
     int modifyPassword(Map<String, Object> info);
     Map<String, Object> loginPoint(String memberName);
+    int deleteIcon(int iconNo, HttpSession session);
+    int selectUseIcon(HttpSession session);
 }

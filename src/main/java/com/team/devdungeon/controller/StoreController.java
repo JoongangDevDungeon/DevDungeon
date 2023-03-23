@@ -148,8 +148,6 @@ public class StoreController {
 
         List<Map<String, Object>> productInfo = storeService.checkProductCount(session.getAttribute("member_id"));
 
-        int count_check = 0;
-
         Map<String, Object> deleteCartList = new HashMap<>();
         for(Map<String, Object> product : productInfo) {
             int product_cnt = (int) product.get("product_sell_cnt");

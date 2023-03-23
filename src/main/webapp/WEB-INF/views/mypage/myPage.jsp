@@ -42,6 +42,9 @@
                     console.log(result);
                     if(result == 1) {
                         alert("대표 아이콘을 변경했습니다.");
+                        location.reload();
+                    } else if (result == 2) {
+                        alert("이미 대표설정된 아이콘 입니다.");
                     } else {
                         alert("아이콘을 변경하는 도중 문제가 발생했습니다.\n잠시 후 다시 시도해주세요.");
                     }
@@ -50,6 +53,29 @@
                     alert("아이콘을 변경하는 도중 에러가 발생했습니다.\n잠시 후 다시 시도해주세요.");
                 }
             });
+        });
+
+        $(".icon_delete").click(function() {
+           const icon_no = $(this).attr("value");
+
+           if(confirm("아이콘을 삭제하겠습니까?")) {
+                $.post({
+                    url : "/iconDelete",
+                    data : {"icon_no" : icon_no },
+                    dataType : "text",
+                    success : function(result) {
+                        if(result == 1) {
+                            alert("아이콘을 삭제 했습니다.");
+                            location.reload();
+                        } else {
+                            alert("아이콘을 변경하는 도중 문제가 발생했습니다.\n잠시 후 다시 시도해주세요.");
+                        }
+                    },
+                    error : function() {
+                        alert("아이콘을 삭제하는 도중 문제가 발생했습니다.\n잠시 후 다시 시도해주세요.");
+                    }
+                });
+            }
         });
 
     });
@@ -75,7 +101,7 @@
                                        <label style="width: 214px; height: 33px; line-height: 50px; text-align: left; font-weight: bold; float: left;">${icons.product_name}</label>
                                        <div style="width: 214px; height: 33px; line-height: 50px; text-align: left; float: left;">
                                            <label class="icon_select" id="icon_select" value="${icons.product_no}"><u>대표설정</u></label>
-                                           <label>삭제</label>
+                                           <label class="icon_delete" id="icon_delete" value="${icons.product_no}">삭제</label>
                                        </div>
                                    </div>
                                </div>

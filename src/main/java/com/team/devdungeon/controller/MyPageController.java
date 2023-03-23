@@ -59,7 +59,23 @@ public class MyPageController {
     @PostMapping("/iconSelect")
     @ResponseBody
     public int iconSelect(@RequestParam int icon_no, HttpSession session) {
-        return myPageService.updateIcon(icon_no, session);
+        int useIcon = myPageService.selectUseIcon(session);
+        System.out.println("(변경) 대표 아이콘 : " + useIcon);
+        if(useIcon == icon_no) {
+            return 2;
+        } else {
+            return myPageService.updateIcon(icon_no, session);
+        }
+
+    }
+
+    @PostMapping("/iconDelete")
+    @ResponseBody
+    public int iconDelete(@RequestParam int icon_no, HttpSession session) {
+        int useIcon = myPageService.selectUseIcon(session);
+        System.out.println("(삭제) 대표 아이콘 : " + useIcon);
+        if(useIcon == icon_no) System.out.println();
+        return myPageService.deleteIcon(icon_no, session);
     }
 
     @PostMapping("/profileImage")

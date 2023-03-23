@@ -175,7 +175,7 @@ public class StoreServiceImpl implements StoreService {
         Map<String, Object> payInfo = new HashMap<>();
         payInfo.put("pay_price", resultPrice);
         payInfo.put("member_id", memberId);
-        payInfo.put("pay_type", pay_type);
+        payInfo.put("view_type", pay_type);
         return storeDAO.payProduct(payInfo);
     }
 
