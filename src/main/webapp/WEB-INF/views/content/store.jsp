@@ -286,7 +286,7 @@
                         <div class="pagingBox">
                            <ul class="pagingList">
                               <li class="pageNo page_btn" onclick="moveBefore(${pageNo})"><i class="xi-step-backward xi-x"></i></li>
-                              <c:forEach var="i" begin="${Math.floor((pageNo-1)/8)*8+1 }" end="${Math.floor((pageNo-1)/8)*8+8 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/10)*10 +10}">
+                              <c:forEach var="i" begin="${Math.floor((pageNo-1)/8)*8+1 }" end="${Math.floor((pageNo-1)/8)*8+8 gt pages.lastPage ? pages.lastPage : Math.floor((pageNo-1)/8)*8+8}">
                                  <li class="pageNo" onclick="move(${i })" <c:if test="${pageNo eq i }" >style="color:red; font-weight: bold;"</c:if>>${i }</li>
                               </c:forEach>
                               <li class="pageNo page_btn" onclick="moveNext(${pageNo})"><i class="xi-step-forward xi-x"></i></li>

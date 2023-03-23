@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
@@ -40,8 +39,12 @@ public class MyPageDAO {
         return result;
     }
 
-    public List<Map<String, Object>> icons(String memberId) {
-        return sqlSession.selectList("mypage.icons", memberId);
+    public int myIconListCount(String memberId) {
+        return sqlSession.selectOne("mypage.myIconListCount", memberId);
+    }
+
+    public List<Map<String, Object>> icons(Map<String, Object> pages) {
+        return sqlSession.selectList("mypage.icons", pages);
     }
 
     public int updateIcon(Map<String, Object> info) {
