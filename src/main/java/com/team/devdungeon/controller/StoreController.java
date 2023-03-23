@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,19 +64,41 @@ public class StoreController {
     @ResponseBody
     public int shoppingBag(HttpServletRequest request) {
         HttpSession session = request.getSession();
+        int result = 0;
 
         String userId = (String) session.getAttribute("member_id");
         String[] shoppingBag = request.getParameterValues("shoppingBag[]");
         String sellType = request.getParameter("sell_type");
 
-        int result = storeService.selectProductLog(userId, shoppingBag);
-        if(result < 1) {    // 구매한 아이콘이 없을 때
-            result = storeService.shoppingBagInsert(userId, shoppingBag, sellType);
+        if(sellType.equals("pay")) {
+            storeService.deleteCartOne(userId, null, sellType);
+        }
+
+        int productLogCount = storeService.selectProductLog(userId, shoppingBag);
+
+        if(productLogCount < 1) {    // 구매한 아이콘이 없을 경우
+            int productInsert = storeService.shoppingBagInsert(userId, shoppingBag, sellType);
+            if(productInsert != 0) {
+                result = 1; // 장바구니 정상 등록
+            } else {
+                result = 3; // 이미 구매 장바구니에 있을 경우
+            }
+        } else {
+            result = 2; // 이미 구매한 아이콘이 있을 경우
         }
 
         return result;
     }
 
+    @PostMapping("/deleteCartOne")
+    @ResponseBody
+    public void deleteCartOne(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String member_id = (String) session.getAttribute("member_id");
+        int product_no = Integer.parseInt(request.getParameter("product_no"));
+        String sell_type = request.getParameter("sell_type");
+        storeService.deleteCartOne(member_id, product_no, sell_type);
+    }
 
     @GetMapping("/payShoppingBag")
     public ModelAndView payShoppingBag(HttpSession session, HttpServletRequest request) {
@@ -89,6 +110,7 @@ public class StoreController {
                 mv.addObject("error", "empty_payBag");
                 mv.setViewName("content/payShoppingBag");
             } else {
+                mv.addObject("type", view_type);
                 mv.addObject("cart", cart);
                 mv.setViewName("content/payShoppingBag");
             }

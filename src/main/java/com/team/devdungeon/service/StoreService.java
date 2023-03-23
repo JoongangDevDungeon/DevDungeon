@@ -14,6 +14,6 @@ public interface StoreService {
     int selectProductLog(String userId, String[] shoppingBag);
     int checkPoint(Object memberId);
     List<Map<String, Object>> checkProductCount(Object memberId);
-
     void deleteCart(Map<String, Object> deleteCartList, Object memberId);
+    void deleteCartOne(String userId, Integer product_no, String sellType);
 }

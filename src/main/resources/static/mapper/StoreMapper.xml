@@ -75,6 +75,18 @@
                     sc.member_no = (SELECT m.member_no FROM member m WHERE member_id = #{memberId})
     </select>
 
+    <delete id="deleteCartOne" parameterType="HashMap">
+        DELETE FROM shopping_cart
+            WHERE
+                member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+            AND
+                sell_type = #{type}
+            <if test="product_no != null">
+            AND
+                product_no = #{product_no}
+            </if>
+    </delete>
+
     <delete id="deleteCartList" parameterType="HashMap">
         DELETE FROM shopping_cart
             WHERE

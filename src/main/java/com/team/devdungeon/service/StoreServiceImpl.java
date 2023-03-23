@@ -159,6 +159,18 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    public void deleteCartOne(String userId, Integer product_no, String sellType) {
+        Map<String, Object> cartInfo = new HashMap<>();
+        cartInfo.put("member_id", userId);
+        cartInfo.put("product_no", product_no);
+        cartInfo.put("type", sellType);
+
+        System.out.println(cartInfo);
+
+        storeDAO.deleteCartOne(cartInfo);
+    }
+
+    @Override
     public int payProduct(int resultPrice, Object memberId, String pay_type) {
         Map<String, Object> payInfo = new HashMap<>();
         payInfo.put("pay_price", resultPrice);

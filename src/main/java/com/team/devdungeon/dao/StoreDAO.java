@@ -24,7 +24,6 @@ public class StoreDAO {
     }
 
     public int shoppingBagInsert(Map<String, Object> cartInfo) {
-        System.out.println(cartInfo);
         int result = 0;
         try {
             result = sqlSession.insert("store.shoppingBagInsert", cartInfo);
@@ -36,7 +35,6 @@ public class StoreDAO {
     }
 
     public List<Map<String, Object>> selectPayShoppingBag(Map<String, Object> cartInfo) {
-        System.out.println("장바구니 : " + cartInfo);
         return sqlSession.selectList("store.selectPayShoppingBag", cartInfo);
     }
 
@@ -84,5 +82,9 @@ public class StoreDAO {
 
     public void deleteCart(Map<String, Object> info) {
         sqlSession.delete("store.deleteCartList", info);
+    }
+
+    public void deleteCartOne(Map<String, Object> cartInfo) {
+        sqlSession.delete("store.deleteCartOne", cartInfo);
     }
 }

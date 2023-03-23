@@ -6,6 +6,7 @@
    <link rel="icon" href="/img/Gazi_shortCut.png" />
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
    <link rel="stylesheet" href="/css/layout.css">
 </head>
 <style>
@@ -27,6 +28,22 @@
    let result_price;
 
    $(function() {
+      $(".delete-cart").click(function() {
+         let sell_type = "${type}";
+         let product_no = $(this).attr("value");
+         $.post({
+            url : "/deleteCartOne",
+            data : { "sell_type" : sell_type, "product_no" : product_no },
+            success : function() {
+               alert("장바구니 목록에서 삭제했습니다.");
+               location.reload();
+            },
+            error : function () {
+               alert("장바구니 목록에서 삭제 중 문제가 발생했습니다.\n잠시후 다시 시도해주세요.");
+            }
+         });
+      });
+
       total_price = $("#total_price").attr("value");
       $("#result_price").text(total_price);
 
@@ -90,6 +107,7 @@
                         <th>상품명</th>
                         <th>판매자</th>
                         <th>가격</th>
+                        <th>취소</th>
                      </tr>
                   </thead>
                   <c:forEach items="${cart}" var="cart">
@@ -105,6 +123,9 @@
                         </td>
                         <td>
                            <div style="line-height: 50px;">${cart.product_price}</div>
+                        </td>
+                        <td style="padding-top: 15px; box-sizing: border-box;">
+                           <i class="xi-trash xi-2x delete-cart" value="${cart.product_no}"></i>
                         </td>
                      </tbody>
                   </c:forEach>
