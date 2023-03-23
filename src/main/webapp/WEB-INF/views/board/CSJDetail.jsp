@@ -172,12 +172,14 @@ function sendPointTo(receiver){
 					<c:if test="${boardFile ne null }">
 						<div class="form-control">
 							<span>
-							<label class="col-form-label"><a href = "data:image/png;base64,${imageDataString}" download = "${boardFile.file_name }.${boardFile.file_extension}">${boardFile.file_name }</a></label>
+							<label class="col-form-label"><a href = "data:image/png;base64,${imageDataString}" download = "${boardFile.file_name }">${boardFile.file_name }</a></label>
 							</span>
 						</div>
-						<div>
-							<img src="data:image/png;base64,${imageDataString}" />
-						</div>
+						<c:if test="${noticeFile.file_extension eq jpg||noticeFile.file_extension eq png||noticeFile.file_extension eq jpeg}">
+							<div>
+								<img src="data:image/png;base64,${imageDataString}" />
+							</div>
+						</c:if>
 					</c:if>
 					${det.board_content }
 					</div>

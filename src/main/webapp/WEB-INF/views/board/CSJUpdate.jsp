@@ -21,8 +21,8 @@
 					<input type="hidden" name="bno" value="${bno }">
 					<input type="hidden" name="category" value="2">
 					<input type="hidden" name="tag" value="1">
-					<input type="text" name="title" class="form-control" value="${det.board_title }" required>
-					<textarea name="content" class="form-control" rows="20" required>${det.board_content }</textarea>
+					<input type="text" name="title" class="form-control" value="${det.board_title }" required maxlength="50">
+					<textarea name="content" class="form-control" rows="20" required maxlength="1000">${det.board_content }</textarea>
 					<input type="file" class="form-control" name="board_file" accept="image/*">
 					<div class="d-flex justify-content-between">
 					<button type="button" class="btn btn-primary p-2" onclick="location.href='/csjboard'">목록</button>

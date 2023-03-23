@@ -67,6 +67,12 @@ public class NoticeService {
 	public int noticeCommentDel(String comment_no) {
 		return noticeDAO.noticeCommentDel(comment_no);
 	}
+
+	public Map<String, Object> callNoticeFile(int notice_no) {
+		// TODO Auto-generated method stub
+		return noticeDAO.callNoticeFile(notice_no);
+	}
+	
 	
 
 }

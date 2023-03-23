@@ -1,5 +1,10 @@
 package com.team.devdungeon.controller;
 
+import static com.team.devdungeon.util.SFTPFileUtil.channelSftp;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.devdungeon.service.NoticeService;
+import com.team.devdungeon.util.SFTPFileUtil;
 import com.team.devdungeon.util.TextChangeUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class NoticeController {
 	
 	private final NoticeService noticeService;
+	private final SFTPFileUtil sftpFileUtil;
 	private final TextChangeUtil textChangeUtil;
 	
 	@GetMapping("/notice")
@@ -61,6 +68,31 @@ public class NoticeController {
 		for(Map<String, Object> m : detailComments) {
 			m.put("comment_content", textChangeUtil.changeText((String)m.get("comment_content")));
 		}
+		//이 게시글에 달린 파일 정보를 불러온다
+		Map<String,Object> noticeFile = noticeService.callNoticeFile(Integer.parseInt(notice_no));
+			if(noticeFile != null) {
+				String remotePath = sftpFileUtil.remotePath + noticeFile.get("file_name");
+				mv.addObject("noticeFile",noticeFile);
+
+		        try {
+		            // 원격 서버에서 이미지 파일 읽어오기
+		            InputStream inputStream = channelSftp.get(remotePath);
+			            // Inputstream -> byte[] 변환
+		            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		            byte[] buffer = new byte[1024];
+		            int len;
+		            while ((len = inputStream.read(buffer)) > -1 ) {
+		                baos.write(buffer, 0, len);
+		            }
+		            baos.flush();
+		            byte[] imageData = baos.toByteArray();
+			            // byte[] -> Base64
+		            String imageDataString = Base64.getEncoder().encodeToString(imageData);
+			            mv.addObject("imageDataString", imageDataString);
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+				}
 		mv.addObject("noticeDetail",noticeDetail);
 		mv.addObject("detailComments",detailComments);
 		return mv;

@@ -35,6 +35,8 @@ public interface NoticeDAO {
 	public int noticeDelete(String notice_no);
 
 	public int noticeCommentDel(String comment_no);
+
+	public Map<String, Object> callNoticeFile(int notice_no);
 	
 	
 

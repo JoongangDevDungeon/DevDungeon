@@ -92,5 +92,8 @@
    		if((SELECT comment_depth FROM notice_comment WHERE comment_no = ${ comment_root } ) = 0 , comment_root = ${ comment_no }, comment_no = ${ comment_no })
    </update>
    
-   
+   <select id="callNoticeFile" parameterType="Integer" resultType="HashMap">
+   		SELECT * FROM notice_file 
+   		WHERE notice_no = #{notice_no}
+   </select>
 </mapper>

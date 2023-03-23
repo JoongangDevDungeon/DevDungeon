@@ -32,10 +32,10 @@
 						class="was-validated">
 						<input type="hidden" name="category" value="2"> <input
 							type="hidden" name="tag" value="1"> <input type="text"
-							name="title" class="form-control" placeholder="제목을 입력하세요" required>
+							name="title" class="form-control" placeholder="제목을 입력하세요" required maxlength="50">
 
 						<textarea name="content" class="form-control is-invalid" rows="20"
-							placeholder="내용을 입력하세요" required></textarea>
+							placeholder="내용을 입력하세요" required maxlength="1000"></textarea>
 
 						<input type="file" class="form-control" name="board_file"
 							accept="image/*">
