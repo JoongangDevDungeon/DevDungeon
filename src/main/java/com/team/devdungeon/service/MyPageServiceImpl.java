@@ -151,7 +151,7 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
-    public int selectUseIcon(HttpSession session) {
+    public Integer selectUseIcon(HttpSession session) {
         String member_id = (String) session.getAttribute("member_id");
         return myPageDAO.selectUseIcon(member_id);
     }

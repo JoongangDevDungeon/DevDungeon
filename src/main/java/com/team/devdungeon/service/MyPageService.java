@@ -20,5 +20,5 @@ public interface MyPageService {
     int modifyPassword(Map<String, Object> info);
     Map<String, Object> loginPoint(String memberName);
     int deleteIcon(int iconNo, HttpSession session);
-    int selectUseIcon(HttpSession session);
+    Integer selectUseIcon(HttpSession session);
 }

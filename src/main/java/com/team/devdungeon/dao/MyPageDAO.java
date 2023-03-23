@@ -48,7 +48,7 @@ public class MyPageDAO {
         return sqlSession.update("mypage.updateIcon", info);
     }
 
-    public int selectUseIcon(String memberId) {
+    public Integer selectUseIcon(String memberId) {
         return sqlSession.selectOne("mypage.selectUseIcon", memberId);
     }
 

@@ -59,13 +59,16 @@ public class MyPageController {
     @PostMapping("/iconSelect")
     @ResponseBody
     public int iconSelect(@RequestParam Integer icon_no, HttpSession session) {
-        int useIcon = myPageService.selectUseIcon(session);
-        if(useIcon == icon_no) {
-            return 2;
-        } else {
+        Integer useIcon = myPageService.selectUseIcon(session);
+        if(useIcon == null) {
             return myPageService.updateIcon(icon_no, session);
+        } else {
+            if(useIcon == icon_no) {
+                return 2;
+            } else {
+                return myPageService.updateIcon(icon_no, session);
+            }
         }
-
     }
 
     @PostMapping("/iconDelete")
