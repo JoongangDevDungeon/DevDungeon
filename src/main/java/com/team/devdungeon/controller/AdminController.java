@@ -227,9 +227,21 @@ public class AdminController {
 	@GetMapping("/adminStatistics")
 	public ModelAndView adminStatistics() {
 		ModelAndView mv = new ModelAndView("./admin/adminStatistics");
-		
 		return mv;
 	}
+	
+//	@GetMapping("/adminStatistics?value=?")
+//	public String adminStatistics(HttpServletRequest request) {
+//		
+//		return "/adminStatistics";
+//	}
+	
+	
+	//엑셀로 받기
+	
+	
+	
+	
 	
 	//StatisticsMonth 막대그래프
 	@GetMapping("/admin/StatisticsMonth")

@@ -334,7 +334,7 @@
 
 <!-- 이벤트 -->
 	<select id="AdminEvent" parameterType="Integer" resultType="HashMap">
-		SELECT *
+		SELECT *, DATE_FORMAT(event_date, '%Y-%m-%d %H:%i:%s') AS formatted_start
 		FROM event
 		<if test="searchType != null">
 			WHERE
