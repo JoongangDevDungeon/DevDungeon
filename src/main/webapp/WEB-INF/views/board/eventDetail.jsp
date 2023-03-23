@@ -134,6 +134,7 @@ h1{
 	border: 1px solid black;
 	min-height: 400px;
 	border-radius: 5px;
+	word-wrap:break-word;
 }
 
 .detailUserProfile {
