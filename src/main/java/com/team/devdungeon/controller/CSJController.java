@@ -125,7 +125,6 @@ public class CSJController {
 			}
 			int boardNo = (int) writemap.get("number");
 			MultipartFile boardFile = fileReq.getFile("board_file");
-			System.out.println(boardFile.getSize());
 			if (boardFile.getSize() > 0) {
 				String originalFileName = boardFile.getOriginalFilename(); // 원래 파일 이름
 				String extension = FilenameUtils.getExtension(originalFileName); // 파일 확장자
@@ -282,7 +281,6 @@ public class CSJController {
 		comment.put("writer", writer);
 		comment.put("content", content);
 		int result = csjService.commentWrite(comment);
-		System.out.println("댓글 result:"+result);
 		if(result>0) {
 			Map<String, Object> pointMap = new HashMap<String, Object>();
 			pointMap.put("member_name", writer);
