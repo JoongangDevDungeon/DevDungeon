@@ -17,7 +17,7 @@
 
     <select id="eventList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
         select e.event_no,e.tag_no ,e.event_title ,e.event_content ,e.event_date ,e.event_update ,e.status_no,e.event_end ,ef.event_file_no ,ef.event_file_name ,ef.event_file_extension ,ef.event_file_size from event e left join event_file ef ON e.event_no = ef.event_no 
-        WHERE (ef.event_file_type = 1 OR ef.event_file_no IS NULL)
+        WHERE (ef.event_file_type = 1 OR ef.event_file_no IS NULL) AND e.status_no = 1
         <if test="searchType != null">
 			AND
 			<choose>
