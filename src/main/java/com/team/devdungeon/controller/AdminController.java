@@ -1,15 +1,19 @@
 package com.team.devdungeon.controller;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
 import com.team.devdungeon.dto.AdminDTO;
 import com.team.devdungeon.dto.AnswerDTO;
 import com.team.devdungeon.dto.BoardDTO;
@@ -30,13 +39,21 @@ import com.team.devdungeon.dto.MemberDTO;
 import com.team.devdungeon.dto.QuestionBoardDTO;
 import com.team.devdungeon.service.AdminService;
 import com.team.devdungeon.util.Excel;
+import com.team.devdungeon.util.SFTPFileUtil;
+import com.team.devdungeon.util.TextChangeUtil;
 
 @Controller
 public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
-
+	
+	@Autowired
+	private SFTPFileUtil sftpFileUtil;
+	
+	@Autowired
+	private TextChangeUtil textChangeUtil;
+	
 	@GetMapping("/admin")
 	public ModelAndView admin() {
 		ModelAndView mv = new ModelAndView("./admin/admin");
@@ -170,10 +187,16 @@ public class AdminController {
 		return mv;
 	}
 	// 게시글 Detail
-	/*
-	 * @PostMapping("/adminBoardDetail") String
-	 * 
-	 */
+	@GetMapping("/adminBoardDetail")
+	public ModelAndView adminBoardDetail(@RequestParam(value = "board_no") int boardNo, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("./admin/adminBoardDetail");
+		
+		List<Map<String, Object>> list = adminService.AdminBoardDetail(boardNo);
+		
+		mv.addObject("list", list);
+		
+		return mv;
+	}
 
 	// 게시글 삭제
 	@PostMapping("/adminBoard")
@@ -495,17 +518,90 @@ public class AdminController {
 	}
 
 	@PostMapping("/adminEventWrite")
-	public String adminEventWrite(HttpServletRequest request) {
+	public String adminEventWrite(HttpServletRequest request, MultipartHttpServletRequest fileReq) {
 		EventDTO eventDTO = new EventDTO();
-		eventDTO.setEvent_content(request.getParameter("eventContent"));
-		eventDTO.setEvent_title(request.getParameter("eventTitle"));
+		
+		eventDTO.setEvent_title(textChangeUtil.changeText(request.getParameter("eventTitle")));
+		eventDTO.setEvent_content(textChangeUtil.changeText(request.getParameter("eventContent")));
 		eventDTO.setTag_no(Integer.parseInt(request.getParameter("eventTag")));
 		eventDTO.setEvent_end(request.getParameter("EventEndDate"));
+		
 		adminService.adminEventWrite(eventDTO);
+		
+		MultipartFile eventFile = fileReq.getFile("eventfile");
+
+		String originalFileName = eventFile.getOriginalFilename(); // 원래 파일 이름
+		String extension = FilenameUtils.getExtension(originalFileName); // 파일 확장자
+		String savedFileName = UUID.randomUUID().toString() + "." + extension; // 저장될 파일 이름
+		
+		int eventNo = eventDTO.getWrittenNo();
+		String remotePath = sftpFileUtil.remotePath + savedFileName;//수정
+		long fileSize = eventFile.getSize();
+		
+		Map<String,Object> fileMap = new HashMap<String, Object>();
+		
+		fileMap.put("event_no", eventNo);
+		fileMap.put("fileName", savedFileName);
+		fileMap.put("extension", extension);
+		fileMap.put("fileSize", fileSize);
+
+        try {
+            JSch jsch = new JSch();
+
+            Session jschSession = jsch.getSession(sftpFileUtil.FTP_USER, sftpFileUtil.FTP_HOST, sftpFileUtil.FTP_PORT);
+            jschSession.setPassword(sftpFileUtil.FTP_PASSWORD);
+            jschSession.setConfig("StrictHostKeyChecking", "no");
+            jschSession.connect();
+
+            ChannelSftp sftpChannel = (ChannelSftp) jschSession.openChannel("sftp");
+            sftpChannel.connect();
+
+            InputStream inputStream = new ByteArrayInputStream(eventFile.getBytes());
+
+            sftpChannel.put(inputStream, remotePath);
+
+            sftpChannel.exit();
+            jschSession.disconnect();
+            adminService.puteventFile(fileMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+		System.out.println("저장 파일 위치, 파일명 : " + remotePath);
+		System.out.println("파일 크기 : "+ fileSize);
 
 		return "redirect:/adminEvent";
-	}
+		
+		/*else {
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("event_title", eventDTO.getEvent_title());
+			map.put("event_content", eventDTO.getEvent_content());
+			
+			adminService.adminEventWrite(eventDTO);
+			
+			return "redirect:/adminEvent";
+		}*/
 
+	}
+	
+	@PostMapping("/adminEventModal")
+	public String adminEventModal(HttpServletRequest request) {
+		EventDTO eventDTO = new EventDTO();
+		
+		String pageNo = request.getParameter("pageNo");
+		
+		eventDTO.setEvent_player(Integer.parseInt(request.getParameter("winner")));
+		eventDTO.setEvent_player(Integer.parseInt(request.getParameter("eventNo")));
+		
+		adminService.adminEventModal(eventDTO);
+		
+//		System.out.println(request.getParameter("winner"));
+//		System.out.println(request.getParameter("eventNo"));
+//		System.out.println(pageNo);
+		
+		return "redirect:/adminEvent?pageNo=" + pageNo;
+	}
+	
 	// 이벤트 삭제
 	@PostMapping("/adminEvent")
 	public String adminEventDel(HttpServletRequest request) {

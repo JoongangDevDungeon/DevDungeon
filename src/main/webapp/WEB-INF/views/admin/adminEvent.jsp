@@ -43,18 +43,12 @@ function moveNext(pageNo){
 }
 
 /* 모달 */
-const myModal = document.getElementById('modal')
+const myModal = document.getElementById('modal');
+myModal.modal("show");
 
-
-myModal.addEventListener('shown.bs.modal', () => {
-	const winner = document.getElementById('winner')
-	function eWinE(){
-		
-	}
+function winsBtn(){
 	document.getElementById("eModalForm").submit();
-	
-})
-
+}
 
 </script>
 <body>
@@ -90,7 +84,7 @@ myModal.addEventListener('shown.bs.modal', () => {
 						</form>
 						
 						<!-- 모달 시작 -->
-						<form action="" method="post" class="exentf2" id="eModalForm">
+						<form action="/adminEventModal" method="post" class="exentf2" id="eModalForm">
 							<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop${row.event_no }">뽑기</button>
 							<!-- Modal -->
 							<div class="modal" id="staticBackdrop${row.event_no }" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -101,12 +95,14 @@ myModal.addEventListener('shown.bs.modal', () => {
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
-										총 당첨자수 : <input type="number" id="winner">
+										<input type="hidden" name="pageNo" value="${pageNo }">
+										<input type="hidden" name="eventNo" value="${row.event_no }">
+										총 당첨자수 : <input type="number" name="winner">
 										
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-											<button type="button" class="btn btn-primary" id="eWinE" onclick="eWinE()">저장</button>
+											<button type="submit" class="btn btn-primary" id="eWinE" onclick="winsBtn()">저장</button>
 										</div>
 									</div>
 								</div>

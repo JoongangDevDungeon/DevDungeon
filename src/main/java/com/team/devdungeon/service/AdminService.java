@@ -185,6 +185,22 @@ public class AdminService {
 		return adminDAO.LogMonth();
 	}
 
+	public void adminEventModal(EventDTO eventDTO) {
+		adminDAO.adminEventModal(eventDTO);
+	}
+
+	public void puteventFile(Map<String, Object> fileMap) {
+		adminDAO.puteventFile(fileMap);
+	}
+
+	public void eventUpdate(Map<String, Object> map) {
+		adminDAO.puteventFile(map);
+	}
+
+	public List<Map<String, Object>> AdminBoardDetail(int boardNo) {
+		return adminDAO.AdminBoardDetail(boardNo);
+	}
+
 
 
 	

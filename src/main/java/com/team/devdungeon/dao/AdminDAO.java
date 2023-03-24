@@ -33,6 +33,8 @@ public interface AdminDAO {
 		
 	void adminBoardDel(BoardDTO boardDTO);
 	
+	List<Map<String, Object>> AdminBoardDetail(int boardNo);
+	
 	//로그 데이터
 	List<Map<String, Object>> AdminLog(Map<String, Object> pages);
 	
@@ -61,6 +63,8 @@ public interface AdminDAO {
 	List<Map<String, Object>> AdminEvent(Map<String, Object> pages);
 	
 	void AdminEventDel(EventDTO eventDTO);
+	
+	void adminEventModal(EventDTO eventDTO);
 	
 	//포인트 정산
 	List<Map<String, Object>> AdminPoint(Map<String, Object> pages);
@@ -99,6 +103,12 @@ public interface AdminDAO {
 	List<Map<String, Object>> LogTime();
 
 	List<Map<String, Object>> LogMonth();
+
+	void puteventFile(Map<String, Object> fileMap);
+
+	
+
+
 
 
 
