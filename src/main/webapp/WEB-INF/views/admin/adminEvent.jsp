@@ -48,7 +48,9 @@ const myModal = document.getElementById('modal')
 
 myModal.addEventListener('shown.bs.modal', () => {
 	const winner = document.getElementById('winner')
-	function eWinE()
+	function eWinE(){
+		
+	}
 	document.getElementById("eModalForm").submit();
 	
 })
@@ -104,7 +106,7 @@ myModal.addEventListener('shown.bs.modal', () => {
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-											<button type="button" class="btn btn-primary" id="eWinE" onclick="eWinE()">완료(저장)</button>
+											<button type="button" class="btn btn-primary" id="eWinE" onclick="eWinE()">저장</button>
 										</div>
 									</div>
 								</div>
