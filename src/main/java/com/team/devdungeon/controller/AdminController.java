@@ -259,8 +259,6 @@ public class AdminController {
 	@ResponseBody
 	@GetMapping("/adminStatistics/{type}")
 	public String adminStatistics(HttpServletRequest request, HttpServletResponse response, @PathVariable String type) {
-		System.out.println(request.getParameter("type"));
-		System.out.println(request.getParameter("value"));
 		
 		List<Map<String, Object>> result = null;
 		switch (type) {
