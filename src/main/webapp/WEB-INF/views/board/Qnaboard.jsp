@@ -85,7 +85,7 @@
 						</tr>
 
 						<c:choose>
-							<c:when test="${sessionScope.member_name ne board.member_name }">
+							<c:when test="${sessionScope.member_id ne board.member_id }">
 								<tr class="subContent sub${board.question_board_no }">
 									<td></td>
 									<td class="title">작성자만 볼 수 있습니다</td>
