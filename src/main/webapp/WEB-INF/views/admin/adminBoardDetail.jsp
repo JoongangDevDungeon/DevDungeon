@@ -22,36 +22,17 @@
 		<div class="container">
 			<h1>관리자 게시글 관리 Detail</h1>
 			<hr class="hr1">
-			<!-- 
-			<table class="table">
-				<tr class="table-header">
-					<th class="col-1">번호</th>
-					<th class="col-3">제목</th>
-					<th class="col-2">글쓴이</th>
-					<th class="col-2">날짜</th>
-					<th class="col-1">조회수</th>
-					<th class="col-1">좋아요</th>
-					<th class="col-1">관리</th>
-				</tr>
-				<c:forEach items="${list }" var="row">
-				<tr>
-					<td>${row.board_no }</td>
-					<td>${row.board_title }</td>
-					<td>${row.member_id }</td>
-					<td>${row.board_date }</td>
-					<td>${row.board_read }</td>
-					<td>${row.board_like }</td>
-					<td>
-						<form action="/adminBoard" method="post">
-							<input type="hidden" name="board_no" value="${row.board_no }">
-							<input type="hidden" name="status_no" value="${row.status_no }">
-							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화' : '비활성화'}</button>
-						</form>
-					</td>
-				</tr>
-				</c:forEach>
-			</table>
-			 -->
+<%-- 			${list } --%>
+			
+			<c:forEach items="${list }" var="row">
+			번호 : ${row.board_no }<br>
+			제목 : ${row.board_title }<br>
+			글쓴이 : ${row.member_id }<br>
+			활성화 : ${row.status_no }<br>
+			내용 : ${row.board_content }<br>
+			날짜 : ${row.formatted_date }
+			</c:forEach>
+			
 			
 			
 			

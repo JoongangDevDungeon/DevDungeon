@@ -99,6 +99,14 @@
 		ORDER BY b.board_no DESC
 		LIMIT #{startPage}, 10
 	</select>
+<!-- 게시글 Detail -->
+	<select id="AdminBoardDetail"  parameterType="Integer"  resultType="HashMap">
+		SELECT b.*, m.member_id, DATE_FORMAT(b.board_date, '%Y-%m-%d %H:%i:%s') AS formatted_date
+		FROM board AS b
+		JOIN member AS m ON b.member_no = m.member_no
+		WHERE board_no = #{boardNo}
+	</select>
+
 
 <!-- 게시글 활성화 비활성화 -->
 	<update id="adminBoardDel" parameterType="BoardDTO">
@@ -349,6 +357,15 @@
 		LIMIT #{startPage}, 10
 	</select>
 	
+<!-- 이벤트 모달 -->
+	<insert id="adminEventModal" parameterType="EventDTO">
+		SELECT DISTINCT member_no
+		FROM event_player
+		WHERE event_no = #{event_no }
+		ORDER BY RAND() 
+		LIMIT #{event_player };
+	</insert>
+	
 <!-- 이벤트 작성 -->	
 	<insert id="adminEventWrite" parameterType="EventDTO">
 		insert into event
@@ -356,8 +373,24 @@
 			event_title = #{event_title},
 			event_content = #{event_content},
 			event_end = #{event_end}
+			<selectKey resultType="int" keyProperty="writtenNo" order="AFTER">
+				SELECT LAST_INSERT_ID()
+			</selectKey> 
+			
 	</insert>
 	
+<!-- 이벤트 파일 -->
+	<insert id="puteventFile" parameterType="HashMap">
+    	INSERT INTO event_file
+    	SET
+    	event_no = #{event_no},
+    	event_file_name = #{fileName},
+    	event_file_extension = #{extension},
+    	event_file_size = #{fileSize},
+    	event_file_type = 1
+    	
+    </insert>
+    
 <!-- 이벤트Del -->
 	<update id="AdminEventDel" parameterType="EventDTO">
 		UPDATE event SET status_no = if(#{status_no}=1,2,1)

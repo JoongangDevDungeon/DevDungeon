@@ -17,10 +17,12 @@ function Event_btn() {
 	let EventTag = document.getElementById("EventTag").value;
 	let EventTitle = document.getElementById("EventTitle").value;
 	let EventContent = document.getElementById("EventContent").value;
+	let EventFile = document.getElementById("EventFile").value;
 	let EventEndDate = document.getElementById("EventEndDate").value;
 
-	if(EventTag === 4 || EventTitle === "" || EventContent === "" || EventEndDate ===""){
+	if(EventTag === 4 || EventTitle === "" || EventFile === "" || EventEndDate ===""){
 		alert("모든 항목을 입력해주세요");
+		return false;
 	} else{
 		document.getElementById("EventForm").submit();
 	}
@@ -41,12 +43,16 @@ function Event_btn() {
 			<hr class="hr1">
 			<br><br>
 			<div class="adminEvent">
-				<form action="/adminEventWrite" method="post" id="EventForm">
+				<form action="/adminEventWrite" enctype="multipart/form-data" method="post" id="EventForm" onsubmit="return Event_btn()">
 					<input type="hidden" name="eventTag" value="4" id="EventTag">
+
 					<input type="text" class="form-control" name="eventTitle" id="EventTitle" placeholder="이벤트 제목입력" maxlength="50"><br>
 					<input type="textarea" class="form-control EventTxt" name="eventContent" id="EventContent" placeholder="이벤트 내용입력"><br>
+					
+					<input type="file" class="form-control" name="eventfile" id="EventFile"><br>
+					
 					이벤트 만료일 : <input type="date" name="EventEndDate" id="EventEndDate"><br><br>
-					<button class="btn btn-success" type="button" onclick="Event_btn()">게시글 올리기</button>
+					<button class="btn btn-success">게시글 올리기</button>
 				</form>
 			</div>
 		</div>
