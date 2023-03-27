@@ -56,7 +56,7 @@ public class PointController {
     public int send_point(HttpServletRequest request, HttpSession session) {
         PointDTO pointDTO = new PointDTO();
 
-        pointDTO.setSend_member_name((String) session.getAttribute("member_name"));
+        pointDTO.setSend_member_name((String) session.getAttribute("member_id"));
         pointDTO.setReceive_member_name(request.getParameter("member_name"));
         pointDTO.setPoint(Integer.parseInt(request.getParameter("point")));
 

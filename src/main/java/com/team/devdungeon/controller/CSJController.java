@@ -87,7 +87,7 @@ public class CSJController {
 	public ModelAndView csjWrite(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
-		if (session.getAttribute("member_name") == null) {
+		if (session.getAttribute("member_id") == null) {
 			mv.setViewName("redirect:/csjboard");
 		} else {
 			mv.setViewName("board/CSJWrite");
@@ -100,10 +100,10 @@ public class CSJController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/csjboard");
 		HttpSession session = request.getSession();
-		if (session.getAttribute("member_name") == null) {
+		if (session.getAttribute("member_id") == null) {
 			return mv;
 		} else {
-			String writer = (String) session.getAttribute("member_name");
+			String writer = (String) session.getAttribute("member_id");
 			String title = request.getParameter("title");
 			title = textChangeUtil.changeText(title);
 			String content = request.getParameter("content");
@@ -111,7 +111,7 @@ public class CSJController {
 			String category = request.getParameter("category");
 			String tag = request.getParameter("tag");
 			Map<String, Object> writemap = new HashMap<String, Object>();
-			writemap.put("member_name", writer);
+			writemap.put("member_id", writer);
 			writemap.put("title", title);
 			writemap.put("content", content);
 			writemap.put("category", category);
@@ -119,7 +119,7 @@ public class CSJController {
 			int result = csjService.write(writemap);
 			if(result==1) {
 				Map<String, Object> pointMap = new HashMap<String, Object>();
-				pointMap.put("member_name", writer);
+				pointMap.put("member_id", writer);
 				pointMap.put("pointType", 2);
 				csjService.addPoint(pointMap);
 			}
@@ -157,12 +157,12 @@ public class CSJController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/CSJUpdate");
 		HttpSession session = request.getSession();
-		if (session.getAttribute("member_name") == null) {
+		if (session.getAttribute("member_id") == null) {
 			mv.setViewName("redirect:/csjboard");
 			return mv;
 		} else {
 			Map<String, Object> det = csjService.detail(bno);
-			if (session.getAttribute("member_name").equals(det.get("member_name"))) {
+			if (session.getAttribute("member_id").equals(det.get("member_id"))) {
 				det.put("board_title",textChangeUtil.changeText((String)det.get("board_title")));
 				det.put("board_content",textChangeUtil.changeText((String)det.get("board_content")));
 				mv.addObject("det", det);
@@ -179,7 +179,7 @@ public class CSJController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/csjboard");
 		HttpSession session = request.getSession();
-		if (session.getAttribute("member_name") == null) {
+		if (session.getAttribute("member_id") == null) {
 			return mv;
 		} else {
 			String title = request.getParameter("title");
@@ -257,7 +257,7 @@ public class CSJController {
 
 	@GetMapping("/likethis")
 	public String likethis(@RequestParam(value = "bno") int bno,HttpSession session) {
-		if(session.getAttribute("member_name")!=null) {
+		if(session.getAttribute("member_id")!=null) {
 			int result = csjService.likethis(bno);
 		}
 		return "redirect:/csjDetail?bno=" + bno;
@@ -272,7 +272,7 @@ public class CSJController {
 	@PostMapping("/csjCommentWrite")
 	public String csjCommentWrite(@RequestParam(value = "bno") int bno, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String writer = (String) session.getAttribute("member_name");
+		String writer = (String) session.getAttribute("member_id");
 
 		String content = request.getParameter("commentContent");
 		content = textChangeUtil.changeText(content);
@@ -283,7 +283,7 @@ public class CSJController {
 		int result = csjService.commentWrite(comment);
 		if(result>0) {
 			Map<String, Object> pointMap = new HashMap<String, Object>();
-			pointMap.put("member_name", writer);
+			pointMap.put("member_id", writer);
 			pointMap.put("pointType", 3);
 			csjService.addPoint(pointMap);
 		}
@@ -293,7 +293,7 @@ public class CSJController {
 	@PostMapping("/csjReplyWrite")
 	public String csjReplyWrite(@RequestParam(value = "bno") int bno, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String writer = (String) session.getAttribute("member_name");
+		String writer = (String) session.getAttribute("member_id");
 		String content = request.getParameter("commentContent");
 		content = textChangeUtil.changeText(content);
 		String root = request.getParameter("root");
@@ -305,7 +305,7 @@ public class CSJController {
 		int result = csjService.ReplyWrite(comment);
 		if(result==1) {
 			Map<String, Object> pointMap = new HashMap<String, Object>();
-			pointMap.put("member_name", writer);
+			pointMap.put("member_id", writer);
 			pointMap.put("pointType", 3);
 			csjService.addPoint(pointMap);
 		}
@@ -356,7 +356,7 @@ public class CSJController {
 
 	@PostMapping("/csjBan")
 	public String csjbanPost(HttpServletRequest request) {
-		if (request.getSession().getAttribute("member_name") == null) {
+		if (request.getSession().getAttribute("member_id") == null) {
 			return "redirect:/csjCloser";
 		} else {
 			if (request.getParameter("formbanType").equals("게시글 신고")) {
@@ -364,7 +364,7 @@ public class CSJController {
 				String banMember = request.getParameter("banMember");
 				String banWhy = request.getParameter("banWhy");
 				banWhy = textChangeUtil.changeText(banWhy);
-				String singoman = (String) request.getSession().getAttribute("member_name");
+				String singoman = (String) request.getSession().getAttribute("member_id");
 				Map<String, Object> banMap = new HashMap<String, Object>();
 				banMap.put("banBoard", banBoard);
 				banMap.put("banMember", banMember);
@@ -378,7 +378,7 @@ public class CSJController {
 				String banMember = request.getParameter("banMember");
 				String banWhy = request.getParameter("banWhy");
 				banWhy = textChangeUtil.changeText(banWhy);
-				String singoman = (String) request.getSession().getAttribute("member_name");
+				String singoman = (String) request.getSession().getAttribute("member_id");
 				Map<String, Object> banMap = new HashMap<String, Object>();
 				banMap.put("banComment", banComment);
 				banMap.put("banBoard", banBoard);
@@ -440,7 +440,7 @@ public class CSJController {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("title", textChangeUtil.changeText(request.getParameter("title")));
 		map.put("content", textChangeUtil.changeText(request.getParameter("content")));
-		map.put("member_name", session.getAttribute("member_name"));
+		map.put("member_id", session.getAttribute("member_id"));
 		int result = (int)csjService.qnaWrite(map);
 		//json형태로 내보내기
 		JSONObject json = new JSONObject();//json으로변환

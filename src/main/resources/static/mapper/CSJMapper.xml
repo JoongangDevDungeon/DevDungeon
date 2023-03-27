@@ -88,7 +88,7 @@
     <insert id="boardWrite" parameterType="HashMap">
 		INSERT INTO board
 		SET
-		member_no = (SELECT member_no FROM member WHERE member_name=#{member_name} )
+		member_no = (SELECT member_no FROM member WHERE member_id=#{member_id} )
 		,board_title = #{title}
 		,tag_no = #{tag}
 		,category_no = #{category}
@@ -112,7 +112,7 @@
     	INSERT INTO board_comment
     	SET
     	board_no = #{board_no}
-    	,comment_writer = (SELECT member_no FROM member WHERE member_name = #{writer})
+    	,comment_writer = (SELECT member_no FROM member WHERE member_id = #{writer})
     	,comment_content = #{content}
     	,comment_depth = 1
     	,comment_root = #{root}
@@ -129,7 +129,7 @@
 		SET
 		question_board_title=#{title},
 		question_board_content=#{content},
-		member_no= (SELECT member_no FROM member WHERE member_name=#{member_name})
+		member_no= (SELECT member_no FROM member WHERE member_id=#{member_id})
     </insert>
     <select id="faqList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
     	SELECT * FROM faq_board
@@ -149,7 +149,7 @@
     	SET
     	board_no = #{banBoard}
     	,ban_member_no = (SELECT member_no FROM member WHERE member_name = #{banMember})
-    	,member_no = (SELECT member_no FROM member WHERE member_name = #{singoman})
+    	,member_no = (SELECT member_no FROM member WHERE member_id = #{singoman})
     	,ban_content = #{banWhy}
     </insert>
     <insert id="banComment" parameterType="HashMap">
@@ -158,7 +158,7 @@
     	board_no = #{banBoard}
     	,comment_no = #{banComment}
     	,ban_member_no = (SELECT member_no FROM member WHERE member_name = #{banMember})
-    	,member_no = (SELECT member_no FROM member WHERE member_name = #{singoman})
+    	,member_no = (SELECT member_no FROM member WHERE member_id = #{singoman})
     	,ban_content = #{banWhy}
     </insert>
     
@@ -185,6 +185,6 @@
   	<update id="addPoint" parameterType="HashMap">
   		UPDATE point SET
   		member_point = member_point + (SELECT change_points FROM change_kind WHERE change_no = #{pointType})
-  		WHERE member_no = (SELECT member_no FROM member WHERE member_name = #{member_name})
+  		WHERE member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
   	</update>
 </mapper>
