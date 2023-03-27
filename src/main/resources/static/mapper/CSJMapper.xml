@@ -144,22 +144,26 @@
     	WHERE board_no = #{board_no}
     </update>
     
-    <insert id="banBoard" parameterType="HashMap">
-    	INSERT INTO ban_board
-    	SET
-    	board_no = #{banBoard}
-    	,ban_member_no = (SELECT member_no FROM member WHERE member_name = #{banMember})
-    	,member_no = (SELECT member_no FROM member WHERE member_id = #{singoman})
-    	,ban_content = #{banWhy}
+    <insert id="banBoard" parameterType="HashMap" statementType="CALLABLE">
+    	{CALL
+    		banBoard(
+    				#{banBoard, mode=IN,jdbcType=INTEGER}
+    				,#{banMember, mode=IN,jdbcType=VARCHAR}
+    				,#{singoman, mode=IN,jdbcType=VARCHAR}
+    				,#{banWhy, mode=IN,jdbcType=VARCHAR}
+    		)
+    	}
     </insert>
-    <insert id="banComment" parameterType="HashMap">
-    	INSERT INTO ban_comment
-    	SET
-    	board_no = #{banBoard}
-    	,comment_no = #{banComment}
-    	,ban_member_no = (SELECT member_no FROM member WHERE member_name = #{banMember})
-    	,member_no = (SELECT member_no FROM member WHERE member_id = #{singoman})
-    	,ban_content = #{banWhy}
+    <insert id="banComment" parameterType="HashMap" statementType="CALLABLE">
+    	{CALL
+    		banComment(
+    				#{banBoard, mode=IN,jdbcType=INTEGER}
+    				,#{banComment, mode=IN,jdbcType=INTEGER}
+    				,#{banMember, mode=IN,jdbcType=VARCHAR}
+    				,#{singoman, mode=IN,jdbcType=VARCHAR}
+    				,#{banWhy, mode=IN,jdbcType=VARCHAR}
+    		)
+    	}
     </insert>
     
     <select id="callBoardFile" parameterType="Integer" resultType="HashMap">

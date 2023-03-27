@@ -117,12 +117,6 @@ public class CSJController {
 			writemap.put("category", category);
 			writemap.put("tag", tag);
 			int result = csjService.write(writemap);
-			if(result==1) {
-				Map<String, Object> pointMap = new HashMap<String, Object>();
-				pointMap.put("member_id", writer);
-				pointMap.put("pointType", 2);
-				csjService.addPoint(pointMap);
-			}
 			int boardNo = (int) writemap.get("number");
 			MultipartFile boardFile = fileReq.getFile("board_file");
 			if (boardFile.getSize() > 0) {
@@ -281,12 +275,6 @@ public class CSJController {
 		comment.put("writer", writer);
 		comment.put("content", content);
 		int result = csjService.commentWrite(comment);
-		if(result>0) {
-			Map<String, Object> pointMap = new HashMap<String, Object>();
-			pointMap.put("member_id", writer);
-			pointMap.put("pointType", 3);
-			csjService.addPoint(pointMap);
-		}
 		return "redirect:/csjDetail?bno=" + bno;
 	}
 
@@ -303,12 +291,6 @@ public class CSJController {
 		comment.put("content", content);
 		comment.put("root", root);
 		int result = csjService.ReplyWrite(comment);
-		if(result==1) {
-			Map<String, Object> pointMap = new HashMap<String, Object>();
-			pointMap.put("member_id", writer);
-			pointMap.put("pointType", 3);
-			csjService.addPoint(pointMap);
-		}
 		return "redirect:/csjDetail?bno=" + bno;
 	}
 
