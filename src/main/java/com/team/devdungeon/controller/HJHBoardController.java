@@ -196,9 +196,9 @@ public class HJHBoardController {
 		String comment_content = request.getParameter("commentText");
 		comment_content = textChangeUtil.changeText(comment_content);
 		String board_no = request.getParameter("board_no");
-		String member_name = (String)session.getAttribute("member_name");
+		String member_id = (String)session.getAttribute("member_id");
 		map.put("comment_content", comment_content);
-		map.put("member_name", member_name);
+		map.put("member_id", member_id);
 		map.put("board_no", board_no);
 		System.out.println(map);
 		HJHboardService.boardComment(map);

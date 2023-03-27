@@ -59,7 +59,7 @@
 		{CALL
              RootComment(
                 #{board_no, mode=IN,jdbcType=INTEGER}
-                ,#{member_name, mode=IN,jdbcType=VARCHAR}
+                ,#{member_id, mode=IN,jdbcType=VARCHAR}
                 ,#{comment_content, mode=IN,jdbcType=VARCHAR}
          	 )
          }

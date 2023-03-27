@@ -17,7 +17,7 @@
     <select id="send_member_no" parameterType="PointDTO" resultType="Integer">
         SELECT member_no
         FROM member
-        WHERE member_name = #{send_member_name};
+        WHERE member_id = #{send_member_name};
     </select>
 
     <update id="send_point" parameterType="PointDTO"><!--보내는 사람 감소-->

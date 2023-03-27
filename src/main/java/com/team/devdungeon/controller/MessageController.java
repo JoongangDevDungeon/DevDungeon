@@ -38,7 +38,7 @@ public class MessageController {
         System.out.println( request.getParameter("member_name") );
         System.out.println( request.getParameter("msg_title") );
         System.out.println( request.getParameter("msg_content") );
-        String post_member_no = (String) session.getAttribute("member_name");
+        String post_member_no = (String) session.getAttribute("member_id");
         String get_member_no = request.getParameter("member_name");
         String message_title = request.getParameter("msg_title");
         message_title = textChangeUtil.changeText(message_title);

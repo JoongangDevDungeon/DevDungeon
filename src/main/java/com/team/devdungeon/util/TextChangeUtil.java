@@ -6,12 +6,17 @@ import org.springframework.stereotype.Component;
 public class TextChangeUtil {
 
 	public String changeText(String txt) {
-		txt = txt.replaceAll("<", "&lt;");
-		txt = txt.replaceAll(">", "&gt;");
+		if (txt != null) {
+			txt = txt.replaceAll("<", "&lt;");
+			txt = txt.replaceAll(">", "&gt;");
+		}
 		return txt;
 	}
+
 	public String changeEnter(String txt) {
-		txt = txt.replaceAll("\n", "<br>");
+		if (txt != null) {
+			txt = txt.replaceAll("\n", "<br>");
+		}
 		return txt;
 	}
 }
