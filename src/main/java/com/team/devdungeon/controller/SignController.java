@@ -32,6 +32,13 @@ public class SignController {
         return mv;
     }
 
+    @PostMapping("/index")
+    @ResponseBody
+    public String index(HttpServletRequest request, @RequestParam String error) {
+        System.out.println(error);
+        return "아이디 혹은 비밀번호를 다시 확인해주세요.";
+    }
+
     @GetMapping("/agree")/*약관 동의 1, 2, 3*/
     public String agree() {
         return "sign/agree";

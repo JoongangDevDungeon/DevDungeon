@@ -119,7 +119,18 @@ $(function() {
                     localStorage.setItem("member_level", member_level);
                     localStorage.setItem("member_point", member_point);
                 } else {
-                    location.href="/index?error=login_fail";
+                    // location.href="/index?error=login_fail";
+                    $.post({
+                       url : "/index",
+                       data : { "error" : "login_fail" },
+                       dataType : "text",
+                       success : function(result) {
+                           alert(result);
+                       },
+                        error : function() {
+                           alert("오류 발생");
+                        }
+                    });
                 }
             },
             error : function (xhr) {
