@@ -175,7 +175,7 @@
 		FROM logs
 		WHERE DATE(created_at) = CURDATE()
 		GROUP BY HOUR(created_at)
-		ORDER BY HOUR(created_at) DESC;
+		ORDER BY HOUR(created_at) ASC;
 	</select>
 
 	<select id="LogMonth" resultType="HashMap">

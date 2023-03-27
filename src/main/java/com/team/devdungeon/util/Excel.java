@@ -53,7 +53,7 @@ public class Excel {
 	    Row row = null;
 	    Cell cell = null;
 	    int rowNum = 0;
-	    System.out.println("엑셀에서 온 result "+result);
+	    
 	    
 	    // Header
 	    row = sheet.createRow(rowNum++);
@@ -91,6 +91,7 @@ public class Excel {
 
 	    // Excel File Output
 	    wb.write(response.getOutputStream());
+	    response.getOutputStream().close();//이거 꼭 닫으셔야 합니다. 꼭 
 	    wb.close();
 	}
 	
