@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+body{/*백그라운드 이미지*/
+     width: 1920px;
+     height: 1000px;
+/*     background-image: url('/resources/testtop.png');*/
+     background-repeat: no-repeat;
+}
+
 /* 헤더 */
 a{ text-decoration: none; color:black; }
 a:hover{ color:black; }
@@ -7,7 +14,7 @@ a:hover{ color:black; }
     width: 1920px;
     height: 40px;
     margin: 0 auto;
-    background-color: #6867AC;
+    background-image: url('/resources/top_bar.png');
 }
 
 .top_ul {
@@ -46,7 +53,6 @@ a:hover{ color:black; }
     height: 100px;
     margin: 0 auto;
     text-align: center;
-
 }
 
 .menu_ul {
@@ -109,27 +115,7 @@ a:hover{ color:black; }
     position: relative;
 }
 
-.add1 {
-    padding: 5px;
-    box-sizing: border-box;
-    width: 300px;
-    min-height: 800px;
-    float: left;
-    background-color: #ff8080;
-    opacity:0.3;
-}
 
-.add2 {
-    padding: 5px;
-    box-sizing: border-box;
-    width: 300px;
-    min-height: 800px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #ff8080;
-    opacity:0.3;
-}
 .content {
     width: 1200px;
     min-height: 800px;

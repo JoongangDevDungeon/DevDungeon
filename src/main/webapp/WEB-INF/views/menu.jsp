@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<style>
+   .line{
+      margin: 0px;
+      padding: 0px;
+      width:1920px;
+      height:10px;
+      background-image: url('/resources/line.png');
+   }
+</style>
 <nav class="menu">
    <ul class="menu_ul">
       <li><a href="/index"><img src="/img/logo.png" alt="가지"></a></li>
-      <li><a href="/notice">공지사항</a></li>
+      <li><a style="font-weight:bold; color: #7e7e7e;" href="/notice">공지사항</a></li>
       <li>
          <div class="dropdown">
-            <a class="board_dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a style="font-weight:bold; color: #7e7e7e;" class="board_dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                게시판
             </a>
             <ul class="dropdown-menu none">
@@ -14,7 +23,8 @@
             </ul>
          </div>
       </li>
-      <li><a href="/store">스토어</a></li>
-      <li><a href="/eventboard">이벤트</a></li>
+      <li><a style="font-weight:bold; color: #7e7e7e;" href="/store">스토어</a></li>
+      <li><a style="font-weight:bold; color: #7e7e7e;" href="/eventboard">이벤트</a></li>
    </ul>
 </nav>
+<div class="line"></div>

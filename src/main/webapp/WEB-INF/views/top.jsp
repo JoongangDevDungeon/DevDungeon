@@ -28,7 +28,7 @@
             </div>
             <!-- 미로그인 시 -->
             <div class="dropdown" id="guest" style="<c:choose><c:when test="${sessionScope.member_name == null}">display: block;</c:when><c:otherwise>display: none;</c:otherwise></c:choose>">
-               <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+               <button style="font-weight:bold; color: #7e7e7e;" type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                   로그인
                </button>
                <div class="dropdown-menu" action="/login" method="post">

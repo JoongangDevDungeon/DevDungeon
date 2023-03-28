@@ -12,8 +12,8 @@
 
    .main_img_place{/*메인 슬라이드 이미지 공간*/
       width: 1920px;
-      height: 500px;
-      background-color: #ff8080;
+      height: 550px;
+      background-image: url('/resources/img_place.png');
    }
 
    .board_top_list{/*보드 top.5 공간*/
@@ -60,7 +60,6 @@
       height: 500px;
       position: relative;
       margin: 0 auto;
-      background-color: #D4D3E8;
       overflow: hidden; /* 현재 슬라이드 오른쪽에 위치한 나머지 슬라이드 들이 보이지 않도록 가림 */
    }
    .radio{
@@ -74,9 +73,8 @@
       position: absolute;
       left: 640px;
       transition-delay: 1s; /* 새 슬라이드가 이동해 오는 동안 이전 슬라이드 이미지가 배경이 보이도록 지연 */
-
       padding: 0;
-      margin: 0;
+      margin-top: 50px;
    }
    .bullets{
       position: absolute;
@@ -127,8 +125,33 @@
       transition: 0.5s;
       z-index:1;
    }
-
 /*===================슬라이드===================*/
+
+   .add1 {
+      padding: 5px;
+      box-sizing: border-box;
+/*      background-image: url('/resources/left.png');*/
+      width: 600px;
+      height: 1100px;
+      min-height: 800px;
+      position: absolute;
+      top: 220px;
+      left: -200px;
+      opacity:0.6;
+   }
+
+   .add2 {
+      padding: 5px;
+      box-sizing: border-box;
+    /*  background-image: url('/resources/right.png');*/
+      width: 400px;
+      height: 1100px;
+      min-height: 800px;
+      position: absolute;
+      top: 200px;
+      right: 0px;
+      opacity:0.6;
+   }
 
 </style>
 <body>
@@ -160,9 +183,9 @@
             </div><%--메인 이미지 슬라이드 공간 끝--%>
 
 
-            <div class="add1">광고1</div>
-            <div class="add2">광고2</div>
-            <div class="content" style="background-color: antiquewhite">
+            <div class="add1"></div>
+            <div class="add2"></div>
+            <div class="content">
 
                <div class="board_top_list">
                   <div class="notice_top_list">공지사항 Top.5</div>
