@@ -93,17 +93,12 @@
    }
    /* 현재 선택된 불릿 배경 흰색으로 구분 표시 */
    .slider input[type=radio]:nth-child(1):checked~.bullets>label:nth-child(1){
-      background-color: #6867AC;
+      background-color: #88a2a2;
    }
    .slider input[type=radio]:nth-child(2):checked~.bullets>label:nth-child(2){
-      background-color: #6867AC;
+      background-color: #88a2a2;
    }
-   .slider input[type=radio]:nth-child(3):checked~.bullets>label:nth-child(3){
-      background-color: #6867AC;
-   }
-   .slider input[type=radio]:nth-child(4):checked~.bullets>label:nth-child(4){
-      background-color: #6867AC;
-   }
+
 
    .slider input[type=radio]:nth-child(1):checked~ul.imgs>li:nth-child(1){/*slider 클래스 안에 1번째 라디오가 체크가 된다면 이미지 ul에 있는 이미지를 */
       left: 0;
@@ -127,31 +122,6 @@
    }
 /*===================슬라이드===================*/
 
-   .add1 {
-      padding: 5px;
-      box-sizing: border-box;
-/*      background-image: url('/resources/left.png');*/
-      width: 600px;
-      height: 1100px;
-      min-height: 800px;
-      position: absolute;
-      top: 220px;
-      left: -200px;
-      opacity:0.6;
-   }
-
-   .add2 {
-      padding: 5px;
-      box-sizing: border-box;
-    /*  background-image: url('/resources/right.png');*/
-      width: 400px;
-      height: 1100px;
-      min-height: 800px;
-      position: absolute;
-      top: 200px;
-      right: 0px;
-      opacity:0.6;
-   }
 
 </style>
 <body>
@@ -160,8 +130,6 @@
    <section>
          <div class="main">
             <div class="main_img_place">
-               <%--<img alt="index..." src="/img/index.jpg" style="width:1000px; height:400px; margin-top:20px;">--%>
-
                   <div class="slider">
                      <input class="radio" type="radio" name="slide" id="slide1" checked>
                      <input class="radio" type="radio" name="slide" id="slide2">
@@ -177,24 +145,17 @@
 
                      </div>
                   </div>
-
-
-
             </div><%--메인 이미지 슬라이드 공간 끝--%>
 
 
-            <div class="add1"></div>
-            <div class="add2"></div>
             <div class="content">
 
                <div class="board_top_list">
                   <div class="notice_top_list">공지사항 Top.5</div>
-                  <div class="question_top_list">질문 게시판 Top.5</div>
+                  <div class="question_top_list">이벤트 Top.5</div>
                   <div class="like_top_list">좋아요 Top.5</div>
                   <div class="read_top_list">조회수 Top.5</div>
                </div>
-
-
             </div>
 
 

@@ -46,7 +46,6 @@
 <%@include file="myPageMenu.jsp"%>
 <section>
     <div class="main">
-        <div class="add1">광고1</div>
         <div class="content">
             <form class="profile-frm" style="width: 700px; padding-top: 100px; box-sizing: border-box; margin: 0 auto;">
                 <div class="form-control profile-edit" style="line-height: 35px;">
@@ -83,7 +82,6 @@
                 </div>
             </form>
         </div>
-        <div class="add2">광고2</div>
     </div>
 </section>
 <%@include file="../footer.jsp"%>
