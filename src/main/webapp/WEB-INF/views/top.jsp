@@ -7,9 +7,9 @@
       <li>
          <!-- 로그인 성공 시 -->
          <div class="dropdown" id="login_success" style="<c:choose><c:when test="${sessionScope.member_name != null || sessionScope.id == 'admin'}">display: block;</c:when><c:otherwise>display: none;</c:otherwise></c:choose>">
-               <span id="member_point" style="margin-right:20px; cursor: pointer;"></span>
-               <span id="member_level" style="margin-right:5px;"></span>
-               <button type="button" class="btn dropdown-toggle" id="member_info" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+               <span style="font-weight:bold; color: #7e7e7e;" id="member_point" style="margin-right:20px; cursor: pointer;"></span>
+               <span style="font-weight:bold; color: #7e7e7e;" id="member_level" style="margin-right:5px;"></span>
+               <button style="font-weight:bold; color: #7e7e7e;" type="button" class="btn dropdown-toggle" id="member_info" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                   <c:choose>
                      <c:when test="${sessionScope.member_name ne null}">${sessionScope.member_name} 님</c:when>
                      <c:when test="${sessionScope.id eq 'admin'}">${sessionScope.id} 님</c:when>
