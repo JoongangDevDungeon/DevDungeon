@@ -16,6 +16,7 @@
     </select>
     <select id="boardFive" parameterType="String" resultType="HashMap">
     	SELECT * FROM board2view
+    	WHERE real_date > DATE_ADD(now(), INTERVAL -1 DAY) 
     	ORDER BY
     	<choose>
     		<when test="string == 'like'">board_like</when>

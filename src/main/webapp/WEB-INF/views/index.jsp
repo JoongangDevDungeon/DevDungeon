@@ -156,7 +156,7 @@
                   	<table>
                   	<c:forEach items="${noticeFive }" var="n">
                   		<tr>
-                  			<td class="text-truncate"><a href="notice">${n.notice_title }</a></td>
+                  			<td class="text-truncate"><a href="/noticeDetail?notice_no=${n.notice_no }">${n.notice_title }</a></td>
                   			<td>${n.notice_date }</td>
                   		</tr>
                   	</c:forEach>
