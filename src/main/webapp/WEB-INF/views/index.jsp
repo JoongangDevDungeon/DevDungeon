@@ -188,10 +188,54 @@
             <div class="content">
 
                <div class="board_top_list">
-                  <div class="notice_top_list">공지사항 Top.5</div>
-                  <div class="question_top_list">질문 게시판 Top.5</div>
-                  <div class="like_top_list">좋아요 Top.5</div>
-                  <div class="read_top_list">조회수 Top.5</div>
+                  <div class="notice_top_list">공지사항 Top.5
+                  	<div class="ListFive">
+                  	<table>
+                  	<c:forEach items="${noticeFive }" var="n">
+                  		<tr>
+                  			<td class="text-truncate"><a href="notice">${n.notice_title }</a></td>
+                  			<td>${n.notice_date }</td>
+                  		</tr>
+                  	</c:forEach>
+                  	</table>
+                  	</div>
+                  </div>
+                  <div class="question_top_list">질문 게시판 Top.5
+                  	<div class="ListFive">
+                  	<table>
+                  	<c:forEach items="${eventFive }" var="e">
+                  		<tr>
+                  			<td class="text-truncate"><a href="eventDetail?bno=${e.event_no }">${e.event_title }</a></td>
+                  			<td>${e.event_date }</td>
+                  		</tr>
+                  	</c:forEach>
+                  	</table>
+                  	</div>
+                  </div>
+                  <div class="like_top_list">좋아요 Top.5
+                  	<div class="ListFive">
+                  	<table>
+                  	<c:forEach items="${likeFive }" var="l">
+                  		<tr>
+                  			<td class="text-truncate"><a href="csjDetail?bno=${l.board_no}">${l.board_title }</a></td>
+                  			<td>${l.board_date }</td>
+                  		</tr>
+                  	</c:forEach>
+                  	</table>
+                  	</div>
+                  </div>
+                  <div class="read_top_list">조회수 Top.5
+                  	<div class="ListFive">
+                  	<table>
+                  	<c:forEach items="${viewFive }" var="v">
+                  		<tr>
+                  			<td class="text-truncate"><a href="csjDetail?bno=${v.board_no}">${v.board_title }</a></td>
+                  			<td>${v.board_date }</td>
+                  		</tr>
+                  	</c:forEach>
+                  	</table>
+                  	</div>
+                  </div>
                </div>
 
 

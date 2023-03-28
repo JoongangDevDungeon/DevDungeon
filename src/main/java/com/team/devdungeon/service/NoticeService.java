@@ -1,5 +1,6 @@
 package com.team.devdungeon.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +72,10 @@ public class NoticeService {
 	public Map<String, Object> callNoticeFile(int notice_no) {
 		// TODO Auto-generated method stub
 		return noticeDAO.callNoticeFile(notice_no);
+	}
+
+	public List<Map<String, Object>> noticeFive() {
+		return noticeDAO.noticeFive();
 	}
 	
 	
