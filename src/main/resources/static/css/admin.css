@@ -1,114 +1,139 @@
 @charset "UTF-8";
-*{
+
+* {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-#container{
+
+#container {
 	width: 100%;
 	height: 100%;
 }
-.container{
+
+.container {
 	margin: 30px 0 40px 80px;
 }
-a{
+
+a {
 	color: black;
 	text-decoration: none;
 }
-.btn1{
+
+.btn1 {
 	cursor: default;
 }
-h1{
+
+h1 {
 	margin: 30px 0 23px 40px;
 }
-th, tr{
+
+th, tr {
 	text-align: center;
 }
-.hr1{
+
+.hr1 {
 	margin: 0;
 	padding: 0;
 	width: 100%;
 }
 
 /* adminLogout */
-.adminlogout{
+.adminlogout {
 	text-align: center;
 	margin-bottom: 5px;
 }
 
 /* adminPaging*/
-.pagingBox{	width:700px; margin:0 auto; }
-.pagingList{
-	margin:0;
-	padding:0;
+.pagingBox {
+	width: 700px;
+	margin: 0 auto;
+}
+
+.pagingList {
+	margin: 0;
+	padding: 0;
 	list-style: none;
 	display: flex;
 	justify-content: start;
 	justify-content: center;
 	font-size: 13px;
 }
-.pageNo{	
+
+.pageNo {
 	cursor: pointer;
-	width:30px;
-	height:30px;
+	width: 30px;
+	height: 30px;
 	text-align: center;
 	line-height: 30px;
 	border-radius: 5px;
 }
-.pageNo:hover{ background-color: #d3d3d3; }
-.page_btn{
+
+.pageNo:hover {
+	background-color: #d3d3d3;
+}
+
+.page_btn {
 	background-color: #6867AC;
-	margin:0 2px;
-	color:white;
+	margin: 0 2px;
+	color: white;
 	font-weight: bold;
 	font-size: 14px;
 }
-.page_btn:hover{ background-color: #8887cc; }
+
+.page_btn:hover {
+	background-color: #8887cc;
+}
 
 /* adminSearch bar */
-.searchForm{ display: flex; justify-content: center; }
-.search_btn{
+.searchForm {
+	display: flex;
+	justify-content: center;
+}
+
+.search_btn {
 	background-color: #6867AC;
-	border:none;
+	border: none;
 	border-radius: 5px;
 	font-size: 15px;
-	width:60px;
-	height:30px;
-	color:white;
+	width: 60px;
+	height: 30px;
+	color: white;
 	font-weight: bold;
 }
 
 /* adminMenu*/
-.header{
+.header {
 	width: 210px;
 	height: 1300px;
-	background-color: rgb(224,224,224);
+	background-color: rgb(224, 224, 224);
 	overflow: hidden;
 	position: absolute;
 	float: left;
 }
-.logo{
+
+.logo {
 	margin: 0;
 	padding: 0;
 	margin-left: 40px;
 	width: 120px;
 }
 
-.main{
+.main {
 	width: calc(100% - 210px);
 	height: 1300px;
 	float: right;
 	background-color: #FAFAFA;
 }
 
-.menu-item{
+.menu-item {
 	width: 200px;
 	height: 50px;
 	overflow: hidden;
 	color: white;
 	margin: 5px;
 	box-sizing: border-box;
-	background-color: rgb(94,94,94);
+	background-color: rgb(94, 94, 94);
 	border-radius: 15px;
 	line-height: 50px;
 	border: 1px solid white;
@@ -116,10 +141,11 @@ th, tr{
 	cursor: pointer;
 }
 
-.menu-item:first-child{
+.menu-item:first-child {
 	margin-top: 13px;
 }
-.adminuser{
+
+.adminuser {
 	width: 200px;
 	height: 50px;
 	overflow: hidden;
@@ -130,17 +156,18 @@ th, tr{
 	line-height: 50px;
 }
 
-.adminuser img{
+.adminuser img {
 	margin: 0 20px 0 10px;
 	vertical-align: middle;
 }
 
-.menu-item img{
+.menu-item img {
 	margin: 5px;
-	margin-right:10px;
+	margin-right: 10px;
 	margin-top: 0;
 	vertical-align: middle;
 }
+
 .menu-item:hover {
 	background-color: red;
 	border-radius: 15px;
@@ -150,145 +177,161 @@ th, tr{
 }
 
 /* 쿠폰 생성버튼 */
-.CC-btn{
+.CC-btn {
 	float: right;
-	margin: 5px 13px 0 0 ;
+	margin: 5px 13px 0 0;
 }
 
 /* 이벤트 글쓰기 버튼 */
-.ED-btn{
+.ED-btn {
 	float: right;
-	margin: 5px 55px 0 0 ;
+	margin: 5px 55px 0 0;
 }
 
 /* admin main css */
-.mboard{
+.mboard {
 	width: 1200px;
 	height: 750px;
-/* 	border: 1px solid black; */
+	/* 	border: 1px solid black; */
 	position: relative;
 	margin: 50px 0 30px 0px;
-/* 	display: block; */
+	/* 	display: block; */
 }
-.mtoday{
+
+.mtoday {
 	margin: 30px 50px 15px 20px;
 	height: 150px;
 	font-size: 18px;
 	padding: 5px;
 }
 
-.mtoday > hr.hr1 {
-  margin: 5px 0;
+.mtoday>hr.hr1 {
+	margin: 5px 0;
 }
-.mhov:hover{
+
+.mhov:hover {
 	color: black;
 }
+
 .mhov:hover .hr {
 	color: red;
 }
+
 .mth {
 	font-size: 25px;
 	font-weight: bold;
 	margin-left: 10px;
 }
-.mtc{
+
+.mtc {
 	position: relative;
 }
-.mtc1{
+
+.mtc1 {
 	position: absolute;
 	margin: 15px 20px 5px 20px;
 	width: 160px;
 	height: 30px;
 }
 
-.mtc2{
+.mtc2 {
 	position: absolute;
 	margin: 60px 0 5px 20px;
 	width: 160px;
 	height: 30px;
 }
-.mtc3{
+
+.mtc3 {
 	position: absolute;
 	margin: 15px 20px 5px 220px;
 	width: 160px;
 	height: 30px;
 }
-.mtc4{
+
+.mtc4 {
 	position: absolute;
 	margin: 60px 20px 5px 220px;
 	width: 160px;
 	height: 30px;
 }
-.mtc5{
+
+.mtc5 {
 	position: absolute;
 	margin: 15px 20px 5px 420px;
 	width: 160px;
 	height: 30px;
 }
 
-.mbar{
+.mbarT {
+	width: 1100px;
+	float: left;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.mbar {
 	width: 550px;
 	float: left;
 	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.qwe {
+	width: 1120px;
+	/* 	height: 400px; */
 }
 
 /* 통계css */
-
-canvas{
+canvas {
 	width: 350px;
 	height: 300px;
 }
 
 
-
-
-
-
-
-
 /* 쿠폰 생성 */
-.admincoupon{
+.admincoupon {
 	margin-left: 320px;
 	width: 500px;
 	text-align: center;
 }
 
-.coupontxt{
+.coupontxt {
 	height: 100px;
 }
 
 /* 이벤트 작성 */
-.adminEvent{
+.adminEvent {
 	margin-left: 320px;
 	width: 500px;
 	text-align: center;
 }
 
-.EventTxt{
+.EventTxt {
 	height: 200px;
 }
 
-.exentf1{
+.exentf1 {
 	width: 60px;
 	margin-left: 25px;
 	float: left;
 }
 
-.exentf2{
+.exentf2 {
 	width: 60px;
 	float: left;
 }
 
-
 /* QnA 답 */
-.adminAnswer{
+.adminAnswer {
 	margin-left: 320px;
 	width: 500px;
 	text-align: center;
 }
-.AnswerTxt{
+
+.AnswerTxt {
 	width: 700px;
 }
-.AnswerBtn{
+
+.AnswerBtn {
 	margin-left: 190px;
 }

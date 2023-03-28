@@ -31,7 +31,6 @@
 		<div class="menu-item" onclick="url('adminQnA')"><img src="./img/admin/adminQnA1.png">QnA</div>
 		<div class="menu-item" onclick="url('adminStore')"><img src="./img/admin/adminstore1.png">스토어</div>
 		<div class="menu-item" onclick="url('adminEvent')"><img src="./img/admin/adminevent1.png">이벤트</div>
-		<div class="menu-item" onclick="url('adminPoint')"><img src="./img/admin/adminpoint1.png">포인트 정산</div>
 		<div class="menu-item" onclick="url('notice')"><img src="./img/admin/adminmainboard1.png">공지사항 관리</div>
 	</div>
 	</div>

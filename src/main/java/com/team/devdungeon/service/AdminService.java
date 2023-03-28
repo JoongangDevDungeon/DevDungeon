@@ -97,10 +97,7 @@ public class AdminService {
 		adminDAO.AdminEventDel(eventDTO);
 	}
 	
-	//포인트 정산
-	public List<Map<String, Object>> AdminPoint(Map<String, Object> pages) {
-		return adminDAO.AdminPoint(pages);
-	}
+	
 	
 	//페이징 서치바 관련
 	public int boardCount(Map<String, Object> pages) {

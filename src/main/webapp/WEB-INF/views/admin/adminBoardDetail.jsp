@@ -22,20 +22,34 @@
 		<div class="container">
 			<h1>관리자 게시글 관리 Detail</h1>
 			<hr class="hr1">
-<%-- 			${list } --%>
-			
-			<c:forEach items="${list }" var="row">
-			번호 : ${row.board_no }<br>
-			제목 : ${row.board_title }<br>
-			글쓴이 : ${row.member_id }<br>
-			활성화 : ${row.status_no }<br>
-			내용 : ${row.board_content }<br>
-			날짜 : ${row.formatted_date }
-			</c:forEach>
-			
-			
-			
-			
+			<br><br>
+			<div class="card mb-4">
+				<div class="card-body">
+					<c:forEach items="${list }" var="row">
+						<div class="mb-3 mt-3">
+							<label for="bno" class="form-label">보드 번호</label>
+							<input type="text" class="form-control" value="${row.board_no }" readonly>
+						</div>
+						<div class="mb-3">
+							<label for="title" class="form-label">제목</label>
+							<input type="text" class="form-control"	value="${row.board_title }" readonly>
+						</div>
+						<div class="mb-3">
+							<label for="writer" class="form-label">글쓴이</label>
+							<input type="text" class="form-control" value="${row.member_id }" readonly>
+						</div>
+						<div class="mb-3">
+							<label for="content" class="form-label">내용</label>
+							<input type="text" class="form-control" value="${row.board_content }" readonly>
+						</div>
+						<div class="mb-3">
+							<label for="regDate" class="form-label">게시일</label>
+							<input type="text" class="form-control" value="${row.formatted_date }" readonly>
+						</div>
+						<button type="button" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화된 게시물' : '비활성화된 게시물'}</button>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

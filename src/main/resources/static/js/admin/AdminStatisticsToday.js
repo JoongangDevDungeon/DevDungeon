@@ -34,7 +34,7 @@ $(document).ready(function() {
 								unit: 'day'
 	 						},
 							gridLines: {
-								display: true
+								display: false
 							},
 							ticks: {
 							}

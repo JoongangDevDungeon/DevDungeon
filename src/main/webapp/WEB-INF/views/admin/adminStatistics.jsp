@@ -29,16 +29,17 @@
 				
 				
 					<!-- 시간별 막대 그래프 -->
-					<div class="mbar">
+					<div class="mbarT">
 						<div class="col-xl-6 mbar">
-							<div class="card mb-4">
-								<div class="card-header">
-									<i class="fas fa-chart-bar me-1">시간별 방문자 현황</i>
+							<div class="card mb-4 qwe">
+								<div class="card-header qwe">
+									<i class="fas fa-chart-bar me-1 qwe">시간별 방문자 현황</i>
 								</div>
-								<div class="card-body">
-									<canvas id="myBarChartTime"></canvas>
+								<div class="card-body qwe">
+									<canvas class="qwe" id="myBarChartTime"></canvas>
 								</div>
 							</div>
+							<button type="button" class="btn btn-success" onclick="location.href='/adminStatistics/time'">시간별방문자 엑셀</button>
 						</div>
 					</div>
 					
@@ -54,6 +55,7 @@
 									<canvas id="myBarChartToday"></canvas>
 								</div>
 							</div>
+							<button type="button" class="btn btn-success" onclick="location.href='/adminStatistics/day'">요일별방문자 엑셀</button>
 						</div>
 					</div>
 					
@@ -69,13 +71,9 @@
 									<canvas id="myBarChartMonth"></canvas>
 								</div>
 							</div>
+							<button type="button" class="btn btn-success" onclick="location.href='/adminStatistics/month'">월별방문자 엑셀</button>
 						</div>
 					</div>
-					
-					<button type="button" onclick="location.href='/adminStatistics/time'">시간별방문자 엑셀</button>
-					<button type="button" onclick="location.href='/adminStatistics/day'">요일별방문자 엑셀</button>
-					<button type="button" onclick="location.href='/adminStatistics/month'">월별방문자 엑셀</button>
-
 				</div>
 			</div>
 		</div>

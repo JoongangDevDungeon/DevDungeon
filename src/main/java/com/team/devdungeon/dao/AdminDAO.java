@@ -66,8 +66,6 @@ public interface AdminDAO {
 	
 	void adminEventModal(EventDTO eventDTO);
 	
-	//포인트 정산
-	List<Map<String, Object>> AdminPoint(Map<String, Object> pages);
 	
 	//페이징 서치바 관련
 	int boardCount(Map<String, Object> pages);
