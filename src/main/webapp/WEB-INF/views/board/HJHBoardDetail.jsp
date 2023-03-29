@@ -99,8 +99,7 @@ $(function(){ //제이쿼리 시작
 		
 		window.open("/sendPoint?receiver="+receiver, '쪽지', 'width=510px,height=450px,scrollbars=yes');
 	});
-	
-	
+
 });//제이쿼리 끝
 
 function comment_check(){	//댓글 공백체크
@@ -113,9 +112,28 @@ function subComment_check(){
 	if(c_commentText.value ==""){ alert("댓글을 입력하세요");	return false; }
 	if(confirm("댓글 작성하시겠습니까?")){ return true; }else{ return false; }
 }
-function boardUpdate(board_no){	location.href="/board/HJHBoardUpdate?board_no="+board_no; }
-function boardDelete(board_no){ 
-	if(confirm("정말로 삭제하시겠습니까?")){ location.href="/board/HJHBoardDelete?board_no="+board_no; }
+function boardUpdate(board_no){
+		let f = document.createElement('form');
+		let obj;
+		obj = document.createElement('input');
+		obj.setAttribute('type', 'hidden');
+		obj.setAttribute('name', 'board_no');
+		obj.setAttribute('value', board_no);
+		f.setAttribute('method', 'post');
+		f.setAttribute('action', '/board/HJHBoardUpdate');
+		document.body.appendChild(f);
+		f.submit();
+ }function boardDelete(board_no){
+	let f = document.createElement('form');
+	let obj;
+	obj = document.createElement('input');
+	obj.setAttribute('type', 'hidden');
+	obj.setAttribute('name', 'board_no');
+	obj.setAttribute('value', board_no);
+	f.setAttribute('method', 'post');
+	f.setAttribute('action', '/board/HJHBoardDelete');
+	document.body.appendChild(f);
+	f.submit();
 }
 
 </script>

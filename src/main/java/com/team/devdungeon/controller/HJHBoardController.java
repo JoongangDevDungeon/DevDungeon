@@ -126,15 +126,12 @@ public class HJHBoardController {
 		//
 		return mv;
 	}
-
 	@GetMapping("/board/HJHBoardWrite")
-	public String boardWrite(HttpSession session,HttpServletRequest request){
-		String member_id = (String)session.getAttribute("member_id");
-		String board_no = request.getParameter("board_no");
-		if(board_no != null){
-
+	public String boardWrite(HttpSession session) {
+		if(session.getAttribute("member_id") == null) {
+			return "redirect:/board/HJHBoard";
 		}
-		return "redirect:/board/HJHBoardDetail?board_no="+board_no;
+		return "board/HJHBoardWrite";
 	}
 
 	@PostMapping("/board/HJHBoardWrite")
@@ -195,7 +192,6 @@ public class HJHBoardController {
 			return"redirect:/board/HJHBoard";
 		}else {
 			String writer = HJHboardService.boardOne(board_no);
-			System.out.println(writer);
 			if(member_id.equals(writer)){
 				Map<String,Object> map = new HashMap<String, Object>();
 				map.put("board_title", board_title);
@@ -240,21 +236,24 @@ public class HJHBoardController {
 		HJHboardService.boardSubComment(map);
 		return "redirect:/board/HJHBoardDetail?board_no="+board_no;
 	}
-
-	@GetMapping("/board/HJHBoardWrite")
-	public String boardWrite(HttpSession session) {
-		if(session.getAttribute("member_id") == null) {
+	@GetMapping("/board/HJHBoardUpdate")
+	public String boardUpdate(HttpSession session, HttpServletRequest request){
+		String member_name = (String)session.getAttribute("member_name");
+		if(member_name != null){
+			String board_no = request.getParameter("board_no");
+			String writer = HJHboardService.boardOne(board_no);
+			return "redirect:/board/HJHBoardDetail?board_no="+board_no;
+		}else{
 			return "redirect:/board/HJHBoard";
 		}
-		return "board/HJHBoardWrite";
 	}
-
-	@GetMapping("/board/HJHBoardUpdate")
-	public ModelAndView boardUpdate(@RequestParam String board_no) {
+	@PostMapping("/board/HJHBoardUpdate")
+	public ModelAndView boardUpdate(@RequestParam String board_no, HttpSession session) {
 		ModelAndView mv = new ModelAndView("/board/HJHBoardWrite");
 		Map<String, Object> boardDetail = HJHboardService.boardDetail(board_no);
 		mv.addObject("boardDetail",boardDetail);
 		return mv;
+
 	}
 
 	@ResponseBody
@@ -268,14 +267,28 @@ public class HJHBoardController {
 		}
 		return result+"";
 	}
-
 	@GetMapping("/board/HJHBoardDelete")
+	public String HJHBoardDelete(HttpSession session, HttpServletRequest request){
+		String member_name = (String)session.getAttribute("member_name");
+		if(member_name != null){
+			String board_no = request.getParameter("board_no");
+			String writer = HJHboardService.boardOne(board_no);
+			return "redirect:/board/HJHBoardDetail?board_no="+board_no;
+		}else{
+			return "redirect:/board/HJHBoard";
+		}
+	}
+	@PostMapping("/board/HJHBoardDelete")
 	public String boardDelete(String board_no) {
 		int result = HJHboardService.boardDelete(board_no);
 		System.out.println(result+" 개의 게시글이 비활성화 되었습니다.");
 		return "redirect:/board/HJHBoard";
 	}
 
+	@GetMapping("/board/HJHBoardCommentDel")
+	public String boardCommentDel(){
+		return "redirect:/board/HJHBoard";
+	}
 	@ResponseBody
 	@PostMapping("/board/HJHBoardCommentDel")
 	public String boardCommentDel(String comment_no) {
@@ -283,6 +296,4 @@ public class HJHBoardController {
 		System.out.println(result+" 개의 댓글이 비활성화 되었습니다.");
 		return result+"";
 	}
-
-
 }

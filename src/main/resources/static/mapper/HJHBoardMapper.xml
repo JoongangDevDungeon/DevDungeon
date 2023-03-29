@@ -94,7 +94,7 @@
     	,comment_root = #{ comment_root }
    </insert>
     <select id="boardOne" parameterType="String" resultType="String">
-        SELECT member_id FROM boardview WHERE board_no=${ board_no }
+        SELECT member_name FROM boardview WHERE board_no=${ board_no }
     </select>
    
 </mapper>
