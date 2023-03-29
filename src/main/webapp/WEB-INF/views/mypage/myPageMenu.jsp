@@ -23,4 +23,4 @@
       <li onclick="location.href='/qnaboard'" style="cursor: pointer;">1:1 문의</li>
    </ul>
 </nav>
-<div class="line"></div>
+<div class="line mb-5"></div>
