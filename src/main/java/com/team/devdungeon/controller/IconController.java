@@ -22,8 +22,14 @@ public class IconController {
 
     @GetMapping("/iconApply")
     public ModelAndView iconApply(HttpServletRequest request) {
-        ModelAndView mv = new ModelAndView("content/iconApply");
-        mv.addObject("apply", request.getParameter("apply"));
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+        if(session.getAttribute("member_id") != null) {
+            mv.setViewName("content/iconApply");
+            mv.addObject("apply", request.getParameter("apply"));
+        } else {
+            mv.setViewName("redirect:/index?error=not_login");
+        }
         return mv;
     }
 
