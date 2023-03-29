@@ -7,6 +7,43 @@ body{/*백그라운드 이미지*/
      background-repeat: no-repeat;
 }
 
+.btn-primary {
+    background-color: #88a2a2;
+    color: white;
+    border: none;
+    font-weight: bold;
+}
+
+.dropdown-toggle {
+    border: 0;
+}
+
+.dropdown-menu > ul {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    height: 250px;
+}
+
+.dropdown-menu > ul > li {
+    padding: 0;
+    margin: 0;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    list-style: none;
+    border-bottom: 1px solid #88a2a2;
+}
+
+.dropdown-menu > ul > li:nth-child(5) {
+    border-bottom: 0;
+}
+
+.dropdown-menu > ul > li:hover {
+    cursor: pointer;
+}
+
 /* 헤더 */
 a{ text-decoration: none; color:black; }
 a:hover{ color:black; }

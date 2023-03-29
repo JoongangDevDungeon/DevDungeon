@@ -111,9 +111,9 @@ $(function() {
                     let member_name = result.member_name;
                     let member_level = result.member_level;
                     let member_point = result.member_point;
-                    $("#member_info").text(member_name + " 님 ");
-                    $("#member_level").text("Lv."+member_level);
- 					$("#member_point").text("포인트 : "+member_point);
+                    $("#member_info").html(member_name + " 님 ");
+                    $("#member_level").html("Lv."+member_level);
+ 					$("#member_point").html("포인트 : "+member_point);
                     $("#guest").hide();
                     $("#login_success").show();
                     localStorage.setItem("member_level", member_level);
