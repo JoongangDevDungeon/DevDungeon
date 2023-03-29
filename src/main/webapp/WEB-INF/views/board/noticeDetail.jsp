@@ -111,7 +111,7 @@ function noticeDelete(notice_no){
 		<!-- 상세화면 -->
 		<div class="detailBox" <c:if test="${sessionScope.member_id eq null }"> style="height:920px;"</c:if>>
 			<div class="detailTop">
-				<div class="detailTop_item">${noticeDetail.notice_title }</div>
+				<div class="detailTop_item text-truncate">${noticeDetail.notice_title }</div>
 				<div class="detailTop_item"><input type="hidden" id="detailWriter" value="${noticeDetail.admin_id }">${noticeDetail.admin_id }</div>
 				<div class="detailTop_item">${noticeDetail.notice_date }</div>
 			</div>

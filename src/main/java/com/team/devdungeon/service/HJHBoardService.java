@@ -51,8 +51,6 @@ public class HJHBoardService {
 	public int boardCommentDel(String comment_no) {
 		return HJHboardDAO.boardCommentDel(comment_no);
 	}
-	public void boardSubComment(Map<String, Object> map) {
-		HJHboardDAO.boardSubComment(map);
-		
-	}
+	public void boardSubComment(Map<String, Object> map) { HJHboardDAO.boardSubComment(map); }
+	public String boardOne(String board_no) { return HJHboardDAO.boardOne(board_no); }
 }

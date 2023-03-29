@@ -39,13 +39,13 @@ import static com.team.devdungeon.util.SFTPFileUtil.channelSftp;
 @RequiredArgsConstructor
 @Controller
 public class HJHBoardController {
-	
+
 	private final HJHBoardService HJHboardService;
 	private final CSJService csjService;
 	private final MyPageService mypageService;
 	private final SFTPFileUtil sftpFileUtil;
 	private final TextChangeUtil textChangeUtil;
-	
+
 	@GetMapping("/board/HJHBoard")
 	public ModelAndView boardList(@RequestParam(value="pageNo", defaultValue = "1") int pageNo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("board/HJHBoard");
@@ -68,6 +68,7 @@ public class HJHBoardController {
 		mv.addObject("pageNo", pageNo);
 		return mv;
 	}
+
 	@GetMapping("/board/HJHBoardDetail")
 	public ModelAndView boardDetail(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("board/HJHBoardDetail");
@@ -83,48 +84,59 @@ public class HJHBoardController {
 		}
 		mv.addObject("boardDetail",boardDetail);
 		mv.addObject("detailComments",detailComments);
-		
+
 		//
 		//작성자의 프로필을 불러온다
 		int member_no = (int) boardDetail.get("member_no");
 		Map<String,Object> mem = csjService.memberProfile(member_no);
-		
+
 		//이 게시글에 달린 파일 정보를 불러온다
 		Map<String,Object> boardFile = csjService.callBoardFile(Integer.parseInt(board_no));
 		if(boardFile != null) {
 			String remotePath = sftpFileUtil.remotePath + boardFile.get("file_name");
 			mv.addObject("boardFile",boardFile);
 
-	        try {
-	            // 원격 서버에서 이미지 파일 읽어오기
-	            InputStream inputStream = channelSftp.get(remotePath);
+			try {
+				// 원격 서버에서 이미지 파일 읽어오기
+				InputStream inputStream = channelSftp.get(remotePath);
 
-	            // Inputstream -> byte[] 변환
-	            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	            byte[] buffer = new byte[1024];
-	            int len;
-	            while ((len = inputStream.read(buffer)) > -1 ) {
-	            	System.out.println("ㅎㅎㅎ");
-	                baos.write(buffer, 0, len);
-	            }
-	            baos.flush();
-	            byte[] imageData = baos.toByteArray();
+				// Inputstream -> byte[] 변환
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				byte[] buffer = new byte[1024];
+				int len;
+				while ((len = inputStream.read(buffer)) > -1 ) {
+					System.out.println("ㅎㅎㅎ");
+					baos.write(buffer, 0, len);
+				}
+				baos.flush();
+				byte[] imageData = baos.toByteArray();
 
-	            // byte[] -> Base64
-	            String imageDataString = Base64.getEncoder().encodeToString(imageData);
+				// byte[] -> Base64
+				String imageDataString = Base64.getEncoder().encodeToString(imageData);
 
-	            mv.addObject("imageDataString", imageDataString);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+				mv.addObject("imageDataString", imageDataString);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		MyPageDTO mydto = mypageService.profile((String)mem.get("member_id"));
 		mydto.setMember_intro(textChangeUtil.changeText(mydto.getMember_intro()));
 		mv.addObject("profile",mydto);
-		
+
 		//
 		return mv;
 	}
+
+	@GetMapping("/board/HJHBoardWrite")
+	public String boardWrite(HttpSession session,HttpServletRequest request){
+		String member_id = (String)session.getAttribute("member_id");
+		String board_no = request.getParameter("board_no");
+		if(board_no != null){
+
+		}
+		return "redirect:/board/HJHBoardDetail?board_no="+board_no;
+	}
+
 	@PostMapping("/board/HJHBoardWrite")
 	public String boardWrite(HttpServletRequest request, HttpSession session,MultipartHttpServletRequest fileReq) {
 		String board_title = textChangeUtil.changeText((String)request.getParameter("writeTitle"));
@@ -138,58 +150,66 @@ public class HJHBoardController {
 			map.put("board_content", board_content);
 			map.put("member_id", member_id);
 			HJHboardService.boardWrite(map);
-			
+
 			MultipartFile boardFile = fileReq.getFile("fileUpload");
 			if (boardFile.getSize() > 0) {
 				String originalFileName = boardFile.getOriginalFilename(); // 원래 파일 이름
 				String extension = FilenameUtils.getExtension(originalFileName); // 파일 확장자
 				String savedFileName = UUID.randomUUID().toString() + "." + extension; // 저장될 파일 이름
-				
+
 				int boardNo = (int) map.get("writtenNo");
 				String remotePath = sftpFileUtil.remotePath + savedFileName;
 				long fileSize = boardFile.getSize();
 				Map<String,Object> fileMap = new HashMap<String, Object>();
-				
+
 				fileMap.put("board_no", boardNo);
 				fileMap.put("fileName", savedFileName);
 				fileMap.put("extension", extension);
 				fileMap.put("fileSize", fileSize);
 
-		        try {
-		            JSch jsch = new JSch();
+				try {
+					JSch jsch = new JSch();
 
-		            Session jschSession = jsch.getSession(sftpFileUtil.FTP_USER, sftpFileUtil.FTP_HOST, sftpFileUtil.FTP_PORT);
-		            jschSession.setPassword(sftpFileUtil.FTP_PASSWORD);
-		            jschSession.setConfig("StrictHostKeyChecking", "no");
-		            jschSession.connect();
+					Session jschSession = jsch.getSession(sftpFileUtil.FTP_USER, sftpFileUtil.FTP_HOST, sftpFileUtil.FTP_PORT);
+					jschSession.setPassword(sftpFileUtil.FTP_PASSWORD);
+					jschSession.setConfig("StrictHostKeyChecking", "no");
+					jschSession.connect();
 
-		            ChannelSftp sftpChannel = (ChannelSftp) jschSession.openChannel("sftp");
-		            sftpChannel.connect();
+					ChannelSftp sftpChannel = (ChannelSftp) jschSession.openChannel("sftp");
+					sftpChannel.connect();
 
-		            InputStream inputStream = new ByteArrayInputStream(boardFile.getBytes());
+					InputStream inputStream = new ByteArrayInputStream(boardFile.getBytes());
 
-		            sftpChannel.put(inputStream, remotePath);
+					sftpChannel.put(inputStream, remotePath);
 
-		            sftpChannel.exit();
-		            jschSession.disconnect();
-		            csjService.putBoardFile(fileMap);
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        }
+					sftpChannel.exit();
+					jschSession.disconnect();
+					csjService.putBoardFile(fileMap);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
 				System.out.println("저장 파일 위치, 파일명 : " + remotePath);
 				System.out.println("파일 크기 : "+ fileSize);
 			}
 			return"redirect:/board/HJHBoard";
 		}else {
-			Map<String,Object> map = new HashMap<String, Object>();
-			map.put("board_title", board_title);
-			map.put("board_content", board_content);
-			map.put("board_no", board_no);
-			HJHboardService.boardUpdate(map);
-			return "redirect:/board/HJHBoardDetail?board_no="+board_no;
+			String writer = HJHboardService.boardOne(board_no);
+			System.out.println(writer);
+			if(member_id.equals(writer)){
+				Map<String,Object> map = new HashMap<String, Object>();
+				map.put("board_title", board_title);
+				map.put("board_content", board_content);
+				map.put("board_no", board_no);
+				HJHboardService.boardUpdate(map);
+				return "redirect:/board/HJHBoardDetail?board_no="+board_no;
+			}else{
+				return "redirect:/board/HJHBoardDetail?board_no="+board_no;
+			}
+
 		}
 	}
+
 	@PostMapping("/board/HJHBoardComment")
 	public String boardComment(HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
@@ -204,6 +224,7 @@ public class HJHBoardController {
 		HJHboardService.boardComment(map);
 		return "redirect:/board/HJHBoardDetail?board_no="+board_no;
 	}
+
 	@PostMapping("/board/HJHSubComment")
 	public String boardSubComment(HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<String, Object>();
@@ -219,21 +240,23 @@ public class HJHBoardController {
 		HJHboardService.boardSubComment(map);
 		return "redirect:/board/HJHBoardDetail?board_no="+board_no;
 	}
-	
+
 	@GetMapping("/board/HJHBoardWrite")
 	public String boardWrite(HttpSession session) {
 		if(session.getAttribute("member_id") == null) {
-			return	"redirect:/board/HJHBoard";
+			return "redirect:/board/HJHBoard";
 		}
-		return "board/HJHBoardWrite"; 	
+		return "board/HJHBoardWrite";
 	}
+
 	@GetMapping("/board/HJHBoardUpdate")
 	public ModelAndView boardUpdate(@RequestParam String board_no) {
 		ModelAndView mv = new ModelAndView("/board/HJHBoardWrite");
 		Map<String, Object> boardDetail = HJHboardService.boardDetail(board_no);
 		mv.addObject("boardDetail",boardDetail);
-		return mv; 
+		return mv;
 	}
+
 	@ResponseBody
 	@PostMapping("/board/boardLike")
 	public String boardLike(String board_no) {
@@ -245,12 +268,14 @@ public class HJHBoardController {
 		}
 		return result+"";
 	}
+
 	@GetMapping("/board/HJHBoardDelete")
 	public String boardDelete(String board_no) {
 		int result = HJHboardService.boardDelete(board_no);
 		System.out.println(result+" 개의 게시글이 비활성화 되었습니다.");
 		return "redirect:/board/HJHBoard";
 	}
+
 	@ResponseBody
 	@PostMapping("/board/HJHBoardCommentDel")
 	public String boardCommentDel(String comment_no) {
@@ -258,6 +283,6 @@ public class HJHBoardController {
 		System.out.println(result+" 개의 댓글이 비활성화 되었습니다.");
 		return result+"";
 	}
-	
-	
+
+
 }
