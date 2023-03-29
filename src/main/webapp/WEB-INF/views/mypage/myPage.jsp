@@ -33,13 +33,12 @@
     }
     .pageNo:hover{ background-color: #d3d3d3; }
     .page_btn{
-        background-color: #6867AC;
+        background-color: #88a2a2;
         margin:0 2px;
         color:white;
         font-weight: bold;
         font-size: 14px;
     }
-    .page_btn:hover{ background-color: #8887cc; }
 
     /* adminSearch bar */
     .searchForm{ display: flex; justify-content: center; }
@@ -154,10 +153,9 @@
 <%@include file="myPageMenu.jsp"%>
 <section>
     <div class="main">
-        <div class="add1">광고1</div>
         <div class="content">
             <div>
-               <div style="width: 640px; height: 360px; margin: 0 auto;">
+               <div style="width: 640px; height: 360px; margin: 0 auto; margin-top: 20px;">
                    <c:choose>
                        <c:when test="${!empty icons}">
                            <!-- 이모티콘 목록 -->
@@ -196,7 +194,7 @@
                 </div>
             </div>
 
-            <hr>
+            <hr class="mt-5 mb-5">
 
             <!-- 유저 프로필 미리보기 -->
             <form action="/profileImage" method="post" enctype="multipart/form-data">
@@ -215,7 +213,7 @@
                     <div style="width: 620px; height: 240px; float: left; text-align: left;">
                         <!-- 레벨, 아이콘, 이름 -->
                         <div style="width: 620px; height: 60px; box-sizing: border-box; padding-top: 7px; padding-left: 10px;">
-                            <span style="display: inline-block; width: 48px; height: 40px; border-radius: 8px; text-align: center; line-height: 38px; background-color: black; color: white;">
+                            <span style="display: inline-block; width: 48px; height: 40px; border-radius: 8px; text-align: center; line-height: 38px; background-color: #88a2a2; color: white;">
                                 Lv.${profile.member_level}
                             </span>
                             <span>
@@ -236,7 +234,6 @@
             </form>
 
         </div>
-        <div class="add2">광고2</div>
     </div>
 </section>
 <%@include file="../footer.jsp"%>
