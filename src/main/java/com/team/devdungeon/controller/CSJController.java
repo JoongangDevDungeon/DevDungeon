@@ -203,6 +203,7 @@ public class CSJController {
 			mv.setViewName("redirect:/csjboard");
 			return mv;
 		}
+		det.put("member_name", textChangeUtil.changeText((String)det.get("member_name")));
 		det.put("board_title", textChangeUtil.changeText((String)det.get("board_title")));
 		det.put("board_content", textChangeUtil.changeText((String)det.get("board_content")));
 		det.put("board_content", textChangeUtil.changeEnter((String)det.get("board_content")));
