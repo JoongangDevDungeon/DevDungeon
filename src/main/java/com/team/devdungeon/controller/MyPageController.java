@@ -116,7 +116,13 @@ public class MyPageController {
     @PostMapping("/profile")
     @ResponseBody
     public int profile(@RequestParam Map<String, Object> map, HttpSession session) {
-        return myPageService.updateProfile(map, session);
+        int result = myPageService.updateProfile(map, session);
+        if(result == 1) {
+            MyPageDTO member_info =  myPageService.userProfile((String)session.getAttribute("member_id"));
+            session.removeAttribute("member_name");
+            session.setAttribute("member_name", member_info.getMember_name());
+        }
+        return result;
     }
     @GetMapping("/myPageChangePassword")
     public String myPageChangePass() {
