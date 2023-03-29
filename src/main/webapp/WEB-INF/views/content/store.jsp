@@ -33,18 +33,17 @@
    }
    .pageNo:hover{ background-color: #d3d3d3; }
    .page_btn{
-      background-color: #6867AC;
+      background-color: #88a2a2;
       margin:0 2px;
       color:white;
       font-weight: bold;
       font-size: 14px;
    }
-   .page_btn:hover{ background-color: #8887cc; }
 
    /* adminSearch bar */
    .searchForm{ display: flex; justify-content: center; }
    .search_btn{
-      background-color: #6867AC;
+      background-color: #88a2a2;
       border:none;
       border-radius: 5px;
       font-size: 15px;
@@ -224,7 +223,7 @@
                <div style=" width: 200px; height: 800px; float: left;">
                   <!-- 구매자 현재 상태 -->
                   <div style="width: 200px; height: 90px; border: 1px solid #ccc; border-radius: 5px;">
-                     <div style="width: 198px; height: 30px; line-height: 30px; background-color: black; color: white; border-radius: 5px 5px 0 0; box-sizing: border-box;">현재 아이콘 상태</div>
+                     <div style="width: 198px; height: 30px; line-height: 30px; background-color: #88a2a2; color: white; border-radius: 5px 5px 0 0; box-sizing: border-box;">현재 아이콘 상태</div>
                      <div style="width: 200px; height: 30px;">
                         <span style="display: block; width: 30px; height: 30px; line-height: 30px; margin-left: 5px; float: left;">Lv.${profile.member_level}</span>
                         <span style="display: block; width: 30px; height: 30px; margin-left: 10px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">
@@ -240,8 +239,8 @@
                   <!-- 아이콘 검색 -->
                   <div class="mt-3 list-group" style="width: 200px; height: 65px;">
                      <form action="/store" method="get" onsubmit="return search()">
-                        <input type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
-                        <button class="search_btn">검색</button>
+                        <input class="form-control" style="width: 138px; height: 30px; float: left;" type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
+                        <button class="search_btn" style="float: left; height: 30px;">검색</button>
                      </form>
                   </div>
 
