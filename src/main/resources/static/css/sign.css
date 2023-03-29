@@ -29,3 +29,13 @@
 .find-btn {
     width: 300px;
 }
+
+.btn-primary {
+    background-color: #88a2a2;
+    border: 0;
+}
+
+.check_btn {
+    background-color: #88a2a2;
+    color: white;
+}
