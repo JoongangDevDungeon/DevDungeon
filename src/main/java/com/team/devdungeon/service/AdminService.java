@@ -27,6 +27,17 @@ public class AdminService {
 	}
 	
 	//메인 대쉬보드
+	public List<Map<String, Object>> adminToday() {
+		return adminDAO.adminToday();
+	}
+	
+	public List<Map<String, Object>> adminDate() {
+		return adminDAO.adminDate();
+	}
+	
+	public List<Map<String, Object>> adminVisitor() {
+		return adminDAO.adminVisitor();
+	}
 	
 	//사용자 관리
 	public List<Map<String, Object>> adminMember(Map<String, Object> pages) {
@@ -46,14 +57,41 @@ public class AdminService {
 		adminDAO.adminBoardDel(boardDTO);
 	}
 	
+	public List<Map<String, Object>> AdminBoardDetail(int boardNo) {
+		return adminDAO.AdminBoardDetail(boardNo);
+	}
+	
 	//로그 데이터
 	public List<Map<String, Object>> AdminLog(Map<String, Object> pages) {
 		return adminDAO.AdminLog(pages);
 	}
 	
 	//통계
+	public List<Map<String, Object>> LogDay() {
+		return adminDAO.LogDay();
+	}
 	
-	//쿠폰 관련
+	public List<Map<String, Object>> LogTime() {
+		return adminDAO.LogTime();
+	}
+	
+	public List<Map<String, Object>> LogMonth() {
+		return adminDAO.LogMonth();
+	}
+	
+	public List<Map<String, Object>> excelTime() {
+		return adminDAO.LogTime();
+	}
+	
+	public List<Map<String, Object>> excelDay() {
+		return adminDAO.LogDay();
+	}
+	
+	public List<Map<String, Object>> excelMonth() {
+		return adminDAO.LogMonth();
+	}
+	
+	//쿠폰
 	public List<Map<String, Object>> adminCoupon(Map<String, Object> pages) {
 		return adminDAO.adminCoupon(pages);
 	}
@@ -64,6 +102,10 @@ public class AdminService {
 	
 	public void adminCouponDel(int couponDel) {
 		adminDAO.adminCouponDel(couponDel);
+	}
+	
+	public List<Map<String, Object>> AdminCouponView() {
+		return adminDAO.AdminCouponView();
 	}
 	
 	//QnA
@@ -88,6 +130,10 @@ public class AdminService {
 		return adminDAO.AdminStore(pages);
 	}
 	
+	public void amdinStoreChange(Map<String, Object> change) {
+		adminDAO.amdinStoreChange(change);
+	}
+	
 	//이벤트
 	public List<Map<String, Object>> AdminEvent(Map<String, Object> pages) {
 		return adminDAO.AdminEvent(pages);
@@ -97,7 +143,21 @@ public class AdminService {
 		adminDAO.AdminEventDel(eventDTO);
 	}
 	
+	public void adminEventModal(EventDTO eventDTO) {
+		adminDAO.adminEventModal(eventDTO);
+	}
 	
+	public void puteventFile(Map<String, Object> fileMap) {
+		adminDAO.puteventFile(fileMap);
+	}
+	
+	public void eventUpdate(Map<String, Object> map) {
+		adminDAO.puteventFile(map);
+	}
+	
+	public void adminEventWrite(EventDTO eventDTO) {
+		adminDAO.adminEventWrite(eventDTO);
+	}
 	
 	//페이징 서치바 관련
 	public int boardCount(Map<String, Object> pages) {
@@ -127,105 +187,5 @@ public class AdminService {
 	public int adminLogCount(Map<String, Object> pages) {
 		return adminDAO.adminLogCount(pages);
 	}
-	//포인트 페이징 카운트(필요없을시 삭제)
-	public int adminPointCount(Map<String, Object> pages) {
-		return adminDAO.adminPointCount(pages);
-	}
-
-
-	public void adminEventWrite(EventDTO eventDTO) {
-		adminDAO.adminEventWrite(eventDTO);
-	}
-
-	public List<Map<String, Object>> adminToday() {
-		return adminDAO.adminToday();
-	}
-
-	public List<Map<String, Object>> AdminCouponView() {
-		return adminDAO.AdminCouponView();
-	}
-
-	public void amdinStoreChange(Map<String, Object> change) {
-		adminDAO.amdinStoreChange(change);
-		
-	}
-
-	public List<Map<String, Object>> adminDate() {
-		return adminDAO.adminDate();
-	}
-
-	public List<Map<String, Object>> adminVisitor() {
-		return adminDAO.adminVisitor();
-	}
-
-	public List<Map<String, Object>> LogDay() {
-		return adminDAO.LogDay();
-	}
-
-	public List<Map<String, Object>> LogTime() {
-		return adminDAO.LogTime();
-	}
-
-	public List<Map<String, Object>> LogMonth() {
-		return adminDAO.LogMonth();
-	}
-
-	public List<Map<String, Object>> excelTime() {
-		return adminDAO.LogTime();
-	}
-
-	public List<Map<String, Object>> excelDay() {
-		return adminDAO.LogDay();
-	}
-
-	public List<Map<String, Object>> excelMonth() {
-		return adminDAO.LogMonth();
-	}
-
-	public void adminEventModal(EventDTO eventDTO) {
-		adminDAO.adminEventModal(eventDTO);
-	}
-
-	public void puteventFile(Map<String, Object> fileMap) {
-		adminDAO.puteventFile(fileMap);
-	}
-
-	public void eventUpdate(Map<String, Object> map) {
-		adminDAO.puteventFile(map);
-	}
-
-	public List<Map<String, Object>> AdminBoardDetail(int boardNo) {
-		return adminDAO.AdminBoardDetail(boardNo);
-	}
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-	
-
-	
 
 }
