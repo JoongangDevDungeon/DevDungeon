@@ -62,4 +62,8 @@ public interface CSJService {
 
 	public void addPoint(Map<String, Object> pointMap);
 
+	public List<Map<String, Object>> eventFive();
+
+	public List<Map<String, Object>> boardFive(String string);
+
 }

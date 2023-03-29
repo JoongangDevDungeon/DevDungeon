@@ -1,6 +1,9 @@
 package com.team.devdungeon.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.team.devdungeon.dto.SignDTO;
+import com.team.devdungeon.service.CSJService;
+import com.team.devdungeon.service.NoticeService;
 import com.team.devdungeon.service.SignService;
 import com.team.devdungeon.util.Email;
 import org.apache.commons.mail.EmailException;
@@ -16,19 +19,35 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SignController {
 
     @Autowired
     private SignService signService;
-
+    
+    @Autowired
+    private CSJService csjService;
+    
+    @Autowired
+    private NoticeService noticeService;
+    
     @GetMapping("/index")
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("index");
         if(request.getParameter("error") != null) {
             mv.addObject("error_msg", request.getParameter("error"));
         }
+        List<Map<String,Object>> noticeFive = noticeService.noticeFive();
+        List<Map<String,Object>> eventFive = csjService.eventFive();
+        List<Map<String,Object>> viewFive = csjService.boardFive("view");
+        List<Map<String,Object>> likeFive = csjService.boardFive("like");
+        mv.addObject("noticeFive",noticeFive);
+        mv.addObject("eventFive",eventFive);
+        mv.addObject("viewFive",viewFive);
+        mv.addObject("likeFive",likeFive);
         return mv;
     }
 
@@ -113,11 +132,12 @@ public class SignController {
         signDTO.setMember_id(request.getParameter("member_id"));
         signDTO.setVerify_code(att_num);
         SignDTO result = signService.mail_code(signDTO);
-/*
+
         String user_mail = signDTO.getMember_email();
         String title = "가지 회원가입 인증번호 입니다.";
         String msg = "회원 가입 인증번호<br><div style='color:red'>"+att_num+"</div>";
-        Email.Mail(user_mail,"",title, msg);*/
+        Email.Mail(user_mail,"",title, msg);
+        System.err.println(user_mail);
         return "";
     }
 
@@ -125,7 +145,6 @@ public class SignController {
     @ResponseBody
     public  String check_mail_num(HttpServletRequest request){
         SignDTO signDTO = new SignDTO();
-        System.err.println("연결");
         signDTO.setVerify_code(request.getParameter("mail_code"));
         signDTO.setMember_email(request.getParameter("member_email"));
         SignDTO result = signService.check_code(signDTO);
@@ -185,10 +204,10 @@ public class SignController {
         int result = signService.accountInquiry(signDTO);
 
        if (result == 1) {
-           /*String user_mail = signDTO.getMember_email();
+           String user_mail = signDTO.getMember_email();
            String title = "가지 계정찾기 인증번호 입니다.";
            String msg = "계정 찾기 인증번호<br><div style='color:red'>"+att_num+"</div>";
-           Email.Mail(user_mail,"",title, msg);*/
+           Email.Mail(user_mail,"",title, msg);
            return "0";
        }else{
            return "1";

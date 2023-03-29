@@ -14,7 +14,17 @@
         </if>
         ORDER BY board_no DESC
     </select>
-
+    <select id="boardFive" parameterType="String" resultType="HashMap">
+    	SELECT * FROM board2view
+    	WHERE real_date > DATE_ADD(now(), INTERVAL -1 DAY) 
+    	ORDER BY
+    	<choose>
+    		<when test="string == 'like'">board_like</when>
+    		<when test="string == 'view'">board_read</when>
+    	</choose>
+    	DESC, board_no DESC
+    	LIMIT 0, 5
+    </select>
     <select id="eventList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
         select e.event_no,e.tag_no ,e.event_title ,e.event_content ,e.event_date ,e.event_update ,e.status_no,e.event_end ,ef.event_file_no ,ef.event_file_name ,ef.event_file_extension ,ef.event_file_size from event e left join event_file ef ON e.event_no = ef.event_no 
         WHERE (ef.event_file_type = 1 OR ef.event_file_no IS NULL) AND e.status_no = 1
@@ -27,7 +37,13 @@
         </if>
         ORDER BY event_no DESC
     </select>
- 
+    <select id="eventFive" resultType="HashMap">
+    	SELECT * FROM event
+    	ORDER BY event_no DESC
+    	LIMIT 0,5
+    </select>
+    
+    
     <select id="detail" parameterType="Integer" resultType="HashMap">
     	SELECT *
     	FROM board2view

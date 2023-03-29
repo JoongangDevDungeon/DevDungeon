@@ -172,6 +172,18 @@ public class CSJServiceImpl implements CSJService {
 		csjDAO.addPoint(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> eventFive() {
+		// TODO Auto-generated method stub
+		return csjDAO.eventFive();
+	}
+
+	@Override
+	public List<Map<String, Object>> boardFive(String string) {
+		// TODO Auto-generated method stub
+		return csjDAO.boardFive(string);
+	}
+
 
 
 

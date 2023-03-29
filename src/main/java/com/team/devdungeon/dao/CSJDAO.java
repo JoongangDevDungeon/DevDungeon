@@ -143,6 +143,16 @@ public class CSJDAO {
 		sqlSession.update(namespace+"addPoint",map);
 	}
 
+	public List<Map<String, Object>> eventFive() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+"eventFive");
+	}
+
+	public List<Map<String, Object>> boardFive(String string) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+"boardFive",string);
+	}
+
 
 
 }
