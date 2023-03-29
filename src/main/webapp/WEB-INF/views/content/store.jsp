@@ -214,6 +214,34 @@
          }
       });
 
+      $("#multi_pay_btn").click(function() {
+         if((shopping_bag == null || shopping_bag == "")) {
+            location.href = "/payShoppingBag?type=cart_pay";
+            return false;
+         } else {
+            console.log("구매 목록 : " + shopping_bag);
+            $.post({
+               url : "/shoppingBag",
+               data : {"shoppingBag" : shopping_bag, "sell_type" : "cart_pay" },
+               dataType : "text",
+               success : function (result) {
+                  if(result == 1) {
+                     location.href = "/payShoppingBag?type=cart_pay";
+                  } else if(result == 2) {
+                     alert("이미 구매한 아이콘이 있습니다.\n다시 한번 확인해주세요.");
+                  } else {
+                     if(confirm("이미 구매 장바구니에 아이콘이 있습니다.\n구매 화면으로 이동하겠습니까?.")) {
+                        location.href = "/payShoppingBag?type=cart_pay";
+                     }
+                  }
+               },
+               error : function () {
+                  console.log("장바구니에 담지 못했습니다.");
+               }
+            });
+         }
+      });
+
    });
 </script>
 <body>
@@ -301,7 +329,7 @@
 
                         <div style="position: absolute; right: 0;">
                            <button class="btn btn-primary" id="pay_shopping_bag">장바구니 추가</button>
-                           <button class="btn btn-primary" onclick="location.href='/payShoppingBag?type=cart_pay'">결제하기</button>
+                           <button class="btn btn-primary" id="multi_pay_btn">결제하기</button>
                            <!--<button class="btn btn-primary" id="gift_shopping_bag">선물</button>-->
                         </div>
                      </div>
