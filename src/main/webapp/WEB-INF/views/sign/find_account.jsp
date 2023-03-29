@@ -60,7 +60,7 @@
                     <button class="btn btn-primary find-btn mt-3" id="find_account" type="button">인증하기</button>
                 </div>
             </div>
-            <input id="user_email" name="user_email" type="text" value="${user_email}">
+            <input id="user_email" name="user_email" type="hidden" value="${user_email}">
         </form>
     </div>
 </body>
