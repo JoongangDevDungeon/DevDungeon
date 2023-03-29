@@ -34,7 +34,7 @@ public interface CSJService {
 
 	public PageInfo<Map<String, Object>> faqList(CSJshowDTO dto);
 
-	public void userDelete(int bno);
+	public void userDelete(Map<String, Object> delMap);
 
 	public int updateBoard(Map<String, Object> updatemap);
 
@@ -65,5 +65,7 @@ public interface CSJService {
 	public List<Map<String, Object>> eventFive();
 
 	public List<Map<String, Object>> boardFive(String string);
+
+	public String callCommentWriter(int cno);
 
 }

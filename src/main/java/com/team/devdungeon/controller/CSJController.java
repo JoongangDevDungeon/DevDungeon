@@ -295,16 +295,25 @@ public class CSJController {
 	}
 
 	@GetMapping("/userBoardDelete")
-	public String csjuserDelete(@RequestParam(value = "bno") int bno) {
-
-		csjService.userDelete(bno);
+	public String csjuserDelete(@RequestParam(value = "bno") int bno,HttpSession session) {
+		String member_id = (String) session.getAttribute("member_id");
+		Map<String,Object> delMap = new HashMap<String, Object>();
+		delMap.put("member_id", member_id);
+		delMap.put("bno", bno);
+		csjService.userDelete(delMap);
 		return "redirect:/csjboard";
 	}
 
 	@GetMapping("/userCommentDelete")
 	public String csjCommentDelete(@RequestParam(value = "cno") int cno, HttpServletRequest request) {
-		csjService.userCommentDelete(cno);
-		return "redirect:" + request.getHeader("Referer");
+		String writer = csjService.callCommentWriter(cno);
+		String member_id = (String) request.getSession().getAttribute("member_id");
+		if(writer.equals(member_id)) {
+			csjService.userCommentDelete(cno);
+			return "redirect:" + request.getHeader("Referer");
+		}else {
+			return "redirect:/error?error=1421";
+		}
 	}
 
 	@ResponseBody
@@ -347,12 +356,14 @@ public class CSJController {
 				String banWhy = request.getParameter("banWhy");
 				banWhy = textChangeUtil.changeText(banWhy);
 				String singoman = (String) request.getSession().getAttribute("member_id");
+				if(singoman!=null) {
 				Map<String, Object> banMap = new HashMap<String, Object>();
 				banMap.put("banBoard", banBoard);
 				banMap.put("banMember", banMember);
 				banMap.put("banWhy", banWhy);
 				banMap.put("singoman", singoman);
 				csjService.banBoard(banMap);
+				}
 				return "board/CSJcloser";
 			} else if (request.getParameter("formbanType").equals("댓글 신고")) {
 				String banComment = request.getParameter("banComment");
@@ -362,12 +373,14 @@ public class CSJController {
 				banWhy = textChangeUtil.changeText(banWhy);
 				String singoman = (String) request.getSession().getAttribute("member_id");
 				Map<String, Object> banMap = new HashMap<String, Object>();
+				if(singoman!=null) {
 				banMap.put("banComment", banComment);
 				banMap.put("banBoard", banBoard);
 				banMap.put("banMember", banMember);
 				banMap.put("banWhy", banWhy);
 				banMap.put("singoman", singoman);
 				csjService.banComment(banMap);
+				}
 				return "redirect:/csjCloser";
 			} else {
 				System.out.println("unknown way");
