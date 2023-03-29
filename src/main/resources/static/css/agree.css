@@ -30,3 +30,8 @@ button {
     width: 700px;
     height:50px;
 }
+
+.btn-primary {
+    background-color: #88a2a2;
+    border: 0;
+}
