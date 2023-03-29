@@ -159,6 +159,10 @@ a:hover{ color:black; }
     margin: 0 auto;
 }
 
+.add1, .add2 {
+    display: none;
+}
+
 /* 푸터 */
 
 footer {
