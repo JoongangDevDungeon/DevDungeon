@@ -86,6 +86,16 @@ function sendMessageTo(receiver){
 function sendPointTo(receiver){
 	window.open("/sendPoint?receiver="+receiver,'쪽지', 'width=510px,height=450px,scrollbars=yes');
 }
+function comment_check(){	//댓글 공백체크
+	let commentText = document.getElementById("commentText");
+	if(commentText.value ==""){ alert("댓글을 입력하세요");	return false; }
+	if(confirm("댓글 작성하시겠습니까?")){ return true; }else{ return false; }
+}
+function subComment_check(){
+	let c_commentText = document.getElementsByClassName("c_commentText");
+	if(c_commentText.value ==""){ alert("대댓글을 입력하세요");	return false; }
+	if(confirm("댓글 작성하시겠습니까?")){ return true; }else{ return false; }
+}
 </script>
 <style>
 .commentAll {
@@ -265,11 +275,11 @@ function sendPointTo(receiver){
 							<hr>
 							<c:if test="${c.comment_no eq c.comment_root }">
 								<div class="commentReplyEnter rep${c.comment_no }">
-									<form action="csjReplyWrite" method="post" class="row g-3">
+									<form action="csjReplyWrite" method="post" class="row g-3" onsubmit="return subComment_check()">
 										<input type="hidden" name="root" value=${c.comment_no }>
 										<input type="hidden" name="bno" value=${det.board_no }>
 										<div class="col-10">
-										<input type="text" class="commentInput form-control" name="commentContent" placeholder="${c.member_name } 에게 작성하는 답글입니다" maxlength="200" required>
+										<input type="text" class="commentInput form-control c_commentText" name="commentContent" placeholder="${c.member_name } 에게 작성하는 답글입니다" maxlength="200" required >
 										</div>
 										<div class="col-2">
 										<button id="commentEnterBtn" class="btn">댓글 입력</button>
@@ -281,10 +291,10 @@ function sendPointTo(receiver){
 					</c:forEach>
 					<c:if test="${sessionScope.member_name ne null }">
 						<div id="commentEnter">
-							<form id="commentForm" action="csjCommentWrite" method="post" class="row g-3">
+							<form id="commentForm" action="csjCommentWrite" method="post" class="row g-3" onsubmit="return comment_check()">
 								<input type="hidden" name="bno" value="${det.board_no }">
 								<div class="col-10">
-								<textarea class="commentInput form-control" name="commentContent" placeholder="명예훼손, 개인정보 유출, 분쟁 유발, 허위사실 유포 등의 글은 이용약관에 의해 제재는 &#13;&#10;물론 법률에 의해 처벌 받을 수 있습니다. 건전한 커뮤니티를 위해 자제를 당부 드립니다." required  maxlength="200"></textarea>
+								<textarea class="commentInput form-control" name="commentContent" id="commentText" placeholder="명예훼손, 개인정보 유출, 분쟁 유발, 허위사실 유포 등의 글은 이용약관에 의해 제재는 &#13;&#10;물론 법률에 의해 처벌 받을 수 있습니다. 건전한 커뮤니티를 위해 자제를 당부 드립니다." required  maxlength="200"></textarea>
 								</div>
 								<div class="col-2">
 								<button id="commentEnterBtn" class="btn">댓글 입력</button>

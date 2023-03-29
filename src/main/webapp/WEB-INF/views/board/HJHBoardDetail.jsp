@@ -106,15 +106,18 @@ $(function(){ //제이쿼리 시작
 function comment_check(){	//댓글 공백체크
 	let commentText = document.getElementById("commentText");
 	if(commentText.value ==""){ alert("댓글을 입력하세요");	return false; }
+	if(confirm("댓글 작성하시겠습니까?")){ return true; }else{ return false; }
+}
+function subComment_check(){
+	let c_commentText = document.getElementById("c_commentText");
+	if(c_commentText.value ==""){ alert("댓글을 입력하세요");	return false; }
+	if(confirm("댓글 작성하시겠습니까?")){ return true; }else{ return false; }
 }
 function boardUpdate(board_no){	location.href="/board/HJHBoardUpdate?board_no="+board_no; }
 function boardDelete(board_no){ 
 	if(confirm("정말로 삭제하시겠습니까?")){ location.href="/board/HJHBoardDelete?board_no="+board_no; }
 }
-function subComment_check(){
-	let c_commentText = document.getElementById("c_commentText");
-	if(c_commentText.value ==""){ alert("댓글을 입력하세요");	return false; }
-}
+
 </script>
 <body>
 	<%@ include file="../top.jsp"%>
@@ -223,7 +226,7 @@ function subComment_check(){
 						<c:if test="${(sessionScope.member_id ne null && sessionScope.member_id ne c.member_id ) }">
 							<button class="commentBtn_1 commentBanBtn" style="background-color: #ff8080; margin-left:5px;" value="${c.comment_no }"><img src="/img/siren.png" style="margin-bottom: 10px;"></button>
 						</c:if>
-						<c:if test="${c.comment_depth eq 0 }">
+						<c:if test="${c.comment_depth eq 0 && c.comment_cnt ne 0 }">
 							<button class="commentDropdown" value="${c.comment_root }"><i class="xi-caret-down "></i></button>
 						</c:if>
 					</div>
