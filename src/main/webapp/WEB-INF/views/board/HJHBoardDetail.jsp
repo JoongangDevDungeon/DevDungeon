@@ -128,7 +128,7 @@ function subComment_check(){
 		<!-- 상세화면 -->
 		<div class="detailBox" <c:if test="${sessionScope.member_id eq null }"> style="height:920px;"</c:if> >
 			<div class="detailTop">
-				<div class="detailTop_item">${boardDetail.board_title }</div>
+				<div class="detailTop_item text-truncate">${boardDetail.board_title }</div>
 				<div class="detailTop_item"><input type="hidden" id="detailWriter" value="${boardDetail.member_name }">${boardDetail.member_name }</div>
 				<c:if test="${sessionScope.member_id ne null && sessionScope.member_id ne boardDetail.member_id }">
 					<div class="detailTop_item message"><span id="message"><img src="/img/send.png" style="width:30px; height:30px;"></span></div>
