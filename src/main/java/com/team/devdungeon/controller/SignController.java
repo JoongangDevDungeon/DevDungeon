@@ -132,11 +132,12 @@ public class SignController {
         signDTO.setMember_id(request.getParameter("member_id"));
         signDTO.setVerify_code(att_num);
         SignDTO result = signService.mail_code(signDTO);
-/*
+
         String user_mail = signDTO.getMember_email();
         String title = "가지 회원가입 인증번호 입니다.";
         String msg = "회원 가입 인증번호<br><div style='color:red'>"+att_num+"</div>";
-        Email.Mail(user_mail,"",title, msg);*/
+        Email.Mail(user_mail,"",title, msg);
+        System.err.println(user_mail);
         return "";
     }
 
@@ -144,7 +145,6 @@ public class SignController {
     @ResponseBody
     public  String check_mail_num(HttpServletRequest request){
         SignDTO signDTO = new SignDTO();
-        System.err.println("연결");
         signDTO.setVerify_code(request.getParameter("mail_code"));
         signDTO.setMember_email(request.getParameter("member_email"));
         SignDTO result = signService.check_code(signDTO);
@@ -204,10 +204,10 @@ public class SignController {
         int result = signService.accountInquiry(signDTO);
 
        if (result == 1) {
-           /*String user_mail = signDTO.getMember_email();
+           String user_mail = signDTO.getMember_email();
            String title = "가지 계정찾기 인증번호 입니다.";
            String msg = "계정 찾기 인증번호<br><div style='color:red'>"+att_num+"</div>";
-           Email.Mail(user_mail,"",title, msg);*/
+           Email.Mail(user_mail,"",title, msg);
            return "0";
        }else{
            return "1";
