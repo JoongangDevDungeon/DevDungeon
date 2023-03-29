@@ -125,7 +125,11 @@
             data : {"shoppingBag" : [icon_no], "sell_type" : "pay" },
             dataType : "text",
             success : function (result) {
-               location.href = "/payShoppingBag?type=pay";
+               if(result == 1) {
+                  location.href = "/payShoppingBag?type=pay";
+               } else if(result == 2) {
+                  alert("이미 구매한 아이콘이 있습니다.\n다시 한번 확인해주세요.");
+               }
             },
             error : function () {
                console.log("구매 중 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.");

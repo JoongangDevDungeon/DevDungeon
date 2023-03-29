@@ -21,7 +21,7 @@
 <!--                	 <li>보유 포인트</li> -->
 						<li onclick="location.href='/myPage'">마이 페이지</li>
                    		<li onclick="location.href='/msgBox'">쪽지함<span class="msg_Cnt"></span></li>
-                   		<li onclick="location.href='/payShoppingBag'">장바구니</li>
+                   		<li onclick="location.href='/payShoppingBag?type=cart_pay'">장바구니</li>
                    		<li onclick="location.href='/logout'">로그아웃</li>
 					</ul>
 				</div>

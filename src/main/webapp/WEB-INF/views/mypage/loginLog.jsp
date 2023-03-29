@@ -17,22 +17,31 @@
     <div class="main">
         <div class="add1">광고1</div>
         <div class="content">
-            <table class="table table-hover">
-                <thead style="text-align: center; background-color: #e2e2e2;">
-                    <th>분류</th>
-                    <th>아이피 주소</th>
-                    <th>정보</th>
-                    <th>날짜</th>
-                </thead>
-                <c:forEach items="${logList}" var="log">
-                    <tbody style="text-align: center;">
-                        <td>로그인</td>
-                        <td>${log.ip}</td>
-                        <td>${log.path}</td>
-                        <td>${log.created_at}</td>
-                    </tbody>
-                </c:forEach>
-            </table>
+            <c:choose>
+                <c:when test="${!empty logList}">
+                    <table class="table table-hover mt-5">
+                        <thead style="background-color: #88a2a2; color: white; border: none; font-weight: bold; text-align: center;">
+                        <th>분류</th>
+                        <th>아이피 주소</th>
+                        <th>정보</th>
+                        <th>날짜</th>
+                        </thead>
+                        <c:forEach items="${logList}" var="log">
+                            <tbody style="text-align: center;">
+                            <td>로그인</td>
+                            <td>${log.ip}</td>
+                            <td>${log.path}</td>
+                            <td>${log.created_at}</td>
+                            </tbody>
+                        </c:forEach>
+                    </table>
+                </c:when>
+                <c:otherwise>
+                    <div class="mt-5">
+                        아직 로그인 기록이 없습니다!
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
         <div class="add2">광고2</div>
     </div>

@@ -27,4 +27,4 @@
       <li><a style="font-weight:bold; color: #7e7e7e;" href="/eventboard">이벤트</a></li>
    </ul>
 </nav>
-<div class="line"></div>
+<div class="line mb-5"></div>
