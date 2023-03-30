@@ -77,6 +77,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 							<input type="hidden" name="board_no" value="${row.board_no }">
 							<input type="hidden" name="status_no" value="${row.status_no }">
 							<input type="hidden" name="pageNo" value="${pageNo }">
+							<input type="hidden" name="url" value="/adminBoard">
 							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? 'ON' : 'OFF'}</button>
 						</form>
 					</td>

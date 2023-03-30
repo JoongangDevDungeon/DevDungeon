@@ -207,15 +207,14 @@ public class AdminController {
 	public String adminBoardDel(HttpServletRequest request) {
 
 		String pageNo = request.getParameter("pageNo");
-
 		BoardDTO boardDTO = new BoardDTO();
-
+		
 		boardDTO.setBoard_no(Integer.parseInt(request.getParameter("board_no")));
 		boardDTO.setStatus_no(Integer.parseInt(request.getParameter("status_no")));
 
 		adminService.adminBoardDel(boardDTO);
 
-		return "redirect:/adminBoard?pageNo=" + pageNo;
+		return "redirect:"+request.getParameter("url")+"?pageNo=" + pageNo;
 	}
 
 	// 로그 데이터
@@ -619,5 +618,37 @@ public class AdminController {
 
 		return "redirect:/adminEvent?pageNo=" + pageNo;
 	}
+	
+	//신고게시물 관리
+	@GetMapping("/adminBanBoard")
+	public ModelAndView banBoard(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
+			HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("./admin/adminBanBoard");
 
+		Map<String, Object> pages = new HashMap<String, Object>();
+
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+
+		pages.put("searchType", searchType);
+		pages.put("searchValue", searchValue);
+
+		int startPage = (pageNo * 10) - 10;
+		int totalCount = adminService.banBoardCount(pages);
+		int lastPage = (int) Math.ceil((double) totalCount / 10);
+
+		// System.out.println(startPage);
+
+		pages.put("startPage", startPage);
+		pages.put("lastPage", lastPage);
+
+		List<Map<String, Object>> list = adminService.BanBoard(pages);
+
+		mv.addObject("pages", pages);
+		mv.addObject("list", list);
+		mv.addObject("pageNo", pageNo);
+
+		return mv;
+	}
+	
 }

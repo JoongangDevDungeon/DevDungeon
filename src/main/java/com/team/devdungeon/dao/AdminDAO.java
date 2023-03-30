@@ -104,6 +104,10 @@ public interface AdminDAO {
 
 	void puteventFile(Map<String, Object> fileMap);
 
+	List<Map<String, Object>> BanBoard(Map<String, Object> pages);
+
+	int banBoardCount(Map<String, Object> pages);
+
 	
 
 

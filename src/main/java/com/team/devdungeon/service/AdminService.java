@@ -198,6 +198,14 @@ public class AdminService {
 		return adminDAO.AdminBoardDetail(boardNo);
 	}
 
+	public List<Map<String, Object>> BanBoard(Map<String, Object> pages) {
+		return adminDAO.BanBoard(pages);
+	}
+
+	public int banBoardCount(Map<String, Object> pages) {
+		return adminDAO.banBoardCount(pages);
+	}
+
 
 
 	
