@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="/css/message.css">
 </head>
 <script>
+
+    function null_ck(){
+        let member_name = document.getElementById("member_name");
+        let point = document.getElementById("point");
+
+        if(member_name.value == ""){ alert("닉네임을 확인해주세요"); return false; }
+        if(point.value == ""){ alert("보낼 포인트를 확인해주세요"); return false; }
+        if(member_name.getAttribute("readonly") != "readonly"){ alert("ID를 확인해주세요"); return false; }
+
+
+    }
+
     $(function(){
 
         $("#name_check").click(function() {
@@ -37,6 +49,10 @@
 
         $("#send_point").click(function(result) {
 
+            if(!$("#member_name").prop('readonly')){
+                alert("닉네임 확인 체크를 확인 해주세요.");
+                return false;
+            }
             if($("#point").val() > ${my_point}){
                 alert("보낼 포인트가 보유하고 있는 포인트 보다 많습니다.");
                 return false;
@@ -60,16 +76,7 @@
 
     });
 
-    function null_ck(){
-        let member_name = document.getElementById("member_name");
-        let msg_title = document.getElementById("msg_title");
-        let msg_content = document.getElementById("msg_content");
 
-        if(member_name.value == ""){ alert("닉네임을 확인해주세요"); return false; }
-        if(member_name.getAttribute("readonly") != "readonly"){ alert("ID를 확인해주세요"); return false; }
-
-
-    }
 </script>
 <style>
     .space{
