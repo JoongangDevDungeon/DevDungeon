@@ -34,6 +34,11 @@ public class SignController {
     @Autowired
     private NoticeService noticeService;
     
+    @GetMapping("/")
+    public String none() {
+    	return "redirect:/index";
+    }
+    
     @GetMapping("/index")
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("index");
