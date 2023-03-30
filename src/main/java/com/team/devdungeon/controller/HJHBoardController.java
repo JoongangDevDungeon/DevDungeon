@@ -62,6 +62,7 @@ public class HJHBoardController {
 		List<Map<String, Object>> list = HJHboardService.boardList(pages);
 		for(Map<String, Object> m : list) {
 			m.put("board_title", textChangeUtil.changeText((String)m.get("board_title")));
+			m.put("member_name", textChangeUtil.changeText((String)m.get("member_name")));
 		}
 		mv.addObject("pages",pages);
 		mv.addObject("list",list);
@@ -81,6 +82,7 @@ public class HJHBoardController {
 		List<Map<String,Object>> detailComments = HJHboardService.detailComment(board_no);
 		for(Map<String, Object> m : detailComments) {
 			m.put("comment_content", textChangeUtil.changeText((String)m.get("comment_content")));
+			m.put("member_name", textChangeUtil.changeText((String)m.get("member_name")));
 		}
 		mv.addObject("boardDetail",boardDetail);
 		mv.addObject("detailComments",detailComments);
