@@ -54,4 +54,8 @@ public class SignDAO {
 
         return sqlSession.update("sign.change_pw",signDTO);
     }
+
+    public String getMemberId(String memberEmail) {
+        return sqlSession.selectOne("sign.getMemberId", memberEmail);
+    }
 }

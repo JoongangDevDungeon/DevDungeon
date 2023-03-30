@@ -71,5 +71,10 @@ public class SignServiceImpl implements SignService {
         return signDAO.change_pw(signDTO);
     }
 
+    @Override
+    public String getMemberId(String memberEmail) {
+        return signDAO.getMemberId(memberEmail);
+    }
+
 
 }
