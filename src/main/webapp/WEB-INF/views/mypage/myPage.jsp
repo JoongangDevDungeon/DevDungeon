@@ -80,6 +80,25 @@
     }//페이징 끝
 
     $(function() {
+
+        $("#sub-btn").click(function() {
+            const profile_img = $("#profile_img").val();
+            const member_intro = $("#member_intro").val();
+
+            if(profile_img == "" || profile_img == null) {
+                alert("이미지를 등록해주세요.");
+                return false;
+            }
+
+            if(member_intro == "" || member_intro == null) {
+                alert("자기소개를 입력해주세요.");
+                return false;
+            }
+
+            $("#pform").submit();
+
+        });
+
         $("#profile_img").change(function() { // 이미지 미리보기
             const profile_img = this.files[0];
             const reader = new FileReader();
@@ -197,7 +216,7 @@
             <hr class="mt-5 mb-5">
 
             <!-- 유저 프로필 미리보기 -->
-            <form action="/profileImage" method="post" enctype="multipart/form-data">
+            <form id="pform" action="/profileImage" method="post" enctype="multipart/form-data">
                 <div class="mt-3">
                     <!-- 파일 등록 -->
                     <div class="filebox mt-3" style="margin: 0 auto; width: 610px; height: 50px;">
@@ -226,11 +245,11 @@
                         </div>
 
                         <div style="padding: 10px; padding-top: 5px; box-sizing: border-box;">
-                            <textarea class="form-control" rows="6" name="member_intro" placeholder="간단한 자기소개를 입력해주세요.">${profile.member_intro}</textarea>
+                            <textarea class="form-control" rows="6" id="member_intro" name="member_intro" placeholder="간단한 자기소개를 입력해주세요.">${profile.member_intro}</textarea>
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary mt-4" type="submit" style="width: 620px;">저장</button>
+                <button class="btn btn-primary mt-4" type="button" id="sub-btn" style="width: 620px;">저장</button>
             </form>
 
         </div>

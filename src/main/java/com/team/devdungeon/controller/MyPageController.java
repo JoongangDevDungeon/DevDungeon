@@ -2,6 +2,7 @@ package com.team.devdungeon.controller;
 
 import com.team.devdungeon.dto.MyPageDTO;
 import com.team.devdungeon.service.MyPageService;
+import com.team.devdungeon.util.TextChangeUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,8 @@ import java.util.Map;
 public class MyPageController {
 
     private final MyPageService myPageService;
+    private final TextChangeUtil textChangeUtil;
+
     @GetMapping("/checkPassword")
     public ModelAndView checkPass(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("mypage/checkPassword");
@@ -96,6 +99,8 @@ public class MyPageController {
 
     @PostMapping("/profileImage")
     public String profileImageAndIntro(HttpSession session, @RequestParam Map<String, Object> map, MultipartFile profile_img) {
+        String member_intro = textChangeUtil.changeText((String)map.get("member_intro"));
+        map.replace("member_intro", member_intro);
         map.put("member_id", (String)session.getAttribute("member_id"));
         int result = myPageService.memberIntro(map, profile_img);
         return "redirect:/myPage";
