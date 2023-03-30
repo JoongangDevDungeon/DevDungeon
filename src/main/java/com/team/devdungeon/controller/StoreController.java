@@ -143,7 +143,7 @@ public class StoreController {
 
     @PostMapping("/payProduct")
     @ResponseBody
-    public int payProduct(HttpSession session, @RequestParam int result_price, @RequestParam String pay_type) {
+    public int payProduct(HttpSession session, @RequestParam int result_price, @RequestParam String pay_type, @RequestParam Integer coupon_no) {
         int result = 0;
 
         List<Map<String, Object>> productInfo = storeService.checkProductCount(session.getAttribute("member_id"));
@@ -163,7 +163,8 @@ public class StoreController {
             result = 2;
         } else {
             int member_point = storeService.checkPoint(session.getAttribute("member_id"));
-            if(member_point >= result_price) result = storeService.payProduct(result_price, session.getAttribute("member_id"), pay_type);
+            System.out.println(coupon_no + " 쿠폰번호!!! ");
+            if(member_point >= result_price) result = storeService.payProduct(result_price, session.getAttribute("member_id"), pay_type, coupon_no);
         }
 
         return result;

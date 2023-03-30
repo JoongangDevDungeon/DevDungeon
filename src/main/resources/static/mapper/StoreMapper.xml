@@ -67,7 +67,9 @@
         SELECT coupon_type, coupon_name, coupon_content, coupon_end
             FROM couponBag cb JOIN coupon c ON cb.coupon_no = c.coupon_type
         WHERE
-            cb.member_no = (SELECT member_no FROM member WHERE member_id = #{member_id});
+            cb.member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
+        AND
+            cb.coupon_status = 0
 
     </select>
 
@@ -128,6 +130,16 @@
 
                 product_no IN<foreach collection="icons" item="icons" open="(" close=")" separator=",">#{icons}</foreach>
 
+    </update>
+
+    <update id="couponUse">
+        UPDATE couponBag
+            SET
+                coupon_status = 1
+        WHERE
+            coupon_no = #{coupon_no}
+        AND
+            member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
     </update>
 
     <insert id="insertProductNo" parameterType="HashMap">

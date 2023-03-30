@@ -69,6 +69,11 @@ public class StoreDAO {
 
             sqlSession.insert("store.insertProductNo", payInfo);
             sqlSession.update("store.productSellCountDown", payInfo);
+            int coupon_no = (int) payInfo.get("coupon_no");
+            if( coupon_no != 0) {
+                sqlSession.update("store.couponUse", payInfo);
+            }
+
             result = sqlSession.delete("store.deleteCart", payInfo);
         }
 

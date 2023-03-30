@@ -55,11 +55,14 @@
          if(result_price == "" || result_price == null) {
             result_price = total_price;
          }
+         if(coupon_type == "" || coupon_type == null) {
+            coupon_type = 0;
+         }
          let sell_type = "${type}";
          console.log("최종 결제 금액 : " + result_price);
          $.post({
             url : "/payProduct",
-            data : { "result_price" : result_price, "pay_type" : sell_type },
+            data : { "coupon_no" : coupon_type , "result_price" : result_price, "pay_type" : sell_type },
             dataType : "text",
             success : function (result) {
                if(result == 0) {
