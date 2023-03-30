@@ -14,7 +14,7 @@
 			(SELECT COUNT(*) FROM question_board WHERE question_board_status = 0) AS question_board_count,
 			(SELECT COUNT(*) FROM member WHERE DATE_FORMAT(join_date, "%Y-%m-%d") = curdate()) AS join_today,
 			(SELECT COUNT(*) FROM board WHERE DATE_FORMAT(board_date, "%Y-%m-%d") = curdate()) AS board_today,
-			(SELECT COUNT(*) FROM product WHERE DATE_FORMAT(product_date, "%Y-%m-%d") = curdate()) AS new_product,
+			(SELECT COUNT(*) FROM product WHERE DATE_FORMAT(product_date, "%Y-%m-%d") = curdate() AND emoticon_authority = 0) AS new_product,
 			(SELECT COUNT(DISTINCT ip) FROM logs WHERE DATE_FORMAT(created_at, "%Y-%m-%d") = curdate() AND ip is not NULL ) AS today_user;
 	</select>
 
@@ -409,5 +409,28 @@
 			LIKE CONCAT('%', #{searchValue }, '%')
 		</if>
     </select>
-
+    
+    <!-- 신고 게시물 관리 -->
+	<select id="BanBoard" parameterType="Integer"  resultType="HashMap">
+		SELECT b.*, m1.member_id AS ban_member_id, m2.member_id AS member_id, s.board_title, s.status_no
+		FROM ban_board AS b
+		LEFT JOIN member AS m1 ON b.ban_member_no = m1.member_no
+		LEFT JOIN member AS m2 ON b.member_no = m2.member_no
+		LEFT JOIN board as s ON b.board_no = s.board_no;
+	</select>
+	
+	<!-- 신고게시물 카운트 -->
+	<select id="banBoardCount" parameterType="HashMap" resultType="Integer">
+		SELECT COUNT(*) FROM ban_board
+		<if test="searchType != null">
+			WHERE
+			<choose>
+				<when test="searchType == 'title'">board_title</when>
+				<when test="searchType == 'writer'">member_name</when>
+			</choose>
+			LIKE CONCAT('%', #{searchValue }, '%')
+		</if>
+    </select>
+	
+	
 </mapper>

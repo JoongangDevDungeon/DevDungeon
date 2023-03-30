@@ -36,4 +36,5 @@ public interface HJHBoardDAO {
 
 	public void boardSubComment(Map<String, Object> map);
 
+    String boardOne(String board_no);
 }

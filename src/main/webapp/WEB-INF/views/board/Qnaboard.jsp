@@ -50,6 +50,7 @@
 			}).done(function(data) {
 				if (data.result == 1) {
 					alert("저장했다");
+					location.reload();
 				} else {
 					alert("저장하지 못했다");
 				}
