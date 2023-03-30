@@ -2,6 +2,8 @@ package com.team.devdungeon.service;
 
 import com.team.devdungeon.dao.MyPageDAO;
 import com.team.devdungeon.dto.MyPageDTO;
+import com.team.devdungeon.util.TextChangeUtil;
+
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ import static com.team.devdungeon.util.SFTPFileUtil.*;
 public class MyPageServiceImpl implements MyPageService {
 
     private final MyPageDAO myPageDAO;
+    private final TextChangeUtil textChangeUtil;
 
     @Override
     public int checkPassword(Map<String, Object> memberInfo) {
@@ -30,7 +33,8 @@ public class MyPageServiceImpl implements MyPageService {
     @Override
     public MyPageDTO profile(String memberId) {
         MyPageDTO profile = myPageDAO.profile(memberId);
-
+        profile.setMember_name(textChangeUtil.changeText(profile.getMember_name()));
+        profile.setMember_intro(textChangeUtil.changeText(profile.getMember_intro()));
         InputStream inputStream = null;
         ByteArrayOutputStream baos = null;
         byte[] buffer = null;

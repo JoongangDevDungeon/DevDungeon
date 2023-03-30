@@ -72,9 +72,9 @@ public class CSJDAO {
 		return PageInfo.of(sqlSession.selectList(namespace+"faqList",dto));
 	}
 
-	public void userDelete(int bno) {
+	public void userDelete(Map<String, Object> delMap) {
 		// TODO Auto-generated method stub
-		sqlSession.update(namespace+"deleteByUser",bno);
+		sqlSession.update(namespace+"deleteByUser",delMap);
 	}
 
 	public int updateBoard(Map<String, Object> updatemap) {
@@ -151,6 +151,11 @@ public class CSJDAO {
 	public List<Map<String, Object>> boardFive(String string) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+"boardFive",string);
+	}
+
+	public String callCommentWriter(int cno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+"callCommentWriter",cno);
 	}
 
 

@@ -99,22 +99,43 @@ $(function(){ //제이쿼리 시작
 		
 		window.open("/sendPoint?receiver="+receiver, '쪽지', 'width=510px,height=450px,scrollbars=yes');
 	});
-	
-	
+
 });//제이쿼리 끝
 
 function comment_check(){	//댓글 공백체크
 	let commentText = document.getElementById("commentText");
 	if(commentText.value ==""){ alert("댓글을 입력하세요");	return false; }
-}
-function boardUpdate(board_no){	location.href="/board/HJHBoardUpdate?board_no="+board_no; }
-function boardDelete(board_no){ 
-	if(confirm("정말로 삭제하시겠습니까?")){ location.href="/board/HJHBoardDelete?board_no="+board_no; }
+	if(confirm("댓글 작성하시겠습니까?")){ return true; }else{ return false; }
 }
 function subComment_check(){
 	let c_commentText = document.getElementById("c_commentText");
 	if(c_commentText.value ==""){ alert("댓글을 입력하세요");	return false; }
+	if(confirm("댓글 작성하시겠습니까?")){ return true; }else{ return false; }
 }
+function boardUpdate(board_no){
+		let f = document.createElement('form');
+		let obj;
+		obj = document.createElement('input');
+		obj.setAttribute('type', 'hidden');
+		obj.setAttribute('name', 'board_no');
+		obj.setAttribute('value', board_no);
+		f.setAttribute('method', 'post');
+		f.setAttribute('action', '/board/HJHBoardUpdate');
+		document.body.appendChild(f);
+		f.submit();
+ }function boardDelete(board_no){
+	let f = document.createElement('form');
+	let obj;
+	obj = document.createElement('input');
+	obj.setAttribute('type', 'hidden');
+	obj.setAttribute('name', 'board_no');
+	obj.setAttribute('value', board_no);
+	f.setAttribute('method', 'post');
+	f.setAttribute('action', '/board/HJHBoardDelete');
+	document.body.appendChild(f);
+	f.submit();
+}
+
 </script>
 <body>
 	<%@ include file="../top.jsp"%>
@@ -128,7 +149,7 @@ function subComment_check(){
 		<!-- 상세화면 -->
 		<div class="detailBox" <c:if test="${sessionScope.member_id eq null }"> style="height:920px;"</c:if> >
 			<div class="detailTop">
-				<div class="detailTop_item">${boardDetail.board_title }</div>
+				<div class="detailTop_item text-truncate">${boardDetail.board_title }</div>
 				<div class="detailTop_item"><input type="hidden" id="detailWriter" value="${boardDetail.member_name }">${boardDetail.member_name }</div>
 				<c:if test="${sessionScope.member_id ne null && sessionScope.member_id ne boardDetail.member_id }">
 					<div class="detailTop_item message"><span id="message"><img src="/img/send.png" style="width:30px; height:30px;"></span></div>
@@ -223,7 +244,7 @@ function subComment_check(){
 						<c:if test="${(sessionScope.member_id ne null && sessionScope.member_id ne c.member_id ) }">
 							<button class="commentBtn_1 commentBanBtn" style="background-color: #ff8080; margin-left:5px;" value="${c.comment_no }"><img src="/img/siren.png" style="margin-bottom: 10px;"></button>
 						</c:if>
-						<c:if test="${c.comment_depth eq 0 }">
+						<c:if test="${c.comment_depth eq 0 && c.comment_cnt ne 0 }">
 							<button class="commentDropdown" value="${c.comment_root }"><i class="xi-caret-down "></i></button>
 						</c:if>
 					</div>

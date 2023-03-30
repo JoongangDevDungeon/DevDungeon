@@ -86,11 +86,11 @@
     	WHERE board_no = #{bno}
     </update>
     
-    <update id="deleteByUser" parameterType="Integer">
+    <update id="deleteByUser" parameterType="HashMap">
     	UPDATE board
     	SET
     	status_no = 2
-    	WHERE board_no = #{bno}
+    	WHERE board_no = #{bno} AND member_no = (SELECT member_no FROM member WHERE member_id = #{member_id})
     </update>
    
     <update id="commentDelete" parameterType="Integer">
@@ -98,6 +98,7 @@
     	SET
     	status_no = 2
     	WHERE IF((select comment_depth from board_comment where comment_no=#{cno})=0,comment_root,comment_no) = #{cno}
+    	
 
     </update>
     
@@ -133,7 +134,9 @@
     	,comment_depth = 1
     	,comment_root = #{root}
     </insert>
-    
+    <select id="callCommentWriter" parameterType="Integer" resultType="String">
+    	SELECT member_id FROM commentview WHERE comment_no = #{cno}
+    </select>
     <select id="qnaList" parameterType="com.team.devdungeon.dto.CSJshowDTO" resultType="HashMap">
     	SELECT q.question_board_no ,(SELECT member_id FROM member WHERE member_no = q.member_no) AS member_id ,q.question_board_title ,q.question_board_date ,q.question_board_status ,q.question_board_content ,a.answer_board_no ,a.answer_board_title ,a.answer_board_date ,a.answer_board_update ,a.answer_board_content 
     	FROM question_board q LEFT JOIN answer_board a ON q.question_board_no = a.question_board_no

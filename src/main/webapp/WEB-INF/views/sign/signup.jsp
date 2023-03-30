@@ -7,14 +7,20 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/sign.css">
 </head>
 <script>
     $(function() {
+        var regex = /^[a-zA-Z0-9\s]+$/;
 
         $('#check_id').click(function (result){
 
             if($("#member_id").val().length < 5 || $("#member_id").val().length > 10){
                 alert("아이디는 5글자 이상 10글자 이하로 입력하세요.");
+                return false;
+            }
+            if(!regex.test($("#member_id").val())){
+                alert("ID에 특수문자를 사용할 수 없습니다.");
                 return false;
             }
             $.ajax({
@@ -25,8 +31,8 @@
                 success : function(result) {
                         if(result == "0"){
                             if(confirm("입력하신 아이디를 사용하시겠습니까?")==true){
-                                $("#member_id").attr("readonly", "readonly");
-                                $("#check_id").attr("disabled", "disabled");
+                                    $("#member_id").attr("readonly", "readonly");
+                                    $("#check_id").attr("disabled", "disabled");
                             }
                         } else{
                             alert("입력하신 아이디는 이미 등록된 아이디 입니다.");
@@ -43,6 +49,10 @@
 
             if($("#member_name").val().length < 2 || $("#member_name").val().length > 8){
                 alert("닉네임은 2글자 이상 7글자 이하로 입력하세요.");
+                return false;
+            }
+            if(!regex.test($("#member_name").val())){
+                alert("닉네임 특수문자를 사용할 수 없습니다.");
                 return false;
             }
             $.ajax({

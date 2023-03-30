@@ -74,6 +74,7 @@ public class CSJController {
 		PageInfo<Map<String, Object>> pageList = csjService.pageList(dto);
 		for(Map<String,Object> m : pageList.getList()) {
 			m.put("board_title", textChangeUtil.changeText((String)m.get("board_title")));
+			m.put("member_name", textChangeUtil.changeText((String)m.get("member_name")));
 		}
 		mv.addObject("pageNo", pageNo);
 		mv.addObject("pageInfo", pageList);
@@ -203,6 +204,7 @@ public class CSJController {
 			mv.setViewName("redirect:/csjboard");
 			return mv;
 		}
+		det.put("member_name", textChangeUtil.changeText((String)det.get("member_name")));
 		det.put("board_title", textChangeUtil.changeText((String)det.get("board_title")));
 		det.put("board_content", textChangeUtil.changeText((String)det.get("board_content")));
 		det.put("board_content", textChangeUtil.changeEnter((String)det.get("board_content")));
@@ -212,6 +214,7 @@ public class CSJController {
 		List<Map<String, Object>> comment = csjService.commentList(bno);
 		for(Map<String,Object> m : comment) {
 			m.put("comment_content", textChangeUtil.changeText((String)m.get("comment_content")));
+			m.put("member_name", textChangeUtil.changeText((String)m.get("member_name")));
 		}
 		
 		Map<String,Object> boardFile = csjService.callBoardFile(bno);
@@ -295,16 +298,25 @@ public class CSJController {
 	}
 
 	@GetMapping("/userBoardDelete")
-	public String csjuserDelete(@RequestParam(value = "bno") int bno) {
-
-		csjService.userDelete(bno);
+	public String csjuserDelete(@RequestParam(value = "bno") int bno,HttpSession session) {
+		String member_id = (String) session.getAttribute("member_id");
+		Map<String,Object> delMap = new HashMap<String, Object>();
+		delMap.put("member_id", member_id);
+		delMap.put("bno", bno);
+		csjService.userDelete(delMap);
 		return "redirect:/csjboard";
 	}
 
 	@GetMapping("/userCommentDelete")
 	public String csjCommentDelete(@RequestParam(value = "cno") int cno, HttpServletRequest request) {
-		csjService.userCommentDelete(cno);
-		return "redirect:" + request.getHeader("Referer");
+		String writer = csjService.callCommentWriter(cno);
+		String member_id = (String) request.getSession().getAttribute("member_id");
+		if(writer.equals(member_id)) {
+			csjService.userCommentDelete(cno);
+			return "redirect:" + request.getHeader("Referer");
+		}else {
+			return "redirect:/error?error=1421";
+		}
 	}
 
 	@ResponseBody
@@ -347,12 +359,14 @@ public class CSJController {
 				String banWhy = request.getParameter("banWhy");
 				banWhy = textChangeUtil.changeText(banWhy);
 				String singoman = (String) request.getSession().getAttribute("member_id");
+				if(singoman!=null) {
 				Map<String, Object> banMap = new HashMap<String, Object>();
 				banMap.put("banBoard", banBoard);
 				banMap.put("banMember", banMember);
 				banMap.put("banWhy", banWhy);
 				banMap.put("singoman", singoman);
 				csjService.banBoard(banMap);
+				}
 				return "board/CSJcloser";
 			} else if (request.getParameter("formbanType").equals("댓글 신고")) {
 				String banComment = request.getParameter("banComment");
@@ -362,12 +376,14 @@ public class CSJController {
 				banWhy = textChangeUtil.changeText(banWhy);
 				String singoman = (String) request.getSession().getAttribute("member_id");
 				Map<String, Object> banMap = new HashMap<String, Object>();
+				if(singoman!=null) {
 				banMap.put("banComment", banComment);
 				banMap.put("banBoard", banBoard);
 				banMap.put("banMember", banMember);
 				banMap.put("banWhy", banWhy);
 				banMap.put("singoman", singoman);
 				csjService.banComment(banMap);
+				}
 				return "redirect:/csjCloser";
 			} else {
 				System.out.println("unknown way");

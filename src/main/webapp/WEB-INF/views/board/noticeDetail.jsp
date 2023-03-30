@@ -87,14 +87,16 @@ $(function(){ //제이쿼리 시작
 function comment_check(){	//댓글 공백체크
 	let commentText = document.getElementById("commentText");
 	if(commentText.value ==""){ alert("댓글을 입력하세요");	return false; }
-}
-function noticeUpdate(notice_no){ location.href="/noticeUpdate?notice_no="+notice_no; }
-function noticeDelete(notice_no){ 
-	if(confirm("정말로 삭제하시겠습니까?")){ location.href="/noticeDelete?notice_no="+notice_no; }
+	if(confirm("댓글 작성하시겠습니까?")){ return true; }else{ return false; }
 }
 function subComment_check(){
 	let c_commentText = document.getElementById("c_commentText");
 	if(c_commentText.value ==""){ alert("댓글을 입력하세요");	return false; }
+	if(confirm("댓글 작성하시겠습니까?")){ return true; }else{ return false; }
+}
+function noticeUpdate(notice_no){ location.href="/noticeUpdate?notice_no="+notice_no; }
+function noticeDelete(notice_no){ 
+	if(confirm("정말로 삭제하시겠습니까?")){ location.href="/noticeDelete?notice_no="+notice_no; }
 }
 </script>
 <body>
@@ -109,7 +111,7 @@ function subComment_check(){
 		<!-- 상세화면 -->
 		<div class="detailBox" <c:if test="${sessionScope.member_id eq null }"> style="height:920px;"</c:if>>
 			<div class="detailTop">
-				<div class="detailTop_item">${noticeDetail.notice_title }</div>
+				<div class="detailTop_item text-truncate">${noticeDetail.notice_title }</div>
 				<div class="detailTop_item"><input type="hidden" id="detailWriter" value="${noticeDetail.admin_id }">${noticeDetail.admin_id }</div>
 				<div class="detailTop_item">${noticeDetail.notice_date }</div>
 			</div>
@@ -172,7 +174,7 @@ function subComment_check(){
 						<c:if test="${sessionScope.member_id ne null}">
 							<button class="commentBtn_1 commentBanBtn" style="background-color: #ff8080; margin-left:5px;" value="${c.comment_no }"><img src="/img/siren.png" style="margin-bottom: 10px;"></button>
 						</c:if>
-						<c:if test="${c.comment_depth eq 0 }">
+						<c:if test="${c.comment_depth eq 0 && c.comment_cnt ne 0 }">
 							<button class="commentDropdown" value="${c.comment_root }"><i class="xi-caret-down "></i></button>
 						</c:if>
 					</div>

@@ -12,16 +12,15 @@
                <button style="margin-top: -3px; font-weight:bold; color: #7e7e7e;" type="button" class="btn dropdown-toggle" id="member_info" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                   <c:choose>
                      <c:when test="${sessionScope.member_name ne null}">${sessionScope.member_name} 님</c:when>
-                     <c:when test="${sessionScope.id eq 'admin'}">${sessionScope.id} 님</c:when>
                   </c:choose>
 				</button>
 				<div class="dropdown-menu" style=" margin: 0; padding: 0; box-sizing: border-box; width: 200px; height: 250px;">
 					<ul>
 						<li onclick="location.href='/level'">레벨현황표</li>
 <!--                	 <li>보유 포인트</li> -->
-						<li onclick="/myPage">마이 페이지</li>
+						<li onclick="location.href='/myPage'">마이 페이지</li>
                    		<li onclick="location.href='/msgBox'">쪽지함<span class="msg_Cnt"></span></li>
-                   		<li onclick="location.href='/payShoppingBag'">장바구니</li>
+                   		<li onclick="location.href='/payShoppingBag?type=cart_pay'">장바구니</li>
                    		<li onclick="location.href='/logout'">로그아웃</li>
 					</ul>
 				</div>

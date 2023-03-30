@@ -22,8 +22,11 @@
 					<input type="hidden" name="category" value="2">
 					<input type="hidden" name="tag" value="1">
 					<input type="text" name="title" class="form-control" value="${det.board_title }" required maxlength="50">
+					<br>
 					<textarea name="content" class="form-control" rows="20" required maxlength="1000">${det.board_content }</textarea>
+					<br>
 					<input type="file" class="form-control" name="board_file" accept="image/*">
+					<br>
 					<div class="d-flex justify-content-between">
 					<button type="button" class="btn btn-primary p-2" onclick="location.href='/csjboard'">목록</button>
 					<button class="btn btn-primary ml-auto p-2">글쓰기</button>

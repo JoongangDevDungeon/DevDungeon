@@ -89,9 +89,9 @@ public class CSJServiceImpl implements CSJService {
 	}
 
 	@Override
-	public void userDelete(int bno) {
+	public void userDelete(Map<String, Object> delMap) {
 		// TODO Auto-generated method stub
-		csjDAO.userDelete(bno);
+		csjDAO.userDelete(delMap);
 	}
 
 	@Override
@@ -182,6 +182,12 @@ public class CSJServiceImpl implements CSJService {
 	public List<Map<String, Object>> boardFive(String string) {
 		// TODO Auto-generated method stub
 		return csjDAO.boardFive(string);
+	}
+
+	@Override
+	public String callCommentWriter(int cno) {
+		// TODO Auto-generated method stub
+		return csjDAO.callCommentWriter(cno);
 	}
 
 

@@ -33,18 +33,17 @@
    }
    .pageNo:hover{ background-color: #d3d3d3; }
    .page_btn{
-      background-color: #6867AC;
+      background-color: #88a2a2;
       margin:0 2px;
       color:white;
       font-weight: bold;
       font-size: 14px;
    }
-   .page_btn:hover{ background-color: #8887cc; }
 
    /* adminSearch bar */
    .searchForm{ display: flex; justify-content: center; }
    .search_btn{
-      background-color: #6867AC;
+      background-color: #88a2a2;
       border:none;
       border-radius: 5px;
       font-size: 15px;
@@ -126,7 +125,11 @@
             data : {"shoppingBag" : [icon_no], "sell_type" : "pay" },
             dataType : "text",
             success : function (result) {
-               location.href = "/payShoppingBag?type=pay";
+               if(result == 1) {
+                  location.href = "/payShoppingBag?type=pay";
+               } else if(result == 2) {
+                  alert("이미 구매한 아이콘이 있습니다.\n다시 한번 확인해주세요.");
+               }
             },
             error : function () {
                console.log("구매 중 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.");
@@ -211,6 +214,34 @@
          }
       });
 
+      $("#multi_pay_btn").click(function() {
+         if((shopping_bag == null || shopping_bag == "")) {
+            location.href = "/payShoppingBag?type=cart_pay";
+            return false;
+         } else {
+            console.log("구매 목록 : " + shopping_bag);
+            $.post({
+               url : "/shoppingBag",
+               data : {"shoppingBag" : shopping_bag, "sell_type" : "cart_pay" },
+               dataType : "text",
+               success : function (result) {
+                  if(result == 1) {
+                     location.href = "/payShoppingBag?type=cart_pay";
+                  } else if(result == 2) {
+                     alert("이미 구매한 아이콘이 있습니다.\n다시 한번 확인해주세요.");
+                  } else {
+                     if(confirm("이미 구매 장바구니에 아이콘이 있습니다.\n구매 화면으로 이동하겠습니까?.")) {
+                        location.href = "/payShoppingBag?type=cart_pay";
+                     }
+                  }
+               },
+               error : function () {
+                  console.log("장바구니에 담지 못했습니다.");
+               }
+            });
+         }
+      });
+
    });
 </script>
 <body>
@@ -224,7 +255,7 @@
                <div style=" width: 200px; height: 800px; float: left;">
                   <!-- 구매자 현재 상태 -->
                   <div style="width: 200px; height: 90px; border: 1px solid #ccc; border-radius: 5px;">
-                     <div style="width: 198px; height: 30px; line-height: 30px; background-color: black; color: white; border-radius: 5px 5px 0 0; box-sizing: border-box;">현재 아이콘 상태</div>
+                     <div style="width: 198px; height: 30px; line-height: 30px; background-color: #88a2a2; color: white; border-radius: 5px 5px 0 0; box-sizing: border-box;">현재 아이콘 상태</div>
                      <div style="width: 200px; height: 30px;">
                         <span style="display: block; width: 30px; height: 30px; line-height: 30px; margin-left: 5px; float: left;">Lv.${profile.member_level}</span>
                         <span style="display: block; width: 30px; height: 30px; margin-left: 10px; padding-top: 2px; box-sizing: border-box; border-radius: 5px; float: left;">
@@ -240,8 +271,8 @@
                   <!-- 아이콘 검색 -->
                   <div class="mt-3 list-group" style="width: 200px; height: 65px;">
                      <form action="/store" method="get" onsubmit="return search()">
-                        <input type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
-                        <button class="search_btn">검색</button>
+                        <input class="form-control" style="width: 138px; height: 30px; float: left;" type="text" name="searchValue" id="searchValue" value="${pages.searchValue }">
+                        <button class="search_btn" style="float: left; height: 30px;">검색</button>
                      </form>
                   </div>
 
@@ -298,7 +329,7 @@
 
                         <div style="position: absolute; right: 0;">
                            <button class="btn btn-primary" id="pay_shopping_bag">장바구니 추가</button>
-                           <button class="btn btn-primary" onclick="location.href='/payShoppingBag?type=cart_pay'">결제하기</button>
+                           <button class="btn btn-primary" id="multi_pay_btn">결제하기</button>
                            <!--<button class="btn btn-primary" id="gift_shopping_bag">선물</button>-->
                         </div>
                      </div>

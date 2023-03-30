@@ -17,7 +17,7 @@
 <script>
    let error = "${error}";
    if(error == "empty_payBag") {
-      alert("장바구니가 비었습니다.\n스토어로 이동합니다.");
+      alert("장바구니가 비었습니다.\n장바구니 추가 후 사용해주세요.");
       location.href = "/store";
    }
 

@@ -85,7 +85,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 						<tr>
 							<td><span class="board_tag">${board.tag_name }</span></td>
 							<td>${board.bno }</td>
-							<td class="title"><a href="/board/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }
+							<td class="title text-truncate" style="max-width: 1px;"><a href="/board/HJHBoardDetail?board_no=${board.board_no }">${board.board_title }
 							<c:if test="${ board.comment_cnt ne 0 }"><h6>${ board.comment_cnt }</h6></c:if></a></td>
 							<td>${board.member_name}</td>
 							<td>${board.board_date }</td>

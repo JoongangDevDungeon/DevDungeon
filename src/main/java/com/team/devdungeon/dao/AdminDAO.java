@@ -22,6 +22,11 @@ public interface AdminDAO {
 	AdminDTO adminLogin(AdminDTO adminDTO);
 	
 	//메인 대쉬보드
+	List<Map<String, Object>> adminToday();
+	
+	List<Map<String, Object>> adminDate();
+	
+	List<Map<String, Object>> adminVisitor();
 	
 	//사용자 관리
 	List<Map<String, Object>> adminMember(Map<String, Object> pages);
@@ -39,13 +44,20 @@ public interface AdminDAO {
 	List<Map<String, Object>> AdminLog(Map<String, Object> pages);
 	
 	//통계
+	List<Map<String, Object>> LogDay();
 	
-	//쿠폰 관련
+	List<Map<String, Object>> LogTime();
+	
+	List<Map<String, Object>> LogMonth();
+	
+	//쿠폰
 	List<Map<String, Object>> adminCoupon(Map<String, Object> pages);
 	
 	void adminCouponCreate(CouponDTO couponDTO);
 	
 	void adminCouponDel(int couponDel);
+	
+	List<Map<String, Object>> AdminCouponView();
 	
 	//QnA
 	List<Map<String, Object>> adminQnA(Map<String, Object> pages);
@@ -59,6 +71,8 @@ public interface AdminDAO {
 	//스토어
 	List<Map<String, Object>> AdminStore(Map<String, Object> pages);
 	
+	void amdinStoreChange(Map<String, Object> change);
+	
 	//이벤트
 	List<Map<String, Object>> AdminEvent(Map<String, Object> pages);
 	
@@ -66,6 +80,9 @@ public interface AdminDAO {
 	
 	void adminEventModal(EventDTO eventDTO);
 	
+	void adminEventWrite(EventDTO eventDTO);
+	
+	void puteventFile(Map<String, Object> fileMap);
 	
 	//페이징 서치바 관련
 	int boardCount(Map<String, Object> pages);
@@ -79,10 +96,9 @@ public interface AdminDAO {
 	int adminStoreCount(Map<String, Object> pages);
 
 	int adminEventCount(Map<String, Object> pages);
-	//포인트 페이징 카운트(필요없을시 삭제)
-	int adminPointCount(Map<String, Object> pages);
 
 	int adminLogCount(Map<String, Object> pages);
+<<<<<<< HEAD
 
 	void adminEventWrite(EventDTO eventDTO);
 
@@ -108,23 +124,7 @@ public interface AdminDAO {
 
 	int banBoardCount(Map<String, Object> pages);
 
+=======
+>>>>>>> d03ac1a1886a4363d7bafec6d5bc3736c540dd0d
 	
-
-
-
-
-
-
-
-
-	
-	
-	
-
-
-
-
-
-
-
 }
