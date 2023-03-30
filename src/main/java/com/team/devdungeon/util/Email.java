@@ -9,7 +9,7 @@ import java.util.Random;
 public class Email {
 
     private static String emailAddr = "date810@naver.com";
-    private static String passwd = "!@#$yong8255";
+    private static String passwd = "!@yong8255";
     private static String hostName = "smtp.office365.com";
     private static int    port = 587;
     private static String name = "가지 커뮤니티";

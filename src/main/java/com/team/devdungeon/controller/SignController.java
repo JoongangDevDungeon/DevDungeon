@@ -3,6 +3,7 @@ package com.team.devdungeon.controller;
 import com.github.pagehelper.PageInfo;
 import com.team.devdungeon.dto.SignDTO;
 import com.team.devdungeon.service.CSJService;
+import com.team.devdungeon.service.LoginService;
 import com.team.devdungeon.service.NoticeService;
 import com.team.devdungeon.service.SignService;
 import com.team.devdungeon.util.Email;
@@ -26,6 +27,9 @@ import java.util.Map;
 public class SignController {
 
     @Autowired
+    private LoginService loginService;
+
+    @Autowired
     private SignService signService;
     
     @Autowired
@@ -33,6 +37,11 @@ public class SignController {
     
     @Autowired
     private NoticeService noticeService;
+    
+    @GetMapping("/")
+    public String none() {
+    	return "redirect:/index";
+    }
     
     @GetMapping("/index")
     public ModelAndView index(HttpServletRequest request) {
@@ -193,6 +202,7 @@ public class SignController {
     @PostMapping("/accountInquiry")
     @ResponseBody
     public String accountInquiry(HttpServletRequest request) throws EmailException {
+        System.out.println("진입");
         SignDTO signDTO = new SignDTO();
 
         String att_num = Email.att_num();/*인증번호 가져옴*/
@@ -200,13 +210,15 @@ public class SignController {
         String member_email = request.getParameter("member_email");
         signDTO.setVerify_code(att_num);/*인증번호 dto에 넣음*/
 
+        System.out.println(att_num);
 
         int result = signService.accountInquiry(signDTO);
 
        if (result == 1) {
+           String member_id = signService.getMemberId(member_email);
            String user_mail = signDTO.getMember_email();
            String title = "가지 계정찾기 인증번호 입니다.";
-           String msg = "계정 찾기 인증번호<br><div style='color:red'>"+att_num+"</div>";
+           String msg = "<div>회원 아이디 : " + member_id + "</div><br>계정 찾기 인증번호<br><div style='color:red'>"+att_num+"</div>";
            Email.Mail(user_mail,"",title, msg);
            return "0";
        }else{

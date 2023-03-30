@@ -171,11 +171,12 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public int payProduct(int resultPrice, Object memberId, String pay_type) {
+    public int payProduct(int resultPrice, Object memberId, String pay_type, Integer coupon_no) {
         Map<String, Object> payInfo = new HashMap<>();
         payInfo.put("pay_price", resultPrice);
         payInfo.put("member_id", memberId);
         payInfo.put("view_type", pay_type);
+        payInfo.put("coupon_no", coupon_no);
         return storeDAO.payProduct(payInfo);
     }
 

@@ -34,8 +34,16 @@ public class PointController {
     }
 
     @GetMapping("/sendPoint")
-    public String sendPoint() {
-        return "message/sendPoint";
+    public ModelAndView sendPoint(HttpSession session) {
+        ModelAndView point = new ModelAndView("message/sendPoint");
+        PointDTO pointDTO = new PointDTO();
+        pointDTO.setSend_member_name((String) session.getAttribute("member_id"));
+
+        int my_point = pointService.mypoint(pointDTO);
+
+        point.addObject("my_point",my_point);
+
+        return point;
     }
 
     @PostMapping("/name_check")

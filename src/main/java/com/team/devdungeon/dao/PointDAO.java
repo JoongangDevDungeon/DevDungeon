@@ -28,9 +28,6 @@ public class PointDAO {
 
     public int send_point(PointDTO pointDTO) {
 
-        System.err.println("보내는 사람 :" + pointDTO.getSend_member_name());
-        System.err.println("받는 사람 :" + pointDTO.getReceive_member_name());
-        System.err.println("보낼 포인트 :" + pointDTO.getPoint());
 
         int receive_member_no = sqlSession.selectOne("point.receive_member_no",pointDTO);
         int send_member_no = sqlSession.selectOne("point.send_member_no",pointDTO);
@@ -41,5 +38,13 @@ public class PointDAO {
         sqlSession.update("point.send_point", pointDTO);
 
         return sqlSession.update("point.receive_point", pointDTO);
+    }
+
+    public int mypoint(PointDTO pointDTO) {
+        int send_member_no = sqlSession.selectOne("point.send_member_no",pointDTO);
+        pointDTO.setSend_member_no(send_member_no);
+
+
+        return sqlSession.selectOne("point.my_point",pointDTO);
     }
 }

@@ -85,5 +85,11 @@
         WHERE member_email = #{member_email}
     </update>
 
+    <select id="getMemberId" parameterType="String" resultType="String">
+        SELECT member_id
+            FROM member
+                WHERE
+            member_email = #{memberEmail}
+    </select>
 
 </mapper>

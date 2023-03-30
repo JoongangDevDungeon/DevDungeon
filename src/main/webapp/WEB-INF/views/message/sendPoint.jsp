@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/message.css">
 </head>
 <script>
+
     $(function(){
 
         $("#name_check").click(function() {
@@ -36,39 +37,39 @@
         });
 
         $("#send_point").click(function(result) {
+
+            if(!$("#member_name").prop('readonly')){
+                alert("닉네임 확인 체크를 확인 해주세요.");
+                return false;
+            }
+            if($("#point").val().length == 0){
+                alert("보낼 포인트를 입력해주세요.");
+                return false;
+            }
+            if($("#point").val() > ${my_point}){
+                alert("보낼 포인트가 보유하고 있는 포인트 보다 많습니다.");
+                return false;
+            }
+
             $.ajax({
                 url : "/send_point",
                 type : "POST",
                 data : {'point' : $("#point").val(), 'member_name' : $("#member_name").val()},
                 dataType : "json",
                 success : function(result) {
-                    alert(result);
-                    if (confirm('"'+$("#member_name").val()+'"'+" 님 에게"+$("#point").val()+ " Point 보내시겠습니까?")==true){
                         alert('"'+$("#member_name").val()+'"'+" 님 에게"+$("#point").val()+ " Point 보냈습니다.")
-                        }
+                        window.close()
                 },
                 error : function(xhr, status, error) {
                     alert("실패");
                 }
             });
 
-// 			});
         });
 
     });
 
-    function null_ck(){
-        let member_name = document.getElementById("member_name");
-        let msg_title = document.getElementById("msg_title");
-        let msg_content = document.getElementById("msg_content");
 
-        if(member_name.value == ""){ alert("닉네임을 확인해주세요"); return false; }
-        if(msg_title.value == ""){ alert("제목을 입력해주세요"); return false; }
-        if(msg_content.value == ""){ alert("내용을 입력해주세요"); return false; }
-        if(member_name.getAttribute("readonly") != "readonly"){ alert("ID를 확인해주세요"); return false; }
-
-
-    }
 </script>
 <style>
     .space{
@@ -129,7 +130,7 @@
 
             </div>
         <br><br><br>
-                <div class="btn btn-primary" style="width: 200px; height: 40px; float: left;" id="my_point" >My Point : 10,000</div>
+                <div class="btn btn-primary" style="width: 200px; height: 40px; float: left;" id="my_point" >My Point : ${my_point} P</div>
 
     </div>
 </form>

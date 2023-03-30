@@ -13,4 +13,6 @@ public interface PointService {
     PointDTO name_check(PointDTO pointDTO);
 
     int send_point(PointDTO pointDTO);
+
+    int mypoint(PointDTO pointDTO);
 }

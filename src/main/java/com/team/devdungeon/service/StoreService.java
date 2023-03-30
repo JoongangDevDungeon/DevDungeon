@@ -10,7 +10,7 @@ public interface StoreService {
     List<Map<String, Object>> selectPayShoppingBag(Object memberId, String view_type);
     List<Map<String, Object>> selectGiftShoppingBag(Object memberId);
     List<Map<String, Object>> couponList(String member_id);
-    int payProduct(int resultPrice, Object memberId, String pay_type);
+    int payProduct(int resultPrice, Object memberId, String pay_type, Integer coupon_no);
     int selectProductLog(String userId, String[] shoppingBag);
     int checkPoint(Object memberId);
     List<Map<String, Object>> checkProductCount(Object memberId);

@@ -21,4 +21,6 @@ public interface SignService {
     SignDTO find_account(SignDTO signDTO);
 
     int change_pw(SignDTO signDTO);
+
+    String getMemberId(String memberEmail);
 }
