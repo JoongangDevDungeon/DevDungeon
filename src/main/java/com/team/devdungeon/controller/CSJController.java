@@ -74,6 +74,7 @@ public class CSJController {
 		PageInfo<Map<String, Object>> pageList = csjService.pageList(dto);
 		for(Map<String,Object> m : pageList.getList()) {
 			m.put("board_title", textChangeUtil.changeText((String)m.get("board_title")));
+			m.put("member_name", textChangeUtil.changeText((String)m.get("member_name")));
 		}
 		mv.addObject("pageNo", pageNo);
 		mv.addObject("pageInfo", pageList);
@@ -213,6 +214,7 @@ public class CSJController {
 		List<Map<String, Object>> comment = csjService.commentList(bno);
 		for(Map<String,Object> m : comment) {
 			m.put("comment_content", textChangeUtil.changeText((String)m.get("comment_content")));
+			m.put("member_name", textChangeUtil.changeText((String)m.get("member_name")));
 		}
 		
 		Map<String,Object> boardFile = csjService.callBoardFile(bno);

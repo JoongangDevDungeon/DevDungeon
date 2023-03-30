@@ -33,12 +33,13 @@
 						<input type="hidden" name="category" value="2"> <input
 							type="hidden" name="tag" value="1"> <input type="text"
 							name="title" class="form-control" placeholder="제목을 입력하세요" required maxlength="50">
-
+						<br>
 						<textarea name="content" class="form-control is-invalid" rows="20"
 							placeholder="내용을 입력하세요" required maxlength="1000"></textarea>
-
+						<br>
 						<input type="file" class="form-control" name="board_file"
 							accept="image/*">
+						<br>
 						<div class="d-flex justify-content-between">
 							<button type="button" class="btn btn-primary p-2"
 								onclick="location.href='/csjboard'">목록</button>
