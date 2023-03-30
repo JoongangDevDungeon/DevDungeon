@@ -622,26 +622,23 @@ public class AdminController {
 	//신고게시물 관리
 	@GetMapping("/adminBanBoard")
 	public ModelAndView banBoard(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
+			@RequestParam(value="board_no") int board_no,
 			HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("./admin/adminBanBoard");
 
 		Map<String, Object> pages = new HashMap<String, Object>();
 
-		String searchType = request.getParameter("searchType");
-		String searchValue = request.getParameter("searchValue");
-
-		pages.put("searchType", searchType);
-		pages.put("searchValue", searchValue);
-
 		int startPage = (pageNo * 10) - 10;
-		int totalCount = adminService.banBoardCount(pages);
+		int totalCount = adminService.boardCount(pages);
 		int lastPage = (int) Math.ceil((double) totalCount / 10);
 
 		// System.out.println(startPage);
 
 		pages.put("startPage", startPage);
 		pages.put("lastPage", lastPage);
-
+		pages.put("board_no", board_no);
+		System.out.println(board_no);
+		
 		List<Map<String, Object>> list = adminService.BanBoard(pages);
 
 		mv.addObject("pages", pages);

@@ -46,7 +46,7 @@
 							<label for="regDate" class="form-label">게시일</label>
 							<input type="text" class="form-control" value="${row.formatted_date }" readonly>
 						</div>
-						<button type="button" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화된 게시물' : '비활성화된 게시물'}</button>
+							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? '활성화된 게시물' : '비활성화 완료'}</button>
 					</c:forEach>
 				</div>
 			</div>

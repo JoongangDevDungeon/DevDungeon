@@ -61,7 +61,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 					<th class="col-2">글쓴이</th>
 					<th class="col-1">날짜</th>
 					<th class="col-1">조회수</th>
-					<th class="col-1">좋아요</th>
+					<th class="col-1">신고수</th>
 					<th class="col-1">상태</th>
 				</tr>
 				<c:forEach items="${list }" var="row">
@@ -71,7 +71,10 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 					<td>${row.member_id }</td>
 					<td>${row.formatted_date }</td>
 					<td>${row.board_read }</td>
-					<td>${row.board_like }</td>
+					<td>
+    					<c:if test="${not empty row.ban_count}"><a href="/adminBanBoard?board_no=${row.board_no}">${row.ban_count}</a>
+    					</c:if><c:if test="${empty row.ban_count}">0</c:if>
+					</td>
 					<td>
 						<form action="/adminBoard" method="post">
 							<input type="hidden" name="board_no" value="${row.board_no }">

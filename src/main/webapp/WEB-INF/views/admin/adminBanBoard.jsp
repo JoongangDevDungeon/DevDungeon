@@ -49,7 +49,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 	<!-- 메인 시작 -->
 	<div class="main">
 		<div class="container">
-			<h1>관리자 게시글 관리
+			<h1>신고 게시글 관리
 			</h1>
 			<hr class="hr1">
 			<table class="table">
@@ -59,7 +59,7 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 					<th class="col-1">신고사유</th>
 					<th class="col-2">글쓴이</th>
 					<th class="col-1">신고자</th>
-					<th class="col-1">상태</th>
+<!-- 					<th class="col-1">상태</th> -->
 				</tr>
 				<c:forEach items="${list }" var="row">
 				<tr>
@@ -68,15 +68,15 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 					<td>${row.ban_content }</td>
 					<td>${row.ban_member_id }</a></td>
 					<td>${row.member_id }</td>
-					<td>
-						<form action="/adminBoard" method="post">
-							<input type="hidden" name="board_no" value="${row.board_no }">
-							<input type="hidden" name="status_no" value="${row.status_no }">
-							<input type="hidden" name="pageNo" value="${pageNo }">
-							<input type="hidden" name="url" value="/adminBanBoard">
-							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? 'ON' : 'OFF'}</button>
-						</form>
-					</td>
+<!-- 					<td> -->
+<!-- 						<form action="/adminBoard" method="post"> -->
+<%-- 							<input type="hidden" name="board_no" value="${row.board_no }"> --%>
+<%-- 							<input type="hidden" name="status_no" value="${row.status_no }"> --%>
+<%-- 							<input type="hidden" name="pageNo" value="${pageNo }"> --%>
+<!-- 							<input type="hidden" name="url" value="/adminBanBoard"> -->
+<%-- 							<button type="submit" class="${row.status_no eq '1' ? 'btn btn-primary' : 'btn btn-danger'}">${row.status_no eq '1' ? 'ON' : 'OFF'}</button> --%>
+<!-- 						</form> -->
+<!-- 					</td> -->
 				</tr>
 				</c:forEach>
 			</table><br>

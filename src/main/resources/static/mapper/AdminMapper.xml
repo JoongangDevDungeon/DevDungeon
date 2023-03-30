@@ -85,9 +85,14 @@
 	
 <!-- 게시글 관리 -->
 	<select id="adminBoard"  parameterType="Integer"  resultType="HashMap">
-		SELECT b.*, m.member_id, DATE_FORMAT(b.board_date, '%Y-%m-%d %H:%i:%s') AS formatted_date
+		SELECT b.*, m.member_id, DATE_FORMAT(b.board_date, '%Y-%m-%d %H:%i:%s') AS formatted_date, bb.ban_count
 		FROM board AS b
 		JOIN member AS m ON b.member_no = m.member_no
+		LEFT JOIN (
+    				SELECT board_no, COUNT(*) AS ban_count
+    				FROM ban_board
+    				GROUP BY board_no
+				) AS bb ON b.board_no = bb.board_no
 		<if test="searchType != null">
 			WHERE
 			<choose>
@@ -416,7 +421,8 @@
 		FROM ban_board AS b
 		LEFT JOIN member AS m1 ON b.ban_member_no = m1.member_no
 		LEFT JOIN member AS m2 ON b.member_no = m2.member_no
-		LEFT JOIN board as s ON b.board_no = s.board_no;
+		LEFT JOIN board as s ON b.board_no = s.board_no
+		where b.board_no = ${board_no};
 	</select>
 	
 	<!-- 신고게시물 카운트 -->
