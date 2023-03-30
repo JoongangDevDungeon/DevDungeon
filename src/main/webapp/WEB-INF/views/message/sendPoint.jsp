@@ -11,17 +11,6 @@
 </head>
 <script>
 
-    function null_ck(){
-        let member_name = document.getElementById("member_name");
-        let point = document.getElementById("point");
-
-        if(member_name.value == ""){ alert("닉네임을 확인해주세요"); return false; }
-        if(point.value == ""){ alert("보낼 포인트를 확인해주세요"); return false; }
-        if(member_name.getAttribute("readonly") != "readonly"){ alert("ID를 확인해주세요"); return false; }
-
-
-    }
-
     $(function(){
 
         $("#name_check").click(function() {
@@ -53,6 +42,10 @@
                 alert("닉네임 확인 체크를 확인 해주세요.");
                 return false;
             }
+            if($("#point").val().length == 0){
+                alert("보낼 포인트를 입력해주세요.");
+                return false;
+            }
             if($("#point").val() > ${my_point}){
                 alert("보낼 포인트가 보유하고 있는 포인트 보다 많습니다.");
                 return false;
@@ -65,13 +58,13 @@
                 dataType : "json",
                 success : function(result) {
                         alert('"'+$("#member_name").val()+'"'+" 님 에게"+$("#point").val()+ " Point 보냈습니다.")
+                        window.close()
                 },
                 error : function(xhr, status, error) {
                     alert("실패");
                 }
             });
 
-// 			});
         });
 
     });
