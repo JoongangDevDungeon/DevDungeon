@@ -65,7 +65,7 @@ $(function(){ //제이쿼리 시작
 	});
 	
 	$(".commentDel").click(function(){
-		if(confirm("삭제하시겠습니까?")){
+			if(confirm("삭제하시겠습니까?")){
 			$.ajax({
 				url: "/board/HJHBoardCommentDel",	//데이터를 전송할 url
 				type: "POST",

@@ -20,6 +20,12 @@
         WHERE member_id = #{send_member_name};
     </select>
 
+    <select id="my_point" parameterType="PointDTO" resultType="Integer">
+        SELECT member_point
+        FROM point
+        WHERE member_no = #{send_member_no};
+    </select>
+
     <update id="send_point" parameterType="PointDTO"><!--보내는 사람 감소-->
         UPDATE point
         SET

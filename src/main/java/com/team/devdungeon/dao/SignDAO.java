@@ -13,7 +13,7 @@ public class SignDAO {
 
     public void signup(SignDTO signDTO) {/*회원 가입*/
     sqlSession.insert("sign.signup",signDTO);/*회원 정보 insert*/
-    sqlSession.insert("sign.new_account",signDTO);/*회원 정보 insert*/
+    sqlSession.insert("sign.new_account",signDTO);
     sqlSession.insert("sign.signup_agree",signDTO);/*회원 약관 동의 insert*/
     sqlSession.insert("sign.point_new",signDTO);/*회원 포인트 생성*/
     }

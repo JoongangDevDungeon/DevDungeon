@@ -31,5 +31,11 @@ public class PointServiceImpl implements PointService {
         return pointDAO.send_point(pointDTO);
     }
 
+    @Override
+    public int mypoint(PointDTO pointDTO) {
+
+        return pointDAO.mypoint(pointDTO);
+    }
+
 
 }

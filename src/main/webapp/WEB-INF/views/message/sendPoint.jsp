@@ -129,7 +129,7 @@
 
             </div>
         <br><br><br>
-                <div class="btn btn-primary" style="width: 200px; height: 40px; float: left;" id="my_point" >My Point : 10,000</div>
+                <div class="btn btn-primary" style="width: 200px; height: 40px; float: left;" id="my_point" >My Point : ${my_point} P</div>
 
     </div>
 </form>

@@ -40,6 +40,7 @@ function couponbtn() {
 			<h1>관리자 쿠폰생성</h1>
 			<hr class="hr1">
 			<br><br>
+
 			<div class="admincoupon">
 				<form action="/adminCouponCreate" method="post" id="couponForm">
 					<select class="form-select" name="event_no" id="couponKind">
