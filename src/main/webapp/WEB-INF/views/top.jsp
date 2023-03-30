@@ -7,8 +7,10 @@
       <li>
          <!-- 로그인 성공 시 -->
          <div class="dropdown" id="login_success" style="<c:choose><c:when test="${sessionScope.member_name != null || sessionScope.id == 'admin'}">display: block;</c:when><c:otherwise>display: none;</c:otherwise></c:choose>">
+             <c:if test="${sessionScope.member_name ne 'admin'}">
                <span style="margin-right:20px; cursor: pointer; font-weight:bold; color: #7e7e7e;" id="member_point"></span>
                <span style="margin-right:5px; font-weight:bold; color: #7e7e7e;" id="member_level"></span>
+             </c:if>
                <button style="margin-top: -3px; font-weight:bold; color: #7e7e7e;" type="button" class="btn dropdown-toggle" id="member_info" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                   <c:choose>
                      <c:when test="${sessionScope.member_name ne null}">${sessionScope.member_name} 님</c:when>

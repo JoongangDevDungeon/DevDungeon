@@ -99,6 +99,7 @@ public class AdminController {
 			// 세션 만들기
 			HttpSession session = request.getSession();
 			session.setAttribute("id", result.getAdmin_id());
+			session.setAttribute("member_name", "admin");
 			session.setAttribute("grade", result.getAdmin_grade());
 
 			return "redirect:/admin";

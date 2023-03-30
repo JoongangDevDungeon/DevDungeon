@@ -54,14 +54,10 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        if(session.getAttribute("member_id") != null) {
-            session.removeAttribute("member_id");
-            session.removeAttribute("member_name");
-            session.setMaxInactiveInterval(0);
-        }
-
+        session.invalidate();
         return "redirect:/index";
     }
+
     @ResponseBody
     @GetMapping("/loginPoint")
     public String loginPoint(HttpSession session){
