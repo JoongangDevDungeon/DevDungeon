@@ -187,9 +187,6 @@ public class AdminService {
 	public int adminLogCount(Map<String, Object> pages) {
 		return adminDAO.adminLogCount(pages);
 	}
-	public int adminPointCount(Map<String, Object> pages) {
-		return adminDAO.adminPointCount(pages);
-	}
 
 	public List<Map<String, Object>> BanBoard(Map<String, Object> pages) {
 		return adminDAO.BanBoard(pages);
