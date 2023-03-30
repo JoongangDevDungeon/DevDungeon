@@ -36,16 +36,19 @@
         });
 
         $("#send_point").click(function(result) {
+
+            if($("#point").val() > ${my_point}){
+                alert("보낼 포인트가 보유하고 있는 포인트 보다 많습니다.");
+                return false;
+            }
+
             $.ajax({
                 url : "/send_point",
                 type : "POST",
                 data : {'point' : $("#point").val(), 'member_name' : $("#member_name").val()},
                 dataType : "json",
                 success : function(result) {
-                    alert(result);
-                    if (confirm('"'+$("#member_name").val()+'"'+" 님 에게"+$("#point").val()+ " Point 보내시겠습니까?")==true){
                         alert('"'+$("#member_name").val()+'"'+" 님 에게"+$("#point").val()+ " Point 보냈습니다.")
-                        }
                 },
                 error : function(xhr, status, error) {
                     alert("실패");
@@ -63,8 +66,6 @@
         let msg_content = document.getElementById("msg_content");
 
         if(member_name.value == ""){ alert("닉네임을 확인해주세요"); return false; }
-        if(msg_title.value == ""){ alert("제목을 입력해주세요"); return false; }
-        if(msg_content.value == ""){ alert("내용을 입력해주세요"); return false; }
         if(member_name.getAttribute("readonly") != "readonly"){ alert("ID를 확인해주세요"); return false; }
 
 
