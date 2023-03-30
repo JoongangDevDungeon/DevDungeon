@@ -99,31 +99,9 @@ public interface AdminDAO {
 
 	int adminLogCount(Map<String, Object> pages);
 
-	void adminEventWrite(EventDTO eventDTO);
-
-	List<Map<String, Object>> adminToday();
-
-	List<Map<String, Object>> AdminCouponView();
-
-	void amdinStoreChange(Map<String, Object> change);
-
-	List<Map<String, Object>> adminDate();
-
-	List<Map<String, Object>> adminVisitor();
-
-	List<Map<String, Object>> LogDay();
-
-	List<Map<String, Object>> LogTime();
-
-	List<Map<String, Object>> LogMonth();
-
-	void puteventFile(Map<String, Object> fileMap);
-
 	List<Map<String, Object>> BanBoard(Map<String, Object> pages);
 
 	int banBoardCount(Map<String, Object> pages);
 
-=======
->>>>>>> d03ac1a1886a4363d7bafec6d5bc3736c540dd0d
-	
+
 }
