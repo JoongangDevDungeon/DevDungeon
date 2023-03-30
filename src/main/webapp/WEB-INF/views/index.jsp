@@ -156,7 +156,7 @@
                   	<table>
                   	<c:forEach items="${noticeFive }" var="n">
                   		<tr>
-                  			<td class="text-truncate" style="max-width:200px;"><a href="/noticeDetail?notice_no=${n.notice_no }">${n.notice_title }</a></td>
+                  			<td class="text-truncate" style="max-width:200px;" onclick="location.href='/noticeDetail?notice_no=${n.notice_no }'">${n.notice_title }</td>
                   			<td>${n.notice_date }</td>
                   		</tr>
                   	</c:forEach>
@@ -168,7 +168,7 @@
                   	<table>
                   	<c:forEach items="${eventFive }" var="e">
                   		<tr>
-                  			<td class="text-truncate" style="max-width:200px;"><a href="eventDetail?bno=${e.event_no }">${e.event_title }</a></td>
+                  			<td class="text-truncate" style="max-width:200px;" onclick="location.href='eventDetail?bno=${e.event_no }'">${e.event_title }</td>
                   			<td>${e.event_date }</td>
                   		</tr>
                   	</c:forEach>
@@ -180,7 +180,7 @@
                   	<table>
                   	<c:forEach items="${likeFive }" var="l">
                   		<tr>
-                  			<td class="text-truncate" style="max-width:200px;"><a href="csjDetail?bno=${l.board_no}">${l.board_title }</a></td>
+                  			<td class="text-truncate" style="max-width:200px;" onclick="location.href='csjDetail?bno=${l.board_no}'">${l.board_title }</td>
                   			<td>${l.board_date }</td>
                   		</tr>
                   	</c:forEach>
@@ -192,7 +192,7 @@
                   	<table>
                   	<c:forEach items="${viewFive }" var="v">
                   		<tr>
-                  			<td class="text-truncate" style="max-width:200px;"><a href="csjDetail?bno=${v.board_no}">${v.board_title }</a></td>
+                  			<td class="text-truncate" style="max-width:200px;" onclick="location.href='csjDetail?bno=${v.board_no}'">${v.board_title }</td>
                   			<td>${v.board_date }</td>
                   		</tr>
                   	</c:forEach>
