@@ -18,8 +18,8 @@
                게시판
             </a>
             <ul class="dropdown-menu none">
-               <li class="drop_menu"><a class="dropdown-item items" href="/board/HJHBoard">자유게시판 [홍]</a></li>
-               <li class="drop_menu"><a class="dropdown-item items" href="/csjboard">자유게시판 [최]</a></li>
+               <li class="drop_menu"><a class="dropdown-item items" href="/board/HJHBoard">자유게시판</a></li>
+               <li class="drop_menu"><a class="dropdown-item items" href="/csjboard">자유게시판II</a></li>
             </ul>
          </div>
       </li>

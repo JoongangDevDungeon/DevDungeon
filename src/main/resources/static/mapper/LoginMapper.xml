@@ -8,5 +8,7 @@
                     member_id = #{member_id }
                 AND
                     member_pw = #{member_pw }
+                AND 
+                	member_grade > 0
     </select>
 </mapper>
