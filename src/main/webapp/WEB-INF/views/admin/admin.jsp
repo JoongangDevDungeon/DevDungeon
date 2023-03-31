@@ -56,7 +56,7 @@
 					</div>
 					<div class="mtc5">
 						<a class="mhov" href="/adminStore">
-							비활성 스토어글 : 
+							신규 스토어상품 : 
 							<span class="mhov hr">${today[0].new_product }</span>
 						</a>
 					</div>
