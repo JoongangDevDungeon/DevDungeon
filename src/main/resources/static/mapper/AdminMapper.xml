@@ -362,15 +362,21 @@
 	</select>
 	
 <!-- 이벤트 모달 -->
-	<insert id="adminEventModal" parameterType="EventDTO">
-		INSERT INTO couponBag 
-		SET
-		member_no = (SELECT DISTINCT member_no
-		FROM event_player
-		WHERE event_no = #{event_no }
-		ORDER BY RAND() 
-		LIMIT #{event_player }),
-		coupon_no = (SELECT coupon_type FROM coupon WHERE event_no = #{event_no})
+	<insert id="adminEventModal" parameterType="EventDTO" statementType="CALLABLE">
+<!-- 		INSERT INTO couponBag  -->
+<!-- 		SET -->
+<!-- 		member_no = (SELECT DISTINCT member_no -->
+<!-- 		FROM event_player -->
+<!-- 		WHERE event_no = #{event_no } -->
+<!-- 		ORDER BY RAND()  -->
+<!-- 		LIMIT #{event_player }), -->
+<!-- 		coupon_no = (SELECT coupon_type FROM coupon WHERE event_no = #{event_no}) -->
+		{CALL
+    			eventwin(
+    				#{event_no, mode=IN,jdbcType=INTEGER}
+    				,#{event_player, mode=IN,jdbcType=INTEGER}
+    		)
+    	}
 	</insert>
 	
 <!-- 이벤트 작성 -->	
