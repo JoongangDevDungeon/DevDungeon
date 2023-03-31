@@ -187,7 +187,7 @@ function subComment_check(){
 							<label class="col-form-label"><a href = "data:image/png;base64,${imageDataString}" download = "${boardFile.file_name }">${boardFile.file_name }</a></label>
 							</span>
 						</div>
-						<c:if test="${noticeFile.file_extension eq jpg||noticeFile.file_extension eq png||noticeFile.file_extension eq jpeg}">
+						<c:if test="${boardFile.file_extension eq 'jpg'||boardFile.file_extension eq 'png'||boardFile.file_extension eq 'jpeg'}">
 							<div>
 								<img style="max-width:100%;" src="data:image/png;base64,${imageDataString}" />
 							</div>

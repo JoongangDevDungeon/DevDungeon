@@ -158,17 +158,20 @@ function boardUpdate(board_no){
 				<div class="detailTop_item">${boardDetail.board_date }</div>
 			</div>
 			<div class="detailMid">
-			<div class="detailMid_item">${boardDetail.board_content }</div>
 				<c:if test="${boardFile ne null }">
 					<div class="form-control">
 						<span>
 							<label class="col-form-label"><a href = "data:image/png;base64,${imageDataString}" download = "${boardFile.file_name }.${boardFile.file_extension}">${boardFile.file_name }</a></label>
 						</span>
 						</div>
+						<c:if test="${boardFile.file_extension eq 'jpg'||boardFile.file_extension eq 'png'||boardFile.file_extension eq 'jpeg'}">
+						
 						<div>
-						<img src="data:image/png;base64,${imageDataString}" />
+						<img style="max-width:100%;" src="data:image/png;base64,${imageDataString}" />
 					</div>
+					</c:if>
 				</c:if>
+			<div class="detailMid_item">${boardDetail.board_content }</div>
 				<div class="userProfile">
 					<div class="mt-3" style="margin: 0 auto; width: 810px; height: 242px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box;">
                     <div style="width: 180px; height: 240px; float: left;">

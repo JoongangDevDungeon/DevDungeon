@@ -561,9 +561,6 @@ public class AdminController {
             InputStream inputStream = new ByteArrayInputStream(eventFile.getBytes());
 
             sftpChannel.put(inputStream, remotePath);
-
-            sftpChannel.exit();
-            jschSession.disconnect();
             adminService.puteventFile(fileMap);
         } catch (Exception e) {
             e.printStackTrace();
