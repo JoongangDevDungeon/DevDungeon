@@ -137,7 +137,7 @@ function closeLayer(){
 							<td>${b.bno }</td>
 							<td onclick="detail(${b.board_no})" class="text-truncate title"
 								style="max-width: 1px;">${b.board_title }<c:if
-									test="${b.isFile ne 0 }">
+									test="${b.isFile gt 0 }">
 									<i class="xi-file-image-o"></i>
 								</c:if> <c:if test="${b.comment_cnt ne 0 }">
 									<h6>${b.comment_cnt}</h6>

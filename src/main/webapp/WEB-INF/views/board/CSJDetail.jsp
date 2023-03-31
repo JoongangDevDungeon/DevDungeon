@@ -189,7 +189,7 @@ function subComment_check(){
 						</div>
 						<c:if test="${noticeFile.file_extension eq jpg||noticeFile.file_extension eq png||noticeFile.file_extension eq jpeg}">
 							<div>
-								<img src="data:image/png;base64,${imageDataString}" />
+								<img style="max-width:100%;" src="data:image/png;base64,${imageDataString}" />
 							</div>
 						</c:if>
 					</c:if>

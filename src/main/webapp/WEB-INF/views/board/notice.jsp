@@ -86,7 +86,11 @@ function moveNext(pageNo){	//페이지 뒤쪽 버튼
 						<tr>
 							<td><span class="notice_tag">${notice.tag_name }</span></td>
 							<td>${notice.nno }</td>
-							<td class="title"><a href="/noticeDetail?notice_no=${notice.notice_no }">${notice.notice_title }
+							<td class="title text-truncate" style="max-width:1px;"><a href="/noticeDetail?notice_no=${notice.notice_no }">${notice.notice_title }
+							<c:if
+									test="${b.isFile gt 0 }">
+									<i class="xi-file-image-o"></i>
+								</c:if>
 							<c:if test="${ notice.comment_cnt ne 0 }"><h6>${ notice.comment_cnt }</h6></c:if></a></td>
 							<td>${notice.admin_id}</td>
 							<td>${notice.notice_date }</td>
