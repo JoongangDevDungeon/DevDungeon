@@ -17,9 +17,12 @@
    }
 
    .board_top_list{/*보드 top.5 공간*/
-      margin: 0 auto;
-      width: 800px;
-      height: 600px;
+	   margin: 0 auto;
+	   margin-top: 50px;
+	   width: 804px;
+	   height: 604px;
+	   border: 2px solid #ded8c3;
+	   box-sizing: border-box;
    }
 
    .notice_top_list{/*공지사항 top.5 공간*/
@@ -27,7 +30,8 @@
       height:300px;
       float: left;
       opacity:0.8;
-      background-color: #6867AC;
+	   border: 4px solid #ded8c3;
+/*      background-color: #6867AC;*/
    }
 
    .question_top_list{/*질문게시판 top.5 공간*/
@@ -35,7 +39,8 @@
       height:300px;
       float: left;
       opacity:0.8;
-      background-color: #A267AC;
+	   border: 4px solid #ded8c3;
+/*      background-color: #A267AC;*/
    }
 
    .like_top_list{/*좋아요 top.5 공간*/
@@ -43,7 +48,8 @@
       height:300px;
       float: left;
       opacity:0.8;
-      background-color: #CE7BB0;
+	   border: 4px solid #ded8c3;
+/*      background-color: #CE7BB0;*/
    }
 
    .read_top_list{/*조회수 top.5 공간*/
@@ -51,7 +57,7 @@
       height:300px;
       float: left;
       opacity:0.8;
-      background-color: #FFBCD1;
+	   border: 4px solid #ded8c3;
    }
 /*===================슬라이드===================*/
 
@@ -122,6 +128,43 @@
    }
 /*===================슬라이드===================*/
 
+   .notice_logo{
+	   width: 60px;
+	   height: 60px;
+	   margin: 0px -80px 0px 20px;
+	   float: left;
+	   background-image: url('/resources/notice_logo.png');
+   }
+
+   .question_logo{
+	   width: 60px;
+	   height: 60px;
+	   margin: 0px -80px 0px 20px;
+	   float: left;
+	   background-image: url('/resources/question_logo.png');
+   }
+
+   .like_logo{
+	   width: 60px;
+	   height: 60px;
+	   margin: 0px -80px 0px 20px;
+	   float: left;
+	   background-image: url('/resources/like_logo.png');
+   }
+
+   .read_logo{
+	   width: 60px;
+	   height: 60px;
+	   margin: 0px -80px 0px 20px;
+	   float: left;
+	   background-image: url('/resources/read_logo.png');
+   }
+
+   h3{
+	   line-height: 50px;
+	   font-weight: bold;
+	   color: gray;
+   }
 
 </style>
 <body>
@@ -147,13 +190,13 @@
                   </div>
             </div><%--메인 이미지 슬라이드 공간 끝--%>
 
-
             <div class="content">
 
+				<%--공지사항 부분--%>
                <div class="board_top_list">
-                  <div class="notice_top_list">공지사항 Top.5
+				   <div class="notice_top_list"><h3><div class="notice_logo"></div> 공지사항 New.5</h3>
                   	<div class="ListFive">
-                  	<table>
+                  	<table class="table table-striped">
                   	<c:forEach items="${noticeFive }" var="n">
                   		<tr>
                   			<td class="text-truncate" style="max-width:200px;" onclick="location.href='/noticeDetail?notice_no=${n.notice_no }'">${n.notice_title }</td>
@@ -163,9 +206,11 @@
                   	</table>
                   	</div>
                   </div>
-                  <div class="question_top_list">질문 게시판 Top.5
+
+				   <%--질문 게시판 부분--%>
+				   <div class="question_top_list"><h3><div class="question_logo"></div> 이벤트 New.5</h3>
                   	<div class="ListFive">
-                  	<table>
+                  	<table class="table table-striped">
                   	<c:forEach items="${eventFive }" var="e">
                   		<tr>
                   			<td class="text-truncate" style="max-width:200px;" onclick="location.href='eventDetail?bno=${e.event_no }'">${e.event_title }</td>
@@ -175,9 +220,11 @@
                   	</table>
                   	</div>
                   </div>
-                  <div class="like_top_list">좋아요 Top.5
+
+				   <%--좋아요 부분--%>
+				   <div class="like_top_list"><h3><div class="like_logo"></div> 좋아요 Top.5</h3>
                   	<div class="ListFive">
-                  	<table>
+                  	<table class="table table-striped">
                   	<c:forEach items="${likeFive }" var="l">
                   		<tr>
                   			<td class="text-truncate" style="max-width:200px;" onclick="location.href='csjDetail?bno=${l.board_no}'">${l.board_title }</td>
@@ -187,9 +234,11 @@
                   	</table>
                   	</div>
                   </div>
-                  <div class="read_top_list">조회수 Top.5
+
+				   <%--조휘수 부분--%>
+				   <div class="read_top_list"><h3><div class="read_logo"></div> 조회수 Top.5</h3>
                   	<div class="ListFive">
-                  	<table>
+                  	<table class="table table-striped">
                   	<c:forEach items="${viewFive }" var="v">
                   		<tr>
                   			<td class="text-truncate" style="max-width:200px;" onclick="location.href='csjDetail?bno=${v.board_no}'">${v.board_title }</td>
