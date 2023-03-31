@@ -192,6 +192,7 @@ h1{
 				<div class="detailBody">
 					<div class="detailTitle">${det.event_title }</div>
 					<div class="detailContent" style="text-align: center; overflow:hidden;">
+						<div style="height:35px; line-height:35px; border-bottom:1px solid black; overflow:hidden;"><fmt:formatDate value="${det.event_date }" pattern="y-MM-d HH:mm" type="date"/> ~ <fmt:formatDate value="${det.event_end }" pattern="y-MM-d HH:mm" type="date"/></div>
 						<c:if test="${eventFile ne null }">
 							<div>
 								<img src="data:image/png;base64,${imageDataString}" width="100%" />

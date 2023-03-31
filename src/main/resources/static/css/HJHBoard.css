@@ -56,7 +56,7 @@ a:hover{ color:#ccc; }
 }
 
 /* HJHBoardDetail */
-.detailBox{	height:1000px; border:1px solid gray; }
+.detailBox{	min-height:1000px; border:1px solid gray; }
 .detailTop{
 	margin:5px;
 	height:50px;
@@ -76,7 +76,7 @@ a:hover{ color:#ccc; }
 .detailTop_item:nth-child(1){ flex-grow:2; }
 .detailMid{
 	margin:5px;
-	height:790px;
+	min-height:790px;
 	border:1px solid black;
 	display: flex;
 	flex-direction: column;

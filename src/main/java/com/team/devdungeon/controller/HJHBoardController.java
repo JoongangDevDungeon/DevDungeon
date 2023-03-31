@@ -180,9 +180,6 @@ public class HJHBoardController {
 					InputStream inputStream = new ByteArrayInputStream(boardFile.getBytes());
 
 					sftpChannel.put(inputStream, remotePath);
-
-					sftpChannel.exit();
-					jschSession.disconnect();
 					csjService.putBoardFile(fileMap);
 				} catch (Exception e) {
 					e.printStackTrace();
