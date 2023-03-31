@@ -590,7 +590,7 @@ public class AdminController {
 		String pageNo = request.getParameter("pageNo");
 		
 		eventDTO.setEvent_player(Integer.parseInt(request.getParameter("winner")));
-		eventDTO.setEvent_player(Integer.parseInt(request.getParameter("eventNo")));
+		eventDTO.setEvent_no(Integer.parseInt(request.getParameter("eventNo")));
 		
 		adminService.adminEventModal(eventDTO);
 		
