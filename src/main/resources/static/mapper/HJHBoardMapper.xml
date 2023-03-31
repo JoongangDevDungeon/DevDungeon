@@ -3,7 +3,7 @@
 <mapper namespace="com.team.devdungeon.dao.HJHBoardDAO">
 
     <select id="boardList"  parameterType="Integer"  resultType="HashMap">
-        SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read,comment_cnt,tag_name, bno
+        SELECT board_no,member_name,board_title,member_no,board_date,board_like,board_read,comment_cnt,tag_name, bno, isFile
         FROM boardview
         <if test="searchType != null">
          	WHERE 

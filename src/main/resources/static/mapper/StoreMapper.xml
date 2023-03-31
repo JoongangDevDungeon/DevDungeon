@@ -4,11 +4,13 @@
 
     <select id="iconListCount" parameterType="HashMap" resultType="Integer">
         SELECT COUNT(*) FROM product
-        <if test="searchValue != null">
             WHERE
-            product_name LIKE CONCAT('%', #{searchValue }, '%')
-            AND
             emoticon_authority = 1
+            AND
+            product_sell_cnt > 0
+        <if test="searchValue != null">
+            AND
+            product_name LIKE CONCAT('%', #{searchValue }, '%')
         </if>
     </select>
 

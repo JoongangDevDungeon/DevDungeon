@@ -363,11 +363,14 @@
 	
 <!-- 이벤트 모달 -->
 	<insert id="adminEventModal" parameterType="EventDTO">
-		SELECT DISTINCT member_no
+		INSERT INTO couponBag 
+		SET
+		member_no = (SELECT DISTINCT member_no
 		FROM event_player
 		WHERE event_no = #{event_no }
 		ORDER BY RAND() 
-		LIMIT #{event_player };
+		LIMIT #{event_player }),
+		coupon_no = (SELECT coupon_type FROM coupon WHERE event_no = #{event_no})
 	</insert>
 	
 <!-- 이벤트 작성 -->	

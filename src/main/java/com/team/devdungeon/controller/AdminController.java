@@ -561,9 +561,6 @@ public class AdminController {
             InputStream inputStream = new ByteArrayInputStream(eventFile.getBytes());
 
             sftpChannel.put(inputStream, remotePath);
-
-            sftpChannel.exit();
-            jschSession.disconnect();
             adminService.puteventFile(fileMap);
         } catch (Exception e) {
             e.printStackTrace();
@@ -593,7 +590,7 @@ public class AdminController {
 		String pageNo = request.getParameter("pageNo");
 		
 		eventDTO.setEvent_player(Integer.parseInt(request.getParameter("winner")));
-		eventDTO.setEvent_player(Integer.parseInt(request.getParameter("eventNo")));
+		eventDTO.setEvent_no(Integer.parseInt(request.getParameter("eventNo")));
 		
 		adminService.adminEventModal(eventDTO);
 		

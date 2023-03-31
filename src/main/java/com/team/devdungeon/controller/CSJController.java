@@ -221,7 +221,7 @@ public class CSJController {
 		if(boardFile != null) {
 			String remotePath = "/home/woori/ftp/files/" + boardFile.get("file_name");
 			mv.addObject("boardFile",boardFile);
-
+			System.out.println(boardFile.get("file_extension"));
 	        try {
 	            // 원격 서버에서 이미지 파일 읽어오기
 	            InputStream inputStream = channelSftp.get(remotePath);
