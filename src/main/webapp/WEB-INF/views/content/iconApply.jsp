@@ -56,7 +56,25 @@
       });
 
       $("#btn-submit").click(function() {
+         if($("#icon_file").val() == "" || $("#icon_file").val() == null) {
+            alert("아이콘 이미지를 등록해주세요.");
+            return false;
+         }
 
+         if($("#icon_name").val() == "" || $("#icon_name").val() == null) {
+            alert("아이콘 이름을 입력하세요.");
+            return false;
+         }
+
+         if($("#icon_count").val() == "" || $("#icon_count").val() == null) {
+            alert("판매 갯수를 입력하세요.");
+            return false;
+         }
+
+         if($("#icon_price").val() == "" || $("#icon_price").val() == null) {
+            alert("가격을 입력하세요.");
+            return false;
+         }
          $(".icon-form").submit();
       });
 
