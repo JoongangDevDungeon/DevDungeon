@@ -40,6 +40,8 @@ public interface AdminDAO {
 	
 	List<Map<String, Object>> AdminBoardDetail(int boardNo);
 	
+	List<Map<String, Object>> BanBoard(Map<String, Object> pages);
+	
 	//로그 데이터
 	List<Map<String, Object>> AdminLog(Map<String, Object> pages);
 	
@@ -98,8 +100,6 @@ public interface AdminDAO {
 	int adminEventCount(Map<String, Object> pages);
 
 	int adminLogCount(Map<String, Object> pages);
-
-	List<Map<String, Object>> BanBoard(Map<String, Object> pages);
 
 	int banBoardCount(Map<String, Object> pages);
 
